@@ -30,7 +30,11 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.Configure<JwtConfig>(builder.Configuration.GetSection("JwtConfig"));
 
 
-
+builder.Services.AddCors(options => options.AddPolicy(name: "FormulaOrigins",
+    policy =>
+    {
+        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
+    }));
 
 builder.Services.AddAuthentication(options =>
 {
@@ -67,7 +71,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors("FormulaOrigins");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
