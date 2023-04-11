@@ -3,6 +3,7 @@
 using CheckeredFlagAPI.Configurations;
 using CheckeredFlagAPI.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -52,7 +53,8 @@ builder.Services.AddAuthentication(options =>
     });
 
 
-
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<DataContext>();
 
 
 var app = builder.Build();
