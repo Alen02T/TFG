@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckeredFlagAPI", "CheckeredFlagAPI.csproj", "{88A64165-FE74-4283-8728-08C5D26059B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckeredFlagAPI", "CheckeredFlagAPI\CheckeredFlagAPI.csproj", "{B08F1DD3-E5C3-4F7A-BB4D-BA3A3AB57574}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{88A64165-FE74-4283-8728-08C5D26059B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88A64165-FE74-4283-8728-08C5D26059B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88A64165-FE74-4283-8728-08C5D26059B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88A64165-FE74-4283-8728-08C5D26059B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B08F1DD3-E5C3-4F7A-BB4D-BA3A3AB57574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B08F1DD3-E5C3-4F7A-BB4D-BA3A3AB57574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B08F1DD3-E5C3-4F7A-BB4D-BA3A3AB57574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B08F1DD3-E5C3-4F7A-BB4D-BA3A3AB57574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {9E7F8745-7F40-4ACF-9B14-208958A0241B}
+		SolutionGuid = {11D1D967-10CD-48BD-A81A-6FB3146B9248}
 	EndGlobalSection
 EndGlobal
