@@ -10,8 +10,8 @@ namespace CheckeredFlagAPI.Mapper
         {
             CreateMap<DirectorDTO, DirectorEntity>();
             CreateMap<DirectorEntity, DirectorDTO>();
-            CreateMap<Director, DirectorEntity>();
-            CreateMap<DirectorEntity, Director>();
+            CreateMap<DirectorDTO, DirectorEntity>();
+            CreateMap<DirectorEntity, DirectorDTO>();
         }
     }
 }

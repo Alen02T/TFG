@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CheckeredFlagAPI.Data;
+using CheckeredFlagAPI.Entity;
 using CheckeredFlagAPI.Models.AuthModels;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,14 +17,14 @@ namespace CheckeredFlagAPI.Services.DirectorService
             _context = context;
             _mapper = mapper;
         }
-        /*
-        public Director Add(Director baseDirector)
+        
+        public DirectorDTO Add(DirectorDTO baseDirector)
         {
             var _mappedDirector = _mapper.Map<DirectorEntity>(baseDirector);
             var entityAdded = _context.Directores.Add(_mappedDirector);
             _context.SaveChanges();
-            return _mapper.Map<Director>(entityAdded);
-        }*/
+            return _mapper.Map<DirectorDTO>(entityAdded);
+        }
 
         public IEnumerable<DirectorDTO> GetAll()
         {

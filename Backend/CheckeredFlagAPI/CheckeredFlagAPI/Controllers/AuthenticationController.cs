@@ -1,4 +1,5 @@
-﻿using CheckeredFlagAPI.Models.AuthModels;
+﻿using CheckeredFlagAPI.Data;
+using CheckeredFlagAPI.Models.AuthModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,15 +17,17 @@ namespace CheckeredFlagAPI.Controllers
         private readonly UserManager<IdentityUser> _userManager;
         //private readonly JwtConfig _jwtConfig;
         private readonly IConfiguration _configuration;
-
-        public AuthenticationController(UserManager<IdentityUser> userManager,
+        private DataContext _context;
+   
+        public AuthenticationController(UserManager<IdentityUser> userManager,DataContext context,
             //JwtConfig jwtConfig
             IConfiguration configuration
             )
         {
-
+            _context = context;
             _userManager = userManager;
             _configuration = configuration;
+            
             //_jwtConfig = jwtConfig;
         }
 
@@ -58,10 +61,11 @@ namespace CheckeredFlagAPI.Controllers
 
                 };
 
-                var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
 
+                var is_created = await _userManager.CreateAsync(new_user, requestDto.Password);
                 if (is_created.Succeeded)
                 {
+
                     //Generate the token 
                     var token = GenerateJwtToken(new_user);
                     return Ok(new AuthResult()

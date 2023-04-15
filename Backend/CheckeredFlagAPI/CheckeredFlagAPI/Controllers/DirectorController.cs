@@ -1,8 +1,12 @@
-﻿using CheckeredFlagAPI.Data;
+﻿using AutoMapper;
+using CheckeredFlagAPI.Data;
+using CheckeredFlagAPI.Entity;
 using CheckeredFlagAPI.Models.AuthModels;
 using CheckeredFlagAPI.Services.DirectorService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheckeredFlagAPI.Controllers
 {
@@ -12,10 +16,12 @@ namespace CheckeredFlagAPI.Controllers
         {
             private readonly DataContext _context;
             private readonly IDirectorService _directorService;
-            public DirectoresController(DataContext context, IDirectorService directorService)
+            private readonly IMapper _mapper;    
+        public DirectoresController(DataContext context, IDirectorService directorService,IMapper mapper)
             {
                 _context = context;
                 _directorService = directorService;
+                _mapper = mapper;
 
             }
 
@@ -50,5 +56,21 @@ namespace CheckeredFlagAPI.Controllers
                 return Ok(result);
             }
 
+
+        [HttpPost]
+        public async Task<IActionResult> CrearDirector([FromBody] DirectorDTO directorDTO)
+        {
+            var director = _mapper.Map<DirectorDTO,DirectorEntity>(directorDTO);
+
+            _context.Directores.Add(director);
+            await _context.SaveChangesAsync();
+
+            return Ok();
         }
+
+
+
+     
+     
+    }
     }

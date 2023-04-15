@@ -59,10 +59,10 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 
 
 
-
+builder.Services.AddScoped<IDirectorService, DirectorService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IDirectorService, DirectorService>();
+
 
 var app = builder.Build();
 

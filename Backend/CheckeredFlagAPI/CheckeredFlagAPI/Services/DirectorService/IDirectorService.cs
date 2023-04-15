@@ -11,5 +11,7 @@ namespace CheckeredFlagAPI.Services.DirectorService
 
         public IEnumerable<DirectorDTO> GetAll();
 
+        public DirectorDTO Add(DirectorDTO guid);
+
     }
 }

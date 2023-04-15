@@ -13,13 +13,15 @@ import { CookieHandlerService } from './services/AuthServices/cookie-handler.ser
 import { AdminComponent } from './components/admin/admin.component';
 import { DirectorService } from './services/AuthServices/director.service';
 import { TokenHandlerService } from './services/AuthServices/token-handler.service';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamsComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
