@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  animation: changeBackgroundColor 10s infinite;
+}
+
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom right, #3040bca6, #6729aa18);
+
+}
+
+
+@keyframes changeBackgroundColor {
+  0% {
+    background-color: #00153f;
+  }
+  50% {
+    background-color: #FF4136;
+  }
+  100% {
+    background-color: #001F3F;
+  }
+}

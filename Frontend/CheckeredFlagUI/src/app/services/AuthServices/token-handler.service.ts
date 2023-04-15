@@ -30,7 +30,7 @@ export class TokenHandlerService {
   // 2. Get user
   getEmail(): string {
     try {
-      console.log(this.getDecodedAccessToken()['email'])
+      //console.log(this.getDecodedAccessToken()['email'])
       return this.getDecodedAccessToken()['email'];
     } catch (Error) {
       return '';
@@ -40,7 +40,7 @@ export class TokenHandlerService {
   // 3. Get Empleado
   getDirector(): Observable<Director> {
     //var email = this.getEmail();
-    console.log(this.getEmail())
+    //console.log(this.getEmail())
     return this._director.getUserDirectorData(this.getEmail());
   }
 }

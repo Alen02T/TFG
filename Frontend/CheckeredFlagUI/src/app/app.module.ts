@@ -8,13 +8,18 @@ import { TeamService } from './services/team.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CookieHandlerService } from './services/AuthServices/cookie-handler.service';
 import { AdminComponent } from './components/admin/admin.component';
 import { DirectorService } from './services/AuthServices/director.service';
 import { TokenHandlerService } from './services/AuthServices/token-handler.service';
 import { RegisterComponent } from './components/register/register.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +32,14 @@ import { RegisterComponent } from './components/register/register.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService],
   bootstrap: [AppComponent]
