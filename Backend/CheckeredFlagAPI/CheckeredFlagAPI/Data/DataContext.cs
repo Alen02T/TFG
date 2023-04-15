@@ -1,9 +1,10 @@
 ﻿using CheckeredFlagAPI.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CheckeredFlagAPI.Data
 {
-    public class DataContext:DbContext
+    public class DataContext:IdentityDbContext
     {
        
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }

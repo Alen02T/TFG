@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models/user';
-import { AuthService } from 'src/app/services/authServices/auth.service';
-import { CookieHandlerService } from 'src/app/services/authServices/cookie-handler.service';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/AuthServices/auth.service';
+import { CookieHandlerService } from 'src/app/services/AuthServices/cookie-handler.service';
 
 
 

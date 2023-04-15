@@ -7,19 +7,27 @@ import { TeamsComponent } from './components/teams/teams.component';
 import { TeamService } from './services/team.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
+import { CookieService } from 'ngx-cookie-service';
+import { FormsModule } from '@angular/forms';
+import { CookieHandlerService } from './services/AuthServices/cookie-handler.service';
+import { AdminComponent } from './components/admin/admin.component';
+import { DirectorService } from './services/AuthServices/director.service';
+import { TokenHandlerService } from './services/AuthServices/token-handler.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamsComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [TeamService],
+  providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
