@@ -1,14 +1,19 @@
 
+<div class="contenedor">
+  <h1>Efecto de máquina de escribir.<span>&#160;</span></h1>
+</div>
 <div class="container">
   <h1>Empieza tu aventura</h1>
+
   <div class="form-container">
     <form style="background-color: rgb(0, 0, 0);width: 400px;border: 2px solid gray;">
-      <mat-vertical-stepper vertical>
+      <mat-vertical-stepper vertical linear>
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Primer paso</ng-template>
             <mat-form-field>
-              <input matInput formControlName="firstCtrl" placeholder="Campo 1">
+              <input matInput formControlName="firstCtrl"   type="email" placeholder="Email" [formControl]="email" />
+              <!-- <input [(ngModel)]="director.name" type="password" placeholder="Password"  /> -->
             </mat-form-field>
             <mat-form-field>
               <input matInput formControlName="secondCtrl" placeholder="Campo 2">
@@ -22,11 +27,11 @@
           <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel>Segundo paso</ng-template>
             <div class="example-container">
-              <mat-form-field appearance="fill">
+              <!-- <mat-form-field appearance="fill">
                 <mat-label>Enter your email</mat-label>
                 <input matInput placeholder="pat@example.com" [formControl]="email" required>
                 <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
+              </mat-form-field> -->
             </div>
             <mat-form-field>
               <input matInput formControlName="fourthCtrl" placeholder="Campo 4">
@@ -37,43 +42,14 @@
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Segundo paso</ng-template>
-            <div class="example-container">
-              <mat-form-field appearance="fill">
-                <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-            </div>
-            <mat-form-field>
-              <input matInput formControlName="fourthCtrl" placeholder="Campo 4">
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Atrás</button>
-              <button mat-button matStepperNext>Próximo</button>
-            </div>
-          </form>
-        </mat-step>
-        <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Segundo paso</ng-template>
-            <div class="example-container">
-              <mat-form-field appearance="fill">
-                <mat-label>Enter your email</mat-label>
-                <input matInput placeholder="pat@example.com" [formControl]="email" required>
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
-              </mat-form-field>
-            </div>
-            <mat-form-field>
-              <input matInput formControlName="fourthCtrl" placeholder="Campo 4">
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Atrás</button>
-              <button mat-button matStepperNext>Próximo</button>
-            </div>
-          </form>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          You are now done.
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button routerLink="" mat-button matStepperPrevious>Proceed</button>
+            <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+          </div>
         </mat-step>
       </mat-vertical-stepper>
     </form>

@@ -15,7 +15,7 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-
+  showFiller = true;
   user = new User();
   team = new Team();
   token = "";

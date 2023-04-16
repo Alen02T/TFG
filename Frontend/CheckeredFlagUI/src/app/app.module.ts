@@ -20,13 +20,17 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
+import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     TeamsComponent,
     LoginComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,8 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatStepperModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatSidenavModule
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService],
   bootstrap: [AppComponent]
