@@ -22,6 +22,8 @@
     "@angular/router": "~13.2.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.4",
+    "flag-icon-css": "^4.1.7",
+    "flag-icons": "^6.6.6",
     "jquery": "^3.6.4",
     "jwt-decode": "^3.1.2",
     "ngx-cookie-service": "^15.0.0",

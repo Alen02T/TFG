@@ -40,7 +40,7 @@ export class CardsComponent implements OnInit {
 
    combineData() {
     if (this.drivers && this.abilities) {
-      this.pilotSkills = [];
+      //this.pilotSkills = [];
       for (const driver of this.drivers) {
         const skill = this.abilities.find((s) => s.driverId === driver.driverId);
         if (skill) {

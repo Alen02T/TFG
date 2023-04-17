@@ -1,7 +1,12 @@
+
 <div class="card" *ngFor="let driver of drivers">
   <img src="https://via.placeholder.com/250x200.png?text=Pilot+Image" alt="Pilot Image">
   <h3>{{driver.name}}</h3>
   <p>Team</p>
+  <p><span class="fi fi-{{ driver.flag }}"></span></p>
+
+
+
   <div class="attributes">
     <div>
       <span>Speed</span>
