@@ -1,0 +1,41 @@
+
+<div class="card" *ngFor="let driver of drivers">
+  <img  src="{{driver.imageDriver}}" alt="Pilot Image">
+  <h3>{{driver.name}} {{driver.lastname}}</h3>
+  <p>Team</p>
+  <p></p>
+  <p><span class="fi fi-{{ driver.flag }}"></span></p>
+
+
+
+  <div class="attributes">
+    <div>
+      <span>Speed</span>
+      <span class="value">90</span>
+    </div>
+    <div>
+      <span>Acceleration</span>
+      <span class="value">85</span>
+    </div>
+    <div>
+      <span>Handling</span>
+      <span class="value">80</span>
+    </div>
+    <div>
+      <span>Braking</span>
+      <span class="value">75</span>
+    </div>
+    <div>
+      <span>Strategy</span>
+      <span class="value">80</span>
+    </div>
+    <div>
+      <span>Aggression</span>
+      <span class="value">60</span>
+    </div>
+  </div>
+  <div class="rating">
+    <span>88</span>
+    <img src="https://via.placeholder.com/30x30.png?text=Star" alt="Star">
+  </div>
+</div>

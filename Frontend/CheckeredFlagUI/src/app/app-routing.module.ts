@@ -4,16 +4,14 @@ import { TeamsComponent } from './components/teams/teams.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { RegisterComponent } from './components/register/register.component';
+import { HomeComponent } from './components/home/home.component';
+import { CardsComponent } from './components/cards/cards.component';
 
 const routes: Routes = [
 
  {
     path: 'teams',
     component: TeamsComponent,
-  },
-  {
-    path: '',
-    component: LoginComponent,
   },
   {
     path: 'login',
@@ -26,6 +24,14 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'cards',
+    component: CardsComponent,
+  },
+  {
+    path: '',
+    component:HomeComponent,
   },
 
 ];

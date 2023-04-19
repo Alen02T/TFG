@@ -14,11 +14,16 @@
         public string imageDriver { get; set; }
         
         //TeamId
-        public int Team { get; set; }
+        public int team { get; set; }
 
-        public int MarketValue { get; set; }
-   
-        
-      
+        //Fantasy
+        public int seasonStartPrice { get; set; }
+        public int currentPrice{get;set;}
+        public int seasonChange { get; set; }
+
+
+        //League Id
+        public int leagueId { get; set; }
+
     }
 }

@@ -46,6 +46,60 @@ namespace CheckeredFlagAPI.Migrations
                     b.ToTable("Director");
                 });
 
+            modelBuilder.Entity("CheckeredFlagAPI.Models.Driver", b =>
+                {
+                    b.Property<int>("driverId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("driverId"), 1L, 1);
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Flag")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Lastname")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
+                    b.Property<int>("currentPrice")
+                        .HasColumnType("int");
+
+                    b.Property<string>("imageDriver")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("leagueId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("seasonChange")
+                        .HasColumnType("int");
+
+                    b.Property<int>("seasonStartPrice")
+                        .HasColumnType("int");
+
+                    b.Property<int>("team")
+                        .HasColumnType("int");
+
+                    b.HasKey("driverId");
+
+                    b.ToTable("Drivers");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")

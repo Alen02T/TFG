@@ -11,12 +11,13 @@
         public int Poles { get; set; }
         public int FastestLaps { get; set; }
         public int Podiums { get; set; }
-        public int Championships { get; set; }
-        public int PositionRaceAvg { get; set; }
-        public int PositionGridAvg { get; set; }
-        public int BestRaceFinish { get; set; }
-        public int WorstRaceFinish { get; set; }
         public int HighestGridPos { get; set; }
+        
+        //Veces que le ha ganado a su compañero
+        public int beatTeamMateRate { get; set; }
+
+        //Circuito Id
+        public int HighestScoringTrack { get; set; }
 
     }
 }

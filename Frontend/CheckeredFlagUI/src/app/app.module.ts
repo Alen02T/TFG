@@ -22,6 +22,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { AdminHeaderComponent } from './components/admin-header/admin-header.component';
+import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './components/header/header.component';
+import { DriverService } from './services/driver.service';
+import { CardsComponent } from './components/cards/cards.component';
+import { AbilityService } from './services/ability.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
     LoginComponent,
     AdminComponent,
     RegisterComponent,
-    AdminHeaderComponent
+    AdminHeaderComponent,
+    HomeComponent,
+    HeaderComponent,
+    CardsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +54,7 @@ import { AdminHeaderComponent } from './components/admin-header/admin-header.com
     MatInputModule,
     MatSidenavModule
   ],
-  providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService],
+  providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,DriverService,AbilityService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

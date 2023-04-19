@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Director } from 'src/app/models/director.model';
+import { Driver } from 'src/app/models/driver.model';
 import { Team } from 'src/app/models/team.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/AuthServices/auth.service';
 import { CookieHandlerService } from 'src/app/services/AuthServices/cookie-handler.service';
 import { DirectorService } from 'src/app/services/AuthServices/director.service';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
+import { DriverService } from 'src/app/services/driver.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -24,6 +26,7 @@ export class AdminComponent implements OnInit {
   directores:Director[] | null;
   notify="";
 
+  drivers:Driver[] | null;
   nombre="";
   age=0;
   country="";
@@ -33,12 +36,12 @@ export class AdminComponent implements OnInit {
 
   constructor(private authService:AuthService,private _directorService:DirectorService,private router : Router,
     private _token:TokenHandlerService, private route: ActivatedRoute,private _cookie:CookieHandlerService,
-    private _teamService:TeamService
+    private _teamService:TeamService,private _driverService:DriverService
     ) {
 
     this.directores=null;
     this.director=null;
-    //this.drivers=null;
+    this.drivers=null;
 
     this.nombre="";
     this.lastname="";
@@ -52,6 +55,7 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDirector();
+    this.getAllDrivers();
   }
 
   getDirector(){
@@ -63,6 +67,11 @@ export class AdminComponent implements OnInit {
  getDirectores(){
    this._directorService.getDirectorData().subscribe(apiEscuderia => this.directores=apiEscuderia);
  }
+
+ getAllDrivers(){
+    this._driverService.getDriverData().subscribe(apiEscuderia=>this.drivers=apiEscuderia);
+ }
+
 
  loadData() {
   // Saving field values for checking if there are changes

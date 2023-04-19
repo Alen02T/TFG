@@ -6,10 +6,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CheckeredFlagAPI.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class DriversController : ControllerBase
+
     {
+
         private readonly DataContext _context;
 
         public DriversController(DataContext context)
@@ -28,7 +31,7 @@ namespace CheckeredFlagAPI.Controllers
         [HttpGet("points")]
         public async Task<ActionResult<List<Driver>>> GetDriversByPoints()
         {
-            return Ok(await _context.Drivers.OrderByDescending(Drivers => Drivers.Points).ToListAsync());
+            return Ok(await _context.Drivers.OrderByDescending(Drivers => Drivers.).ToListAsync());
         }*/
 
 
@@ -37,7 +40,7 @@ namespace CheckeredFlagAPI.Controllers
         public async Task<ActionResult<List<Driver>>> GetTeam(int teamId)
         {
             var drivers = await _context.Drivers
-                .Where(c => c.Team == teamId)
+                .Where(c => c.team == teamId)
                 .ToListAsync();
 
             return drivers;
@@ -56,7 +59,7 @@ namespace CheckeredFlagAPI.Controllers
 
 
         [HttpPost]
-        public async Task<ActionResult<List<Driver>>> AddHero(Driver Driver)
+        public async Task<ActionResult<List<Driver>>> AddDriver(Driver Driver)
         {
             _context.Drivers.Add(Driver);
             await _context.SaveChangesAsync();
@@ -64,52 +67,33 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(await _context.Drivers.ToListAsync());
         }
 
-        /*
-       [HttpPut]
-       [Route("{id}")]
-       public async Task<IActionResult> UpdateDriver([FromRoute] int id, Driver request)
-       {
-           var dbDriver = await _context.Drivers.FindAsync(request.driverId);
-           if (dbDriver == null)
-               return BadRequest("Driver not found.");
-           //dbTask.Id = request.Id;
-           dbDriver.Name = request.Name;
-           dbDriver.Country = request.Country;
-           dbDriver.Flag = request.Flag;
-           dbDriver.Number = request.Number;
-           dbDriver.Lastname = request.Lastname;
-           dbDriver.imageDriver = request.imageDriver;
-           dbDriver.Podiums = request.Podiums;
-           dbDriver.Team = request.Team;
-           dbDriver.Age = request.Age;
-           dbDriver.Points = request.Points;
-
-
-           await _context.SaveChangesAsync();
-
-           return Ok(dbDriver);
-       }
-
 
         [HttpPut]
-        public async Task<ActionResult<List<Driver>>> UpdateHero(Driver request)
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateDriver([FromRoute] int id, Driver request)
         {
             var dbDriver = await _context.Drivers.FindAsync(request.driverId);
             if (dbDriver == null)
                 return BadRequest("Driver not found.");
+            //dbTask.Id = request.Id;
             dbDriver.Name = request.Name;
-            dbDriver.Country= request.Country;
-            dbDriver.Flag= request.Flag;
+            dbDriver.Country = request.Country;
+            dbDriver.Flag = request.Flag;
             dbDriver.Number = request.Number;
-            dbDriver.Lastname= request.Lastname;
-            dbDriver.imageDriver= request.imageDriver;
-            dbDriver.Podiums= request.Podiums;
-            dbDriver.Team= request.Team;
-            dbDriver.Age= request.Age;
-            dbDriver.Points = request.Points;
+            dbDriver.Lastname = request.Lastname;
+            dbDriver.imageDriver = request.imageDriver;
+            dbDriver.currentPrice = request.currentPrice;
+            dbDriver.seasonChange = request.seasonChange;
+            dbDriver.seasonStartPrice = request.seasonStartPrice;
+            dbDriver.Age = request.Age;
+
+
             await _context.SaveChangesAsync();
-            return Ok(await _context.Drivers.ToListAsync());
-        }*/
+
+            return Ok(dbDriver);
+        }
+
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Driver>>> Delete(int id)
         {

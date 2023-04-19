@@ -1,4 +1,5 @@
 ﻿using CheckeredFlagAPI.Entity;
+using CheckeredFlagAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,5 +10,6 @@ namespace CheckeredFlagAPI.Data
        
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<DirectorEntity> Directores { get; set; }
+        public DbSet<Driver> Drivers { get; set; }
     }
 }
