@@ -19,7 +19,7 @@ namespace CheckeredFlagAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Ability>>> GetStats()
+        public async Task<ActionResult<List<Ability>>> GetAbilities()
         {
             return Ok(await _context.Abilities.ToListAsync());
         }
@@ -35,7 +35,7 @@ namespace CheckeredFlagAPI.Controllers
 
 
         [HttpGet("driver/{driverId}")]
-        public async Task<ActionResult<List<Ability>>> GetDriverStatsByDriverId(int driverId)
+        public async Task<ActionResult<List<Ability>>> GetDriverAbilitiesByDriverId(int driverId)
         {
             var Tasks = await _context.Abilities
                 .Where(c => c.driverId == driverId)
@@ -45,7 +45,7 @@ namespace CheckeredFlagAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Ability>>> AddStat(Ability ability)
+        public async Task<ActionResult<List<Ability>>> AddAbility(Ability ability)
         {
             _context.Abilities.Add(ability);
             await _context.SaveChangesAsync();
@@ -55,20 +55,20 @@ namespace CheckeredFlagAPI.Controllers
 
 
         [HttpPut]
-        public async Task<ActionResult<List<Ability>>> UpdateStat(Ability request)
+        public async Task<ActionResult<List<Ability>>> UpdateAbility(Ability request)
         {
-            var dbStat = await _context.Abilities.FindAsync(request.abilityId);
-            if (dbStat == null)
+            var dbAbility = await _context.Abilities.FindAsync(request.abilityId);
+            if (dbAbility == null)
                 return BadRequest("Ability not found.");
 
-            dbStat.overtaking = request.overtaking;
-            dbStat.defending = request.defending;
-            dbStat.tireManagement = request.tireManagement;
-            dbStat.consistency = request.consistency;
-            dbStat.pace = request.pace;
-            dbStat.experience= request.experience;
-            dbStat.overall = request.overall;
-            //dbStat.driverId = request.driverId;
+            dbAbility.overtaking = request.overtaking;
+            dbAbility.defending = request.defending;
+            dbAbility.tireManagement = request.tireManagement;
+            dbAbility.consistency = request.consistency;
+            dbAbility.pace = request.pace;
+            dbAbility.experience= request.experience;
+            dbAbility.overall = request.overall;
+            //dbAbility.driverId = request.driverId;
 
             await _context.SaveChangesAsync();
 
@@ -77,11 +77,11 @@ namespace CheckeredFlagAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Ability>>> Delete(int id)
         {
-            var dbStat = await _context.Abilities.FindAsync(id);
-            if (dbStat == null)
+            var dbAbility = await _context.Abilities.FindAsync(id);
+            if (dbAbility == null)
                 return BadRequest("Ability not found.");
 
-            _context.Abilities.Remove(dbStat);
+            _context.Abilities.Remove(dbAbility);
             await _context.SaveChangesAsync();
 
             return Ok(await _context.Abilities.ToListAsync());
