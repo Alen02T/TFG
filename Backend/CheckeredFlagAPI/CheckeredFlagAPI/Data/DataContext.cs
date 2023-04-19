@@ -11,5 +11,7 @@ namespace CheckeredFlagAPI.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
         public DbSet<DirectorEntity> Directores { get; set; }
         public DbSet<Driver> Drivers { get; set; }
+
+        public DbSet<Ability> Abilities { get; set; }
     }
 }
