@@ -18,21 +18,21 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
 
         }
 
-        /*
-
+       
 
               [HttpGet]
               public ActionResult<List<DriverInfo>> GetAllDriverInfo()
               {
                   //var _context = new UserRegistrationContext();
                   var driverInfoList = (from d in _context.Drivers
-                                        join t in _context.Teams on d.Team equals t.teamId
-                                        join s in _context.Stats on d.driverId equals s.driver
-                  orderby d.Points descending
+                                        join t in _context.Teams on d.team equals t.teamId
+                                        join s in _context.Stats on d.driverId equals s.DriverId
+                                        join a in _context.Abilities on d.driverId equals a.driverId
+                                        orderby s.Points descending
                                         select new DriverInfo()
                                         {
+                                            //Driver
                                             DriverId = d.driverId,
-
                                             DriverName = d.Name,
                                             DriverLastName = d.Lastname,
                                             DriverCountry = d.Country,
@@ -40,10 +40,23 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                             DriverFlag = d.Flag,
                                             DriverNumber = d.Number,
                                             DriverImageDriver = d.imageDriver,
-                                            DriverPoints = d.Points,
-                                            DriverPodiums = d.Podiums,
+                                            DrivercurrentPrice = d.currentPrice,
+                                            DriverseasonChange = d.seasonChange,
+                                            DriverseasonStartPrice = d.seasonStartPrice,
 
 
+                                            //Driver's Stats
+                                            DriverPoints = s.Points,
+                                            DriverPodiums = s.Podiums,
+                                            DriverWins = s.Wins,
+                                            DriverPoles=s.Poles,
+                                            DriverFastestLaps=s.FastestLaps,
+                                            DriverDnfs=s.Dnfs,
+                                            DriverHighestGridPos=s.HighestGridPos,
+                                            DriverbeatTeamMateRate=s.beatTeamMateRate,
+                                            DriverHighestScoringTrack=s.HighestScoringTrack,
+
+                                            //Driver's Team
                                             TeamColor = t.color,
                                             TeamName = t.name,
                                             TeamShieldImage = t.shieldImage,
@@ -52,18 +65,19 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                             TeamCountry = t.country,
                                             TeamFlag = t.flag,
 
-                                            overtaking = s.overtaking,
-                                            defending = s.defending,
-                                            tireManagement = s.tireManagement,
-                                            consistency = s.consistency,
-                                            pace = s.pace,
-                                            wetClimate = s.wetClimate,
-                                            overall = s.overall
+                                            //Driver's Abilities
+                                            overtaking = a.overtaking,
+                                            defending = a.defending,
+                                            tireManagement = a.tireManagement,
+                                            consistency = a.consistency,
+                                            pace = a.pace,
+                                            experience = a.experience,
+                                            overall = a.overall
 
 
 
                                         }).ToList();
                   return driverInfoList;
-              }*/
+              }
     }
 }
