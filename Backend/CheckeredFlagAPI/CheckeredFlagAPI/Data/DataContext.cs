@@ -13,11 +13,9 @@ namespace CheckeredFlagAPI.Data
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Ability> Abilities { get; set; }
         public DbSet<Stat> Stats { get; set; }
-
         public DbSet<Team> Teams { get; set; }
-
         public DbSet<Circuit> Circuits { get; set; }
-
         public DbSet<Race> Races { get; set; }
+        public DbSet<Sponsor> Sponsors { get; set; }
     }
 }
