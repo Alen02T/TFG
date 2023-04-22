@@ -10,7 +10,7 @@ export class DriverService {
   constructor(private http: HttpClient) {}
 
   getDriverData() : Observable<Driver[]> {
-    return this.http.get<Driver[]>(environment.API_URL + '/Drivers/driversNoDb');
+    return this.http.get<Driver[]>(environment.API_URL + '/Drivers');
   }
 
   getDriverById(id : number) : Observable<Driver>{

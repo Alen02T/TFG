@@ -1,0 +1,34 @@
+<!-- <app-header></app-header> -->
+
+<body style="height: auto;">
+  <div style="font-family: FormulaRegular;" class="driver-cards" >
+   <div [routerLink]="'/Drivers/'+driver.driverId" class="flip-card" *ngFor="let driver of driversInfo" style="--team-color: #{{driver.teamColor}};" >
+      <div class="flip-card-inner" >
+        <div class="driver-card card-background" >
+         <div class="driver-image-layer" >
+          <img [src]="driver.teamShieldImage" alt="">
+         </div>
+          <div class="overlay">
+            <p>Rating</p>
+            <div class="number" style="font-weight: bold;"><i>{{driver.overall}}</i></div><br>
+            <!--<div class="abbr" style="font-weight: bold;">VER</div>-->
+            <!--<img class="flag" src="\assets\img\nl.png" alt="">-->
+            <!--<img class="team" src="\assets\img\redbull_logo.png" alt="">-->
+            <span style="float: right;border-radius: 50px;" class="flag-icon flag-icon-{{driver?.driverFlag}}"></span>
+             <!-- <div class="text">{{ driver.driverCountry }}</div> -->
+
+          </div>
+          <div class="overlay-name">
+
+            <div class="first-name">{{ driver.driverName }}</div>
+            <div class="last-name"> {{ driver.driverLastName }}</div>
+            <p> <small> {{ driver.teamName }}</small></p>
+           <!-- <a target="_blank" [routerLink]="'/Drivers/'+driver.driverId"><button style="background-color: rgb(230, 230, 230);" type="button" class="btn btn-info">See More</button></a> -->
+          </div>
+          <!--style="width: 250px;"-->
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

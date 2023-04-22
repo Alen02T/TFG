@@ -27,6 +27,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { DriverService } from './services/driver.service';
 import { CardsComponent } from './components/cards/cards.component';
 import { AbilityService } from './services/ability.service';
+import { DriversComponent } from './components/drivers/drivers.component';
+import { driverInfoService } from './services/driverInfo.service';
+import { SelectedDriverComponent } from './components/selected-driver/selected-driver.component';
+import { StatService } from './services/stat.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +42,9 @@ import { AbilityService } from './services/ability.service';
     AdminHeaderComponent,
     HomeComponent,
     HeaderComponent,
-    CardsComponent
+    CardsComponent,
+    DriversComponent,
+    SelectedDriverComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +60,8 @@ import { AbilityService } from './services/ability.service';
     MatInputModule,
     MatSidenavModule
   ],
-  providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,DriverService,AbilityService],
+  providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
+    DriverService,AbilityService,driverInfoService,StatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

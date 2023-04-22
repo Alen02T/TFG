@@ -13,7 +13,7 @@ export class TeamService {
   }
 
   getTeamById(id : number) : Observable<Team>{
-    return this.http.get<Team>(environment.API_URL + '/teams/'+id);
+    return this.http.get<Team>(environment.API_URL + '/team/'+id);
   }
 
   getTeamsOrdererByPoints() : Observable<Team[]> {

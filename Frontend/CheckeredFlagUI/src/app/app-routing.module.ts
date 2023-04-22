@@ -6,6 +6,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { DriversComponent } from './components/drivers/drivers.component';
+import { SelectedDriverComponent } from './components/selected-driver/selected-driver.component';
 
 const routes: Routes = [
 
@@ -33,6 +35,15 @@ const routes: Routes = [
     path: '',
     component:HomeComponent,
   },
+  {
+    path: 'Drivers',
+    component:DriversComponent,
+  },
+  {
+    path: 'Drivers/:id',
+    component:SelectedDriverComponent,
+  },
+
 
 ];
 
