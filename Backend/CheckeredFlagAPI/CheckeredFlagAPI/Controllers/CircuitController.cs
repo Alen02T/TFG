@@ -33,7 +33,7 @@ namespace CheckeredFlagAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Circuit>>> AddHero(Circuit Circuit)
+        public async Task<ActionResult<List<Circuit>>> AddCircuit(Circuit Circuit)
         {
             _context.Circuits.Add(Circuit);
             await _context.SaveChangesAsync();
