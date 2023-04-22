@@ -15,5 +15,7 @@ namespace CheckeredFlagAPI.Data
         public DbSet<Stat> Stats { get; set; }
 
         public DbSet<Team> Teams { get; set; }
+
+        public DbSet<Circuit> Circuits { get; set; }
     }
 }
