@@ -1,28 +1,152 @@
 
-<div class="main" style="background-image: url('/assets/img/alonso.png');background-repeat: no-repeat;background-size: cover;background-position: bottom;font-family: FormulaRegular;">
+<div class="main" style="background-image: url('{{grandPrix?.circuitImage}}');background-repeat: no-repeat;background-size: cover;background-position: bottom;font-family: FormulaRegular;">
   <div class="text-center border-bottom panel">
           <div class="container">
             <div class="jumbotron">
               <pre>
                 <h1>
-                  <!-- {{grandPrix?.circuitCountry}} -->
+                  {{grandPrix?.circuitCountry}}
                   2023
                 </h1>
 
               </pre>
 
-              <!-- <h1>{{circuit?.name}}</h1> -->
-                <!-- <p class="parragraph" style="color: white;float:left;">Next Location | {{circuit?.country}} <span class="flag-icon flag-icon-{{grandPrix?.circuitFlag}}"></span> </p> -->
-                <!-- <h6 style="font-size:25px" class="circuit"> Round {{grandPrix?.raceRound}}</h6> -->
+              <h1>{{circuit?.name}}</h1>
+                <p class="parragraph" style="color: white;float:left;">Next Location | {{circuit?.country}} <span class="flag-icon flag-icon-{{grandPrix?.circuitFlag}}"></span> </p>
+                <h6 style="font-size:25px" class="circuit"> Round {{grandPrix?.raceRound}}</h6>
 
-                <!-- <h5 class="sponsor" style="background-color: rgba(60, 59, 59, 0.855);padding: 30px;"> <span style="font-size: 15px;color:black"> Sponsored By</span> {{grandPrix?.sponsorName}}</h5> -->
+                <h5 class="sponsor" style="background-color: rgba(60, 59, 59, 0.855);padding: 30px;"> <span style="font-size: 15px;color:black"> Sponsored By</span> {{grandPrix?.sponsorName}}</h5>
             </div>
           </div>
   </div>
 </div>
 
 <ul style="padding: 20px;border-bottom: 5px solid black;font-family: FormulaRegularBold;" class="nav justify-content-center bg-dark">
-  <!-- <h2 style="color:white;">FORMULA 1 {{grandPrix?.raceYear}} {{grandPrix?.sponsorName}} {{grandPrix?.raceName}}</h2> -->
+  <h2 style="color:white;">FORMULA 1 {{grandPrix?.raceYear}} {{grandPrix?.sponsorName}} {{grandPrix?.raceName}}</h2>
 </ul>
+<!-- <nav class="nav nav-pills flex-column flex-sm-row">
+  <a class="flex-sm-fill text-sm-center nav-link active" href="#">Active</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Link</a>
+  <a class="flex-sm-fill text-sm-center nav-link" href="#">Link</a>
+  <a class="flex-sm-fill text-sm-center nav-link disabled" href="#">Disabled</a>
+</nav> -->
+<div class="container" style="margin: auto;background-color: red;">
+  <div class="row">
+    <div style="background-color: lightcyan;text-align: center;" class="col-12 col-md-8">
+      <span style="text-align: left;" class=" fi fi-{{grandPrix?.circuitFlag}}"></span><span style="font-size: 1.4em;"> Formula 1 {{grandPrix?.sponsorName}} {{grandPrix?.raceName}} {{grandPrix?.raceYear}} </span>
+    </div>
+    <div class="col-6 col-md-4">
+      <!-- Aqui va la horizontal card -->
+    </div>
+  </div>
+</div>
+
+<div class="container" style="margin: auto;">
 
 
+  <section class="info-section">
+    <!-- <span class="icono fi fi-{{grandPrix?.circuitFlag}}"></span> -->
+    <div class="row">
+      <div style="background-color: aqua;" class="col-sm-8">
+        <img src="{{grandPrix?.circuitImageMap}}" alt="Imagen descriptiva">
+      </div>
+      <div class="col-sm-4">
+        <div class="container" style="margin: auto;background-color: red;height: 100%;">
+          <div style="height: 100%;" class="row row-cols-2">
+            <div class="col">
+              <h5>Piloto </h5>
+                <p style="background-color: lightcyan;">{{grandPrix?.circuitdriverRecord}}</p>
+              </div>
+            <div class="col">
+              <h5>Laps </h5>
+                <p style="background-color: lightcyan;">{{grandPrix?.circuitLaps}}</p>
+            </div>
+            <div class="col">
+              <h5>Lap Record </h5>
+              <p style="background-color: lightcyan;">{{grandPrix?.circuitlapRecord}}</p>
+            </div>
+            <div class="col">
+              <h5>Length KM </h5>
+              <p style="background-color: lightcyan;">{{grandPrix?.circuitlength}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <div class="container">
+    <div class="text-center mb-5">
+      <h3>Jobs openning</h3>
+      <p class="lead">Eros ante urna tortor aliquam nisl magnis quisque hac</p>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex flex-column flex-lg-row">
+          <span class="avatar avatar-text rounded-3 me-4 mb-2">FD</span>
+          <div class="row flex-fill">
+            <div class="col-sm-5">
+              <h4 class="h5">Junior Frontend Developer</h4>
+              <span class="badge bg-secondary">WORLDWIDE</span> <span class="badge bg-success">$60K - $100K</span>
+            </div>
+            <div class="col-sm-4 py-2">
+              <span class="badge bg-secondary">REACT</span>
+              <span class="badge bg-secondary">NODE</span>
+              <span class="badge bg-secondary">TYPESCRIPT</span>
+              <span class="badge bg-secondary">JUNIOR</span>
+            </div>
+            <div class="col-sm-3 text-lg-end">
+              <a href="#" class="btn btn-primary stretched-link">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex flex-column flex-lg-row">
+          <span class="avatar avatar-text rounded-3 me-4 bg-warning mb-2">BE</span>
+          <div class="row flex-fill">
+            <div class="col-sm-5">
+              <h4 class="h5">Senior Backend Engineer</h4>
+              <span class="badge bg-secondary">US</span> <span class="badge bg-success">$90K - $180K</span>
+            </div>
+            <div class="col-sm-4 py-2">
+              <span class="badge bg-secondary">GOLANG</span>
+              <span class="badge bg-secondary">SENIOR</span>
+              <span class="badge bg-secondary">ENGINEER</span>
+              <span class="badge bg-secondary">BACKEND</span>
+            </div>
+            <div class="col-sm-3 text-lg-end">
+              <a href="#" class="btn btn-primary stretched-link">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <div class="d-flex flex-column flex-lg-row">
+          <span class="avatar avatar-text rounded-3 me-4 bg-info mb-2">PM</span>
+          <div class="row flex-fill">
+            <div class="col-sm-5">
+              <h4 class="h5">Director of Product Marketing</h4>
+              <span class="badge bg-secondary">WORLDWIDE</span> <span class="badge bg-success">$150K - $210K</span>
+            </div>
+            <div class="col-sm-4 py-2">
+              <span class="badge bg-secondary">PRODUCT MARKETING</span>
+              <span class="badge bg-secondary">MARKETING</span>
+              <span class="badge bg-secondary">EXECUTIVE</span>
+              <span class="badge bg-secondary">ECOMMERCE</span>
+            </div>
+            <div class="col-sm-3 text-lg-end">
+              <a href="#" class="btn btn-primary stretched-link">Apply</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

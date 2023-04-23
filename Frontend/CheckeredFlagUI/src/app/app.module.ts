@@ -35,6 +35,7 @@ import { SelectedTeamComponent } from './components/selected-team/selected-team.
 import { SelectedCircuitComponent } from './components/selected-circuit/selected-circuit.component';
 import { CircuitService } from './services/circuit.service';
 import { SponsorService } from './services/sponsor.service';
+import { GrandPrixService } from './services/grandPrix.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { SponsorService } from './services/sponsor.service';
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
-  ,SponsorService],
+  ,SponsorService,GrandPrixService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
