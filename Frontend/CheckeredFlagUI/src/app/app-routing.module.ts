@@ -9,6 +9,7 @@ import { CardsComponent } from './components/cards/cards.component';
 import { DriversComponent } from './components/drivers/drivers.component';
 import { SelectedDriverComponent } from './components/selected-driver/selected-driver.component';
 import { SelectedTeamComponent } from './components/selected-team/selected-team.component';
+import { SelectedCircuitComponent } from './components/selected-circuit/selected-circuit.component';
 
 const routes: Routes = [
 
@@ -51,6 +52,10 @@ const routes: Routes = [
   {
     path: 'Drivers/:id',
     component:SelectedDriverComponent,
+  },
+  {
+    path: 'Circuits/:id',
+    component:SelectedCircuitComponent,
   },
 
 
