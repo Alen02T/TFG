@@ -34,6 +34,7 @@ import { StatService } from './services/stat.service';
 import { SelectedTeamComponent } from './components/selected-team/selected-team.component';
 import { SelectedCircuitComponent } from './components/selected-circuit/selected-circuit.component';
 import { CircuitService } from './services/circuit.service';
+import { SponsorService } from './services/sponsor.service';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { CircuitService } from './services/circuit.service';
     MatSidenavModule
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
-    DriverService,AbilityService,driverInfoService,StatService,CircuitService],
+    DriverService,AbilityService,driverInfoService,StatService,CircuitService
+  ,SponsorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
