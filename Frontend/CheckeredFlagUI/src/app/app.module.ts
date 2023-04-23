@@ -36,7 +36,9 @@ import { SelectedCircuitComponent } from './components/selected-circuit/selected
 import { CircuitService } from './services/circuit.service';
 import { SponsorService } from './services/sponsor.service';
 import { GrandPrixService } from './services/grandPrix.service';
-
+import { CreateQualyComponent } from './components/create-qualy/create-qualy.component';
+import { QualyService } from './services/qualy.service';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +53,8 @@ import { GrandPrixService } from './services/grandPrix.service';
     DriversComponent,
     SelectedDriverComponent,
     SelectedTeamComponent,
-    SelectedCircuitComponent
+    SelectedCircuitComponent,
+    CreateQualyComponent
   ],
   imports: [
     BrowserModule,
@@ -65,11 +68,12 @@ import { GrandPrixService } from './services/grandPrix.service';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSidenavModule
+    MatSidenavModule,
+    DragDropModule
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
-  ,SponsorService,GrandPrixService],
+  ,SponsorService,GrandPrixService,QualyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

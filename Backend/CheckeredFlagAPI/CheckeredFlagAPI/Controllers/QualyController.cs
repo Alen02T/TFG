@@ -52,6 +52,17 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(await _context.Qualys.ToListAsync());
         }
 
+
+        [HttpPost("/Qualys")]
+        public async Task<ActionResult<List<Qualy>>> AddQualys(List<Qualy> qualys)
+        {
+            _context.Qualys.AddRange(qualys);
+            await _context.SaveChangesAsync();
+
+            return Ok(await _context.Qualys.ToListAsync());
+        }
+
+
         [HttpPut]
         public async Task<ActionResult<List<Qualy>>> UpdateQualy(Qualy request)
         {
