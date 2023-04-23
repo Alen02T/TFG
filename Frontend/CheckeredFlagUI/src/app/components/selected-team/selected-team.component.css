@@ -1,0 +1,61 @@
+.main-container{
+  width: 100%;
+  height: 400px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.info-container{
+  font-size: 25px;
+  padding: 20px;
+  float: left;
+  width: 55%;
+  height: 100%;
+  background-color: rgba(233, 233, 233, 0.837);
+}
+
+.image-container{
+  float: right;
+  width: 45%;
+  height: 100%;
+  background-color: rgba(233, 233, 233, 0.837);
+
+  display: flex;
+  justify-content: center;
+}
+body {
+  background-color: #333;
+}
+
+img {
+
+}
+
+.sponsors-imgs{
+  width: 150px;
+  height: 150px;
+  animation: scroll 60s linear infinite;
+}
+
+.slide-track {
+  width: 100%;
+  display: flex;
+  gap: 15em;
+  overflow: hidden;
+}
+
+.slider {
+  margin-top: 50px;
+  background-color: whitesmoke;
+  padding: 2em 2em;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translatex(-1000%)
+  }
+}

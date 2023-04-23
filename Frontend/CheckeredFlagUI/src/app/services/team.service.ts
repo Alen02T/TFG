@@ -9,7 +9,7 @@ export class TeamService {
   constructor(private http: HttpClient) {}
 
   getTeamData() : Observable<Team[]> {
-    return this.http.get<Team[]>(environment.API_URL + '/teams');
+    return this.http.get<Team[]>(environment.API_URL + '/team');
   }
 
   getTeamById(id : number) : Observable<Team>{
@@ -17,7 +17,7 @@ export class TeamService {
   }
 
   getTeamsOrdererByPoints() : Observable<Team[]> {
-    return this.http.get<Team[]>(environment.API_URL + '/teams/points');
+    return this.http.get<Team[]>(environment.API_URL + '/team/points');
   }
 
   updateTeam(teamId:number,country:string,flag:string,color:string,name:string,director:string,points:number,engine:string,shieldImage:string,vehicleImage:string): Observable<any> {
@@ -32,7 +32,7 @@ export class TeamService {
     bodyData.engine=engine;
     bodyData.shieldImage=shieldImage;
     bodyData.vehicleImage=vehicleImage;
-    return this.http.put<any>(environment.API_URL + '/Teams/'+teamId, bodyData);
+    return this.http.put<any>(environment.API_URL + '/Team/'+teamId, bodyData);
   }
 
 

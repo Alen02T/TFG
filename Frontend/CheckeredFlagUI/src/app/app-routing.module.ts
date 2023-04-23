@@ -8,6 +8,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { DriversComponent } from './components/drivers/drivers.component';
 import { SelectedDriverComponent } from './components/selected-driver/selected-driver.component';
+import { SelectedTeamComponent } from './components/selected-team/selected-team.component';
 
 const routes: Routes = [
 
@@ -34,6 +35,14 @@ const routes: Routes = [
   {
     path: '',
     component:HomeComponent,
+  },
+  {
+    path: 'Teams',
+    component:TeamsComponent,
+  },
+  {
+    path: 'Teams/:id',
+    component:SelectedTeamComponent,
   },
   {
     path: 'Drivers',

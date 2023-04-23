@@ -17,4 +17,9 @@ export class DriverService {
     return this.http.get<Driver>(environment.API_URL + '/Drivers/'+id);
   }
 
+
+  getDriversByEscuderia(id : number) : Observable<Driver[]>{
+    return this.http.get<Driver[]>(environment.API_URL + '/Drivers/team/'+id);
+  }
+
 }

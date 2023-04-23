@@ -31,6 +31,7 @@ import { DriversComponent } from './components/drivers/drivers.component';
 import { driverInfoService } from './services/driverInfo.service';
 import { SelectedDriverComponent } from './components/selected-driver/selected-driver.component';
 import { StatService } from './services/stat.service';
+import { SelectedTeamComponent } from './components/selected-team/selected-team.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { StatService } from './services/stat.service';
     HeaderComponent,
     CardsComponent,
     DriversComponent,
-    SelectedDriverComponent
+    SelectedDriverComponent,
+    SelectedTeamComponent
   ],
   imports: [
     BrowserModule,
