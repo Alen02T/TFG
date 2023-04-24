@@ -20,7 +20,7 @@ export class QualyService {
   }
 
   addQualys(qualys: Qualy[]): Observable<Qualy[]> {
-    return this.http.post<Qualy[]>(`${environment.API_URL}/Qualys/`, qualys);
+    return this.http.post<Qualy[]>(environment.API_URL_SPECIAL+'Qualys/', qualys);
   }
 
 

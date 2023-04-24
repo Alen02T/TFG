@@ -17,13 +17,7 @@ export class CreateQualyComponent implements OnInit {
   drivers:any[] = [];
   driversFinishedQualy:any[] = [];
   qualyArray:Qualy[] = [];
-
-
-  datos = [
-    { nombre: 'Juan', edad: 30 },
-    { nombre: 'María', edad: 25 },
-    { nombre: 'Pedro', edad: 40 }
-  ];
+  qualyArray2:Qualy[] = [];
 
   allMoved:boolean
   http: any;
@@ -42,15 +36,6 @@ export class CreateQualyComponent implements OnInit {
     this._qualyService.getAllQualys().subscribe(apiQualy=>this.qualies=apiQualy);
   }
 
-  enviar() {
-    from(this.datos).pipe(
-      concatMap((dato:any) => this.http.post('/api/datos', dato))
-    ).subscribe(
-      () => console.log('Petición completada'),
-      (error) => console.error(error),
-      () => console.log('Todas las peticiones han sido completadas')
-    );
-  }
 
 
  drop = (event: CdkDragDrop<{title: string; poster: string}[]>) => {
@@ -91,7 +76,7 @@ export class CreateQualyComponent implements OnInit {
       let contador=1;
 
       this.driversFinishedQualy.forEach(item => {
-        console.log(item.driverId)
+        //console.log(item.driverId)
 
         if(contador==1){
           //Modelo qualy con FastestLap
@@ -111,23 +96,15 @@ export class CreateQualyComponent implements OnInit {
           let qualy: Qualy = {
             id:0,
             raceId: 1,
-            time: null,
+            time: "",
             grid:contador,
             driverId:item.driverId,
             fastestLap:false,
           };
           this.qualyArray.push(qualy)
         }
-
-
-        //console.log("Contador " , contador)
         contador++;
 
-
-      });
-
-      this.qualyArray.forEach(item => {
-        console.log(item)
 
       });
 
@@ -137,11 +114,59 @@ export class CreateQualyComponent implements OnInit {
   }
 
 
+//El array 3 funciona
+onAddQualys3(array:any){
+let contador=1
+  array.forEach((item: any) => {
+    //console.log(item)
+    //console.log(contador)
 
 
+    if(contador==1){
+      //Modelo qualy con FastestLap
+      let qualy: Qualy = {
+        id:0,
+        raceId: 2,
+        time: '1:20:000',
+        grid:contador,
+        driverId:item.driverId,
+        fastestLap:true,
+      };
+      this.qualyArray2.push(qualy)
 
-onAddQualys(){
-  this._qualyService.addQualys(this.qualyArray).subscribe(apiQualy=>this.qualies2=apiQualy);
+      //console.log("Modelo: " , qualy)
+    }else{
+      //Modelo sin fastest lap y sin tiempo
+      let qualy: Qualy = {
+        id:0,
+        raceId: 2,
+        time: "",
+        grid:contador,
+        driverId:item.driverId,
+        fastestLap:false,
+      };
+      this.qualyArray2.push(qualy)
+    }
+
+    contador++
+  });
+
+  this._qualyService.addQualys(this.qualyArray2).subscribe(
+    apiQualy => {
+      // Aquí se reciben los datos de la API y se almacenan en una variable
+      this.qualies2 = apiQualy;
+      console.log(this.qualies2)
+    },
+    error => {
+      // Aquí se maneja cualquier error que pueda ocurrir en la petición
+      console.error(error);
+    }
+  );
+
+  this.qualyArray2.forEach(item => {
+    console.log(item)
+  });
+
 }
 
 

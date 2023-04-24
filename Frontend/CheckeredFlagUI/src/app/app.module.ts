@@ -39,6 +39,7 @@ import { GrandPrixService } from './services/grandPrix.service';
 import { CreateQualyComponent } from './components/create-qualy/create-qualy.component';
 import { QualyService } from './services/qualy.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { SeeRaceComponent } from './components/see-race/see-race.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,7 +55,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     SelectedDriverComponent,
     SelectedTeamComponent,
     SelectedCircuitComponent,
-    CreateQualyComponent
+    CreateQualyComponent,
+    SeeRaceComponent
   ],
   imports: [
     BrowserModule,

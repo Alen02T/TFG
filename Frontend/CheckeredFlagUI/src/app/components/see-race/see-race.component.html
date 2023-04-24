@@ -1,0 +1,112 @@
+<p>see-race works!</p>
+<app-header></app-header>
+
+
+    <!-- <div style="border-left: 2px solid rgb(189, 188, 188);overflow-y: scroll;max-height: 1250px ;" class="col-4">
+      <br><br>
+        <h2 style="text-align: center;">Estadisticas de Carrera</h2>
+        <hr>
+        <br><br>
+      <h4 style="text-align: center;">Ganador</h4>
+      <div *ngFor="let raceResult of raceResults |  slice:0:1; index as i; first as isFirst;" class="card2" style="margin-bottom: 50px;">
+        <div *ngIf="isFirst">
+          <div class="text-right cross"> <i class="fa fa-times"></i> </div>
+          <div class="card-body text-center">
+
+             <span> {{raceResult.teamName}}</span>
+
+           <img class="btn btn-out btn-square continue" src="/assets/img/verstappen.png" height="60" width="60" alt="">
+            <img class="img-fluid rounded-circle" src="{{raceResult?.driverImageDriver}}" height="60" width="60" />
+              <p><span style="font-size: 20px;font-weight: bold;color: rgb(87, 87, 87);">{{raceResult.driverLastName}}</span>  gana el {{grandPrix?.raceName}}</p>
+              <h2 style="color: rgb(190, 161, 14);">1ST</h2>
+              <img [src]="raceResult.teamShieldImage" height="50" width="50" alt="">
+          </div>
+        </div>
+      </div>
+
+
+
+      <h5 style="text-align: center;">Rey de los adelantamientos</h5>
+      <div class="card2" style="margin-bottom: 50px;">
+          <div class="text-right cross"> <i class="fa fa-times"></i> </div>
+          <img src="https://img.icons8.com/bubbles/200/000000/trophy.png" height="55" width="55">
+          <div class="card-body text-center">
+            <img class="btn btn-out btn-square continue" src="{{raceResult?.driverImageDriver}}" height="60" width="60" alt="">
+              <p><span style="font-size: 20px;font-weight: bold;color: rgb(87, 87, 87);">{{mostOvertakingPlayerName}}</span>  sorprende en {{grandPrix?.circuitName}}</p>
+              <h5><span style="color: royalblue;font-size: 30px;font-weight: bold;">{{numeroMax}}</span> posiciones ganadas</h5>
+          </div>
+      </div>
+
+
+      <h5 style="text-align: center;">Peor Rendimiento</h5>
+      <div class="card2" style="margin-bottom: 50px;">
+          <div class="text-right cross"> <i class="fa fa-times"></i> </div>
+          <img src="https://img.icons8.com/bubbles/200/000000/trophy.png" height="60" width="60">
+          <div class="card-body text-center">
+            <img class="btn btn-out btn-square continue" src="{{raceResult?.driverImageDriver}}" height="60" width="60" alt="">
+              <p>No es el mejor resultado para <span style="font-size: 20px;font-weight: bold;color: rgb(87, 87, 87);" >{{worstOvertakingPlayerName}}</span></p>
+              <h5><span style="color: red;font-size: 30px;font-weight: bold;">{{numeroPerdidaPosicion}}</span> posiciones perdidas</h5>
+          </div>
+      </div>
+
+  </div> -->
+
+
+
+
+
+
+
+
+
+<marquee   scrollamount="15" style="background-color:rgb(0, 0, 0);color: white;padding: 10px;">
+  <div style="font-family: FormulaRegular;" *ngFor="let raceResult of raceResults;"  style="margin-right: 10px; border-left: 5px solid #{{raceResult.teamColor}};display: inline-block;background-color:rgb(44, 44, 44);border: 2px solid rgb(0, 0, 0);justify-content: center;min-width: 25%;padding: 10px;" class="box" >
+    <span style="font-size: 35px;margin-left: 10px;text-align: center;font-family: FormulaRegularBold;">{{raceResult.resultPosition}}º</span>
+    <span style="font-size: 25px;"> {{raceResult.driverName}} {{raceResult.driverLastName}} |  Pts:<span style="font-weight: bold;">+{{raceResult.resultPoints}}</span> </span>
+    <!-- <img [src]="'assets/img/2018-f1-force-india.png'" style="max-height: 150px;max-height: 150px;"   alt=""> -->
+    <img style="float: left;" [src]="raceResult.teamShieldImage" height="50" width="50" alt="">
+    <img  style="float: right;margin-left: 5px;border-left: 2px solid black;" [src]="raceResult.teamVehicleImage" alt="">
+  </div>
+</marquee>
+
+
+
+
+
+
+
+
+
+
+
+
+<div style="font-family: FormulaRegular;">
+  <div>
+    <div class="container">
+      <br><br>
+        <h1>Formula 1 {{grandPrix?.sponsorName}} {{grandPrix?.raceName}} - Race Result</h1> <span style="float: right;" class="flag-icon flag-icon-{{grandPrix?.circuitFlag}}"></span>
+
+        <b>{{grandPrix?.raceDate}}</b> | <small>{{grandPrix?.circuitName}},{{grandPrix?.circuitCountry}}</small>
+
+        <hr>
+
+        <h3>Results</h3>
+        <br>
+        <table class="table" >
+          <thead>
+            <tr>
+              <th scope="col">Pos</th>
+              <th scope="col">Piloto</th>
+              <th scope="col">Equipo</th>
+              <th scope="col">Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let raceResult of raceResults;let first = first; let last = last" >
+              <th  scope="row">{{raceResult?.resultPosition}}</th>
+              <td>{{raceResult?.driverName}} {{raceResult?.driverLastName}} <b>| <i style="font-family: FormulaRegularBlack;">{{raceResult?.driverNumber}}</i></b></td>
+              <td>{{raceResult?.teamName}} <img src="{{raceResult?.teamShieldImage}}" width="30" height="30" alt="">   </td>
+              <td> + {{raceResult?.resultPoints}}</td>
+            </tr>
+          </tbody>
+        </table>
