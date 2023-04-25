@@ -1,46 +1,25 @@
+<header style="background-color: red;font-family: FormulaRegularBold;color:black" class="d-flex flex-wrap justify-content-center py-3   border-bottom">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <img style="float: left;" height="60" width="70" class="img-fluid" src="/assets/img/f1_logo-white.svg" alt="">
 
-<nav class="py-1 bg-light border-bottom">
-  <ul class="nav">
-    <li class="nav-item">
-      <a class="nav-link active" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/astonMartinLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/williamsLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/mclarenLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/mercedesLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/alfaromeoLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/alpineLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/haasLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/ferrariLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/redbullLogo.png" alt=""></a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="#"><img class="lista-imagen" src="/assets/teamImgs/logo/alphatauriLogo.png" alt=""></a>
-    </li>
+    <!-- <span style="color: white;font-weight: bold" class="fs-4"><i>F1</i></span> -->
+  </a>
+  <ul class="nav nav-pills">
+      <li class="nav-item"><a style="color: white;font-weight: bold" [routerLink]="'/'"  class="nav-link">Inicio</a></li>
+      <li class="nav-item"><a style="color: white;font-weight: bold" [routerLink]="'/Drivers'" class="nav-link">Drivers</a></li>
+      <li class="nav-item"><a style="color: white;font-weight: bold" [routerLink]="'/Teams'" class="nav-link">Teams</a></li>
+      <!-- <li class="nav-item"><a style="color: white;font-weight: bold;" [routerLink]="'/Results'" href="#" class="nav-link">Carrera</a></li> -->
+      <li class="nav-item"><a style="color: white;font-weight: bold;" [routerLink]="'/GrandPrix'" href="#" class="nav-link">Calendar</a></li>
+      <li class="nav-item"><a style="color: white;font-weight: bold;" [routerLink]="'/login'" href="#" class="nav-link">Login</a></li>
   </ul>
-</nav>
-
-
-<header>
-  <div class="logo">
-    <h1>Logo</h1>
-  </div>
-  <div class="titulo">
-    <h1>Título del sitio web</h1>
-    <h2>Subtítulo del sitio web</h2>
-  </div>
 </header>
+<!-- <div *ngIf="loaderService.isLoading | async"  class="loader-container">
+  <mat-progress-bar
+  class="example-margin"
+  [color]="color"
+  [mode]="mode"
+  [value]="value"
+  [bufferValue]="bufferValue"
+  ></mat-progress-bar>
+</div> -->
+

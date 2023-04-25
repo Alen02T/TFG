@@ -44,6 +44,7 @@ import { RaceResultService } from './services/raceresult.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import { QualyResultService } from './services/qualyresult.service';
 import { HomeLeagueComponent } from './components/home-league/home-league.component';
+import { HeaderHomeComponent } from './components/header-home/header-home.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,8 @@ import { HomeLeagueComponent } from './components/home-league/home-league.compon
     SelectedCircuitComponent,
     CreateQualyComponent,
     SeeRaceComponent,
-    HomeLeagueComponent
+    HomeLeagueComponent,
+    HeaderHomeComponent
   ],
   imports: [
     BrowserModule,
