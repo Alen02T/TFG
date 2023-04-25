@@ -8,7 +8,7 @@
         public string Time { get; set; }
         public int DriverId { get; set; }
         public int Grid { get; set; }
-
+        public int TeamId { get; set; }
         //Fastest Lap 
         public bool FastestLap { get; set; } = false;
     }

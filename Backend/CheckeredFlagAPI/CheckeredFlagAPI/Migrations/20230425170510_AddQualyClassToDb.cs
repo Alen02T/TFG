@@ -18,6 +18,7 @@ namespace CheckeredFlagAPI.Migrations
                     Time = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DriverId = table.Column<int>(type: "int", nullable: false),
                     Grid = table.Column<int>(type: "int", nullable: false),
+                    TeamId = table.Column<int>(type: "int", nullable: false),
                     FastestLap = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

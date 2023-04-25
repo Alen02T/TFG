@@ -1,5 +1,5 @@
 ﻿using CheckeredFlagAPI.Data;
-using CheckeredFlagAPI.Models;
+using CheckeredFlagAPI.Models.InnerJoinClasses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

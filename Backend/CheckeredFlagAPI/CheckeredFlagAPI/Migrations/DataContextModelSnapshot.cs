@@ -204,6 +204,9 @@ namespace CheckeredFlagAPI.Migrations
                     b.Property<int>("RaceId")
                         .HasColumnType("int");
 
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Time")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

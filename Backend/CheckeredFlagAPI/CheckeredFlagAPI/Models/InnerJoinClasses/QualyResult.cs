@@ -1,11 +1,9 @@
-﻿namespace CheckeredFlagAPI.Models
+﻿namespace CheckeredFlagAPI.Models.InnerJoinClasses
 {
-    public class RaceResult
+    public class QualyResult
     {
 
-
-        //Result
-        public int ResultId { get; set; }
+        public int QualyId { get; set; }
         public int RaceId { get; set; }
 
         //Team
@@ -29,9 +27,8 @@
 
 
         //Result
-        public int ResultGrid { get; set; }
-        public int ResultPosition { get; set; }
-        public int ResultPoints { get; set; }
-        public bool ResultFastestLap { get; set; }
+        public int QualyGrid { get; set; }
+        public string QualyTime { get; set; }
+        public bool QualyFastestLap { get; set; }
     }
 }

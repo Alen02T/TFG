@@ -3,7 +3,7 @@ using CheckeredFlagAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+/**/
 namespace CheckeredFlagAPI.Controllers
 {
     [Route("api/[controller]")]
@@ -74,8 +74,8 @@ namespace CheckeredFlagAPI.Controllers
             dbResult.DriverId = request.DriverId;
             dbResult.Time = request.Time;
             dbResult.Grid = request.Grid;
-            dbResult.FastestLap= request.FastestLap;
-
+            dbResult.FastestLap = request.FastestLap;
+            dbResult.TeamId = request.TeamId;
 
             await _context.SaveChangesAsync();
 

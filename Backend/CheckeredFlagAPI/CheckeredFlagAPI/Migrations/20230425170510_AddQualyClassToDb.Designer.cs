@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CheckeredFlagAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230422230915_AddQualyClassToDb")]
+    [Migration("20230425170510_AddQualyClassToDb")]
     partial class AddQualyClassToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -204,6 +204,9 @@ namespace CheckeredFlagAPI.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("RaceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
                     b.Property<string>("Time")
