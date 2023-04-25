@@ -1,12 +1,21 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+const number=7
 export const environment = {
   production: false,
   API_URL: "https://localhost:7085/api",
   API_URL_SPECIAL: "https://localhost:7085/",
+  LINK_GITHUB:"https://github.com/Alen02T",
+  LINK_LINKEDIN:"https://www.linkedin.com/in/alen-tokalic-cerkezovic-8a50b7249/",
+  LINK_TWITTER:"",
+  LINK_INSTAGRAM:"https://www.instagram.com/alen_rincon/",
 
+//Cambiar cada vez que quiera cambiar una carrera
+
+  BEFORERACEID:number-1,
+  CURRENTRACEID:number,
+  AFTERCURRENT:number+1,
 
 };
 

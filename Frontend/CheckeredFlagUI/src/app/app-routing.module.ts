@@ -12,6 +12,7 @@ import { SelectedTeamComponent } from './components/selected-team/selected-team.
 import { SelectedCircuitComponent } from './components/selected-circuit/selected-circuit.component';
 import { CreateQualyComponent } from './components/create-qualy/create-qualy.component';
 import { SeeRaceComponent } from './components/see-race/see-race.component';
+import { HomeLeagueComponent } from './components/home-league/home-league.component';
 
 const routes: Routes = [
 
@@ -67,7 +68,10 @@ const routes: Routes = [
     path: 'GrandPrix/:id',
     component: SeeRaceComponent,
   },
-
+  {
+    path: 'MyLeague',
+    component: HomeLeagueComponent,
+  },
 
 
 ];
