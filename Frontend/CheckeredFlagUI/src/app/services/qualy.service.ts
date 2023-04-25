@@ -19,6 +19,10 @@ export class QualyService {
     return this.http.get<Qualy>(environment.API_URL + '/Qualy/'+id);
   }
 
+  getQualysByRace(id : number) : Observable<Qualy[]>{
+    return this.http.get<Qualy[]>(environment.API_URL + '/Qualy/race/'+id);
+  }
+
   addQualys(qualys: Qualy[]): Observable<Qualy[]> {
     return this.http.post<Qualy[]>(environment.API_URL_SPECIAL+'Qualys/', qualys);
   }

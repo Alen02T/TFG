@@ -3,6 +3,7 @@ export class Qualy{
   raceId:number;
   time:string | null;
   driverId:number;
+  teamId:number;
   grid:number;
   fastestLap:boolean;
 
@@ -10,6 +11,7 @@ constructor(){
   this.id=0;
   this.raceId=0;
   this.driverId=0;
+  this.teamId=0;
   this.time=null;
   this.grid=0;
   this.fastestLap=false;

@@ -11,6 +11,7 @@ import { SelectedDriverComponent } from './components/selected-driver/selected-d
 import { SelectedTeamComponent } from './components/selected-team/selected-team.component';
 import { SelectedCircuitComponent } from './components/selected-circuit/selected-circuit.component';
 import { CreateQualyComponent } from './components/create-qualy/create-qualy.component';
+import { SeeRaceComponent } from './components/see-race/see-race.component';
 
 const routes: Routes = [
 
@@ -61,6 +62,10 @@ const routes: Routes = [
   {
     path: 'Qualy',
     component:CreateQualyComponent,
+  },
+  {
+    path: 'GrandPrix/:id',
+    component: SeeRaceComponent,
   },
 
 

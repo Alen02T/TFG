@@ -75,38 +75,40 @@ export class CreateQualyComponent implements OnInit {
       this.allMoved = true;
       let contador=1;
 
-      this.driversFinishedQualy.forEach(item => {
-        //console.log(item.driverId)
+      // this.driversFinishedQualy.forEach(item => {
+      //   //console.log(item.driverId)
 
-        if(contador==1){
-          //Modelo qualy con FastestLap
-          let qualy: Qualy = {
-            id:0,
-            raceId: 1,
-            time: '1:20:000',
-            grid:contador,
-            driverId:item.driverId,
-            fastestLap:true,
-          };
-          this.qualyArray.push(qualy)
+      //   if(contador==1){
+      //     //Modelo qualy con FastestLap
+      //     let qualy: Qualy = {
+      //       id:0,
+      //       raceId: 1,
+      //       time: '1:20:000',
+      //       grid:contador,
+      //       driverId:item.driverId,
+      //       teamId:item.team,
+      //       fastestLap:true,
+      //     };
+      //     this.qualyArray.push(qualy)
 
-          //console.log("Modelo: " , qualy)
-        }else{
-          //Modelo sin fastest lap y sin tiempo
-          let qualy: Qualy = {
-            id:0,
-            raceId: 1,
-            time: "",
-            grid:contador,
-            driverId:item.driverId,
-            fastestLap:false,
-          };
-          this.qualyArray.push(qualy)
-        }
-        contador++;
+      //     //console.log("Modelo: " , qualy)
+      //   }else{
+      //     //Modelo sin fastest lap y sin tiempo
+      //     let qualy: Qualy = {
+      //       id:0,
+      //       raceId: 1,
+      //       time: "",
+      //       grid:contador,
+      //       driverId:item.driverId,
+      //       teamId:item.team,
+      //       fastestLap:false,
+      //     };
+      //     this.qualyArray.push(qualy)
+      //   }
+      //   contador++;
 
 
-      });
+      // });
 
     } else {
        this.allMoved = false;
@@ -126,10 +128,11 @@ let contador=1
       //Modelo qualy con FastestLap
       let qualy: Qualy = {
         id:0,
-        raceId: 2,
+        raceId: 1,
         time: '1:20:000',
         grid:contador,
         driverId:item.driverId,
+        teamId:item.team,
         fastestLap:true,
       };
       this.qualyArray2.push(qualy)
@@ -139,10 +142,11 @@ let contador=1
       //Modelo sin fastest lap y sin tiempo
       let qualy: Qualy = {
         id:0,
-        raceId: 2,
+        raceId: 1,
         time: "",
         grid:contador,
         driverId:item.driverId,
+        teamId:item.team,
         fastestLap:false,
       };
       this.qualyArray2.push(qualy)

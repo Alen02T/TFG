@@ -40,6 +40,10 @@ import { CreateQualyComponent } from './components/create-qualy/create-qualy.com
 import { QualyService } from './services/qualy.service';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { SeeRaceComponent } from './components/see-race/see-race.component';
+import { RaceResultService } from './services/raceresult.service';
+import {MatTabsModule} from '@angular/material/tabs';
+import { QualyResultService } from './services/qualyresult.service';
+import { HomeLeagueComponent } from './components/home-league/home-league.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +60,8 @@ import { SeeRaceComponent } from './components/see-race/see-race.component';
     SelectedTeamComponent,
     SelectedCircuitComponent,
     CreateQualyComponent,
-    SeeRaceComponent
+    SeeRaceComponent,
+    HomeLeagueComponent
   ],
   imports: [
     BrowserModule,
@@ -71,11 +76,12 @@ import { SeeRaceComponent } from './components/see-race/see-race.component';
     ReactiveFormsModule,
     MatInputModule,
     MatSidenavModule,
-    DragDropModule
+    DragDropModule,
+    MatTabsModule
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
-  ,SponsorService,GrandPrixService,QualyService],
+  ,SponsorService,GrandPrixService,QualyService,RaceResultService,QualyResultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
