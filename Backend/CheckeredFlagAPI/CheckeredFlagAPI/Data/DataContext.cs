@@ -19,5 +19,6 @@ namespace CheckeredFlagAPI.Data
         public DbSet<Sponsor> Sponsors { get; set; }
         public DbSet<Result> Results { get; set; }
         public DbSet<Qualy> Qualys { get; set; }
+        public DbSet<Liga> Ligas { get; set; }
     }
 }

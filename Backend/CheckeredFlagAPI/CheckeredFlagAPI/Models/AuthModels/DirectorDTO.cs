@@ -10,7 +10,7 @@ namespace CheckeredFlagAPI.Models.AuthModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public int TeamId { get; set; }
+        public int LeagueId { get; set; }
 
       
     }
