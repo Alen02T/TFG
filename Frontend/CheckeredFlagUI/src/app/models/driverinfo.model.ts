@@ -10,7 +10,9 @@ export class driverInfo {
   driverFlag: string | null;
   driverNumber: number;
   driverImageDriver: string | null;
-
+  driverseasonStartPrice:number;
+  drivercurrentPrice:number;
+  driverseasonChange:number;
 
 
   //Driver's Stats
@@ -55,7 +57,9 @@ export class driverInfo {
     this.driverFlag = null;
     this.driverNumber = 0;
     this.driverImageDriver=null;
-
+    this.driverseasonStartPrice=0;
+    this.drivercurrentPrice=0;
+    this.driverseasonChange=0;
 
     this.overtaking = 0;
     this.defending = 0;

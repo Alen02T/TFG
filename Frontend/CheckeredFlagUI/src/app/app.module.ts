@@ -48,6 +48,7 @@ import { HeaderHomeComponent } from './components/header-home/header-home.compon
 import { LigaService } from './services/liga.service';
 import { AdminCardsComponent } from './components/admin-cards/admin-cards.component';
 import { CommonModule } from '@angular/common';
+import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -67,7 +68,8 @@ import { CommonModule } from '@angular/common';
     SeeRaceComponent,
     HomeLeagueComponent,
     HeaderHomeComponent,
-    AdminCardsComponent
+    AdminCardsComponent,
+    AdminDriversComponent
   ],
   imports: [
     BrowserModule,

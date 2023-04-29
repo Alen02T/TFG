@@ -23,11 +23,16 @@ export class AdminCardsComponent implements OnInit {
     this.progressDrivers=0;
    }
 
+
+
+
   ngOnInit(): void {
     this._driverService.getDriverData().subscribe(apiDrivers=>{
       this.drivers=apiDrivers
-
       this.contadorDrivers=this.drivers.length
+
+
+      //Funcion de progreso
       this.getDriversProgressBar()
     });
   }

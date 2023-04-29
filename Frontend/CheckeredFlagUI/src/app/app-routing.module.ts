@@ -13,6 +13,7 @@ import { SelectedCircuitComponent } from './components/selected-circuit/selected
 import { CreateQualyComponent } from './components/create-qualy/create-qualy.component';
 import { SeeRaceComponent } from './components/see-race/see-race.component';
 import { HomeLeagueComponent } from './components/home-league/home-league.component';
+import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.component';
 
 const routes: Routes = [
 
@@ -28,6 +29,11 @@ const routes: Routes = [
     path: 'admin',
     component: AdminComponent,
   },
+  {
+    path: 'admin/drivers',
+    component: AdminDriversComponent,
+  },
+
   {
     path: 'register',
     component: RegisterComponent,
