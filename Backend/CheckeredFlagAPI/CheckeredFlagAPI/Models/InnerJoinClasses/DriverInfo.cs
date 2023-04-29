@@ -15,8 +15,8 @@
         public int DrivercurrentPrice { get; set; }
         public int DriverseasonChange { get; set; }
 
-
-
+        //Driver LeagueId
+        public int DriverLeagueId { get; set; } 
 
 
 
