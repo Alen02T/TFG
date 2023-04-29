@@ -3,6 +3,8 @@ using CheckeredFlagAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CheckeredFlagAPI.Controllers
 {
@@ -37,6 +39,22 @@ namespace CheckeredFlagAPI.Controllers
             }
 
             return liga;
+        }
+
+        // GET: api/Liga/5
+        [HttpGet("Director/{directorId}")]
+        public async Task<ActionResult<Liga>> GetLigaByDirectorId(int directorId)
+        {
+            var ligaDirector = await _context.Ligas
+                .Where(c => c.DirectorId == directorId)
+                .FirstOrDefaultAsync();
+
+            if (ligaDirector == null)
+            {
+                return BadRequest("No se ha encontrado ninguna liga relacionada a este director");
+            }
+
+            return ligaDirector;
         }
 
         // PUT: api/Liga/5

@@ -45,6 +45,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { QualyResultService } from './services/qualyresult.service';
 import { HomeLeagueComponent } from './components/home-league/home-league.component';
 import { HeaderHomeComponent } from './components/header-home/header-home.component';
+import { LigaService } from './services/liga.service';
+import { AdminCardsComponent } from './components/admin-cards/admin-cards.component';
+import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,12 +66,14 @@ import { HeaderHomeComponent } from './components/header-home/header-home.compon
     CreateQualyComponent,
     SeeRaceComponent,
     HomeLeagueComponent,
-    HeaderHomeComponent
+    HeaderHomeComponent,
+    AdminCardsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    CommonModule,
     FormsModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -83,7 +88,8 @@ import { HeaderHomeComponent } from './components/header-home/header-home.compon
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
-  ,SponsorService,GrandPrixService,QualyService,RaceResultService,QualyResultService],
+  ,SponsorService,GrandPrixService,QualyService,RaceResultService,QualyResultService
+,LigaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

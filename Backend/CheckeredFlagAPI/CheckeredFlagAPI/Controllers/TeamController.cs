@@ -39,6 +39,16 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(team);
         }
 
+        [HttpGet("league/{leagueId}")]
+        public async Task<ActionResult<List<Team>>> GetTeamsByLeague(int leagueId)
+        {
+            var teams = await _context.Teams
+                 .Where(c => c.leagueId == leagueId)
+                 .ToListAsync();
+
+            return teams;
+        }
+
 
 
         [HttpPost]

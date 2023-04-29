@@ -3,28 +3,26 @@
     <i class="fas fa-bars"></i>
   </a>
 
-
   <nav style="border-right: 2px solid rgb(255, 204, 0);" id="sidebar" class="sidebar-wrapper">
     <div class="sidebar-content">
       <div class="sidebar-brand">
         <a href="#">Checkered Flag</a>
+
         <div id="close-sidebar">
-          <i class="fas fa-times"></i>
         </div>
       </div>
       <div class="sidebar-header">
         <div class="user-pic">
-          <img class="img-responsive img-rounded" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+          <img style="background-color: white;padding: 5;" class="img-responsive img-rounded" src="/assets/driverImgs/hamilton.png"
             alt="User picture">
         </div>
         <div class="user-info">
-          <span class="user-name">Jhon
-            <strong>Smith</strong>
+          <span class="user-name">{{director?.name}}
+            <strong>| Director</strong>
           </span>
           <span class="user-role">Administrator</span>
           <span class="user-status">
-            <i class="fa fa-circle"></i>
-            <span>Online</span>
+            <span>Online</span><i class="bi bi-circle-fill"></i>
           </span>
         </div>
       </div>
@@ -49,131 +47,56 @@
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-tachometer-alt"></i>
+              <i class="bi bi-speedometer"></i>
               <span>Dashboard</span>
-              <span class="badge badge-pill badge-warning">New</span>
+              <!-- <span class="badge badge-pill badge-warning">New</span> -->
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Dashboard 1
-                    <span class="badge badge-pill badge-success">Pro</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Dashboard 2</a>
-                </li>
-                <li>
-                  <a href="#">Dashboard 3</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="fa fa-shopping-cart"></i>
-              <span>E-commerce</span>
-              <span class="badge badge-pill badge-danger">3</span>
-            </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Products
+            <a routerLink="/Drivers">
+              <i class="bi bi-person-vcard-fill"></i>
 
-                  </a>
-                </li>
-                <li>
-                  <a href="#">Orders</a>
-                </li>
-                <li>
-                  <a href="#">Credit cart</a>
-                </li>
-              </ul>
-            </div>
-          </li>
-          <li class="sidebar-dropdown">
-            <a href="#">
-              <i class="far fa-gem"></i>
-              <span>Components</span>
+              <span>Drivers</span>
+              <!-- <span class="badge badge-pill badge-danger">3</span> -->
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">General</a>
-                </li>
-                <li>
-                  <a href="#">Panels</a>
-                </li>
-                <li>
-                  <a href="#">Tables</a>
-                </li>
-                <li>
-                  <a href="#">Icons</a>
-                </li>
-                <li>
-                  <a href="#">Forms</a>
-                </li>
-              </ul>
-            </div>
+          </li>
+          <li class="sidebar-dropdown">
+            <a routerLink="/Teams">
+              <i class="bi bi-people-fill"></i>
+              <span>Teams</span>
+            </a>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-chart-line"></i>
+              <i class="bi bi-reception-4"></i>
               <span>Charts</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Pie chart</a>
-                </li>
-                <li>
-                  <a href="#">Line chart</a>
-                </li>
-                <li>
-                  <a href="#">Bar chart</a>
-                </li>
-                <li>
-                  <a href="#">Histogram</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="sidebar-dropdown">
             <a href="#">
-              <i class="fa fa-globe"></i>
-              <span>Maps</span>
+              <i class="bi bi-calendar-week-fill"></i>
+              <span>Season</span>
             </a>
-            <div class="sidebar-submenu">
-              <ul>
-                <li>
-                  <a href="#">Google maps</a>
-                </li>
-                <li>
-                  <a href="#">Open street map</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li class="header-menu">
-            <span>Extra</span>
+            <span>Workspace</span>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-book"></i>
-              <span>Documentation</span>
-              <span class="badge badge-pill badge-primary">Beta</span>
+              <i class="bi bi-tools"></i>
+              <span>Races Management</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-calendar"></i>
-              <span>Calendar</span>
+              <i class="bi bi-server"></i>
+              <span>Qualy Management</span>
             </a>
           </li>
           <li>
             <a href="#">
-              <i class="fa fa-folder"></i>
-              <span>Examples</span>
+              <i class="bi bi-wrench-adjustable-circle-fill"></i>
+              <span>Results</span>
             </a>
           </li>
         </ul>
@@ -202,13 +125,31 @@
 
 
     <!-- sidebar-wrapper  -->
-    <main class="page-content">
+    <main style="background: #19001c;min-height: 110vh;" class="page-content">
       <div class="container-fluid">
 
-        <h2>Welcome Back {{nombre}}</h2>
+        <h2>Welcome Back!   <strong style="color: rgb(146, 110, 19);">{{nombre}}</strong></h2>
         <hr>
-
+        <app-admin-cards></app-admin-cards>
         <div class="row">
+
+
+
+          <div class="jumbotron">
+            <small>Informacion De Liga</small>
+            <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+              <div class="col-md-6 px-0">
+                <h1 class="display-4 fst-italic">League {{ligaObj?.nombre}}</h1>
+                <p class="lead my-3">{{ligaObj?.descripcion}}</p>
+                <p>{{ligaObj?.ubicacion}}</p>
+
+                <p class="lead mb-0"><a  [routerLink]="'/MyLeague'"  class="text-white fw-bold">Acceder...</a></p>
+              </div>
+            </div>
+          </div>
+
+
+
 
 
 <!--Lista pilotos-->
@@ -218,11 +159,12 @@
                     <div class="card">
                         <div class="d-flex card-header justify-content-between">
                             <h5 style="color:black" class="me-3 mb-0">Top Drivers</h5>
+
                             <a href="#!.html">View All</a>
                         </div>
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
-                                <!--List-item-->
+
                                 <li *ngFor="let driver of drivers" class="list-group-item pt-0">
                                     <div class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
@@ -248,6 +190,39 @@
                 </div>
             </div>
           </div>
+
+
+
+        <!-- Añadir boton -->
+        <!-- meter un modal -->
+
+          <!-- <form [hidden]="ligaObj != null"  [formGroup]="taskForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="mb-3">
+              <label for="recipient-name" class="col-form-label">Nombre:</label>
+              <input type="text" formControlName="nombre" required class="form-control" id="recipient-name">
+            </div>
+
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">descripcion</label>
+              <textarea class="form-control" formControlName="descripcion" id="message-text"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Ubicacion</label>
+              <textarea class="form-control" formControlName="ubicacion" id="message-text"></textarea>
+            </div>
+            <div class="mb-3">
+              <label style="color:black" >id de piloto: </label>
+
+
+
+              <input class="form-control" type="number" formControlName="directorId"><br><br>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!taskForm.valid">Crear Tarea</button>
+            </div>
+          </form> -->
 
 
 

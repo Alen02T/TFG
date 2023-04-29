@@ -31,7 +31,7 @@ export class DirectorService {
     let bodyData = new Director();
     bodyData.name = body.name;
     bodyData.email = body.email;
-    bodyData.teamId=body.teamId;
+    bodyData.leagueId=body.leagueId;
 
     return this.http.post<T>(environment.API_URL + 'Directores', bodyData, {
       observe: 'response',

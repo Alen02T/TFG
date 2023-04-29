@@ -27,6 +27,17 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(await _context.Drivers.ToListAsync());
         }
 
+
+        [HttpGet("league/{leagueId}")]
+        public async Task<ActionResult<List<Driver>>> GetDriversByLeague(int leagueId)
+        {
+            var drivers = await _context.Drivers
+                 .Where(c => c.leagueId == leagueId)
+                 .ToListAsync();
+
+            return drivers;
+        }
+
         /*
         [HttpGet("points")]
         public async Task<ActionResult<List<Driver>>> GetDriversByPoints()

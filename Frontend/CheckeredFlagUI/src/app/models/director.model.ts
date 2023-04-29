@@ -2,13 +2,13 @@ export class Director {
   id:number;
   name:string;
   email:string;
-  teamId:number;
+  leagueId:number;
 
   constructor(){
     this.id=0;
     this.name='';
     this.email='';
-    this.teamId=0;
+    this.leagueId=0;
   }
 
 

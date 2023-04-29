@@ -25,5 +25,8 @@
         public string chassis { get; set; }
         public string vehicleImage { get; set; }
 
+
+        //LeagueId
+        public int leagueId { get; set; }
     }
 }
