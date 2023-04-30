@@ -6,79 +6,42 @@
         <div class="card-body">
           <div class="d-grid"> <a href="javascript:;" class="btn btn-primary">+ Add File</a>
           </div>
-          <h5 class="my-3">My Drive</h5>
+          <h5 class="my-3">My Drivers</h5>
           <div class="fm-menu">
-            <div class="list-group list-group-flush"> <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-folder me-2"></i><span>All Files</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-devices me-2"></i><span>My Devices</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-analyse me-2"></i><span>Recents</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-plug me-2"></i><span>Important</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-trash-alt me-2"></i><span>Deleted Files</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-file me-2"></i>
-                      <span>Documents</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-image me-2"></i><span>Images</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-video me-2"></i><span>Videos</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-music me-2"></i><span>Audio</span></a>
-              <a href="javascript:;" class="list-group-item py-1"><i class="bx bx-beer me-2"></i><span>Zip Files</span></a>
+            <div class="list-group list-group-flush">
+              <a *ngFor="let driverInfo of driversInfoByLeague" class="list-group-item py-1"><span>{{driverInfo.driverName}}</span></a>
             </div>
           </div>
         </div>
       </div>
+
+
       <div class="card">
         <div class="card-body">
-          <h5 class="mb-0 text-primary font-weight-bold">45.5 GB <span class="float-end text-secondary">50 GB</span></h5>
-          <p class="mb-0 mt-2"><span class="text-secondary">Used</span><span class="float-end text-primary">Upgrade</span>
-          </p>
-          <div class="progress mt-3" style="height:7px;">
+          <h6 class="text-secondary">Points Total:{{suma}}</h6>
+          <h5 class="mb-0 text-primary font-weight-bold"></h5>
+          <!-- <div class="progress mt-3" style="height:7px;" >
             <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-            <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+            <div class="progress-bar" role="progressbar" style="width: 30%;background-color:red ;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
             <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+          </div> -->
+          <div class="progress mt-3" style="height:7px">
+            <div  *ngFor="let driverLeague of driversInfoByLeague;let i = index" class="progress-bar" role="progressbar" style="background-color: {{colors?.[i]}};" [style.width.%]="driverLeague.driverPoints"></div>
           </div>
           <div class="mt-3"></div>
-          <div class="d-flex align-items-center">
-            <div class="fm-file-box bg-light-primary text-primary"><i class="bx bx-image"></i>
+
+          <div class="d-flex align-items-center" *ngFor="let driverLeague of driversInfoByLeague;let i = index">
+            <div class="fm-file-box bg-light-primary text-primary"><i style="color: {{colors?.[i]}};" class="bi bi-circle-fill"></i>
             </div>
             <div class="flex-grow-1 ms-2">
-              <h6 class="mb-0">Images</h6>
-              <p class="mb-0 text-secondary">1,756 files</p>
+              <h6 class="mb-0">{{driverLeague.driverName}}</h6>
+              <p class="mb-0 text-secondary">{{driverLeague.driverLastName}}</p>
             </div>
-            <h6 class="text-primary mb-0">15.3 GB</h6>
+            <h6 class="text-primary mb-0">{{driverLeague.driverPoints}} Pts</h6>
           </div>
-          <div class="d-flex align-items-center mt-3">
-            <div class="fm-file-box bg-light-success text-success"><i class="bx bxs-file-doc"></i>
-            </div>
-            <div class="flex-grow-1 ms-2">
-              <h6 class="mb-0">Documents</h6>
-              <p class="mb-0 text-secondary">123 files</p>
-            </div>
-            <h6 class="text-primary mb-0">256 MB</h6>
-          </div>
-          <div class="d-flex align-items-center mt-3">
-            <div class="fm-file-box bg-light-danger text-danger"><i class="bx bx-video"></i>
-            </div>
-            <div class="flex-grow-1 ms-2">
-              <h6 class="mb-0">Media Files</h6>
-              <p class="mb-0 text-secondary">24 files</p>
-            </div>
-            <h6 class="text-primary mb-0">3.4 GB</h6>
-          </div>
-          <div class="d-flex align-items-center mt-3">
-            <div class="fm-file-box bg-light-warning text-warning"><i class="bx bx-image"></i>
-            </div>
-            <div class="flex-grow-1 ms-2">
-              <h6 class="mb-0">Other Files</h6>
-              <p class="mb-0 text-secondary">458 files</p>
-            </div>
-            <h6 class="text-primary mb-0">3 GB</h6>
-          </div>
-          <div class="d-flex align-items-center mt-3">
-            <div class="fm-file-box bg-light-info text-info"><i class="bx bx-image"></i>
-            </div>
-            <div class="flex-grow-1 ms-2">
-              <h6 class="mb-0">Unknown Files</h6>
-              <p class="mb-0 text-secondary">57 files</p>
-            </div>
-            <h6 class="text-primary mb-0">178 GB</h6>
-          </div>
+
+
+
         </div>
       </div>
     </div>
@@ -93,56 +56,26 @@
             </div>
           </div>
           <div class="row mt-3">
-            <div class="col-12 col-lg-4">
-              <div class="card shadow-none border radius-15">
+            <h6>Best Rated Drivers</h6>
+            <div *ngFor="let driversRate of driversInfoByRating;index as i" class="col-12 col-lg-4">
+
+              <div style="" class="card shadow-none border radius-15">
+
                 <div class="card-body">
+
                   <div class="d-flex align-items-center">
-                    <div class="fm-icon-box radius-15 bg-primary text-white"><i class="lni lni-google-drive"></i>
+                    <h6>{{driversRate.drivercurrentPrice | currency:'USD' }}</h6>
+                    <div class="fm-icon-box radius-15 bg-primary text-white">
                     </div>
-                    <div class="ms-auto font-24"><i class="fa fa-ellipsis-h"></i>
+                    <div class="ms-auto font-24"><span style="float: right;border-radius: 50px;" class="fi fi-{{ driversRate?.driverFlag }}"></span>
                     </div>
                   </div>
-                  <h5 class="mt-3 mb-0">Google Drive</h5>
-                  <p class="mb-1 mt-4"><span>45.5 GB</span>  <span class="float-end">50 GB</span>
+                  <h5 class="mt-3 mb-0">{{driversRate.driverName}}</h5>
+                  <small>{{driversRate.driverLastName}}</small>
+                  <p class="mb-1 mt-4"><span>{{driversRate.overall}}/100</span><img class="float-end" width="30" src="{{driversRate.teamShieldImage}}" alt="">
                   </p>
                   <div class="progress" style="height: 7px;">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-4">
-              <div class="card shadow-none border radius-15">
-                <div class="card-body">
-                  <div class="d-flex align-items-center">
-                    <div class="fm-icon-box radius-15 bg-danger text-white"><i class="lni lni-dropbox-original"></i>
-                    </div>
-                    <div class="ms-auto font-24"><i class="fa fa-ellipsis-h"></i>
-                    </div>
-                  </div>
-                  <h5 class="mt-3 mb-0">Dropbox</h5>
-                  <p class="mb-1 mt-4"><span>1,2 GB</span>  <span class="float-end">3 GB</span>
-                  </p>
-                  <div class="progress" style="height: 7px;">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: 45%;" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 col-lg-4">
-              <div class="card shadow-none border radius-15">
-                <div class="card-body">
-                  <div class="d-flex align-items-center">
-                    <div class="fm-icon-box radius-15 bg-warning text-dark"><i class="bx bxs-door-open"></i>
-                    </div>
-                    <div class="ms-auto font-24"><i class="fa fa-ellipsis-h"></i>
-                    </div>
-                  </div>
-                  <h5 class="mt-3 mb-0">OneDrive</h5>
-                  <p class="mb-1 mt-4"><span>2,5 GB</span>  <span class="float-end">3 GB</span>
-                  </p>
-                  <div class="progress" style="height: 7px;">
-                    <div class="progress-bar bg-warning" role="progressbar" style="width: 65%;" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar" style="background-color:#{{driversRate.teamColor}};width: {{driversRate.overall}}%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </div>
               </div>
@@ -203,7 +136,7 @@
           <!--end row-->
           <div class="d-flex align-items-center">
             <div>
-              <h5 class="mb-0">Recent Files</h5>
+              <h5 class="mb-0">Market Value</h5>
             </div>
             <div class="ms-auto"><a href="javascript:;" class="btn btn-sm btn-outline-secondary">View all</a>
             </div>
@@ -215,13 +148,13 @@
                   <th>Name <i class="bx bx-up-arrow-alt ms-2"></i>
                   </th>
                   <th>Teams</th>
-                  <th>Current Value</th>
                   <th>Start Value</th>
+                  <th>Current Value</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let driverInfo of driversInfo">
+                <tr *ngFor="let driverInfo of driversInfoOrderedByPrice">
                   <td>
                     <div class="d-flex align-items-center">
                       <div><i class="bx bxs-file-pdf me-2 font-24 text-danger"></i>
@@ -230,8 +163,9 @@
                     </div>
                   </td>
                   <td >{{driverInfo.teamName}} <img width="50" src="{{driverInfo.teamShieldImage}}" alt=""> </td>
-                  <td>{{driverInfo.drivercurrentPrice | currency:'USD' }}</td>
                   <td>{{driverInfo.driverseasonStartPrice | currency:'USD' }}</td>
+                  <td>{{driverInfo.drivercurrentPrice | currency:'USD' }}</td>
+
 
 
 

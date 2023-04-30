@@ -17,6 +17,14 @@ export class driverInfoService {
     return this.http.get<driverInfo[]>(environment.API_URL + '/DriverInfo/price/'+id);
   }
 
+  getdriverInfoDataByLeagueOrderedByPoints(id : number) : Observable<driverInfo[]> {
+    return this.http.get<driverInfo[]>(environment.API_URL + '/DriverInfo/points/'+id);
+  }
+
+  getdriverInfoDataByLeagueOrderedByRating(id : number) : Observable<driverInfo[]> {
+    return this.http.get<driverInfo[]>(environment.API_URL + '/DriverInfo/rating/'+id);
+  }
+
   getdriverInfoData() : Observable<driverInfo[]> {
     return this.http.get<driverInfo[]>(environment.API_URL + '/DriverInfo');
   }
