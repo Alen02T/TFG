@@ -80,6 +80,131 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
         }
 
 
+
+        [HttpGet("points/{leagueId}")]
+        public ActionResult<List<DriverInfo>> GetAllDriverInfoByLeagueIdOrderedByPoints(int leagueId)
+        {
+            //var _context = new UserRegistrationContext();
+            var driverInfoList = (from d in _context.Drivers
+                                  join t in _context.Teams on d.team equals t.teamId
+                                  join s in _context.Stats on d.driverId equals s.DriverId
+                                  join a in _context.Abilities on d.driverId equals a.driverId
+                                  where leagueId.Equals(d.leagueId)
+                                  orderby s.Points descending
+                                  select new DriverInfo()
+                                  {
+                                      //Driver
+                                      DriverId = d.driverId,
+                                      DriverName = d.Name,
+                                      DriverLastName = d.Lastname,
+                                      DriverCountry = d.Country,
+                                      DriverAge = d.Age,
+                                      DriverFlag = d.Flag,
+                                      DriverNumber = d.Number,
+                                      DriverImageDriver = d.imageDriver,
+                                      DrivercurrentPrice = d.currentPrice,
+                                      DriverseasonChange = d.seasonChange,
+                                      DriverseasonStartPrice = d.seasonStartPrice,
+                                      DriverLeagueId = d.leagueId,
+
+                                      //Driver's Stats
+                                      DriverPoints = s.Points,
+                                      DriverPodiums = s.Podiums,
+                                      DriverWins = s.Wins,
+                                      DriverPoles = s.Poles,
+                                      DriverFastestLaps = s.FastestLaps,
+                                      DriverDnfs = s.Dnfs,
+                                      DriverHighestGridPos = s.HighestGridPos,
+                                      DriverbeatTeamMateRate = s.beatTeamMateRate,
+                                      DriverHighestScoringTrack = s.HighestScoringTrack,
+
+                                      //Driver's Team
+                                      TeamColor = t.color,
+                                      TeamName = t.name,
+                                      TeamShieldImage = t.shieldImage,
+                                      TeamVehicleImage = t.vehicleImage,
+                                      TeamDirector = t.director,
+                                      TeamCountry = t.country,
+                                      TeamFlag = t.flag,
+
+                                      //Driver's Abilities
+                                      overtaking = a.overtaking,
+                                      defending = a.defending,
+                                      tireManagement = a.tireManagement,
+                                      consistency = a.consistency,
+                                      pace = a.pace,
+                                      experience = a.experience,
+                                      overall = a.overall
+
+
+
+                                  }).ToList();
+            return driverInfoList;
+        }
+
+
+        [HttpGet("rating/{leagueId}")]
+        public ActionResult<List<DriverInfo>> GetAllDriverInfoByLeagueIdOrderedByOverall(int leagueId)
+        {
+            //var _context = new UserRegistrationContext();
+            var driverInfoList = (from d in _context.Drivers
+                                  join t in _context.Teams on d.team equals t.teamId
+                                  join s in _context.Stats on d.driverId equals s.DriverId
+                                  join a in _context.Abilities on d.driverId equals a.driverId
+                                  where leagueId.Equals(d.leagueId)
+                                  orderby a.overall descending
+                                  select new DriverInfo()
+                                  {
+                                      //Driver
+                                      DriverId = d.driverId,
+                                      DriverName = d.Name,
+                                      DriverLastName = d.Lastname,
+                                      DriverCountry = d.Country,
+                                      DriverAge = d.Age,
+                                      DriverFlag = d.Flag,
+                                      DriverNumber = d.Number,
+                                      DriverImageDriver = d.imageDriver,
+                                      DrivercurrentPrice = d.currentPrice,
+                                      DriverseasonChange = d.seasonChange,
+                                      DriverseasonStartPrice = d.seasonStartPrice,
+                                      DriverLeagueId = d.leagueId,
+
+                                      //Driver's Stats
+                                      DriverPoints = s.Points,
+                                      DriverPodiums = s.Podiums,
+                                      DriverWins = s.Wins,
+                                      DriverPoles = s.Poles,
+                                      DriverFastestLaps = s.FastestLaps,
+                                      DriverDnfs = s.Dnfs,
+                                      DriverHighestGridPos = s.HighestGridPos,
+                                      DriverbeatTeamMateRate = s.beatTeamMateRate,
+                                      DriverHighestScoringTrack = s.HighestScoringTrack,
+
+                                      //Driver's Team
+                                      TeamColor = t.color,
+                                      TeamName = t.name,
+                                      TeamShieldImage = t.shieldImage,
+                                      TeamVehicleImage = t.vehicleImage,
+                                      TeamDirector = t.director,
+                                      TeamCountry = t.country,
+                                      TeamFlag = t.flag,
+
+                                      //Driver's Abilities
+                                      overtaking = a.overtaking,
+                                      defending = a.defending,
+                                      tireManagement = a.tireManagement,
+                                      consistency = a.consistency,
+                                      pace = a.pace,
+                                      experience = a.experience,
+                                      overall = a.overall
+
+
+
+                                  }).ToList();
+            return driverInfoList;
+        }
+
+
         [HttpGet("price/{leagueId}")]
         public ActionResult<List<DriverInfo>> GetAllDriverInfoByLeagueIdOrderedByPrice(int leagueId)
         {
