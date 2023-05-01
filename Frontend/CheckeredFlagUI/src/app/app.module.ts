@@ -49,6 +49,9 @@ import { LigaService } from './services/liga.service';
 import { AdminCardsComponent } from './components/admin-cards/admin-cards.component';
 import { CommonModule } from '@angular/common';
 import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.component';
+import { AdminTeamsComponent } from './components/admin-teams/admin-teams.component';
+import {MatSelectModule} from '@angular/material/select';
+import { AdminAddDriverComponent } from './components/admin-add-driver/admin-add-driver.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +72,9 @@ import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.
     HomeLeagueComponent,
     HeaderHomeComponent,
     AdminCardsComponent,
-    AdminDriversComponent
+    AdminDriversComponent,
+    AdminTeamsComponent,
+    AdminAddDriverComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +91,8 @@ import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.
     MatInputModule,
     MatSidenavModule,
     DragDropModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSelectModule
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService

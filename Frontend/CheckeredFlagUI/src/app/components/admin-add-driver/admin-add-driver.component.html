@@ -1,0 +1,264 @@
+<app-admin-header></app-admin-header>
+
+<!-- <mat-form-field class="modal" appearance="fill">
+  <mat-label>Panel color</mat-label>
+  <mat-select [formControl]="panelDrivers" panelClass="example-panel-{{panelDrivers.value}}">
+    <mat-option *ngFor="let driverInfo of driversInfoByLeague" [value]="driverInfo">{{ driverInfo }}</mat-option>
+  </mat-select>
+</mat-form-field> -->
+
+<div class="container">
+  <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+      <div class="card h-100">
+        <div class="card-body">
+          <div class="account-settings">
+            <div class="user-profile">
+              <div class="user-avatar">
+                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+              </div>
+              <h5 class="user-name">New User</h5>
+              <!-- <h6 class="user-email">yuki@Maxwell.com</h6> -->
+            </div>
+            <div class="about">
+              <h5>About</h5>
+              <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+  <div class="card h-100">
+    <div class="card-body">
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <h6 class="mb-2 text-primary">Personal Details</h6>
+        </div>
+
+
+<form [formGroup]="pilotForm" (ngSubmit)="submitForm()">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" formControlName="name" class="form-control" id="name">
+  </div>
+  <div class="mb-3">
+    <label for="lastname" class="form-label">Lastname</label>
+    <input type="text" formControlName="lastname" class="form-control" id="lastname">
+  </div>
+  <div class="mb-3">
+    <label for="age" class="form-label">Age</label>
+    <input type="number" formControlName="age" class="form-control" id="age">
+  </div>
+  <div class="mb-3">
+    <label for="country" class="form-label">Country</label>
+    <input type="text" formControlName="country" class="form-control" id="country">
+  </div>
+  <div class="mb-3">
+    <label for="flag" class="form-label">Flag</label>
+    <input type="text" formControlName="flag" class="form-control" id="flag">
+  </div>
+  <div class="mb-3">
+    <label for="number" class="form-label">Number</label>
+    <input type="number" formControlName="number" class="form-control" id="number">
+  </div>
+  <div class="mb-3">
+    <label for="imageDriver" class="form-label">Image Driver</label>
+    <input type="text" formControlName="imageDriver" class="form-control" id="imageDriver">
+  </div>
+  <div class="mb-3">
+    <label for="seasonStartPrice" class="form-label">Season Start Price</label>
+    <input type="number" formControlName="seasonStartPrice" class="form-control" id="seasonStartPrice">
+  </div>
+  <div class="mb-3">
+    <label for="currentPrice" class="form-label">Current Price</label>
+    <input type="number" formControlName="currentPrice" class="form-control" id="currentPrice">
+  </div>
+  <div class="mb-3">
+    <label for="seasonChange" class="form-label">Season Change</label>
+    <input type="number" formControlName="seasonChange" class="form-control" id="seasonChange">
+  </div>
+  <div class="mb-3">
+    <label for="team" class="form-label">Team</label>
+    <input type="number" formControlName="team" class="form-control" id="team">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+        <!--
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+
+           <div class="form-group">
+            <label for="eMail">Email</label>
+            <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="website">Website URL</label>
+            <input type="url" class="form-control" id="website" placeholder="Website url">
+          </div>
+        </div>
+      </div>
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <h6 class="mt-3 mb-2 text-primary">Address</h6>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="Street">Street</label>
+            <input type="name" class="form-control" id="Street" placeholder="Enter Street">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="ciTy">City</label>
+            <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="sTate">State</label>
+            <input type="text" class="form-control" id="sTate" placeholder="Enter State">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="zIp">Zip Code</label>
+            <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
+          </div>
+        </div>
+      </div>
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="text-right">
+            <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+            <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+  </div>
+</div>
+</div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">.col-md-4</div>
+      <div class="col-md-4 ms-auto">.col-md-4 .ms-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 ms-auto">.col-md-3 .ms-auto</div>
+      <div class="col-md-2 ms-auto">.col-md-2 .ms-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 ms-auto">.col-md-6 .ms-auto</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-9">
+        Level 1: .col-sm-9
+        <div class="row">
+          <div class="col-8 col-sm-6">
+            Level 2: .col-8 .col-sm-6
+          </div>
+          <div class="col-4 col-sm-6">
+            Level 2: .col-4 .col-sm-6
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- (A) FULL SCREEN OVERLAY -->
+<div id="owrap">
+  <div style="background-color: white;" id="obox">
+
+    <button onclick="document.getElementById('owrap').className=''">
+      Close
+    </button>
+
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col">
+            Aston Martin
+          </div>
+          <div class="col">
+            <img src="/assets/driverImgs/alonso.png" alt="">
+          </div>
+          <div class="col">
+            One of three columns
+          </div>
+          <div class="col">
+            One of three columns
+          </div>
+        </div>
+        <div class="row align-items-center">
+          <div class="col">
+            One of three columns
+          </div>
+          <div class="col">
+            One of three columns
+          </div>
+          <div class="col">
+            One of three columns
+          </div>
+        </div>
+        <div class="row align-items-end">
+          <div class="col">
+            One of three columns
+          </div>
+          <div class="col">
+            One of three columns
+          </div>
+          <div class="col">
+            One of three columns
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>
+
+<!-- (B) TOGGLE BUTTON -->
+<button onclick="document.getElementById('owrap').className='show'">
+  Open
+
+
+
+</button>

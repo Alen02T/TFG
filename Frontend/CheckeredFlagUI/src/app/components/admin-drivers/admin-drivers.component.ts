@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { driverInfo } from 'src/app/models/driverinfo.model';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
 
@@ -17,6 +18,8 @@ export class AdminDriversComponent implements OnInit {
   color:string | null;
   colors:any[] | null;
   suma:number;
+
+  panelDrivers = new FormControl('red');
 
   constructor(private _driverInfoService:driverInfoService) {
     this.driversInfoOrderedByPrice=null;
@@ -60,9 +63,12 @@ export class AdminDriversComponent implements OnInit {
       this.colors = colors;
 
     })
-
-
   }
+
+
+
+
+
 
 
 }

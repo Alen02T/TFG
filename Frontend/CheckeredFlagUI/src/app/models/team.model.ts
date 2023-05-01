@@ -12,6 +12,8 @@ export class Team {
   championships:number;
   shieldImage: string | null;
   vehicleImage: string | null;
+  leagueId:number;
+
 
   constructor() {
     this.teamId = 0;
@@ -27,5 +29,6 @@ export class Team {
     this.championships=0;
     this.shieldImage = null;
     this.vehicleImage = null;
+    this.leagueId=0;
   }
 }

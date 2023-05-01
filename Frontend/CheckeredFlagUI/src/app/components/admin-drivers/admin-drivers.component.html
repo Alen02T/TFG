@@ -1,15 +1,20 @@
 <app-admin-header></app-admin-header>
+
 <div class="container">
   <div class="row">
       <div class="col-12 col-lg-3">
       <div class="card">
         <div class="card-body">
-          <div class="d-grid"> <a href="javascript:;" class="btn btn-primary">+ Add File</a>
+          <div class="d-grid"> <a routerLink="add" class="btn btn-success">+ Add Driver</a>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+              Añadir Piloto
+            </button>
           </div>
           <h5 class="my-3">My Drivers</h5>
           <div class="fm-menu">
             <div class="list-group list-group-flush">
-              <a *ngFor="let driverInfo of driversInfoByLeague" class="list-group-item py-1"><span>{{driverInfo.driverName}}</span></a>
+              <a *ngFor="let driverInfo of driversInfoByLeague" class="list-group-item py-1"><span>{{driverInfo.driverName}}</span><i style="color:#{{driverInfo.teamColor}};float:right" class="bi bi-circle-fill"></i></a>
+
             </div>
           </div>
         </div>
@@ -59,7 +64,7 @@
             <h6>Best Rated Drivers</h6>
             <div *ngFor="let driversRate of driversInfoByRating;index as i" class="col-12 col-lg-4">
 
-              <div style="" class="card shadow-none border radius-15">
+              <div class="card shadow-none border radius-15">
 
                 <div class="card-body">
 
@@ -197,9 +202,32 @@
                 </tr>
               </tbody>
             </table>
+
           </div>
         </div>
       </div>
     </div>
   </div>
+
   </div>
+
+<!-- Botón para abrir el modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

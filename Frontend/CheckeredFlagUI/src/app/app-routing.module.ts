@@ -14,6 +14,8 @@ import { CreateQualyComponent } from './components/create-qualy/create-qualy.com
 import { SeeRaceComponent } from './components/see-race/see-race.component';
 import { HomeLeagueComponent } from './components/home-league/home-league.component';
 import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.component';
+import { AdminTeamsComponent } from './components/admin-teams/admin-teams.component';
+import { AdminAddDriverComponent } from './components/admin-add-driver/admin-add-driver.component';
 
 const routes: Routes = [
 
@@ -32,6 +34,14 @@ const routes: Routes = [
   {
     path: 'admin/drivers',
     component: AdminDriversComponent,
+  },
+  {
+    path: 'admin/drivers/add',
+    component: AdminAddDriverComponent,
+  },
+  {
+    path: 'admin/teams',
+    component: AdminTeamsComponent,
   },
 
   {

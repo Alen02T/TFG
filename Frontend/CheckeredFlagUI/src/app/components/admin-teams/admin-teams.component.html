@@ -1,0 +1,37 @@
+
+<app-admin-header></app-admin-header>
+<div class="container">
+  <div class="col-12 col-sm-12 col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>Project Teams</h4>
+          </div>
+          <div class="card-body">
+            <div class="media-list position-relative">
+              <div class="table-responsive" id="project-team-scroll" tabindex="1" style="height: 400px; overflow: hidden; outline: none;">
+                <table class="table table-hover table-xl mb-0">
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Teams</th>
+                      <th>Car</th>
+                      <th>Points</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr style="cursor: pointer;" [routerLink]="'/Teams/'+team.teamId" *ngFor="let team of teams">
+                      <td><img height="30" width="50" src="{{team.shieldImage}}" alt=""></td>
+                      <td class="text-truncate">{{team.name}}</td>
+                      <td class="text-truncate">
+                        <img width="150" src="{{team.vehicleImage}}" alt="">
+                      </td>
+                      <td class="text-truncate">{{team.points}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>

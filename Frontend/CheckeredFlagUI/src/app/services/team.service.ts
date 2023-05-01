@@ -8,6 +8,11 @@ import { Team } from '../models/team.model';
 export class TeamService {
   constructor(private http: HttpClient) {}
 
+  getTeamsByLeagueOrdererByPoints(id : number) : Observable<Team[]> {
+    return this.http.get<Team[]>(environment.API_URL + '/Team/points/'+id);
+  }
+
+
   getTeamData() : Observable<Team[]> {
     return this.http.get<Team[]>(environment.API_URL + '/team');
   }
