@@ -23,6 +23,8 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(await _context.Teams.ToListAsync());
         }
 
+      
+
 
         [HttpGet("points")]
         public async Task<ActionResult<List<Team>>> GetTeamsByPoints()
@@ -39,11 +41,25 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(team);
         }
 
+
+
         [HttpGet("league/{leagueId}")]
         public async Task<ActionResult<List<Team>>> GetTeamsByLeague(int leagueId)
         {
             var teams = await _context.Teams
                  .Where(c => c.leagueId == leagueId)
+                 .ToListAsync();
+
+            return teams;
+        }
+
+
+        [HttpGet("points/{leagueId}")]
+        public async Task<ActionResult<List<Team>>> GetTeamsByLeagueOrderedByPoints(int leagueId)
+        {
+            var teams = await _context.Teams
+                 .Where(c => c.leagueId == leagueId).
+                  OrderByDescending(c=>c.points)
                  .ToListAsync();
 
             return teams;
