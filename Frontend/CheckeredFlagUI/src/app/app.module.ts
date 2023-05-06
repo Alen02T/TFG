@@ -52,6 +52,7 @@ import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.
 import { AdminTeamsComponent } from './components/admin-teams/admin-teams.component';
 import {MatSelectModule} from '@angular/material/select';
 import { AdminAddDriverComponent } from './components/admin-add-driver/admin-add-driver.component';
+import { AdminSelectedDriverComponent } from './components/admin-selected-driver/admin-selected-driver.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,8 @@ import { AdminAddDriverComponent } from './components/admin-add-driver/admin-add
     AdminCardsComponent,
     AdminDriversComponent,
     AdminTeamsComponent,
-    AdminAddDriverComponent
+    AdminAddDriverComponent,
+    AdminSelectedDriverComponent
   ],
   imports: [
     BrowserModule,

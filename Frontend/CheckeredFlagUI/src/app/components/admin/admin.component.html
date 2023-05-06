@@ -165,8 +165,8 @@
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
 
-                                <li *ngFor="let driver of drivers" class="list-group-item pt-0">
-                                    <div class="d-flex align-items-center">
+                                <li [routerLink]="'drivers/'+driver.driverId" *ngFor="let driver of drivers" class="list-group-item pt-0" style="cursor:pointer;">
+                                    <div  class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
                                             <img src="{{driver.imageDriver}}" alt="" class="avatar rounded-circle" />
                                         </div>

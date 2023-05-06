@@ -6,7 +6,7 @@
       <div class="flip-card-inner" >
         <div class="driver-card card-background" >
          <div class="driver-image-layer" >
-          <img [src]="driver.teamShieldImage" alt="">
+          <img [src]="driver.driverImageDriver" alt="">
          </div>
           <div class="overlay">
             <p>Rating</p>
@@ -22,7 +22,8 @@
 
             <div class="first-name">{{ driver.driverName }}</div>
             <div class="last-name"> {{ driver.driverLastName }}</div>
-            <p> <small> {{ driver.teamName }}</small></p>
+            <!-- <p> <small> {{ driver.teamName }}</small></p> -->
+            <img style="height: 60px; width: 60px;" [src]="driver.teamShieldImage" alt="">
            <!-- <a target="_blank" [routerLink]="'/Drivers/'+driver.driverId"><button style="background-color: rgb(230, 230, 230);" type="button" class="btn btn-info">See More</button></a> -->
           </div>
           <!--style="width: 250px;"-->
