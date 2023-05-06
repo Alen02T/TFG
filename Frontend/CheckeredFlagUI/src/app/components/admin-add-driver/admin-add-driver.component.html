@@ -18,6 +18,9 @@
                 <img class="common" style="background-color: yellow;" width="60" height="70" [src]="imagenElegida ? imagenElegida : 'ruta/default.png'" [hidden]="!imagenElegida">
               </div>
               <h5 class="user-name">New User</h5>
+              <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
+                Elige Foto
+              </button>
               <!-- <h6 class="user-email">yuki@Maxwell.com</h6> -->
             </div>
             <div class="about">
@@ -82,6 +85,9 @@
     <label for="team" class="form-label">Team</label>
     <input type="number" formControlName="team" class="form-control" id="team">
   </div>
+<!-- (B) TOGGLE BUTTON -->
+
+
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
         <!--
@@ -298,8 +304,5 @@
 
 </div>
 
-<!-- (B) TOGGLE BUTTON -->
-<button  onclick="document.getElementById('owrap').className='show'">
-  Open
-</button>
+
 

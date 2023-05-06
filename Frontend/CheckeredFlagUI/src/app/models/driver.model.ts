@@ -11,6 +11,8 @@ export class Driver {
   currentPrice:number;
   seasonChange:number;
   team:number;
+  leagueId:number;
+
 
   constructor(){
     this.driverId=0;
@@ -25,6 +27,7 @@ export class Driver {
     this.imageDriver='';
     this.team=0;
     this.number=0;
+    this.leagueId=0;
   }
 
 
