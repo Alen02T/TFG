@@ -205,7 +205,7 @@
 
   <div class="mb-3">
     <ng-select [(ngModel)]="selectedTeam" formControlName="team">
-      <ng-option *ngFor="let team of teams" [value]="team.teamId">{{team.name}}</ng-option>
+      <ng-option *ngFor="let team of teams" [value]="team.teamId"><img height="60" width="60" src="{{team.shieldImage}}" alt=""> {{team.name}}</ng-option>
     </ng-select>
 
     <!-- <label for="team" class="form-label">Team</label>

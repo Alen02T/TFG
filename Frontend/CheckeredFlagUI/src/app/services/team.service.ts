@@ -13,6 +13,9 @@ export class TeamService {
   }
 
 
+
+
+
   getTeamData() : Observable<Team[]> {
     return this.http.get<Team[]>(environment.API_URL + '/team');
   }
