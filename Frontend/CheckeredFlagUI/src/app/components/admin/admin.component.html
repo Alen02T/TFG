@@ -166,6 +166,7 @@
                             <ul class="list-group list-group-flush">
 
                                 <li [routerLink]="'drivers/'+driver.driverId" *ngFor="let driver of drivers" class="list-group-item pt-0" style="cursor:pointer;">
+
                                     <div  class="d-flex align-items-center">
                                         <div class="flex-shrink-0 me-3">
                                             <img src="{{driver.imageDriver}}" alt="" class="avatar rounded-circle" />
@@ -175,15 +176,15 @@
                                             <p class="mb-0 text-muted">{{driver.country}}</p>
                                             <p><span class="fi fi-{{ driver.flag }}"></span></p>
                                         </div>
-                                        <div class="flex-shrink-0 text-end">
-                                            <span>
-                                                {{driver.currentPrice}}
-                                            </span>
+
+                                        <div  class="flex-shrink-0 text-end">
+                                            <span style="margin-right: 15px;">{{driver.currentPrice}} </span>
+                                              <div  [hidden]="driver.team !== 0 " style="float: right;">
+                                                  <i  alt="No tiene equipo" style="color:rgb(255, 145, 0)" class="bi bi-exclamation-triangle-fill"></i>
+                                              </div>
                                         </div>
                                     </div>
                                 </li>
-
-
                             </ul>
                         </div>
                     </div>

@@ -147,9 +147,9 @@
                 <img class="common" style="background-color: yellow;" width="60" height="70" [src]="imagenElegida ? imagenElegida : 'ruta/default.png'" [hidden]="!imagenElegida">
               </div>
               <h5 class="user-name">New User</h5>
-              <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
+              <!-- <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
                 Elige Foto
-              </button>
+              </button> -->
               <!-- <h6 class="user-email">yuki@Maxwell.com</h6> -->
             </div>
             <div class="about">
@@ -199,20 +199,50 @@
     <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
       Elige Foto
     </button>
-    <label for="imageDriver" class="form-label">Image Driver</label>
+    <label for="imageDriver" class="form-label"></label>
     <input type="text" formControlName="imageDriver" class="form-control" id="imageDriver">
   </div>
-
-  <div class="mb-3">
-    <ng-select [(ngModel)]="selectedTeam" formControlName="team">
-      <ng-option *ngFor="let team of availableTeams" [value]="team.teamId"><img height="60" width="60" src="{{team.shieldImage}}" alt=""> {{team.name}}</ng-option>
+ <!-- <label for="team" class="form-label">Team</label>
+    <input type="number" formControlName="team" class="form-control" id="team" required> -->
+  <!-- <div style="background-color: black;width: 100%;height: 40px;" class="mb-3">
+    <ng-select class="select" [(ngModel)]="selectedTeam" formControlName="team">
+      <ng-option *ngFor="let team of availableTeams" [value]="team.teamId"><img height="auto" width="auto" src="{{team.shieldImage}}" alt=""> {{team.name}}</ng-option>
     </ng-select>
 
-    <!-- <label for="team" class="form-label">Team</label>
-    <input type="number" formControlName="team" class="form-control" id="team" required> -->
+  </div> -->
+
+
+
+<ng-select (change)="getTeam(selectedTeam)" style="border: 2px solid black;" [items]="availableTeams" [(ngModel)]="selectedTeam" bindLabel="team" bindValue="teamId" formControlName="team">
+  <ng-template  ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+      <div style="margin: 10px 0;border: 2px solid #{{item.color}};" class="card mb-3">
+        <div class="row g-0">
+          <div style="background-image: url({{item.shieldImage}});background-position: center;background-repeat: no-repeat;background-size: contain" class="col-md-4">
+
+          </div>
+          <div class="col-md-8">
+            <div style="background-color: #{{item.color}};" class="card-body">
+             <h5 class="card-title">{{item.name}}</h5>
+              <p class="card-text"><img class="img-fluid rounded-start" height="100" width="120" src="{{item.vehicleImage}}" alt=""></p>
+              <p class="card-text"><small class="text-muted">{{item.director}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+  </ng-template>
+
+</ng-select>
+
+  <div style="padding:10px;margin-top:10px;border: 2px solid #{{team?.color}};" [hidden]="!team">
+    <small>{{team?.name}}</small>
+    <h6>Equipo elegido</h6>
+    <img src="{{team?.shieldImage}}" alt="">
+    <img width="auto" height="auto" src="{{team?.vehicleImage}}" alt="">
   </div>
 
-  <br/>Selected car ID: {{selectedTeam | json}}
+  <!-- <br/>Selected car ID: {{selectedTeam | json}} -->
+  <br>
+  <hr>
 
 
 
@@ -228,10 +258,10 @@
 
 
 
-Button trigger modal
+<!-- Button trigger modal
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
-</button>
+</button> -->
 
 <!-- Modal -->
 <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

@@ -126,6 +126,7 @@ export class AdminAddDriverComponent implements OnInit {
   }
 
 
+
   ngOnInit() {
     // this.calcularOverall()
     this._teamService.getAvailableTeams(1).subscribe(apiTeams=>this.availableTeams=apiTeams)
@@ -135,25 +136,6 @@ export class AdminAddDriverComponent implements OnInit {
   getTeam(idDriver:number){
     this._teamService.getTeamById(idDriver).subscribe(apiEscuderia => {
       this.team=apiEscuderia
-
-      // this.nombre=this.driver.name
-
-      // this.numeroDriverTemporal=this.driver.driverId
-      //   this.teamService.getTeamById(this.driver.team).subscribe(apiEscuderia => {
-      //   this.team=apiEscuderia
-      //     this.numeroEquipoTemporal=this.team.teamId
-
-      //     this.teamName!=this.team.name
-      //     this.teamVehicleImage!=this.team.vehicleImage
-      //     this.teamShieldImage!=this.team.shieldImage
-      //     this.teamShieldImage!=this.team.shieldImage
-      //     this.teamFlag=this.teamFlag
-      //     this.teamCountry=this.teamCountry
-
-      //   console.log(this.numeroEquipoTemporal)
-      //   console.log(this.team.name)
-      // });
-
     });
   }
 
