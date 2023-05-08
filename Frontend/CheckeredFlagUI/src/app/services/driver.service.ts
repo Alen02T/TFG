@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Driver } from '../models/driver.model';
+import { Team } from '../models/team.model';
 
 
 @Injectable()
@@ -18,9 +19,12 @@ export class DriverService {
   }
 
 
+
   getDriversByEscuderia(id : number) : Observable<Driver[]>{
     return this.http.get<Driver[]>(environment.API_URL + '/Drivers/team/'+id);
   }
+
+
 
   updateDriver(driverId :number , name : string, lastname :string,wins:number,country:string,flag:string,number:number,points:number,podiums:number,imageDriver:string,team:number): Observable<any> {
     let bodyData =new Driver();

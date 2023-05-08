@@ -12,12 +12,12 @@ export class TeamService {
     return this.http.get<Team[]>(environment.API_URL + '/Team/points/'+id);
   }
 
-
-
-
-
   getTeamData() : Observable<Team[]> {
     return this.http.get<Team[]>(environment.API_URL + '/team');
+  }
+
+  getAvailableTeams(id : number) : Observable<Team[]>{
+    return this.http.get<Team[]>(environment.API_URL + '/Team/teams-available/league/'+id);
   }
 
   getTeamById(id : number) : Observable<Team>{

@@ -71,39 +71,6 @@ namespace CheckeredFlagAPI.Controllers
         }
 
 
-
-        //Equipos sin un piloto
-        [HttpGet("teams-without-one-driver/league/{leagueId}")]
-        public async Task<ActionResult<List<Team>>> GetTeamsWithoutOneDriver(int leagueId)
-        {
-            var teams = await _context.Teams
-             .Where(t => _context.Drivers.Count(d => d.team == t.teamId) == 1 && t.leagueId == leagueId)
-             .ToListAsync();
-            return teams;
-
-        }
-        //Equipos disponibles
-        [HttpGet("teams-available/league/{leagueId}")]
-        public async Task<ActionResult<List<Team>>> GetAvailableTeams(int leagueId)
-        {
-            var teams = await _context.Teams
-             .Where(t => _context.Drivers.Count(d => d.team == t.teamId) == 1 || !_context.Drivers.Any(d => d.team == t.teamId) && t.leagueId == leagueId)
-             .ToListAsync();
-            return teams;
-
-        }
-        //Equipos sin pilotos
-        [HttpGet("teams-without-drivers/league/{leagueId}")]
-        public async Task<ActionResult<List<Team>>> GetTeamsWithoutDrivers(int leagueId)
-        {
-            var teams = await _context.Teams
-                .Where(t => !_context.Drivers.Any(d => d.team == t.teamId) && t.leagueId==leagueId)
-                .ToListAsync();
-
-            return teams;
-
-        }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<Driver>> Get(int id)
         {

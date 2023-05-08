@@ -23,17 +23,11 @@ export class AdminAddDriverComponent implements OnInit {
   // abilityForm: FormGroup;
 
   overall:number;
+
   teams:Team [] | null;
+  availableTeams:Team[] | null;
 
   selectedTeam:number;
-  selectedCar: number;
-
-  cars = [
-      { id: 1, name: 'Volvo' },
-      { id: 2, name: 'Saab' },
-      { id: 3, name: 'Opel' },
-      { id: 4, name: 'Audi' },
-  ];
 
 
 
@@ -45,11 +39,14 @@ export class AdminAddDriverComponent implements OnInit {
     private _teamService:TeamService
     ,private formBuilder: FormBuilder) {
     this.driver=null;
+
     this.team=null;
+    this.availableTeams=null;
+
+
     this.miElemento=ElementRef;
 
     this.overall=0;
-    this.selectedCar=0;
     this.imagenElegida="";
     this.nombre=""
     this.teams=null;
@@ -131,6 +128,7 @@ export class AdminAddDriverComponent implements OnInit {
 
   ngOnInit() {
     // this.calcularOverall()
+    this._teamService.getAvailableTeams(1).subscribe(apiTeams=>this.availableTeams=apiTeams)
     this._teamService.getTeamData().subscribe(apiTeam=>this.teams=apiTeam);
   }
 
