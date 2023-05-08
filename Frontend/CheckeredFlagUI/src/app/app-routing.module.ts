@@ -41,7 +41,7 @@ const routes: Routes = [
     component: AdminSelectedDriverComponent,
   },
   {
-    path: 'admin/drivers/add',
+    path: 'admin/addDriver',
     component: AdminAddDriverComponent,
   },
   {

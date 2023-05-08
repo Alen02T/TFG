@@ -1,11 +1,140 @@
 <app-admin-header></app-admin-header>
 
-<!-- <mat-form-field class="modal" appearance="fill">
-  <mat-label>Panel color</mat-label>
-  <mat-select [formControl]="panelDrivers" panelClass="example-panel-{{panelDrivers.value}}">
-    <mat-option *ngFor="let driverInfo of driversInfoByLeague" [value]="driverInfo">{{ driverInfo }}</mat-option>
-  </mat-select>
-</mat-form-field> -->
+
+
+
+
+<!-- <div class="container">
+
+  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <mat-stepper orientation="horizontal" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="pilotForm">
+      <form  [formGroup]="pilotForm">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="First name" formControlName="name" required>
+        </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Lastname</mat-label>
+            <input matInput placeholder="First name" formControlName="lastname" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="First name" formControlName="age" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
+              Elige Foto
+            </button>
+            <input  onclick="document.getElementById('owrap').className='show'" matInput formControlName="imageDriver" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="First name" formControlName="number" required>
+          </mat-form-field>
+        </p>
+
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="First name" formControlName="team" required>
+          </mat-form-field>
+        </p>
+
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="abilityForm">
+      <form [formGroup]="abilityForm">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+        <h3>Rating
+          <span *ngIf="overall >= 90">{{overall}} - <span style="color:green"> Master</span></span>
+          <span *ngIf="overall >= 70 && overall < 90">{{overall}} - Good</span>
+          <span *ngIf="overall >= 50 && overall < 70">{{overall}} - Average</span>
+          <span *ngIf="overall <= 50">{{overall}} - Bad</span>
+        </h3>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Adelantamiento</mat-label>
+            <input matInput placeholder="First name" formControlName="overtaking" type="number" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>defending</mat-label>
+
+            <input matInput placeholder="First name" formControlName="defending" type="number" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>tireManagement</mat-label>
+            <input matInput placeholder="First name" formControlName="tireManagement" type="number" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>consistency</mat-label>
+            <input matInput placeholder="First name" formControlName="consistency" type="number">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>experience</mat-label>
+            <input matInput placeholder="First name" formControlName="experience" type="number" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>pace</mat-label>
+            <input matInput placeholder="First name" formControlName="pace" type="number" required>
+          </mat-form-field>
+        </p>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+
+
+</div> -->
+
+
+
+
+
+
+
 
 <div class="container">
   <div class="row gutters">
@@ -25,7 +154,8 @@
             </div>
             <div class="about">
               <h5>About</h5>
-              <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+              <p>Menu de Creacion de pilotos</p>
+              <p>Introduce los datos de tu piloto y elige un aspecto para el</p>
             </div>
           </div>
         </div>
@@ -39,19 +169,19 @@
           <h6 class="mb-2 text-primary">Personal Details</h6>
         </div>
 
-
+</div></div>
 <form [formGroup]="pilotForm" (ngSubmit)="submitForm()">
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
-    <input type="text" formControlName="name" class="form-control" id="name">
+    <input type="text" formControlName="name" class="form-control" id="name" required>
   </div>
   <div class="mb-3">
     <label for="lastname" class="form-label">Lastname</label>
-    <input type="text" formControlName="lastname" class="form-control" id="lastname">
+    <input type="text" formControlName="lastname" class="form-control" id="lastname" required>
   </div>
   <div class="mb-3">
     <label for="age" class="form-label">Age</label>
-    <input type="number" formControlName="age" class="form-control" id="age">
+    <input type="number" formControlName="age" class="form-control" id="age" required>
   </div>
   <!-- <div class="mb-3">
     <label for="country" class="form-label">Country</label>
@@ -63,110 +193,48 @@
   </div> -->
   <div class="mb-3">
     <label for="number" class="form-label">Number</label>
-    <input type="number" formControlName="number" class="form-control" id="number">
+    <input type="number" formControlName="number" class="form-control" id="number" required>
   </div>
-  <!-- <div class="mb-3">
+  <div class="mb-3">
+    <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
+      Elige Foto
+    </button>
     <label for="imageDriver" class="form-label">Image Driver</label>
     <input type="text" formControlName="imageDriver" class="form-control" id="imageDriver">
-  </div> -->
-  <!-- <div class="mb-3">
-    <label for="seasonStartPrice" class="form-label">Season Start Price</label>
-    <input type="number" formControlName="seasonStartPrice" class="form-control" id="seasonStartPrice">
   </div>
+
   <div class="mb-3">
-    <label for="currentPrice" class="form-label">Current Price</label>
-    <input type="number" formControlName="currentPrice" class="form-control" id="currentPrice">
-  </div> -->
-  <!-- <div class="mb-3">
-    <label for="seasonChange" class="form-label">Season Change</label>
-    <input type="number" formControlName="seasonChange" class="form-control" id="seasonChange">
-  </div> -->
-  <div class="mb-3">
-    <label for="team" class="form-label">Team</label>
-    <input type="number" formControlName="team" class="form-control" id="team">
+    <ng-select [(ngModel)]="selectedTeam" formControlName="team">
+      <ng-option *ngFor="let team of teams" [value]="team.teamId">{{team.name}}</ng-option>
+    </ng-select>
+
+    <!-- <label for="team" class="form-label">Team</label>
+    <input type="number" formControlName="team" class="form-control" id="team" required> -->
   </div>
-<!-- (B) TOGGLE BUTTON -->
+
+  <br/>Selected car ID: {{selectedTeam | json}}
+
 
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-        <!--
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="fullName">Full Name</label>
-            <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-
-           <div class="form-group">
-            <label for="eMail">Email</label>
-            <input type="email" class="form-control" id="eMail" placeholder="Enter email ID">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="phone">Phone</label>
-            <input type="text" class="form-control" id="phone" placeholder="Enter phone number">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="website">Website URL</label>
-            <input type="url" class="form-control" id="website" placeholder="Website url">
-          </div>
-        </div>
-      </div>
-      <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <h6 class="mt-3 mb-2 text-primary">Address</h6>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="Street">Street</label>
-            <input type="name" class="form-control" id="Street" placeholder="Enter Street">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="ciTy">City</label>
-            <input type="name" class="form-control" id="ciTy" placeholder="Enter City">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="sTate">State</label>
-            <input type="text" class="form-control" id="sTate" placeholder="Enter State">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="zIp">Zip Code</label>
-            <input type="text" class="form-control" id="zIp" placeholder="Zip Code">
-          </div>
-        </div>
-      </div>
-      <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="text-right">
-            <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-            <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </div>
 </div>
-</div>
 
-<!-- Button trigger modal -->
+ <!--Using items input-->
+
+<!-- (B) TOGGLE BUTTON -->
+
+
+
+Button trigger modal
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -207,7 +275,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
@@ -299,10 +367,14 @@
         </div>
       </div>
     </div>
+
+
+
   </div>
 
 
 </div>
 
 
+</div>
 

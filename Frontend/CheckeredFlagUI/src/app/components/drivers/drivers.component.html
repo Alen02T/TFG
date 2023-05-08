@@ -1,5 +1,6 @@
 <app-header></app-header>
 
+
 <body style="height: auto;">
   <div style="font-family: FormulaRegular;" class="driver-cards" >
    <div [routerLink]="'/Drivers/'+driver.driverId" class="flip-card" *ngFor="let driver of driversInfo" style="--team-color: #{{driver.teamColor}};" >

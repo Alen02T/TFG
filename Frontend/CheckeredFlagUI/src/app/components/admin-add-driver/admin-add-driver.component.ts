@@ -21,9 +21,24 @@ export class AdminAddDriverComponent implements OnInit {
   // statForm: FormGroup;
 
   // abilityForm: FormGroup;
+
+  overall:number;
+  teams:Team [] | null;
+
+  selectedTeam:number;
+  selectedCar: number;
+
+  cars = [
+      { id: 1, name: 'Volvo' },
+      { id: 2, name: 'Saab' },
+      { id: 3, name: 'Opel' },
+      { id: 4, name: 'Audi' },
+  ];
+
+
+
   imagenElegida:string;
-
-
+  isLinear = false;
 
 
   constructor(private _driverService:DriverService,
@@ -31,11 +46,14 @@ export class AdminAddDriverComponent implements OnInit {
     ,private formBuilder: FormBuilder) {
     this.driver=null;
     this.team=null;
-      this.miElemento=ElementRef;
+    this.miElemento=ElementRef;
 
+    this.overall=0;
+    this.selectedCar=0;
     this.imagenElegida="";
     this.nombre=""
-
+    this.teams=null;
+    this.selectedTeam=0;
     this.pilotForm = this.formBuilder.group({
       driverId: [0, Validators.required],
       name: [null, Validators.required],
@@ -45,23 +63,25 @@ export class AdminAddDriverComponent implements OnInit {
       flag: ['es', Validators.required],
       number: [0, Validators.required],
       imageDriver: ["", Validators.required],
-      seasonStartPrice: [800000, Validators.required],
-      currentPrice: [800000, Validators.required],
-      seasonChange: [0, Validators.required],
+      seasonStartPrice: [800000],
+      currentPrice: [800000],
+      seasonChange: [0],
       team: [0, Validators.required],
-      leagueId: [0, Validators.required]
+      leagueId: [0]
     });
 
+
+
     // this.abilityForm = this.formBuilder.group({
-    //   driverId: [this, Validators.required],
+    //   driverId: [0, Validators.required],
     //   abilityId: [0, Validators.required],
-    //   "overtaking": 99,
-    //   "defending": 99,
-    //   "tireManagement": 99,
-    //   "consistency": 99,
-    //   "experience": 99,
-    //   "pace": 99,
-    //   "overall": 99
+    //   overtaking: [0, Validators.required],
+    //   defending: [0, Validators.required],
+    //   tireManagement: [0, Validators.required],
+    //   consistency: [0, Validators.required],
+    //   experience: [0, Validators.required],
+    //   pace: [0, Validators.required],
+    //   overall: [0, Validators.required],
     // });
 
     // this.statForm = this.formBuilder.group({
@@ -83,7 +103,15 @@ export class AdminAddDriverComponent implements OnInit {
   }
 
 
+  // calcularOverall(){
+  // this.abilityForm.valueChanges.subscribe(values => {
+  //   const { overtaking, defending, tireManagement, consistency, experience, pace } = values;
+  // const sum = [overtaking, defending, tireManagement, consistency, experience, pace].reduce((a, b) => a + Math.round(b), 0);
+  // const average = Math.round(sum / 6);
+  // this.overall = average;
+  // });
 
+  // }
 
   obtenerSrcImagen(string:any) {
     this.imagenElegida=string;
@@ -91,33 +119,48 @@ export class AdminAddDriverComponent implements OnInit {
     this.pilotForm.controls['imageDriver'].setValue(this.imagenElegida);
   }
 
-//Esto Crea 2 pilotos
-  // submitForm() {
-  //   console.log(this.pilotForm.value);
-  //   this._driverService.postDriverData(this.pilotForm.value, 1)
-  //     .subscribe(
-  //       (driver: Driver) => {
-  //         console.log('Driver created successfully:', driver);
-  //         console.log("DriverId" + driver.driverId)
-  //         // Aquí puedes llamar a otros métodos del servicio para crear los objetos adicionales
-  //       },
-  //       (error: any) => {
-  //         console.error('Error creating driver:', error);
-  //       }
-  //     );
-  // }
+
 
 
   submitForm(){
-    console.log(this.pilotForm.value)
+    //console.log(this.pilotForm.value)
     this._driverService.postDriverData(this.pilotForm.value,1);
 
   }
 
 
   ngOnInit() {
-
+    // this.calcularOverall()
+    this._teamService.getTeamData().subscribe(apiTeam=>this.teams=apiTeam);
   }
+
+  getTeam(idDriver:number){
+    this._teamService.getTeamById(idDriver).subscribe(apiEscuderia => {
+      this.team=apiEscuderia
+
+      // this.nombre=this.driver.name
+
+      // this.numeroDriverTemporal=this.driver.driverId
+      //   this.teamService.getTeamById(this.driver.team).subscribe(apiEscuderia => {
+      //   this.team=apiEscuderia
+      //     this.numeroEquipoTemporal=this.team.teamId
+
+      //     this.teamName!=this.team.name
+      //     this.teamVehicleImage!=this.team.vehicleImage
+      //     this.teamShieldImage!=this.team.shieldImage
+      //     this.teamShieldImage!=this.team.shieldImage
+      //     this.teamFlag=this.teamFlag
+      //     this.teamCountry=this.teamCountry
+
+      //   console.log(this.numeroEquipoTemporal)
+      //   console.log(this.team.name)
+      // });
+
+    });
+  }
+
+
+
+
+
 }
-
-
