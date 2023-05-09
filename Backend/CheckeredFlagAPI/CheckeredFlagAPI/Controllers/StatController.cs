@@ -34,13 +34,26 @@ namespace CheckeredFlagAPI.Controllers
 
 
         [HttpGet("driver/{driverId}")]
-        public async Task<ActionResult<List<Stat>>> GetDriverStatsByDriverId(int driverId)
+        public async Task<ActionResult<Stat>> GetDriverStatsByDriverId(int driverId)
         {
+            /*
             var Tasks = await _context.Stats
                 .Where(c => c.DriverId == driverId)
                 .ToListAsync();
 
-            return Tasks;
+            return Tasks;*/
+
+            var Stat = await _context.Stats.
+                FirstOrDefaultAsync(s=>s.DriverId == driverId);
+            if (Stat == null)
+                return BadRequest("Stat not found.");
+            return Ok(Stat);
+
+            /*
+            var Stat = await _context.Stats.FindAsync(id);
+            if (Stat == null)
+                return BadRequest("Stat not found.");
+            return Ok(Stat);*/
         }
 
         [HttpPost]

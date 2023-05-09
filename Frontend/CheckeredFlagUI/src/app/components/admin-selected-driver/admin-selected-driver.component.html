@@ -2,20 +2,52 @@
 <app-admin-header></app-admin-header>
 
 
-<div style="background-color: lightgreen;" >
+<div style="background-color: lightgray;" >
+  <div class="container">
+
+
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-    <div class="col-10 col-sm-8 col-lg-6">
-      <img src="/assets/teamImgs/logo/astonMartinLogo.svg" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+
+
+    <div  [hidden]="team==null" class="col-10 col-sm-8 col-lg-6">
+      <img src="{{team?.shieldImage}}" class="d-block mx-lg-auto img-fluid" width="350" height="240" >
     </div>
-    <div class="col-lg-6">
+    <div  class="container col-lg-6">
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{driver?.name}}</h1>
-      <p class="lead">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
-      <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+      <h6  [hidden]="team!=null" class="container" style="margin: auto;">Este piloto no tiene equipo</h6>
+
+      <div class="container" [hidden]="stat!=null">
+        <hr>
+        <p class="lead"><i  alt="No tiene equipo" style="color:rgb(255, 145, 0)" class="bi bi-exclamation-triangle-fill"></i> El Piloto no tiene <strong>estadisticas</strong> cargadas</p>
+        <form>
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-warning" (click)="cargarEstadisticas()">Cargar Estadisticas</button>
+
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="container" [hidden]="ability!=null">
+        <hr>
+        <p class="lead"><i  alt="No tiene equipo" style="color:rgb(255, 145, 0)" class="bi bi-exclamation-triangle-fill"></i> El Piloto no tiene <strong>habilidades</strong> cargadas</p>
+        <form>
+          <div class="row">
+            <div class="col">
+              <button type="button" class="btn btn-warning"> Cargar Habilidades</button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-start">
         <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">{{ability?.defending}}</button>
         <button type="button" class="btn btn-outline-secondary btn-lg px-4">{{team?.name}}</button>
-      </div>
+      </div> -->
     </div>
   </div>
+</div>
 </div>
 
 <div class="container text-center">

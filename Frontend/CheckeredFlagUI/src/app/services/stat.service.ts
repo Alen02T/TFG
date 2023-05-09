@@ -15,7 +15,11 @@ export class StatService {
   }
 
   getDriverStats(id : number) : Observable<Stat>{
-    return this.http.get<Stat>(environment.API_URL + '/Stat/'+id);
+    return this.http.get<Stat>(environment.API_URL + '/Stat/driver/'+id);
+  }
+
+  postStatData(body: Stat): Observable<Stat> {
+    return this.http.post<Stat>(environment.API_URL + '/Stat/', body);
   }
 
 }

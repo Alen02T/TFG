@@ -42,6 +42,10 @@ export class AdminComponent implements OnInit {
   fechaInicial:Date | null;
   fechaFinal:Date | null;
 
+
+
+
+
   constructor(private authService:AuthService,private _directorService:DirectorService,private router : Router,
     private _token:TokenHandlerService, private route: ActivatedRoute,private _cookie:CookieHandlerService,
     private _teamService:TeamService,private _driverService:DriverService,private _ligaService:LigaService,
@@ -62,6 +66,8 @@ export class AdminComponent implements OnInit {
     this.teamId=0;
 
     this.ligaObj=null;
+
+
 
   }
 
