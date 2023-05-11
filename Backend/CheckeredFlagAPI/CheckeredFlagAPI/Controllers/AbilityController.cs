@@ -37,11 +37,14 @@ namespace CheckeredFlagAPI.Controllers
         [HttpGet("driver/{driverId}")]
         public async Task<ActionResult<List<Ability>>> GetDriverAbilitiesByDriverId(int driverId)
         {
-            var Tasks = await _context.Abilities
-                .Where(c => c.driverId == driverId)
-                .ToListAsync();
+            var Ability = await _context.Abilities
+                .FirstOrDefaultAsync(c => c.driverId == driverId);
+             if (Ability == null)
+                return BadRequest("Ability not found.");
+            return Ok(Ability);
 
-            return Tasks;
+
+            return Ok(Ability);
         }
 
         [HttpPost]
@@ -86,7 +89,19 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(await _context.Abilities.ToListAsync());
         }
+        
+        [HttpDelete("driver/{driverId}")]
+        public async Task<ActionResult<List<Ability>>> DeleteByDriverId(int driverId)
+        {
+            var Ability = await _context.Abilities.
+                FirstOrDefaultAsync(a => a.driverId == driverId);
+            if (Ability == null)
+                return BadRequest("Ability not found.");
+            _context.Abilities.Remove(Ability);
+            await _context.SaveChangesAsync();
 
+            return Ok(await _context.Abilities.ToListAsync());
+        }
 
 
 

@@ -10,11 +10,22 @@ export class AbilityService {
   constructor(private http: HttpClient) {}
 
   getAllAbilities() : Observable<Ability[]> {
-    return this.http.get<Ability[]>(environment.API_URL + '/Ability/All');
+    return this.http.get<Ability[]>(environment.API_URL + '/Ability');
   }
 
   getDriverAbility(id : number) : Observable<Ability>{
-    return this.http.get<Ability>(environment.API_URL + '/Ability/'+id);
+    return this.http.get<Ability>(environment.API_URL + '/Ability/driver/'+id);
+  }
+
+  postAbilityData(body: Ability): Observable<Ability> {
+    return this.http.post<Ability>(environment.API_URL + '/Ability/', body);
+  }
+
+
+  deleteAbilityByDriverId(driverId :number) {
+    this.http.delete(environment.API_URL +'/Ability/driver/'+driverId).subscribe(data => {
+      console.log(data);
+    });
   }
 
   // postAbilityData(body: any, driverId: number): Observable<Ability> {

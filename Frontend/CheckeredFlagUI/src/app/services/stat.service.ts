@@ -22,4 +22,11 @@ export class StatService {
     return this.http.post<Stat>(environment.API_URL + '/Stat/', body);
   }
 
+  deleteStatByDriverId(driverId :number) {
+    this.http.delete(environment.API_URL +'/Stat/driver/'+driverId).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+
 }

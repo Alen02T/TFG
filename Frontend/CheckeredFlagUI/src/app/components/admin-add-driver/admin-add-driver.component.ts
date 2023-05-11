@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Driver } from 'src/app/models/driver.model';
 import { Team } from 'src/app/models/team.model';
 import { DriverService } from 'src/app/services/driver.service';
@@ -37,11 +38,12 @@ export class AdminAddDriverComponent implements OnInit {
 
   constructor(private _driverService:DriverService,
     private _teamService:TeamService
-    ,private formBuilder: FormBuilder) {
+    ,private formBuilder: FormBuilder,private router:Router) {
     this.driver=null;
 
     this.team=null;
     this.availableTeams=null;
+
 
 
     this.miElemento=ElementRef;
@@ -53,8 +55,8 @@ export class AdminAddDriverComponent implements OnInit {
     this.selectedTeam=0;
     this.pilotForm = this.formBuilder.group({
       driverId: [0, Validators.required],
-      name: [null, Validators.required],
-      lastname: [null, Validators.required],
+      name: ['', Validators.required],
+      lastname: ['', Validators.required],
       age: [0, Validators.required],
       country: ['España', Validators.required],
       flag: ['es', Validators.required],
@@ -120,11 +122,13 @@ export class AdminAddDriverComponent implements OnInit {
 
 
   submitForm(){
-    //console.log(this.pilotForm.value)
     this._driverService.postDriverData(this.pilotForm.value,1);
-
+    this.router.navigate(['/admin/']);
   }
 
+ reloadPage() {
+    location.reload();
+  }
 
 
   ngOnInit() {

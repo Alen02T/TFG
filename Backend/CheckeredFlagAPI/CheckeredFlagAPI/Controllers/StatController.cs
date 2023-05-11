@@ -99,5 +99,19 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(await _context.Stats.ToListAsync());
         }
+
+
+        [HttpDelete("driver/{driverId}")]
+        public async Task<ActionResult<List<Stat>>> DeleteByDriverId(int driverId)
+        {
+            var Stat = await _context.Stats.
+                FirstOrDefaultAsync(s => s.DriverId == driverId);
+            if (Stat == null)
+                return BadRequest("Stat not found.");
+            _context.Stats.Remove(Stat);
+            await _context.SaveChangesAsync();
+
+            return Ok(await _context.Stats.ToListAsync());
+        }
     }
 }

@@ -159,6 +159,33 @@
 
   </div>
 
+  <div class="container mt-5">
+    <hr>
+    <h2>Pilotos</h2>
+    <div class="row">
+        <div  *ngFor="let driver of drivers" class="col-md-4">
+            <div style="background-color: rgb(251, 245, 245);" class="card p-3">
+              <small><span style="float: right;border-radius: 50px;" class="fi fi-{{ driver.flag }}"></span></small>
+                <div  class="d-flex flex-row mb-3"><img  style="background: linear-gradient(to bottom right, #650202, #000000);border: 2px solid black;" src="{{driver.imageDriver}}" width="70">
+                    <div style="padding: 5px;" class="d-flex flex-column ml-2"><span></span>
+                      <span class="text-black-50">{{driver.name}} <strong>{{driver.lastname}}</strong></span>
+                      <h6 style="font-style: italic;">{{driver.number}}</h6>
+                    </div>
+                  </div>
+
+                <h6>{{driver.country}}</h6>
+
+                <div class="d-flex justify-content-between install mt-3">
+                  <button class="btn btn-danger" (click)="onDeleteDriver(driver)">Borrar</button>
+                  <button class="btn btn-warning">Editar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Botón para abrir el modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">

@@ -147,6 +147,9 @@
                 <img class="common" style="background-color: yellow;" width="60" height="70" [src]="imagenElegida ? imagenElegida : 'ruta/default.png'" [hidden]="!imagenElegida">
               </div>
               <h5 class="user-name">New User</h5>
+              <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
+                Elige Foto
+              </button>
               <!-- <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
                 Elige Foto
               </button> -->
@@ -195,11 +198,10 @@
     <label for="number" class="form-label">Number</label>
     <input type="number" formControlName="number" class="form-control" id="number" required>
   </div>
+
   <div class="mb-3">
-    <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
-      Elige Foto
-    </button>
-    <label for="imageDriver" class="form-label"></label>
+    <small>Haz click en el boton amarillo</small><br>
+    <label for="imageDriver" class="form-label">Añade tu Foto!</label>
     <input type="text" formControlName="imageDriver" class="form-control" id="imageDriver">
   </div>
  <!-- <label for="team" class="form-label">Team</label>
@@ -211,32 +213,29 @@
 
   </div> -->
 
+  <ng-select (change)="getTeam(selectedTeam)" style="border: 2px solid black;" [items]="availableTeams" [(ngModel)]="selectedTeam" bindLabel="team" bindValue="teamId" formControlName="team">
+    <ng-template  ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+        <div style="margin: 10px 0;border: 2px solid #{{item.color}};" class="card mb-3">
+          <div class="row g-0">
+            <div style="background-image: url({{item.shieldImage}});background-position: center;background-repeat: no-repeat;background-size: contain" class="col-md-4">
 
-
-<ng-select (change)="getTeam(selectedTeam)" style="border: 2px solid black;" [items]="availableTeams" [(ngModel)]="selectedTeam" bindLabel="team" bindValue="teamId" formControlName="team">
-  <ng-template  ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-      <div style="margin: 10px 0;border: 2px solid #{{item.color}};" class="card mb-3">
-        <div class="row g-0">
-          <div style="background-image: url({{item.shieldImage}});background-position: center;background-repeat: no-repeat;background-size: contain" class="col-md-4">
-
-          </div>
-          <div class="col-md-8">
-            <div style="background-color: #{{item.color}};" class="card-body">
-             <h5 class="card-title">{{item.name}}</h5>
-              <p class="card-text"><img class="img-fluid rounded-start" height="100" width="120" src="{{item.vehicleImage}}" alt=""></p>
-              <p class="card-text"><small class="text-muted">{{item.director}}</small></p>
+            </div>
+            <div class="col-md-8">
+              <div style="background-color: #{{item.color}};" class="card-body">
+              <h5 class="card-title">{{item.name}}</h5>
+                <p class="card-text"><img class="img-fluid rounded-start" height="100" width="120" src="{{item.vehicleImage}}" alt=""></p>
+                <p class="card-text"><small class="text-muted">{{item.director}}</small></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-  </ng-template>
-
-</ng-select>
+    </ng-template>
+  </ng-select>
 
   <div style="padding:10px;margin-top:10px;border: 2px solid #{{team?.color}};" [hidden]="!team">
     <small>{{team?.name}}</small>
     <h6>Equipo elegido</h6>
-    <img src="{{team?.shieldImage}}" alt="">
+    <img width="220px" src="{{team?.shieldImage}}" alt="">
     <img width="auto" height="auto" src="{{team?.vehicleImage}}" alt="">
   </div>
 
@@ -246,8 +245,9 @@
 
 
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" [disabled]="pilotForm.invalid" class="btn btn-primary">Submit</button>
 </form>
+
   </div>
 </div>
 </div>

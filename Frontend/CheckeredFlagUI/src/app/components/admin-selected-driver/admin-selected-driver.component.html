@@ -1,8 +1,8 @@
-<p>admin-selected-driver works!</p>
+
 <app-admin-header></app-admin-header>
 
 
-<div style="background-color: lightgray;" >
+<div #miElemento class="prueba" style="background-color: lightgray;" >
   <div class="container">
 
 
@@ -13,8 +13,32 @@
       <img src="{{team?.shieldImage}}" class="d-block mx-lg-auto img-fluid" width="350" height="240" >
     </div>
     <div  class="container col-lg-6">
+        <h3>{{driver?.lastname}}</h3>
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{driver?.name}}</h1>
-      <h6  [hidden]="team!=null" class="container" style="margin: auto;">Este piloto no tiene equipo</h6>
+
+      <div class="container" style="margin: auto;" [hidden]="team!=null">
+
+        <h6 style="float: left;">Equipos Disponibles:</h6>
+
+        <div class="mt-3">
+          <span *ngFor="let team of availableTeams" class="badge bg-{{team.color}} me-1"><img style="width: 70px;" src="{{team.shieldImage}}" alt=""></span>
+
+        </div>
+        <button (click)="updateDriver()" class="btn btn-success" >Click</button>
+        <h4>Elige el equipo</h4>
+
+
+        <form style="border: 2px solid black;" class="container">
+        <ng-select [items]="availableTeams"
+           [addTag]="addTagFn"
+           bindLabel="name"
+           (change)="onSelectionChange($event)"
+          >
+        </ng-select>
+
+      </form>
+
+      </div>
 
       <div class="container" [hidden]="stat!=null">
         <hr>
@@ -23,7 +47,6 @@
           <div class="row">
             <div class="col">
               <button type="button" class="btn btn-warning" (click)="cargarEstadisticas()">Cargar Estadisticas</button>
-
             </div>
           </div>
         </form>
@@ -35,7 +58,7 @@
         <form>
           <div class="row">
             <div class="col">
-              <button type="button" class="btn btn-warning"> Cargar Habilidades</button>
+              <button type="button" class="btn btn-warning"  (click)="cargarAbilities()"> Cargar Habilidades</button>
             </div>
           </div>
         </form>
@@ -235,6 +258,19 @@
 
   </div>
 </div>
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+  <div class="toast-header">
+    <strong class="mr-auto">Mensaje</strong>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Cerrar">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="toast-body">
+    Esto es un mensaje de Bootstrap Toast.
+  </div>
+</div>
+
+
 
 <div class="container">
   <h2>Footer hermano</h2>

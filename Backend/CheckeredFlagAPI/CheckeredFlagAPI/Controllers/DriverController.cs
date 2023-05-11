@@ -118,6 +118,21 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(dbDriver);
         }
 
+        [HttpPut]
+        [Route("{id}/team")]
+        public async Task<IActionResult> UpdateDriverTeam([FromRoute] int id, [FromBody] int team)
+        {
+            var dbDriver = await _context.Drivers.FindAsync(id);
+            if (dbDriver == null)
+                return BadRequest("Driver not found.");
+
+            dbDriver.team = team;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dbDriver);
+        }
+
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Driver>>> Delete(int id)

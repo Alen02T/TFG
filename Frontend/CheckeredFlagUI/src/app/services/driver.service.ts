@@ -18,10 +18,12 @@ export class DriverService {
     return this.http.get<Driver>(environment.API_URL + '/Drivers/'+id);
   }
 
-
-
   getDriversByEscuderia(id : number) : Observable<Driver[]>{
     return this.http.get<Driver[]>(environment.API_URL + '/Drivers/team/'+id);
+  }
+
+  getDriversByLeagueId(leagueId : number) : Observable<Driver[]>{
+    return this.http.get<Driver[]>(environment.API_URL + '/Drivers/league/'+leagueId);
   }
 
 
@@ -41,6 +43,19 @@ export class DriverService {
     bodyData.team=team;
     return this.http.put<any>(environment.API_URL + '/Drivers/'+driverId, bodyData);
   }
+
+  updateDriverTeam(driverId: number, team: number): Observable<any> {
+    return this.http.put<any>(environment.API_URL + '/Drivers/' + driverId + '/team', team);
+  }
+
+
+  deleteDriver(driver :number) {
+    this.http.delete(environment.API_URL +'/Drivers/'+driver).subscribe(data => {
+      console.log(data);
+    });
+  }
+
+
 
 
   postDriverData(body : any,leagueId:number):Observable<Driver> {
