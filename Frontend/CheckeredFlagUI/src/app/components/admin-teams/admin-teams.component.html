@@ -1,5 +1,6 @@
 
 <app-admin-header></app-admin-header>
+<main style="background-color:#192031;padding: 20px;color: gray;height: 100%;">
 <div class="container">
   <div class="col-12 col-sm-12 col-md-12">
         <div class="card">
@@ -19,7 +20,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr style="cursor: pointer;" [routerLink]="'/Teams/'+team.teamId" *ngFor="let team of teams">
+                    <tr style="cursor: pointer;" [routerLink]="'/admin/teams/'+team.teamId" *ngFor="let team of teams">
                       <td><img height="30" width="50" src="{{team.shieldImage}}" alt=""></td>
                       <td class="text-truncate">{{team.name}}</td>
                       <td class="text-truncate">
@@ -35,3 +36,4 @@
         </div>
       </div>
   </div>
+</main>

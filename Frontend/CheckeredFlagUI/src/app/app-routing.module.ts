@@ -17,6 +17,7 @@ import { AdminDriversComponent } from './components/admin-drivers/admin-drivers.
 import { AdminTeamsComponent } from './components/admin-teams/admin-teams.component';
 import { AdminAddDriverComponent } from './components/admin-add-driver/admin-add-driver.component';
 import { AdminSelectedDriverComponent } from './components/admin-selected-driver/admin-selected-driver.component';
+import { AdminSelectedTeamComponent } from './components/admin-selected-team/admin-selected-team.component';
 
 const routes: Routes = [
 
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'admin/drivers/:id',
     component: AdminSelectedDriverComponent,
+  },
+  {
+    path: 'admin/teams/:id',
+    component: AdminSelectedTeamComponent,
   },
   {
     path: 'admin/addDriver',

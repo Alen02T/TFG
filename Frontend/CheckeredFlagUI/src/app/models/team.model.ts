@@ -6,7 +6,7 @@ export class Team {
   name: string | null;
   director: string | null;
   points: number;
-  homebase:string|null;
+  homefactory:string|null;
   engine: string | null;
   chassis:string|null;
   championships:number;
@@ -23,7 +23,7 @@ export class Team {
     this.color= null;
     this.director = null;
     this.points = 0;
-    this.homebase=null;
+    this.homefactory=null;
     this.engine = null;
     this.chassis=null;
     this.championships=0;

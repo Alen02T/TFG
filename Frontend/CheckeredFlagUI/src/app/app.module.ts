@@ -55,6 +55,7 @@ import { AdminAddDriverComponent } from './components/admin-add-driver/admin-add
 import { AdminSelectedDriverComponent } from './components/admin-selected-driver/admin-selected-driver.component';
 import {MatSliderModule} from '@angular/material/slider';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AdminSelectedTeamComponent } from './components/admin-selected-team/admin-selected-team.component';
 
 @NgModule({
   declarations: [
@@ -79,7 +80,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AdminDriversComponent,
     AdminTeamsComponent,
     AdminAddDriverComponent,
-    AdminSelectedDriverComponent
+    AdminSelectedDriverComponent,
+    AdminSelectedTeamComponent
   ],
   imports: [
     BrowserModule,

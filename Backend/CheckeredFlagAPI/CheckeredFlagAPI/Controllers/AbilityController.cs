@@ -102,13 +102,6 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(await _context.Abilities.ToListAsync());
         }
-
-
-
-
-
-
-
     }
 
 

@@ -1,0 +1,232 @@
+<app-admin-header></app-admin-header>
+<main style="background-color:#192031">
+<header style="background-color: #030a18">
+
+  <section class="header-content">
+    <h1 class="header-title animate-pop-in">{{team?.name}}</h1>
+    <div class="header-subtitle animate-pop-in">
+      <img width="220px" src="{{team?.shieldImage}}" alt="">
+    </div>
+  </section>
+  <div style="position: absolute;top: 10px;left: 10px;display: inline-flex;">
+    <div *ngFor="let driver of drivers" style="width: 100px;margin: 10px;border: 4px solid #{{team?.color}};" class="avatar">
+      <img style="background-color: #{{team?.color}}" src="{{driver?.imageDriver}}" alt="">
+    </div>
+  </div>
+
+</header>
+
+<!-- style="position: absolute;top: 00;left: 0;display: inline-flex;" -->
+
+<div class="container">
+  <div class="row">
+    <div style="border-right: 2px solid gray;" class="col-md-4">
+      <div class="container text-center" style="color: gray;">
+        <h1>Prueba</h1>
+        <div class="card" style="margin: auto;">
+
+          <div class="card-body">
+            <h5 class="card-title">Closest Rivals</h5>
+            <!-- <table class="table table-dark table-striped">
+              <tbody>
+                <tr *ngFor="let orderedTeam of orderedTeams;index as i">
+                  <th scope="row">{{i+1}}</th>
+                  <td>
+                    <div style="background-image: url({{orderedTeam?.shieldImage}});background-position: center;background-size: contain;background-repeat: no-repeat;border: 4px solid #{{orderedTeam?.color}};" class="avatar2">
+                    </div>
+                  </td>
+                  <td>{{orderedTeam?.name}}</td>
+                  <td>{{orderedTeam?.points}}</td>
+                </tr>
+              </tbody>
+            </table> -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-8">
+      <div class="container">
+        <div class="row justify-content-evenly">
+          <div class="col">
+            <caption> <span style="font-weight: bold;">OVERVIEW</span></caption>
+            <table class="table table-dark table-striped-columns">
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td>{{team?.name}}</td>
+                </tr>
+                <tr>
+                  <td>HomeBase</td>
+                  <td>{{team?.homefactory}}</td>
+                </tr>
+                <tr>
+                  <td>Country</td>
+                  <td> <span class="fi fi-{{ team?.flag }}"></span>{{team?.country}}</td>
+                </tr>
+                <tr>
+                  <td>Director</td>
+                  <td>{{team?.director}}</td>
+                </tr>
+                <tr>
+                  <td>Points</td>
+                  <td>{{team?.points}} points</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col">
+            <caption> <span style="font-weight: bold;">STATS</span></caption>
+            <table class="table table-dark table-striped-columns">
+              <tbody>
+                <tr>
+                  <td>Engine</td>
+                  <td>{{team?.engine}}</td>
+                </tr>
+                <tr>
+                  <td>Car Chassis</td>
+                  <td>{{team?.chassis}}</td>
+                </tr>
+                <tr>
+                  <td>VehicleImage</td>
+                  <td><img src="{{team?.vehicleImage}}" alt=""></td>
+                </tr>
+                <tr>
+                  <td>Championships</td>
+                  <td>{{team?.championships}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="background-color: black;" class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+            <img class="mr-3" src="/assets/teamImgs/logo/astonMartinLogo.svg" alt="" width="48" height="48">
+            <div class="lh-100">
+              <small>Highest Scoring Track</small>
+              <h2>BAHRAIN</h2>
+
+
+            </div>
+            <div style="display: inline-block;background-color: aliceblue;position: relative;right: 0;" class="rightside">
+              <span class="fi fi-{{ team?.flag }}"></span>
+            </div>
+          </div>
+
+          <h4 style="color: gray;text-align: left;">Head to Head</h4>
+          <div class="col">
+            <div  class="card mb-3">
+              <div  class="row justify-content-md-center">
+                <div class="col" >
+
+                  <div style="float: right;display: flex; align-items: center;">
+                    <h6 class="driverText">{{firstDriverInfo?.driverLastName}}</h6>
+                    <img style="float: right;" width="50" src="{{firstDriverInfo?.driverImageDriver}}" alt="">
+                  </div>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td style="width: 220px;">
+                          <div style="direction: rtl;" class="progress">
+                            <div style="background-color: #{{firstDriverInfo?.teamColor}};" class="progress-bar" role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverPodiums + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>{{firstDriverInfo?.driverPodiums}}</td>
+                        <td style="text-align: right;">Podiums</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 220px;">
+                          <div style="direction: rtl;" class="progress">
+                            <div style="background-color: #{{firstDriverInfo?.teamColor}};" class="progress-bar" role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverWins + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>{{firstDriverInfo?.driverWins}}</td>
+                        <td style="text-align: right;">Wins</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 220px;">
+                          <div style="direction: rtl;" class="progress">
+                            <div style="background-color: #{{firstDriverInfo?.teamColor}};" class="progress-bar" role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverPoles + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>{{firstDriverInfo?.driverPoles}}</td>
+                        <td style="text-align: right;">Poles</td>
+                      </tr>
+                      <tr>
+                        <td style="width: 220px;">
+                          <div style="direction: rtl;" class="progress">
+                            <div style="background-color: #{{firstDriverInfo?.teamColor}};" class="progress-bar"  role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverDnfs + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                        <td>{{firstDriverInfo?.driverDnfs}}</td>
+                        <td style="text-align: right;">Dnfs</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                <div class="container text-center col-md-auto">
+                  <div>
+                    <small>Combined</small>
+                    <!-- <h1 style="color: #cd3c50;font-size: 55px;">{{ secondDriverInfo!.driverWins + firstDriverInfo!.driverWins }}</h1> -->
+                    <small>Total Wins</small>
+                  </div>
+                </div>
+                <div class="col">
+                  <div style="float: left;display: flex; align-items: center;">
+                    <img style="float: right;" width="50" src="{{secondDriverInfo?.driverImageDriver}}" alt="">
+                    <h6 class="driverText">{{secondDriverInfo?.driverLastName}}</h6>
+                  </div>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <td style="text-align: left;">Podiums</td>
+                        <td>{{secondDriverInfo?.driverPodiums}}</td>
+                        <td style="width: 220px;">
+                          <div style="direction: ltr;" class="progress">
+                            <div style="background-color: #{{secondDriverInfo?.teamColor}};" class="progress-bar" role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverPoles + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left;">Wins</td>
+                        <td>{{secondDriverInfo?.driverWins}}</td>
+                        <td style="width: 220px;">
+                          <div style="direction: ltr;" class="progress">
+                            <div style="background-color: #{{secondDriverInfo?.teamColor}};" class="progress-bar" role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverPoles + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left;">Poles</td>
+                        <td>{{secondDriverInfo?.driverPoles}}</td>
+                        <td style="width: 220px;">
+                          <div style="direction: ltr;" class="progress">
+                            <div style="background-color: #{{secondDriverInfo?.teamColor}};" class="progress-bar" role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverPoles + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+
+                      </tr>
+                      <tr>
+                        <td style="text-align: left;">Dnfs</td>
+                        <td>{{secondDriverInfo?.driverDnfs}}</td>
+                        <td style="width: 220px;">
+                          <div style="direction: ltr;" class="progress">
+                            <div style="background-color: #{{secondDriverInfo?.teamColor}};" class="progress-bar" role="progressbar" [ngStyle]="{'width':firstDriverInfo?.driverPoles + '%'}" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</main>
