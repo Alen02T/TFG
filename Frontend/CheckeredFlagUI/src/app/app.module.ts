@@ -56,6 +56,8 @@ import { AdminSelectedDriverComponent } from './components/admin-selected-driver
 import {MatSliderModule} from '@angular/material/slider';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AdminSelectedTeamComponent } from './components/admin-selected-team/admin-selected-team.component';
+import { AdminAddRacesComponent } from './components/admin-add-races/admin-add-races.component';
+import { RaceService } from './services/race.service';
 
 @NgModule({
   declarations: [
@@ -81,7 +83,8 @@ import { AdminSelectedTeamComponent } from './components/admin-selected-team/adm
     AdminTeamsComponent,
     AdminAddDriverComponent,
     AdminSelectedDriverComponent,
-    AdminSelectedTeamComponent
+    AdminSelectedTeamComponent,
+    AdminAddRacesComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,7 @@ import { AdminSelectedTeamComponent } from './components/admin-selected-team/adm
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
   ,SponsorService,GrandPrixService,QualyService,RaceResultService,QualyResultService
-,LigaService],
+,LigaService,RaceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

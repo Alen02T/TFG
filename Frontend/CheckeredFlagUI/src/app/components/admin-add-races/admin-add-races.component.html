@@ -1,0 +1,14 @@
+<p>admin-add-races works!</p>
+
+
+<h1>Liga</h1>
+<h1>{{ liga?.nombre }}</h1>
+<p>{{ liga?.descripcion }}</p>
+
+
+
+<ul>
+  <li *ngFor="let circuit of circuits">
+    {{ circuit.name }} ({{ circuit.country }})
+  </li>
+</ul>

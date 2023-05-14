@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CheckeredFlagAPI.Controllers
@@ -88,16 +89,43 @@ namespace CheckeredFlagAPI.Controllers
 
             return NoContent();
         }
+    
 
-        // POST: api/Liga
-        [HttpPost]
-        public async Task<ActionResult<Liga>> PostLiga(Liga liga)
+        [HttpPost("{idLiga}/seleccionar-circuitos")]
+        public async Task<ActionResult<Liga>> SeleccionarCircuitos(int idLiga, List<int> circuitoIds)
         {
-            _context.Ligas.Add(liga);
+            var liga = await _context.Ligas.FindAsync(idLiga);
+
+            if (liga == null)
+            {
+                return NotFound();
+            }
+
+            if (circuitoIds == null || circuitoIds.Count == 0)
+            {
+                // No hay circuitos seleccionados, borrar la lista actual
+                liga.Circuits = null;
+            }
+            else
+            {
+                // Buscar los circuitos seleccionados por id en la base de datos y agregarlos a la lista de circuitos seleccionados de la liga.
+                var circuitosSeleccionados = await _context.Circuits.Where(c => circuitoIds.Contains(c.circuitId)).ToListAsync();
+
+                if (circuitosSeleccionados.Count != circuitoIds.Count)
+                {
+                    // Alguno de los circuitoIds no existe en la base de datos
+                    return BadRequest("Uno o más circuitos seleccionados no existen.");
+                }
+
+                liga.Circuits = circuitosSeleccionados;
+            }
+
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetLiga", new { id = liga.Id }, liga);
+            return liga;
         }
+
+
 
         // DELETE: api/Liga/5
         [HttpDelete("{id}")]
