@@ -24,15 +24,14 @@ namespace CheckeredFlagAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Liga>>> GetLigas()
         {
-            return await _context.Ligas.ToListAsync();
+            return await _context.Ligas.Include(l=>l.Circuits).ToListAsync();
         }
 
         // GET: api/Liga/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Liga>> GetLiga(int id)
         {
-            var liga = await _context.Ligas.FindAsync(id);
-
+            var liga = await _context.Ligas.Include(l => l.Circuits).FirstOrDefaultAsync(l => l.Id == id);
             if (liga == null)
             {
                 return NotFound();
@@ -41,12 +40,15 @@ namespace CheckeredFlagAPI.Controllers
             return liga;
         }
 
+
+
         // GET: api/Liga/5
         [HttpGet("Director/{directorId}")]
         public async Task<ActionResult<Liga>> GetLigaByDirectorId(int directorId)
         {
             var ligaDirector = await _context.Ligas
                 .Where(c => c.DirectorId == directorId)
+                .Include(l => l.Circuits)
                 .FirstOrDefaultAsync();
 
             if (ligaDirector == null)

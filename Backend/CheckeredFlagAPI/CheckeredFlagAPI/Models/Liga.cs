@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.Server.Circuits;
+
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace CheckeredFlagAPI.Models
 {
@@ -13,6 +15,7 @@ namespace CheckeredFlagAPI.Models
         public string Ubicacion { get; set; }
 
         public int DirectorId { get; set; }
-
+        
+        public List<Circuit> Circuits { get; set; }
     }
 }

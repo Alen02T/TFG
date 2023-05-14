@@ -1,4 +1,6 @@
-﻿namespace CheckeredFlagAPI.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CheckeredFlagAPI.Models
 {
     public class Circuit
     {
@@ -19,8 +21,8 @@
 
       //Imagen del circuito
         public string imageCircuit { get; set; }
-
-
+        [JsonIgnore]
+        public List<Liga> Ligas{ get; set; }
 
 
     }

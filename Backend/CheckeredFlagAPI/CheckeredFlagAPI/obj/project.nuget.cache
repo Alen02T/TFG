@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3v+5k0axCcxlI2raFafsJiXTU2pgFBBikCMSyokUDnV3StHHcg9zs0xyQtDv6SFuTcK8hwA73oYJ5Npm9sQtXA==",
+  "dgSpecHash": "BefOulNT6JlD7scLPVI8qSgNgjVgzwQEicjoPAMijCZUDXoskofJIXLFKF0Eu/kVtA4VU1hk7Sm3qM4jzJ3xDw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Alen\\OneDrive - Gobierno de La Rioja\\Documentos\\CheckeredFlag\\TFG\\Backend\\CheckeredFlagAPI\\CheckeredFlagAPI\\CheckeredFlagAPI.csproj",
+  "projectFilePath": "C:\\Users\\Alen\\OneDrive - Gobierno de La Rioja\\Documentos\\CheckeredFlagProject\\TFG\\Backend\\CheckeredFlagAPI\\CheckeredFlagAPI\\CheckeredFlagAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Alen\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Alen\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
