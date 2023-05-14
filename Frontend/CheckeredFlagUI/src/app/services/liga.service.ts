@@ -35,4 +35,8 @@ export class LigaService {
     return this.http.get<any>(environment.API_URL+'/Liga/' + id);
   }
 
+ añadirCircuitosAlaLiga(idLiga: number, circuitoIds: number[]): Observable<Liga> {
+    return this.http.post<Liga>(environment.API_URL + '/Liga/'+idLiga+'/seleccionar-circuitos/', circuitoIds);
+  }
+
 }

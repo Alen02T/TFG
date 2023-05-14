@@ -2,5 +2,13 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.ng-select-container {
+  border-bottom: 1px solid black !important;
+}
+ng-select ::ng-deep .focus {
+  border-color: #1268ff;
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 53, 145, 0.25);
+}
 @import '~bootstrap/dist/css/bootstrap.css';
 @import "node_modules/flag-icons/css/flag-icons.min.css";

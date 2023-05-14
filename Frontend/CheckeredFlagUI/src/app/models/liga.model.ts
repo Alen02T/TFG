@@ -1,3 +1,5 @@
+import { Circuit } from "./circuit.model";
+
 export class Liga {
   id:number;
   nombre:string;
@@ -6,7 +8,7 @@ export class Liga {
   fechaFin:Date;
   ubicacion:string;
   directorId:number;
-
+  // circuits: Circuit[] = [];
   constructor() {
     this.id = 0;
     this.nombre = "";
