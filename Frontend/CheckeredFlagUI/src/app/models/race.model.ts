@@ -6,6 +6,7 @@ export class Race {
   name: string | null;
   date: string | null;
   sponsor:number;
+  leagueId:number;
 
   constructor() {
     this.raceId = 0;
@@ -15,5 +16,6 @@ export class Race {
     this.round = 0;
     this.sponsor=0;
     this.circuit = 0;
+    this.leagueId=0;
   }
 }

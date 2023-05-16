@@ -33,7 +33,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                  select new GrandPrix()
                                  {
                                      RaceId = r.Id,
-
+                                     CircuitId = c.circuitId,
                                      CircuitName = c.name,
                                      CircuitCountry = c.country,
                                      CircuitFlag = c.flag,
@@ -55,9 +55,8 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
 
 
 
-
         [HttpGet("{id}")]
-        public ActionResult<GrandPrix> GetGrandPrixById(int id)
+        public ActionResult<GrandPrix> GetGrandPrixByRoundNumber(int id)
         {
             //var _context = new UserRegistrationContext();
             var grandprixList = (from r in _context.Races
@@ -67,7 +66,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                  select new GrandPrix()
                                  {
                                      RaceId = r.Id,
-
+                                     CircuitId = c.circuitId,
                                      CircuitName = c.name,
                                      CircuitCountry = c.country,
                                      CircuitFlag = c.flag,
@@ -75,8 +74,8 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                      CircuitLaps = c.laps,
                                      CircuitImage = c.imageCircuit,
                                      CircuitdriverRecord = c.driverRecord,
-                                     CircuitlapRecord  =c.lapRecord,
-                                     Circuitlength=c.length,
+                                     CircuitlapRecord = c.lapRecord,
+                                     Circuitlength = c.length,
 
                                      RaceYear = r.year,
                                      RaceRound = r.round,
@@ -91,5 +90,43 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                  }).FirstOrDefault();
             return Ok(grandprixList);
         }
+
+        /*
+
+        [HttpGet("{id}")]
+        public ActionResult<GrandPrix> GetGrandPrixByRaceId(int id)
+        {
+            //var _context = new UserRegistrationContext();
+            var grandprixList = (from r in _context.Races
+                                 join c in _context.Circuits on r.Circuit equals c.circuitId
+                                 join s in _context.Sponsors on r.Sponsor equals s.sponsorId
+                                 where r.Circuit == id
+                                 select new GrandPrix()
+                                 {
+                                     RaceId = r.Id,
+                                     CircuitId = c.circuitId,
+                                     CircuitName = c.name,
+                                     CircuitCountry = c.country,
+                                     CircuitFlag = c.flag,
+                                     CircuitImageMap = c.imageMap,
+                                     CircuitLaps = c.laps,
+                                     CircuitImage = c.imageCircuit,
+                                     CircuitdriverRecord = c.driverRecord,
+                                     CircuitlapRecord = c.lapRecord,
+                                     Circuitlength = c.length,
+
+                                     RaceYear = r.year,
+                                     RaceRound = r.round,
+                                     RaceName = r.name,
+                                     RaceDate = r.date,
+
+                                     SponsorName = s.Name,
+                                     SponsorLink = s.Link,
+
+
+
+                                 }).FirstOrDefault();
+            return Ok(grandprixList);
+        }*/
     }
 }

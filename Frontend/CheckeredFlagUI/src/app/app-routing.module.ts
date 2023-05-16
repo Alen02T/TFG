@@ -19,6 +19,7 @@ import { AdminAddDriverComponent } from './components/admin-add-driver/admin-add
 import { AdminSelectedDriverComponent } from './components/admin-selected-driver/admin-selected-driver.component';
 import { AdminSelectedTeamComponent } from './components/admin-selected-team/admin-selected-team.component';
 import { AdminAddRacesComponent } from './components/admin-add-races/admin-add-races.component';
+import { AdminAddResultComponent } from './components/admin-add-result/admin-add-result.component';
 
 const routes: Routes = [
 
@@ -53,6 +54,10 @@ const routes: Routes = [
   {
     path: 'admin/addRaces',
     component: AdminAddRacesComponent,
+  },
+  {
+    path: 'admin/addResults',
+    component: AdminAddResultComponent,
   },
   {
     path: 'admin/teams',

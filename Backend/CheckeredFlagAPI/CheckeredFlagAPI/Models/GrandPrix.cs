@@ -3,7 +3,7 @@
     public class GrandPrix
     {
         public int RaceId { get; set; }
-
+        public int CircuitId { get; set; }
         public string CircuitName { get; set; }
         public string CircuitCountry { get; set; }
         public string CircuitFlag { get; set; }

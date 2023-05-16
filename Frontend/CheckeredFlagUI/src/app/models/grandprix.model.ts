@@ -3,6 +3,7 @@
 export class GrandPrix {
   raceId: number;
 
+  circuitId:number | null
   circuitName: string | null;
   circuitCountry: string | null;
   circuitFlag: string | null;
@@ -25,6 +26,7 @@ export class GrandPrix {
   constructor() {
     this.raceId = 0;
 
+    this.circuitId=0;
     this.circuitName = null;
     this.circuitCountry =   null;
     this.circuitFlag = null;

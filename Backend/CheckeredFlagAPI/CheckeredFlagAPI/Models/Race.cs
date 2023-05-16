@@ -14,5 +14,9 @@
 
         //Id del sponsor principal de la carrera
         public int Sponsor { get; set; }
+
+        public int leagueId { get; set; }
+
+        
     }
 }

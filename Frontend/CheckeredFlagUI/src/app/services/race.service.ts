@@ -15,4 +15,8 @@ export class RaceService {
     return this.http.get<Race>(environment.API_URL + '/Race/'+id);
   }
 
+
+  addRace(race: Race): Observable<Race> {
+    return this.http.post<Race>(environment.API_URL + '/Race/', race);
+  }
 }

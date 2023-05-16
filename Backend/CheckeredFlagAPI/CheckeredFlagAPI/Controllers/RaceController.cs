@@ -35,6 +35,31 @@ namespace CheckeredFlagAPI.Controllers
             return races;
         }
 
+
+        [HttpGet("circuit/{circuitId}")]
+        public async Task<ActionResult<IEnumerable<Race>>> GetRacesByCircuit(int circuitId)
+        {
+            var races = await _context.Races.Where(r => r.Circuit == circuitId).ToListAsync();
+
+            if (races == null)
+            {
+                return NotFound();
+            }
+
+            return races;
+        }
+
+        /*
+        [HttpGet("circuit/{circuitId}")]
+        public async Task<ActionResult<List<Race>>> GetRaceFromCircuit(int circuitId)
+        {
+            var races = await _context.Races
+                .Where(c => c.Circuit == circuitId)
+                .ToListAsync();
+
+            return races;
+        }*/
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Race>> Get(int id)
         {

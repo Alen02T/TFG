@@ -31,7 +31,6 @@ export class AdminAddDriverComponent implements OnInit {
   selectedTeam:number;
 
 
-
   imagenElegida:string;
   isLinear = false;
 

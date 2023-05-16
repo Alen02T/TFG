@@ -7,6 +7,10 @@
   <!-- <small>{{ liga?.descripcion }}</small> -->
 </header>
 
+
+
+
+
 <div [hidden]="tieneElementos===true"  class="container">
   <div style="background-color: gray;padding:20px" class="jumbotron">
     <h1>Parece que no tienes Circuitos</h1>
@@ -72,37 +76,21 @@
         <div class="card-body bg-dark">
           <h5 class="card-title text-center">{{selectedCircuit?.name}}</h5>
           <div class="row">
-            <div class="col">
-              <div class="col">
-                <div class="container text-center">
-                  <p>Country</p>
-                  <hr>
-                  <h6>{{selectedCircuit?.country}}<span class="fi fi-{{ selectedCircuit?.flag }}"></span> </h6>
+
+              <div class="row">
+                <div class="col">
+                  <div class="container text-center">
+                    <p>Country</p>
+                    <hr>
+                    <h6>{{selectedCircuit?.country}}<span class="fi fi-{{ selectedCircuit?.flag }}"></span> </h6>
+                  </div>
+                </div>
+                <div class="col">
+                  <h6></h6>
+
                 </div>
               </div>
-           </div>
-            <div class="col">
-              <div class="container text-center">
-                <p>Lap Record Holder</p>
-                <hr>
-                <h6>{{selectedCircuit?.driverRecord}}</h6>
-              </div>
-            </div>
-            <div></div>
-            <div class="col">
-              <div class="container text-center">
-                <p>Lap Record Holder</p>
-                <hr>
-                <h6>{{selectedCircuit?.driverRecord}}</h6>
-              </div>
-            </div>
-            <div class="col">
-              <div class="container text-center">
-                <p>Lap Record Holder</p>
-                <hr>
-                <h6>{{selectedCircuit?.driverRecord}}</h6>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>
@@ -132,17 +120,84 @@
     </tr>
   </tbody>
   </table>
-  <!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-    <div class="example-box" *ngFor="let circuit of Allcircuits" cdkDrag>
-      {{circuit.name}}
-      <div *cdkDragPreview>
-        <img width="320px" src="{{circuit.imageCircuit}}" alt="">
-        <span class="fi fi-{{circuit.flag}}"></span>
-      </div>
-    </div>
-  </div> -->
 </div>
 
 
+<!--
+<div *ngFor="let race of races">
+  <h1>{{race.name}}</h1>
+</div>
+ -->
 
+
+
+
+
+
+ <form  [formGroup]="raceForm">
+  <ng-select  [items]="sponsors" [(ngModel)]="sponsor" bindLabel="name" bindValue="sponsor" formControlName="sponsor">
+    <ng-template   ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+        <h5>{{item.name}}</h5>
+      </ng-template>
+  </ng-select>
+</form>
+
+
+
+
+
+
+<!-- <div class="container">
+
+
+<div class="card">
+  <div style="padding: 10px;background-color: gray;" class="card-header">
+    <ul class="centered-ul">
+      <li style="cursor:pointer;" *ngFor="let grandPrix of grandPrixes" (click)="toggleSelected2(grandPrix,$event.target)">
+        <span style="background-color: black;" [ngClass]="{'grayscale': !isSelected2(grandPrix)}" class="avatar fi fi-{{ grandPrix.circuitFlag}}"></span>
+      </li>
+    </ul>
+  </div>
+  <div style="height: 350px;background-image: url({{selectedCircuitImage}});background-size: cover;background-repeat: no-repeat;">
+    <img style="width: 100px;background-color: black;" *ngIf="selectedCircuitMap" [src]="selectedCircuitMap" class="card-img-top" alt="...">
+  </div>
+
+  <div class="card-body bg-dark">
+    <h5 class="card-title text-center">{{selectedGp?.raceName}}</h5>
+    <div class="row">
+      <div class="col">
+        <div class="col">
+          <div class="container text-center">
+            <p>Country</p>
+            <hr>
+            <h6>{{selectedCircuit?.country}}<span class="fi fi-{{ selectedCircuit?.flag }}"></span> </h6>
+          </div>
+        </div>
+     </div>
+      <div class="col">
+        <div class="container text-center">
+          <p>Lap Record Holder</p>
+          <hr>
+          <h6>{{selectedCircuit?.driverRecord}}</h6>
+        </div>
+      </div>
+      <div></div>
+      <div class="col">
+        <div class="container text-center">
+          <p>Lap Record Holder</p>
+          <hr>
+          <h6>{{selectedCircuit?.driverRecord}}</h6>
+        </div>
+      </div>
+      <div class="col">
+        <div class="container text-center">
+          <p>Lap Record Holder</p>
+          <hr>
+          <h6>{{selectedCircuit?.driverRecord}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div> -->
 </main>
