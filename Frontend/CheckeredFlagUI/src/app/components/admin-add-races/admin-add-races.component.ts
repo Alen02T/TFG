@@ -128,12 +128,13 @@ export class AdminAddRacesComponent implements OnInit {
 
         console.log(formattedDate); // Ejemplo de salida: "16/05/2023"
 
+
         const nuevaCarrera: Race = {
           raceId:0,
           name:"Gran Premio de " + circuitoId.country,
           date:formattedDate,
           year:new Date().getFullYear(),
-          round: index,
+          round: index+1,
           sponsor: arraySponsors[index],
           circuit: circuitoIds[index].circuitId,
           leagueId:2
@@ -202,8 +203,6 @@ export class AdminAddRacesComponent implements OnInit {
           this.showMessage = false;
         });
       }else{
-
-
 
 
         //Metodo para la liga
