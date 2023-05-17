@@ -1,0 +1,78 @@
+<app-admin-header></app-admin-header>
+<main style="background-color: #192031;color: black;min-height: 100vh;">
+  <div  class="container">
+    <div class="row">
+      <div style="margin-top: 80px;" class="col-4">
+
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="card-deck">
+                <div *ngFor="let gp of grandPrixes,first as First" class="card" style="margin: 10px;background-color: #22293b;color: lightgray;">
+                  <div class="active" style="border: 2px solid blueviolet;" *ngIf="First">
+                  </div>
+                  <div class="card-body row">
+                    <div style="float: left;" class="mr-auto">
+                      <small style="text-align: left;">{{gp.circuitCountry}}</small>
+                    </div>
+                    <div style="float: right;" class="ml-auto">
+                      <span style="float: right;text-align: riceght;" class="fi fi-{{gp.circuitFlag}}"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+
+      <div style="margin-top: 80px;" class="col-sm-8">
+        <div style="background-color:#010a23 ;">
+          <div class="vertical-text">
+            <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span>
+             {{currentGrandPrix?.circuitCountry}}
+          </div>
+          <div  style="padding: 15px;display: flex;justify-content: center;"  class="col-sm-8 container">
+
+            <div class="card" style="width: 85%;">
+              <div class="card-header row">
+                <div class="col">
+                  <h6>{{currentGrandPrix?.raceName}}</h6>
+                </div>
+                <div class="col">
+                  <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span>
+                </div>
+
+              </div>
+              <img src="{{currentGrandPrix?.circuitImage}}" class="card-img-top" alt="Descripción de la imagen">
+              <div class="card-body">
+                <h5 class="card-title">{{currentGrandPrix?.circuitName}}</h5>
+                <p class="card-text">{{currentGrandPrix?.raceName}} <span style="color: goldenrod;font-weight: bold;"> {{currentGrandPrix?.sponsorName}}</span></p>
+                <img height="60" src="{{currentGrandPrix?.circuitImageMap}}" alt="">
+              </div>
+              <div class="card-body row">
+                <div style="float: left;" class="mr-auto">
+                  <small style="text-align: left;"><span style="font-weight: bold;color: crimson;">{{currentGrandPrix?.circuitlength}}</span> km | <span style="font-weight: bold;color: crimson;"> {{currentGrandPrix?.circuitLaps}}</span> laps</small>
+                </div>
+                <div style="float: right;" class="ml-auto">
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="padding: 20px;">
+            <button  [routerLink]="'/Qualy/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Clasificacion</button>
+            <button class="btn btn-warning">Añadir Carrera</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+

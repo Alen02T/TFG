@@ -1,63 +1,14 @@
 <p>create-qualy works!</p>
 
-
+<h6>{{raceId}}</h6>
 
 <!-- <div class="container" *ngFor="let qualy of qualies">
   <p>{{qualy.fastestLap}}</p>
 </div> -->
 
 
-<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-  <div class="example-box" *ngFor="let driver of drivers" cdkDrag>
-    {{driver.name}}
-
-    <div *cdkDragPreview>
-      <h1>huevo</h1>
-      <p>asd</p>
-    </div>
-    <!-- <img *cdkDragPreview [src]="driver.imageDriver" [alt]="driver.name"> -->
-  </div>
-</div>
-
 
 <hr>
-<!-- <h1>Puede venirse</h1> -->
-
-<!-- Empieza a partir de aqui -->
-
-
-<!--
-<div cdkDropListGroup>
-  <div class="example-container">
-    <h2>To do</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="drivers"
-      class="example-list"
-      (cdkDropListDropped)="drop2($event)">
-      <div class="example-box" *ngFor="let driver of drivers" cdkDrag>
-        <img *cdkDragPreview [src]="driver.imageDriver" [alt]="driver.name">
-        {{driver.name}}
-      </div>
-
-    </div>
-  </div>
-
-  <div class="example-container">
-    <h2>Done</h2>
-
-    <div
-      cdkDropList
-      [cdkDropListData]="driversFinishedQualy"
-      class="example-list"
-      (cdkDropListDropped)="drop2($event)">
-      <div class="example-box" *ngFor="let driver of driversFinishedQualy" cdkDrag>{{driver.name}}</div>
-    </div>
-  </div>
-</div>
--->
-
 
 
 
@@ -83,7 +34,7 @@
         (cdkDropListDropped)="drop2($event)">
         <div class="example-box" *ngFor="let driver of drivers" cdkDrag>
           <img *cdkDragPreview [src]="driver.imageDriver" [alt]="driver.name">
-          {{driver.name}}{{driver.lastname}} <span>{{driver.number}}</span>
+          {{driver.name}} {{driver.lastname}} <span>{{driver.number}}</span>
         </div>
 
       </div>
@@ -108,7 +59,6 @@
   </div>
 
   <div class="col col-lg-2">
-
       <div class="card">
         <div class="card-header">
           Featured
@@ -121,7 +71,8 @@
 
         </div>
       </div>
-
   </div>
 </div>
 </div>
+
+

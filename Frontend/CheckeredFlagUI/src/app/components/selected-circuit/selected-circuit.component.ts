@@ -24,7 +24,7 @@ export class SelectedCircuitComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this._grandPrixService.getGrandPrixById(1).subscribe(apiStandings=>{
+    this._grandPrixService.getGrandPrixByRound(1).subscribe(apiStandings=>{
       this.grandPrix=apiStandings
       console.log(this.grandPrix.circuitlength)
     });

@@ -5,6 +5,7 @@ import { DriverService } from 'src/app/services/driver.service';
 import { QualyService } from 'src/app/services/qualy.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { concatMap, from } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-create-qualy',
   templateUrl: './create-qualy.component.html',
@@ -22,14 +23,32 @@ export class CreateQualyComponent implements OnInit {
   allMoved:boolean
   http: any;
 
-  constructor(private _qualyService:QualyService,private _driverService:DriverService) {
+
+  raceId:number=0;
+
+
+  constructor(private _qualyService:QualyService,private _driverService:DriverService,
+    private _activatedRoute:ActivatedRoute) {
 
     this.qualies2=null;
     this.qualies=null;
     this.allMoved=false;
    }
 
+
+
+
+
+
   ngOnInit(): void {
+  this._activatedRoute.paramMap.subscribe((parameters: any) => {
+        this.raceId = parameters.get('id');
+    });
+
+
+
+
+
     this._driverService.getDriverData().subscribe(apiDrivers => {
       this.drivers=apiDrivers
     });
@@ -116,62 +135,62 @@ export class CreateQualyComponent implements OnInit {
   }
 
 
-//El array 3 funciona
-onAddQualys3(array:any){
-let contador=1
-  array.forEach((item: any) => {
-    //console.log(item)
-    //console.log(contador)
+  //El array 3 funciona
+  onAddQualys3(array:any){
+  let contador=1
+    array.forEach((item: any) => {
+      //console.log(item)
+      //console.log(contador)
 
 
-    if(contador==1){
-      //Modelo qualy con FastestLap
-      let qualy: Qualy = {
-        id:0,
-        raceId: 1,
-        time: '1:20:000',
-        grid:contador,
-        driverId:item.driverId,
-        teamId:item.team,
-        fastestLap:true,
-      };
-      this.qualyArray2.push(qualy)
+      if(contador==1){
+        //Modelo qualy con FastestLap
+        let qualy: Qualy = {
+          id:0,
+          raceId: 1,
+          time: '1:20:000',
+          grid:contador,
+          driverId:item.driverId,
+          teamId:item.team,
+          fastestLap:true,
+        };
+        this.qualyArray2.push(qualy)
 
-      //console.log("Modelo: " , qualy)
-    }else{
-      //Modelo sin fastest lap y sin tiempo
-      let qualy: Qualy = {
-        id:0,
-        raceId: 1,
-        time: "",
-        grid:contador,
-        driverId:item.driverId,
-        teamId:item.team,
-        fastestLap:false,
-      };
-      this.qualyArray2.push(qualy)
-    }
+        //console.log("Modelo: " , qualy)
+      }else{
+        //Modelo sin fastest lap y sin tiempo
+        let qualy: Qualy = {
+          id:0,
+          raceId: 1,
+          time: "",
+          grid:contador,
+          driverId:item.driverId,
+          teamId:item.team,
+          fastestLap:false,
+        };
+        this.qualyArray2.push(qualy)
+      }
 
-    contador++
-  });
+      contador++
+    });
 
-  this._qualyService.addQualys(this.qualyArray2).subscribe(
-    apiQualy => {
-      // Aquí se reciben los datos de la API y se almacenan en una variable
-      this.qualies2 = apiQualy;
-      console.log(this.qualies2)
-    },
-    error => {
-      // Aquí se maneja cualquier error que pueda ocurrir en la petición
-      console.error(error);
-    }
-  );
+    this._qualyService.addQualys(this.qualyArray2).subscribe(
+      apiQualy => {
+        // Aquí se reciben los datos de la API y se almacenan en una variable
+        this.qualies2 = apiQualy;
+        console.log(this.qualies2)
+      },
+      error => {
+        // Aquí se maneja cualquier error que pueda ocurrir en la petición
+        console.error(error);
+      }
+    );
 
-  this.qualyArray2.forEach(item => {
-    console.log(item)
-  });
+    this.qualyArray2.forEach(item => {
+      console.log(item)
+    });
 
-}
+  }
 
 
 }

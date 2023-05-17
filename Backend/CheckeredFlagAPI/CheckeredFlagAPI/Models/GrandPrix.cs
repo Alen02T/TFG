@@ -2,6 +2,7 @@
 {
     public class GrandPrix
     {
+        public int leagueId { get; set; }
         public int RaceId { get; set; }
         public int CircuitId { get; set; }
         public string CircuitName { get; set; }

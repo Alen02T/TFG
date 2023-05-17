@@ -40,7 +40,7 @@ export class AdminAddRacesComponent implements OnInit {
 
   circuitosSeleccionados:Circuit[] | null;
 
-  grandPrixes:GrandPrix[] = []
+  grandPrixes:GrandPrix[] | null;
 
   idSponsor:number=0;
 
@@ -61,7 +61,8 @@ export class AdminAddRacesComponent implements OnInit {
    constructor(private _raceService:RaceService,
     private _circuitService:CircuitService,
     private _ligaService:LigaService,private _grandPrixService:GrandPrixService,
-    private _sponsorService:SponsorService,private formBuilder:FormBuilder) {
+    private _sponsorService:SponsorService,private formBuilder:FormBuilder,
+) {
 
       this.selectedGp=null;
       this.selectedCircuit=null;
@@ -76,7 +77,7 @@ export class AdminAddRacesComponent implements OnInit {
       this.sponsor=null;
       this.sponsors=null;
       this.race=null;
-
+      this.grandPrixes=null;
 
       this.raceForm = this.formBuilder.group({
         raceId: [0],
@@ -116,6 +117,10 @@ export class AdminAddRacesComponent implements OnInit {
       const year = currentDate.getFullYear().toString();
       let month = currentDate.getMonth() + 1;
 
+
+  // Reemplaza "getCurrentRound" con el método correcto de obtención del valor inicial de "round" en tu Global Service
+
+
       circuitoIds.forEach((circuitoId,index)=>{
 
         month++
@@ -139,6 +144,9 @@ export class AdminAddRacesComponent implements OnInit {
           circuit: circuitoIds[index].circuitId,
           leagueId:2
         };
+
+
+
 
         // Llama al método correspondiente de tu servicio para crear la carrera
         this._raceService.addRace(nuevaCarrera).subscribe(
@@ -262,18 +270,16 @@ export class AdminAddRacesComponent implements OnInit {
       }
 
 
-      getRandomSponsor(){
-        const randomNumber = Math.floor(Math.random() * 17) + 1;
-      }
-
 
     ngOnInit(): void {
       //Cargo todos los circuitos
+      // this._grandPrixService.getGrandPrixData().subscribe(apiGrandPrix=>this.grandPrixes=apiGrandPrix)
       this._raceService.getRaceData().subscribe(apiRaces=>this.races=apiRaces)
       this._circuitService.getCircuitData().subscribe(apiCircuits=>this.Allcircuits=apiCircuits)
-      this.getLigaWithCircuits()
-      this._grandPrixService.getGrandPrixData().subscribe(apiGrandPrix=>this.grandPrixes=apiGrandPrix)
 
+
+      this.getLigaWithCircuits()
+      this._grandPrixService.getGrandPrixRacesByLeagueIdOrderedByRound(2).subscribe(apiGrandPrix=>this.grandPrixes=apiGrandPrix)
 
       this._sponsorService.getSponsorData().subscribe(apiSponsors=>this.sponsors=apiSponsors)
     }

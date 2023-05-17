@@ -102,24 +102,38 @@
 <!-- Se esconde si no tiene elementos -->
 <div [hidden]="tieneElementos===false" class="container">
 
-  <h1>Currently Running</h1>
+  <h1>Felicidades</h1>
+  <h6>Tienes Carreras Creadas</h6>
 
   <table class="table table-dark table-striped">
     <thead>
       <tr class="bg-light">
         <th scope="col">ROUND</th>
         <th colspan="4" scope="col">TRACK</th>
+        <th colspan="2">DRIVER RECORD</th>
       </tr>
     </thead>
   <tbody>
-    <tr style="color: white;font-weight: bold;" *ngFor="let item of circuits,index as i">
-      <td>{{i+1}}</td>
-      <td><span style="font-size: 35px;" class="fi fi-{{item.flag}}"></span></td>
-      <td><span class="ms-1">{{item.country}}</span></td>
-      <td>{{item.name}}</td>
+    <tr style="color: white;font-weight: bold;" *ngFor="let gps of grandPrixes,index as i">
+      <td>{{gps.raceRound}}</td>
+      <td><span style="font-size: 35px;" class="fi fi-{{gps.circuitFlag}}"></span></td>
+      <td><span class="ms-1">{{gps.circuitCountry}}</span></td>
+      <td>{{gps.raceDate}}</td>
+      <td>{{gps.raceName}} <strong style="color: gold;"> {{gps.sponsorName}}</strong></td>
+      <td>{{gps.circuitdriverRecord}} | <small><strong style="color: crimson">{{gps.circuitlapRecord}}</strong></small></td>
     </tr>
   </tbody>
   </table>
+  <a style="text-align: center;"  routerLink="/admin/races-management" class="btn btn-warning">Ir a Administracion de Carreras</a>
+</div>
+
+
+
+<div>
+
+  <!-- <div *ngFor="let item of grandPrixes | keyvalue">
+    {{ item.key }}: {{ item.value }}
+  </div> -->
 </div>
 
 
@@ -130,74 +144,4 @@
  -->
 
 
-
-
-
-
- <form  [formGroup]="raceForm">
-  <ng-select  [items]="sponsors" [(ngModel)]="sponsor" bindLabel="name" bindValue="sponsor" formControlName="sponsor">
-    <ng-template   ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-        <h5>{{item.name}}</h5>
-      </ng-template>
-  </ng-select>
-</form>
-
-
-
-
-
-
-<!-- <div class="container">
-
-
-<div class="card">
-  <div style="padding: 10px;background-color: gray;" class="card-header">
-    <ul class="centered-ul">
-      <li style="cursor:pointer;" *ngFor="let grandPrix of grandPrixes" (click)="toggleSelected2(grandPrix,$event.target)">
-        <span style="background-color: black;" [ngClass]="{'grayscale': !isSelected2(grandPrix)}" class="avatar fi fi-{{ grandPrix.circuitFlag}}"></span>
-      </li>
-    </ul>
-  </div>
-  <div style="height: 350px;background-image: url({{selectedCircuitImage}});background-size: cover;background-repeat: no-repeat;">
-    <img style="width: 100px;background-color: black;" *ngIf="selectedCircuitMap" [src]="selectedCircuitMap" class="card-img-top" alt="...">
-  </div>
-
-  <div class="card-body bg-dark">
-    <h5 class="card-title text-center">{{selectedGp?.raceName}}</h5>
-    <div class="row">
-      <div class="col">
-        <div class="col">
-          <div class="container text-center">
-            <p>Country</p>
-            <hr>
-            <h6>{{selectedCircuit?.country}}<span class="fi fi-{{ selectedCircuit?.flag }}"></span> </h6>
-          </div>
-        </div>
-     </div>
-      <div class="col">
-        <div class="container text-center">
-          <p>Lap Record Holder</p>
-          <hr>
-          <h6>{{selectedCircuit?.driverRecord}}</h6>
-        </div>
-      </div>
-      <div></div>
-      <div class="col">
-        <div class="container text-center">
-          <p>Lap Record Holder</p>
-          <hr>
-          <h6>{{selectedCircuit?.driverRecord}}</h6>
-        </div>
-      </div>
-      <div class="col">
-        <div class="container text-center">
-          <p>Lap Record Holder</p>
-          <hr>
-          <h6>{{selectedCircuit?.driverRecord}}</h6>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div> -->
 </main>

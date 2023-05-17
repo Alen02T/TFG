@@ -59,6 +59,7 @@ import { AdminSelectedTeamComponent } from './components/admin-selected-team/adm
 import { AdminAddRacesComponent } from './components/admin-add-races/admin-add-races.component';
 import { RaceService } from './services/race.service';
 import { AdminAddResultComponent } from './components/admin-add-result/admin-add-result.component';
+import { AdminRacesManagementComponent } from './components/admin-races-management/admin-races-management.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { AdminAddResultComponent } from './components/admin-add-result/admin-add
     AdminSelectedDriverComponent,
     AdminSelectedTeamComponent,
     AdminAddRacesComponent,
-    AdminAddResultComponent
+    AdminAddResultComponent,
+    AdminRacesManagementComponent
   ],
   imports: [
     BrowserModule,

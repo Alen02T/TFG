@@ -15,6 +15,9 @@ namespace CheckeredFlagAPI.Models
         public string Ubicacion { get; set; }
 
         public int DirectorId { get; set; }
+
+        public int currentRound { get; set; }
+
         
         public List<Circuit> Circuits { get; set; }
     }

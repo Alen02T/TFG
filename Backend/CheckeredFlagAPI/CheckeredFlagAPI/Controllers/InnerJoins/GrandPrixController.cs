@@ -2,6 +2,7 @@
 using CheckeredFlagAPI.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheckeredFlagAPI.Controllers.InnerJoins
 {
@@ -33,6 +34,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                  select new GrandPrix()
                                  {
                                      RaceId = r.Id,
+                                     leagueId = r.leagueId,
                                      CircuitId = c.circuitId,
                                      CircuitName = c.name,
                                      CircuitCountry = c.country,
@@ -40,6 +42,9 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                      CircuitImageMap = c.imageMap,
                                      CircuitLaps = c.laps,
                                      CircuitImage = c.imageCircuit,
+                                     CircuitdriverRecord = c.driverRecord,
+                                     CircuitlapRecord = c.lapRecord,
+                                     Circuitlength = c.length,
 
                                      RaceYear = r.year,
                                      RaceRound = r.round,
@@ -55,14 +60,14 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
 
 
 
-        [HttpGet("{id}")]
-        public ActionResult<GrandPrix> GetGrandPrixByRoundNumber(int id)
+        [HttpGet("round/{roundId}")]
+        public ActionResult<GrandPrix> GetGrandPrixByRoundNumber(int roundId)
         {
             //var _context = new UserRegistrationContext();
             var grandprixList = (from r in _context.Races
                                  join c in _context.Circuits on r.Circuit equals c.circuitId
                                  join s in _context.Sponsors on r.Sponsor equals s.sponsorId
-                                 where r.round == id
+                                 where r.round == roundId
                                  select new GrandPrix()
                                  {
                                      RaceId = r.Id,
@@ -81,6 +86,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                      RaceRound = r.round,
                                      RaceName = r.name,
                                      RaceDate = r.date,
+                                     leagueId = r.leagueId,
 
                                      SponsorName = s.Name,
                                      SponsorLink = s.Link,
@@ -91,19 +97,23 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
             return Ok(grandprixList);
         }
 
-        /*
 
-        [HttpGet("{id}")]
-        public ActionResult<GrandPrix> GetGrandPrixByRaceId(int id)
+
+
+
+        [HttpGet("league/{leagueId}")]
+        public ActionResult<List<GrandPrix>> GetAllGrandPrixByLeagueOrderedByRound(int leagueId)
         {
             //var _context = new UserRegistrationContext();
             var grandprixList = (from r in _context.Races
                                  join c in _context.Circuits on r.Circuit equals c.circuitId
                                  join s in _context.Sponsors on r.Sponsor equals s.sponsorId
-                                 where r.Circuit == id
+                                 where r.leagueId.Equals(leagueId)
+                                 orderby r.round
                                  select new GrandPrix()
                                  {
                                      RaceId = r.Id,
+                                     leagueId = r.leagueId,
                                      CircuitId = c.circuitId,
                                      CircuitName = c.name,
                                      CircuitCountry = c.country,
@@ -113,7 +123,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                      CircuitImage = c.imageCircuit,
                                      CircuitdriverRecord = c.driverRecord,
                                      CircuitlapRecord = c.lapRecord,
-                                     Circuitlength = c.length,
+                                     Circuitlength=c.length,
 
                                      RaceYear = r.year,
                                      RaceRound = r.round,
@@ -123,10 +133,8 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                      SponsorName = s.Name,
                                      SponsorLink = s.Link,
 
-
-
-                                 }).FirstOrDefault();
-            return Ok(grandprixList);
-        }*/
+                                 }).ToList();
+            return grandprixList;
+        }
     }
 }

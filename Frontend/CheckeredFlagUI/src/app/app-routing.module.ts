@@ -20,6 +20,7 @@ import { AdminSelectedDriverComponent } from './components/admin-selected-driver
 import { AdminSelectedTeamComponent } from './components/admin-selected-team/admin-selected-team.component';
 import { AdminAddRacesComponent } from './components/admin-add-races/admin-add-races.component';
 import { AdminAddResultComponent } from './components/admin-add-result/admin-add-result.component';
+import { AdminRacesManagementComponent } from './components/admin-races-management/admin-races-management.component';
 
 const routes: Routes = [
 
@@ -96,9 +97,17 @@ const routes: Routes = [
     path: 'Circuits/:id',
     component:SelectedCircuitComponent,
   },
+  // {
+  //   path: 'Qualy',
+  //   component:CreateQualyComponent,
+  // },
   {
-    path: 'Qualy',
+    path: 'Qualy/:id',
     component:CreateQualyComponent,
+  },
+  {
+    path: 'admin/races-management',
+    component:AdminRacesManagementComponent,
   },
   {
     path: 'GrandPrix/:id',

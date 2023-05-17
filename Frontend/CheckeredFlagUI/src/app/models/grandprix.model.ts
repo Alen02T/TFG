@@ -2,7 +2,7 @@
 
 export class GrandPrix {
   raceId: number;
-
+  leagueId:number;
   circuitId:number | null
   circuitName: string | null;
   circuitCountry: string | null;
@@ -41,6 +41,7 @@ export class GrandPrix {
     this.raceRound = 0;
     this.raceName=null;
     this.raceDate=null;
+    this.leagueId=0;
 
     this.sponsorName=null;
     this.sponsorLink=null;
