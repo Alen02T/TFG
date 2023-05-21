@@ -43,6 +43,7 @@ namespace CheckeredFlagAPI.Controllers
             return results;
         }
 
+        /*
         [HttpPost]
         public async Task<ActionResult<List<Result>>> AddResult(Result Result)
         {
@@ -50,7 +51,18 @@ namespace CheckeredFlagAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(await _context.Results.ToListAsync());
+        }*/
+
+        //Solo añade 
+        [HttpPost]
+        public async Task<ActionResult<Result>> AddResult(Result result)
+        {
+            _context.Results.Add(result);
+            await _context.SaveChangesAsync();
+
+            return Ok(result);
         }
+
 
         [HttpPut]
         public async Task<ActionResult<List<Result>>> UpdateResult(Result request)

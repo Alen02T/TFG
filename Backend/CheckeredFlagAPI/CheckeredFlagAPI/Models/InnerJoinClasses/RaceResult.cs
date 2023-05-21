@@ -9,6 +9,7 @@
         public int RaceId { get; set; }
 
         //Team
+
         public string TeamColor { get; set; }
         public string TeamName { get; set; }
         public string TeamShieldImage { get; set; }
@@ -20,6 +21,7 @@
 
 
         //Piloto
+        public int DriverId { get; set; }
         public string DriverName { get; set; }
         public string DriverLastName { get; set; }
         public string DriverCountry { get; set; }

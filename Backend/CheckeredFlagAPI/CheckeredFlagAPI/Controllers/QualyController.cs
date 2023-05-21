@@ -33,8 +33,8 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(Qualy);
         }
 
-        [HttpGet("race/{raceId}")]
-        public async Task<ActionResult<List<Qualy>>> GetRace(int raceId)
+        [HttpGet("races/{raceId}")]
+        public async Task<ActionResult<List<Qualy>>> GetAllRacesByRaceId(int raceId)
         {
             var qualys = await _context.Qualys
                 .Where(c => c.RaceId == raceId)
@@ -42,6 +42,19 @@ namespace CheckeredFlagAPI.Controllers
 
             return qualys;
         }
+
+        [HttpGet("race/{raceId}")]
+        public async Task<ActionResult<Qualy>> GetRace(int raceId)
+        {
+            var qualy = await _context.Qualys
+                .Where(c => c.RaceId == raceId)
+                .FirstOrDefaultAsync();
+
+            return qualy;
+        }
+
+   
+
 
         [HttpPost]
         public async Task<ActionResult<List<Qualy>>> AddQualy(Qualy qualy)
