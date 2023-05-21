@@ -5,11 +5,35 @@ import { DriverService } from 'src/app/services/driver.service';
 import { QualyService } from 'src/app/services/qualy.service';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { concatMap, from } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { trigger, state, style, animate, transition } from '@angular/animations';
+import { GrandPrixService } from 'src/app/services/grandPrix.service';
+import { GrandPrix } from 'src/app/models/grandprix.model';
+import { driverInfo } from 'src/app/models/driverinfo.model';
+import { driverInfoService } from 'src/app/services/driverInfo.service';
+
 @Component({
   selector: 'app-create-qualy',
   templateUrl: './create-qualy.component.html',
-  styleUrls: ['./create-qualy.component.css']
+  styleUrls: ['./create-qualy.component.css'],
+  animations: [
+    trigger('cardAnimation', [
+      state('hidden', style({ opacity: 0 })),
+      state('visible', style({ opacity: 1 })),
+      transition('hidden => visible', animate('500ms ease-in')),
+      transition('visible => hidden', animate('500ms ease-out'))
+    ]),
+    trigger('fadeInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('500ms', style({ opacity: 1 }))
+      ]),
+      transition(':leave', [
+        animate('500ms', style({ opacity: 0 }))
+      ])
+    ])
+  ]
+
 })
 export class CreateQualyComponent implements OnInit {
   qualies2:Qualy[] | null;
@@ -20,19 +44,30 @@ export class CreateQualyComponent implements OnInit {
   qualyArray:Qualy[] = [];
   qualyArray2:Qualy[] = [];
 
+  driverPoleMan:driverInfo | null
+  public isButtonDisabled: boolean = true;
+
   allMoved:boolean
   http: any;
+  showCard: boolean = false;
 
+
+  polePiloto:number=0;
 
   raceId:number=0;
 
+  grandPrix:GrandPrix | null;
 
   constructor(private _qualyService:QualyService,private _driverService:DriverService,
-    private _activatedRoute:ActivatedRoute) {
+    private _activatedRoute:ActivatedRoute,private _grandPrix:GrandPrixService,
+    private _driverInfo:driverInfoService,private router:Router) {
 
+    this.driverPoleMan=null
     this.qualies2=null;
     this.qualies=null;
     this.allMoved=false;
+
+    this.grandPrix=null
    }
 
 
@@ -45,8 +80,7 @@ export class CreateQualyComponent implements OnInit {
         this.raceId = parameters.get('id');
     });
 
-
-
+    this._grandPrix.getGrandPrixByRaceID(this.raceId).subscribe(apiGp=>this.grandPrix=apiGp)
 
 
     this._driverService.getDriverData().subscribe(apiDrivers => {
@@ -87,13 +121,20 @@ export class CreateQualyComponent implements OnInit {
     }
   }
 
-
+  toggleCard() {
+    this.showCard = !this.showCard;
+  }
 
   checkAllMoved() {
     if (this.drivers.length === 0) {
       this.allMoved = true;
       let contador=1;
+      console.log("Se han movido todos")
 
+        this.isButtonDisabled = false; // Habilitar el botón
+
+
+         // Deshabilitar el botón
       // this.driversFinishedQualy.forEach(item => {
       //   //console.log(item.driverId)
 
@@ -131,12 +172,20 @@ export class CreateQualyComponent implements OnInit {
 
     } else {
        this.allMoved = false;
+       this.isButtonDisabled = true;
     }
   }
 
+  public redirectToPage(): void {
+    setTimeout(() => {
+      this.router.navigate(['/admin/races-management']); // Cambia '/otra-pagina' con la ruta de la página a la que quieres redirigir
+    }, 3000); // Espera 3000 milisegundos (3 segundos) antes de redirigir
+  }
 
   //El array 3 funciona
   onAddQualys3(array:any){
+
+
   let contador=1
     array.forEach((item: any) => {
       //console.log(item)
@@ -144,16 +193,19 @@ export class CreateQualyComponent implements OnInit {
 
 
       if(contador==1){
+        this.polePiloto=item.driverId
         //Modelo qualy con FastestLap
         let qualy: Qualy = {
           id:0,
-          raceId: 1,
+          raceId: this.raceId,
           time: '1:20:000',
           grid:contador,
           driverId:item.driverId,
           teamId:item.team,
           fastestLap:true,
         };
+
+        this._driverInfo.getdriverInfoDataByDriverId(this.polePiloto).subscribe(apiDatos=>this.driverPoleMan=apiDatos)
         this.qualyArray2.push(qualy)
 
         //console.log("Modelo: " , qualy)
@@ -161,7 +213,7 @@ export class CreateQualyComponent implements OnInit {
         //Modelo sin fastest lap y sin tiempo
         let qualy: Qualy = {
           id:0,
-          raceId: 1,
+          raceId:  this.raceId,
           time: "",
           grid:contador,
           driverId:item.driverId,
@@ -185,10 +237,12 @@ export class CreateQualyComponent implements OnInit {
         console.error(error);
       }
     );
-
+    this.redirectToPage()
     this.qualyArray2.forEach(item => {
       console.log(item)
     });
+
+    this.toggleCard()
 
   }
 

@@ -57,7 +57,7 @@ const routes: Routes = [
     component: AdminAddRacesComponent,
   },
   {
-    path: 'admin/addResults',
+    path: 'admin/races-management/addResults/:id',
     component: AdminAddResultComponent,
   },
   {

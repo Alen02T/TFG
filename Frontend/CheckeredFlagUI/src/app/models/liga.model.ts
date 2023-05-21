@@ -8,7 +8,8 @@ export class Liga {
   fechaFin:Date;
   ubicacion:string;
   directorId:number;
-  // circuits: Circuit[] = [];
+  currentRound:number;
+
   constructor() {
     this.id = 0;
     this.nombre = "";
@@ -17,5 +18,6 @@ export class Liga {
     this.fechaFin = new Date();
     this.ubicacion="";
     this.directorId = 0;
+    this.currentRound=0;
   }
 }

@@ -20,7 +20,11 @@ export class QualyService {
   }
 
   getQualysByRace(id : number) : Observable<Qualy[]>{
-    return this.http.get<Qualy[]>(environment.API_URL + '/Qualy/race/'+id);
+    return this.http.get<Qualy[]>(environment.API_URL + '/Qualy/races/'+id);
+  }
+
+  getSingularQualyByRaceId(id : number) : Observable<Qualy>{
+    return this.http.get<Qualy>(environment.API_URL + '/Qualy/race/'+id);
   }
 
   addQualys(qualys: Qualy[]): Observable<Qualy[]> {

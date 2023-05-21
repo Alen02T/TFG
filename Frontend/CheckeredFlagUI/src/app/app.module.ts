@@ -60,6 +60,7 @@ import { AdminAddRacesComponent } from './components/admin-add-races/admin-add-r
 import { RaceService } from './services/race.service';
 import { AdminAddResultComponent } from './components/admin-add-result/admin-add-result.component';
 import { AdminRacesManagementComponent } from './components/admin-races-management/admin-races-management.component';
+import { ResultService } from './services/result.service';
 
 @NgModule({
   declarations: [
@@ -113,7 +114,7 @@ import { AdminRacesManagementComponent } from './components/admin-races-manageme
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
   ,SponsorService,GrandPrixService,QualyService,RaceResultService,QualyResultService
-,LigaService,RaceService],
+,LigaService,RaceService,ResultService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

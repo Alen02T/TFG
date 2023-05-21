@@ -1,10 +1,10 @@
 .vertical-text {
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 3%;
   transform: translate(-40%, -40%) rotate(-90deg);
   color: gray;
-  font-size: 80px;
+  font-size: 50px;
   font-weight: bolder;
   letter-spacing:10px;
     text-shadow: 2px 2px 4px goldenrod;

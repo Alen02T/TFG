@@ -1,6 +1,7 @@
-export class qualyResult {
+export class qualyresult {
   qualyId: number;
 
+  driverId:number;
   driverName: string | null;
   driverLastName: string | null;
   driverCountry: string | null;
@@ -9,7 +10,7 @@ export class qualyResult {
   driverImageDriver: string | null;
   //Hay que añadir el driverId para poder enlazarlo
 
-
+  raceId:number;
   raceYear: number;
   raceRound: number;
 
@@ -17,6 +18,7 @@ export class qualyResult {
   qualyTime: number;
   qualyFastestLap:boolean;
 
+  teamId:number;
   teamColor: string | null;
   teamName: string | null;
   teamShieldImage: string | null;
@@ -25,6 +27,7 @@ export class qualyResult {
   constructor() {
     this.qualyId = 0;
 
+    this.driverId=0;
     this.driverName = null;
     this.driverLastName =   null;
     this.driverCountry = null;
@@ -32,6 +35,7 @@ export class qualyResult {
     this.driverNumber = 0;
     this.driverImageDriver=null;
 
+    this.raceId=0;
     this.raceYear = 0;
     this.raceRound = 0;
 
@@ -39,6 +43,7 @@ export class qualyResult {
     this.qualyTime=0;
     this.qualyFastestLap=false;
 
+    this.teamId=0;
     this.teamColor=null;
     this.teamName=null;
     this.teamShieldImage=null;

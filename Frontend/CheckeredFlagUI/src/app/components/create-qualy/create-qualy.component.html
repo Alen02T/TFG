@@ -1,25 +1,14 @@
-<p>create-qualy works!</p>
 
-<h6>{{raceId}}</h6>
-
-<!-- <div class="container" *ngFor="let qualy of qualies">
-  <p>{{qualy.fastestLap}}</p>
-</div> -->
+<app-admin-header></app-admin-header>
 
 
+<header>
+  <h1>{{ grandPrix?.raceName }} | Clasificacion <span style="text-align: right;" class="fi fi-{{grandPrix?.circuitFlag}}"></span></h1>
+  <!-- <small>{{ liga?.descripcion }}</small> -->
+</header>
 
 <hr>
-
-
-
-
-
-
-
-<!--
-
-  Empieza a partir de aqui
- -->
+<main style="background-color: #192031;color: white;">
 
 <div cdkDropListGroup>
  <div class="row justify-content-md-center">
@@ -34,14 +23,14 @@
         (cdkDropListDropped)="drop2($event)">
         <div class="example-box" *ngFor="let driver of drivers" cdkDrag>
           <img *cdkDragPreview [src]="driver.imageDriver" [alt]="driver.name">
-          {{driver.name}} {{driver.lastname}} <span>{{driver.number}}</span>
+         <img style="width: 60px;" src="{{driver.imageDriver}}" alt="">  {{driver.name}} {{driver.lastname}}
         </div>
 
       </div>
     </div>
 
   </div>
-  <div class="col-md-auto">
+  <div class="col-md-8">
     <div class="example-container">
       <h2>Qualifying Result <span style="float: right;"><input type="checkbox" [(ngModel)]="allMoved" />
       </span></h2>
@@ -50,29 +39,54 @@
         [cdkDropListData]="driversFinishedQualy"
         class="example-list"
         (cdkDropListDropped)="drop2($event)">
-        <div class="example-box" *ngFor="let driver of driversFinishedQualy; let i = index" cdkDrag>{{i+1}} {{driver.name}} <div *ngIf="allMoved && i==0">
+        <div class="example-box" *ngFor="let driver of driversFinishedQualy; let i = index" cdkDrag> <span style="font-weight: bold;color: crimson;font-size: 35px;"> {{i+1}}</span> {{driver.name}} <img style="width: 60px;" src="{{driver.imageDriver}}" alt=""> <div *ngIf="allMoved && i==0">
           <label for="texto">Tiempo </label>
-          <input type="text" id="texto" (focus)="driver" [defaultValue]="'1:00:000'">
+          <input type="text" name="time" id="texto" (focus)="driver" [defaultValue]="'1:20:000'">
         </div></div>
       </div>
     </div>
   </div>
 
-  <div class="col col-lg-2">
-      <div class="card">
-        <div class="card-header">
-          Featured
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-          <button (click)="onAddQualys3(driversFinishedQualy)">Haz click aquí</button>
 
-        </div>
-      </div>
+</div>
+</div>
+
+<button [disabled]="isButtonDisabled"  (click)="onAddQualys3(driversFinishedQualy)">Haz click aquí</button>
+</main>
+<div class="container2" [@fadeInOut] [@cardAnimation]="showCard ? 'visible' : 'hidden'" *ngIf="showCard">
+
+  <div style="color: wheat;background-color: #192031;" class="game">
+    <div class="rank"><img width="35" src="{{driverPoleMan?.teamShieldImage}}" alt=""></div>
+  <div class="front">
+    <img src="{{driverPoleMan?.driverImageDriver}}" alt="game">
+    <h6 class="text-center">POLEMAN</h6>
+    <h5 class="name text-center"><strong>{{driverPoleMan?.driverName}}</strong></h5>
+    <div class="status">
+      <img src="{{driverPoleMan?.teamVehicleImage}}" alt="game">
+
+    </div>
   </div>
+  <div class="back">
+    <div  class="streaming-info">
+      <p class="game-stat">{{driverPoleMan?.driverPoles}} <span>Poles</span></p>
+      <p class="game-stat">{{driverPoleMan?.driverPoints}}<span>Points</span></p>
+    </div>
+    <h6>{{driverPoleMan?.driverLastName}} | <span style="font-style: italic;color: crimson;"><strong>{{driverPoleMan?.driverNumber}}</strong></span> </h6>
+    <h5><span class="fi fi-{{driverPoleMan?.driverFlag}}"></span></h5>
+    </div>
+    <div style="background-color:#{{driverPoleMan?.teamColor}};" class="backgroundWrapper"></div>
+    </div>
+
+
+  <div class="close-button" (click)="toggleCard()">
+    <button style="background-color: red;" class="btn btn-danger">X</button>
+  </div>
+
 </div>
-</div>
+
+
+<button (click)="toggleCard()">Mostrar tarjeta</button>
+
+
 
 

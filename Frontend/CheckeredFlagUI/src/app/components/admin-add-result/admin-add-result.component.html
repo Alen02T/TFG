@@ -1,5 +1,141 @@
-<p>admin-add-result works!</p>
 
-<div *ngFor="let item of circuitosSeleccionados">
-  <p>{{item.country}}</p>
+
+
+<app-admin-header></app-admin-header>
+
+<!-- <div class="row">
+
+
+<div cdkDropListGroup>
+  <div class="row justify-content-md-center">
+   <div class="col col-lg-2">
+     <div class="example-container">
+       <h6>Orden de Clasificacion</h6>
+
+       <div style="background-color: #010a23;"
+         cdkDropList
+         [cdkDropListData]="qualyResults"
+         class="example-list"
+         (cdkDropListDropped)="drop2($event)">
+         <div style="cursor: move;color: #556690;font-weight: bold;" class="example-box" *ngFor="let item of qualyResults,index as i" cdkDrag>
+
+          <div>
+            <img style="background-repeat: no-repeat;background-size: contain;background-position: center ;background-image: url({{item.teamShieldImage}});background-color: #{{item.teamColor}};" *cdkDragPreview [src]="item.driverImageDriver" [alt]="item.driverName">
+          </div>
+          <p style="padding: 10px;">
+            <img style="width: 60px;" src="{{item.driverImageDriver}}" alt="">  {{item.driverName}}   <span style="color: goldenrod;font-size: 30px;font-weight: bold;float: right;">{{item.qualyGrid}}º</span>
+          </p>
+
+         </div>
+
+       </div>
+     </div>
+
+   </div>
+
+<div class="col-md-8">
+  <h1>Tabla Final</h1>
+  <div class="table-wrapper ">
+
+    <table cdkDropList [cdkDropListData]="driversFinishedRace" class="example-list" (cdkDropListDropped)="drop2($event)" class="fl-table">
+      <thead >
+        <tr >
+          <th>Piloto</th>
+          <th>Equipo</th>
+          <th>asd</th>
+          <th>Header 4</th>
+          <th>Header 5</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let driver of driversFinishedRace; let i = index" cdkDrag>
+          <td style="cursor: move;"> <img style="width: 80px;" src="{{driver.driverImageDriver}}" alt=""> </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+ </div>
+</div>
+
+
+
+
+</div> -->
+
+
+
+
+
+<div class="container">
+  <div class="row">
+    <h5>Parrilla de Clasificacion</h5>
+    <div class="col col-lg-2">
+      <div style="background-color: #010a23;">
+      <div style="cursor: move;color: #556690;font-weight: bold;" class="example-box" *ngFor="let item of qualyResults,index as i">
+
+       <div>
+         <img style="background-repeat: no-repeat;background-size: contain;background-position: center ;background-image: url({{item.teamShieldImage}});background-color: #{{item.teamColor}};">
+       </div>
+       <p style="padding: 10px;">
+         <img style="width: 60px;" src="{{item.driverImageDriver}}" alt="">  {{item.driverName}}   <span style="color: goldenrod;font-size: 30px;font-weight: bold;float: right;">{{item.qualyGrid}}º</span>
+       </p>
+
+      </div>
+
+    </div>
+    </div>
+
+
+    <div class="col-md-8">
+      <form (ngSubmit)="guardarResultados()">
+
+
+      <h1>Tabla Final</h1>
+      <div class="table-wrapper ">
+
+        <table cdkDropList [cdkDropListData]="qualyResults" class="example-list" (cdkDropListDropped)="drop2($event)" class="fl-table">
+          <thead >
+            <tr >
+              <th colspan="2">Piloto</th>
+              <th colspan="2">Equipo</th>
+              <th>Puntos</th>
+
+              <th colspan="2">Fastest Lap</th>
+            </tr>
+          </thead>
+          <tbody >
+            <tr style="cursor: move;" *ngFor="let driver of qualyResults; let i = index" cdkDrag>
+              <td > <span class="fi fi-{{driver.driverFlag}}"></span> <img style="width: 80px;" src="{{driver.driverImageDriver}}" alt=""> </td>
+              <td> <span style="float: left; color: #{{driver.teamColor}};font-size: 15px;font-weight: 900;font-style: italic;"> {{driver.driverNumber}}</span>
+                <span style="font-weight: bold;text-align: center;">{{driver.driverName}} <strong> {{driver.driverLastName}}</strong></span>
+              </td>
+              <td><img width="100" src="{{driver.teamShieldImage}}" alt=""></td>
+              <td style="border-left: 2px solid black;"><img width="100" src="{{driver.teamVehicleImage}}" alt=""></td>
+              <td>{{puntosPorPosicion[i]}}</td>
+              <td> <input  type="checkbox" [checked]="selectedDriverIndex === i" (change)="selectDriver(i)">
+                <ng-container *ngIf="selectedDriverIndex === i">
+                  <img src="/assets/stuff/fastest.png" alt="Imagen">
+                </ng-container></td>
+              <td *ngIf="driver.qualyGrid==i+1"><i style="color: gray" class="bi bi-caret-right-fill"></i></td>
+              <td *ngIf="driver.qualyGrid<i+1"><i style="color: red" class="bi bi-caret-down-fill"></i></td>
+              <td *ngIf="driver.qualyGrid>i+1"><i style="color: green" class="bi bi-caret-up-fill"></i></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-warning" *ngIf="!isCheckboxSelected()">Selecciona al menos un checkbox.</div>
+      <input value="Guardar" class="btn btn-success" type="submit">
+      </form>
+    </div>
+
+
+  </div>
+
+
+
+
+</div>
+
+

@@ -1,5 +1,22 @@
 <app-admin-header></app-admin-header>
 <main style="background-color: #192031;color: black;min-height: 100vh;">
+
+  <div *ngIf="circuitos?.length==liga?.currentRound && qualysResults.length!==0 && raceResults?.length!==0" class="container">
+    <h6>Se acabo</h6>
+    <div class="winner-section">
+      <h2 class="winner-title">¡Felicidades, eres el ganador!</h2>
+      <div class="winner-info">
+        <img src="ruta-a-la-imagen-del-ganador.jpg" alt="Imagen del ganador" class="winner-image">
+        <div class="winner-details">
+          <h3 class="winner-name">Nombre del ganador</h3>
+          <p class="winner-description">Breve descripción o mensaje de felicitación</p>
+          <button class="winner-button">Ver premio</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
   <div  class="container">
     <div class="row">
       <div style="margin-top: 80px;" class="col-4">
@@ -9,7 +26,8 @@
             <div class="col">
               <div class="card-deck">
                 <div *ngFor="let gp of grandPrixes,first as First" class="card" style="margin: 10px;background-color: #22293b;color: lightgray;">
-                  <div class="active" style="border: 2px solid blueviolet;" *ngIf="First">
+                  <div class="active" style="border: 2px solid blueviolet;" *ngIf="gp.raceRound === this.liga?.currentRound;">
+
                   </div>
                   <div class="card-body row">
                     <div style="float: left;" class="mr-auto">
@@ -30,47 +48,167 @@
 
 
 
-      <div style="margin-top: 80px;" class="col-sm-8">
-        <div style="background-color:#010a23 ;">
-          <div class="vertical-text">
-            <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span>
-             {{currentGrandPrix?.circuitCountry}}
-          </div>
-          <div  style="padding: 15px;display: flex;justify-content: center;"  class="col-sm-8 container">
 
-            <div class="card" style="width: 85%;">
-              <div class="card-header row">
-                <div class="col">
-                  <h6>{{currentGrandPrix?.raceName}}</h6>
-                </div>
-                <div class="col">
-                  <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span>
-                </div>
-
+      <div style="margin-top: 80px;color: gray;" class="col-sm-8">
+        <mat-tab-group  style="color: gray;background-color: #22293b">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <span style="color: white;">Informacion</span>
+            </ng-template>
+            <div style="background-color:#010a23;">
+              <div class="vertical-text">
+                <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span>
+                 {{currentGrandPrix?.circuitCountry}}
               </div>
-              <img src="{{currentGrandPrix?.circuitImage}}" class="card-img-top" alt="Descripción de la imagen">
-              <div class="card-body">
-                <h5 class="card-title">{{currentGrandPrix?.circuitName}}</h5>
-                <p class="card-text">{{currentGrandPrix?.raceName}} <span style="color: goldenrod;font-weight: bold;"> {{currentGrandPrix?.sponsorName}}</span></p>
-                <img height="60" src="{{currentGrandPrix?.circuitImageMap}}" alt="">
-              </div>
-              <div class="card-body row">
-                <div style="float: left;" class="mr-auto">
-                  <small style="text-align: left;"><span style="font-weight: bold;color: crimson;">{{currentGrandPrix?.circuitlength}}</span> km | <span style="font-weight: bold;color: crimson;"> {{currentGrandPrix?.circuitLaps}}</span> laps</small>
-                </div>
-                <div style="float: right;" class="ml-auto">
+              <div  style="padding: 15px;display: flex;justify-content: center;"  class="col-sm-8 container">
 
+                <div class="card" style="width: 85%;">
+                  <div class="card-header row">
+                    <div class="col">
+                      <h6>{{currentGrandPrix?.raceName}}</h6>
+                    </div>
+                    <div class="col">
+                      <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span>
+                    </div>
+
+                  </div>
+                  <img src="{{currentGrandPrix?.circuitImage}}" class="card-img-top" alt="Descripción de la imagen">
+                  <div class="card-body">
+                    <h5 class="card-title">{{currentGrandPrix?.circuitName}}</h5>
+                    <p class="card-text">{{currentGrandPrix?.raceName}} <span style="color: goldenrod;font-weight: bold;"> {{currentGrandPrix?.sponsorName}}</span></p>
+                    <img height="60" src="{{currentGrandPrix?.circuitImageMap}}" alt="">
+                  </div>
+                  <div class="card-body row">
+                    <div style="float: left;" class="mr-auto">
+                      <small style="text-align: left;"><span style="font-weight: bold;color: crimson;">{{currentGrandPrix?.circuitlength}}</span> km | <span style="font-weight: bold;color: crimson;"> {{currentGrandPrix?.circuitLaps}}</span> laps</small>
+                    </div>
+                    <div style="float: right;" class="ml-auto">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div style="padding: 20px;" >
+                <button [disabled]="qualysResults.length!=0" [ngClass]="{'btn btn-warning': qualysResults.length==0, 'btn btn-success': qualysResults}"  [routerLink]="'/Qualy/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Clasificacion</button>
+                <button [disabled]="raceResults?.length!=0" [ngClass]="{'btn btn-warning': raceResults?.length==0, 'btn btn-success': raceResults}" [routerLink]="'addResults/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Carrera</button>
+              </div>
+
+            </div>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+             <span style="color: white;">Clasificacion</span>
+            </ng-template>
+            <div *ngIf="qualysResults" class="row">
+              <div class="container">
+
+                <div style="padding: 30px;" class="row justify-content-md-center">
+
+                  <h1 style="color: goldenrod;">{{currentGrandPrix?.circuitName}} | <span style="color: silver;"> Qualifying</span></h1>
+
+                  <div class="col" style="height: 500px">
+                    <h5>Tabla Qualifying</h5>
+                    <small>{{currentGrandPrix?.raceName}}</small>
+                    <table style="color: white;border: 2px solid #010a23;padding: 10px;" class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Grid</th>
+                          <th scope="col">Piloto</th>
+                          <th colspan="3" scope="col">Equipo</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of qualysResults;first as First;index as i">
+                          <td>{{i+1}}</td>
+                          <td>{{item.driverName}}</td>
+                          <td> <img style="width: 40px;" src="{{item.teamShieldImage}}" alt="">  </td>
+                          <!-- <td> <img style="width: 30px;" src="{{item.teamShieldImage}}" alt="">  </td> -->
+                          <td *ngIf="item.qualyFastestLap === true">
+                            <img width="25" src="/assets/stuff/fastest.png" alt="">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="col">
+                    <h4 style="color: crimson;">Poleman</h4>
+                    <small>{{currentGrandPrix?.circuitCountry}} <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span></small>
+                    <div *ngFor="let item of qualysResults.slice(0, 1)" class="card" style="border: 2px solid black;background-image: url({{item?.teamShieldImage}});background-position: right top 80px;background-size: contain;background-repeat: no-repeat;background-color: #22293b;">
+                      <img class="card-img-top" src="{{item.driverImageDriver}}" alt="Card image cap">
+                      <div style="background-color: #010a23;" class="card-body">
+                        <h5 class="card-title">{{item.driverName}}</h5>
+                        <p class="card-text">{{item.driverLastName}} <span class="fi fi-{{item.driverFlag}}"></span></p>
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        <img  src="{{item.teamVehicleImage}}" alt="">
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div style="padding: 20px;">
-            <button  [routerLink]="'/Qualy/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Clasificacion</button>
-            <button class="btn btn-warning">Añadir Carrera</button>
-          </div>
 
-        </div>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <span style="color: white;">Carrera</span>
+            </ng-template>
+            <div *ngIf="raceResults" class="row">
+              <div class="container">
+
+                <div style="padding: 30px;" class="row justify-content-md-center">
+
+                  <h1 style="color: goldenrod;">{{currentGrandPrix?.circuitName}} | <span style="color: silver;"> Carrera</span></h1>
+
+                  <div class="col" style="height: 500px">
+                    <h5>Tabla Carrera</h5>
+                    <small>{{currentGrandPrix?.raceName}}</small>
+                    <table style="color: white;border: 2px solid #010a23;padding: 10px;" class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Grid</th>
+                          <th scope="col">Piloto</th>
+                          <th colspan="3" scope="col">Equipo</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of raceResults;first as First;index as i">
+                          <td>{{i+1}}</td>
+                          <td>{{item.driverName}}</td>
+                          <td> <img style="width: 40px;" src="{{item.teamShieldImage}}" alt="">  </td>
+                          <!-- <td> <img style="width: 30px;" src="{{item.teamShieldImage}}" alt="">  </td> -->
+                          <td *ngIf="item.resultFastestLap === true">
+                            <img width="25" src="/assets/stuff/fastest.png" alt="">
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                  <div class="col">
+                    <h4 style="color: crimson;">Winner</h4>
+                    <small>{{currentGrandPrix?.circuitCountry}} <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span></small>
+                    <div *ngFor="let item of raceResults?.slice(0, 1)" class="card" style="border: 2px solid black;background-image: url({{item?.teamShieldImage}});background-position: right top 80px;background-size: contain;background-repeat: no-repeat;background-color: #22293b;">
+                      <img class="card-img-top" src="{{item.driverImageDriver}}" alt="Card image cap">
+                      <div style="background-color: #010a23;" class="card-body">
+                        <h5 class="card-title">{{item.driverName}}</h5>
+                        <p class="card-text">{{item.driverLastName}} <span class="fi fi-{{item.driverFlag}}"></span></p>
+                        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        <img  src="{{item.teamVehicleImage}}" alt="">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+
+
       </div>
+
 
     </div>
   </div>
