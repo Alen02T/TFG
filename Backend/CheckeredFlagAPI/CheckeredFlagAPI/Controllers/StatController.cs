@@ -87,6 +87,32 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(await _context.Stats.ToListAsync());
         }
+
+
+
+        [HttpPut("driver/{driverId}")]
+        public async Task<ActionResult<Stat>> UpdateStatByDriverId(Stat request, int driverId)
+        {
+            var dbStat = await _context.Stats.
+               FirstOrDefaultAsync(s => s.DriverId == driverId);
+            if (dbStat == null)
+                return BadRequest("Stat not found.");
+
+            dbStat.Points = request.Points;
+            dbStat.Dnfs = request.Dnfs;
+            dbStat.Wins = request.Wins;
+            dbStat.Poles = request.Poles;
+            dbStat.FastestLaps = request.FastestLaps;
+            dbStat.HighestGridPos = request.HighestGridPos;
+            dbStat.Podiums = request.Podiums;
+            dbStat.beatTeamMateRate = request.beatTeamMateRate;
+            dbStat.HighestScoringTrack = request.HighestScoringTrack;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dbStat);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<List<Stat>>> Delete(int id)
         {
