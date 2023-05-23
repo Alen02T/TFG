@@ -28,5 +28,9 @@ export class StatService {
     });
   }
 
+  updateStat(updatedStat: Stat,driverId:number): Observable<Stat> {
+    return this.http.put<Stat>(environment.API_URL +'/Stat/driver/'+driverId, updatedStat);
+  }
+
 
 }

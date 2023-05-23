@@ -69,6 +69,8 @@
                     </div>
                     <div class="col">
                       <span class="fi fi-{{currentGrandPrix?.circuitFlag}}"></span>
+
+                      <img *ngIf="driver" style="float: right;" height="60" src="{{driver?.imageDriver}}" alt="">
                     </div>
 
                   </div>
@@ -90,7 +92,10 @@
               </div>
               <div style="padding: 20px;" >
                 <button [disabled]="qualysResults.length!=0" [ngClass]="{'btn btn-warning': qualysResults.length==0, 'btn btn-success': qualysResults}"  [routerLink]="'/Qualy/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Clasificacion</button>
-                <button [disabled]="raceResults?.length!=0" [ngClass]="{'btn btn-warning': raceResults?.length==0, 'btn btn-success': raceResults}" [routerLink]="'addResults/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Carrera</button>
+                <button [disabled]="raceResults?.length!=0 || qualysResults.length==0" [ngClass]="{'btn btn-warning': raceResults?.length==0, 'btn btn-success': raceResults}" [routerLink]="'addResults/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Carrera</button>
+                <button *ngIf="raceResults?.length!=0 && qualysResults.length!=0" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float: right;background-color: rgb(147, 44, 147);">Avanzar al siguiente Gran Premio</button>
+
+
               </div>
 
             </div>
@@ -208,6 +213,27 @@
 
 
       </div>
+
+      <!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Continuar al siguiente Gran Premio</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Seguro que quieres continuar?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-warning" (click)="continuarMundial()" >Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     </div>

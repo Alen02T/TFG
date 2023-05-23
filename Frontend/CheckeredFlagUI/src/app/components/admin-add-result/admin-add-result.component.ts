@@ -1,18 +1,20 @@
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Circuit } from 'src/app/models/circuit.model';
 import { Liga } from 'src/app/models/liga.model';
 import { Qualy } from 'src/app/models/qualy.model';
 import { qualyresult } from 'src/app/models/qualyresult.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { Result } from 'src/app/models/result.model';
+import { Stat } from 'src/app/models/stat.model';
 import { GrandPrixService } from 'src/app/services/grandPrix.service';
 import { LigaService } from 'src/app/services/liga.service';
 import { QualyService } from 'src/app/services/qualy.service';
 import { QualyResultService } from 'src/app/services/qualyresult.service';
 import { RaceService } from 'src/app/services/race.service';
 import { ResultService } from 'src/app/services/result.service';
+import { StatService } from 'src/app/services/stat.service';
 
 @Component({
   selector: 'app-admin-add-result',
@@ -31,6 +33,7 @@ export class AdminAddResultComponent implements OnInit {
 
   qualys:Qualy[] | null;
 
+  stat:Stat | null;
 
   puntosPorPosicion = [
     25, // Posición 0
@@ -51,12 +54,14 @@ export class AdminAddResultComponent implements OnInit {
     ,private _grandPrixService:GrandPrixService,
     private _activatedRoute:ActivatedRoute,
     private _qualyResultService:QualyResultService,
-    private _qualyService:QualyService,private _resultService:ResultService) {
+    private _qualyService:QualyService,private _router:Router,
+    private _resultService:ResultService,
+    private _statService:StatService) {
 
       this.qualyResults=null;
       this.liga=null;
       this.raceResults=null;
-
+      this.stat=null;
       this.qualys=null;
      }
 
@@ -100,11 +105,14 @@ export class AdminAddResultComponent implements OnInit {
       if (!this.qualyResults) {
         return; // Evitar errores si this.qualyResults es null o undefined
       }
-      console.log(this.selectedDriverIndex)
+
 
 
       this.qualyResults?.forEach((dato,index)=>{
-        // console.log(dato)
+
+        //Accedo a la clase para poder updatearla despues
+        this._statService.getDriverStats(dato.driverId).subscribe(apiDatos=>{
+          this.stat=apiDatos
 
 
         let posicionActual = index + 1 ;
@@ -118,10 +126,26 @@ export class AdminAddResultComponent implements OnInit {
         newResult.grid = dato.qualyGrid;
         newResult.position = posicionActual;
 
+        //Stat
 
-         if (index >= 0 && index < this.puntosPorPosicion.length) {
+        if (posicionActual <= this.stat.highestGridPos) {
+          this.stat.highestGridPos = posicionActual;
+          this.stat.highestScoringTrack = posicionActual;
+        }
+
+
+        this.stat.beatTeamMateRate=this.stat.beatTeamMateRate+posicionActual;
+
+        console.log(posicionActual)
+        if (index >= 0 && index < this.puntosPorPosicion.length) {
+          if(index==0){
+            this.stat.wins++
+            this.stat.podiums++
+          }else if(index<3){
+            this.stat.podiums++
+          }
           newResult.points = this.puntosPorPosicion[index];
-          console.log(newResult.points )
+          this.stat.points = this.stat.points + this.puntosPorPosicion[index]
         } else {
           newResult.points = 0; // O cualquier otro valor predeterminado
         }
@@ -129,7 +153,20 @@ export class AdminAddResultComponent implements OnInit {
         if(this.selectedDriverIndex==index){
           newResult.fastestLap=true
           newResult.points=newResult.points+1
+          this.stat.points = this.stat.points +1
+          this.stat.fastestLaps = this.stat.fastestLaps +1;
         }
+
+      this._statService.updateStat(this.stat,dato.driverId).subscribe(
+        (response:any) => {
+          console.log('response received', response);
+          // Realiza cualquier lógica adicional con la respuesta aquí
+        },
+        (error:any) => {
+          console.error('error caught in component', error);
+          // Maneja el error aquí si es necesario
+        }
+       )
 
         this._resultService.postResultData2(newResult).subscribe(
           (response:any) => {
@@ -142,14 +179,10 @@ export class AdminAddResultComponent implements OnInit {
           }
         );
 
-
-
-        console.log(newResult)
+        this._router.navigate(['/admin']);
       })
-
-
-
-    }
+    })
+  }
 
 
 

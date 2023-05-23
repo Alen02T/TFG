@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
+import { driverInfo } from 'src/app/models/driverinfo.model';
 import { Liga } from 'src/app/models/liga.model';
 import { Team } from 'src/app/models/team.model';
 import { User } from 'src/app/models/user.model';
@@ -11,6 +12,7 @@ import { CookieHandlerService } from 'src/app/services/AuthServices/cookie-handl
 import { DirectorService } from 'src/app/services/AuthServices/director.service';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { DriverService } from 'src/app/services/driver.service';
+import { driverInfoService } from 'src/app/services/driverInfo.service';
 import { LigaService } from 'src/app/services/liga.service';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -43,13 +45,17 @@ export class AdminComponent implements OnInit {
   fechaFinal:Date | null;
 
 
+  driversOrderedByPoints:driverInfo[] | null;
+  driversInfoNormal:driverInfo[] | null;
+  teams:Team[] | null;
 
+  textoExplicativo:string="";
 
 
   constructor(private authService:AuthService,private _directorService:DirectorService,private router : Router,
     private _token:TokenHandlerService, private route: ActivatedRoute,private _cookie:CookieHandlerService,
     private _teamService:TeamService,private _driverService:DriverService,private _ligaService:LigaService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,private _driverInfoService:driverInfoService
     ) {
       this.fechaInicial=null;
       this.fechaFinal=null;
@@ -68,6 +74,9 @@ export class AdminComponent implements OnInit {
     this.ligaObj=null;
 
 
+      this.teams=null;
+      this.driversOrderedByPoints=null
+      this.driversInfoNormal=null
 
   }
 
@@ -75,6 +84,11 @@ export class AdminComponent implements OnInit {
   ngOnInit(): void {
     this.getDirector();
     this.getAllDrivers();
+    this.getTeams();
+  }
+
+  getTeams(){
+    this._teamService.getTeamData().subscribe(apiDatos=>this.teams=apiDatos)
   }
 
   getDirector(){
@@ -89,7 +103,16 @@ export class AdminComponent implements OnInit {
    this._directorService.getDirectorData().subscribe(apiEscuderia => this.directores=apiEscuderia);
  }
 
+getDriversOrderedByPoints(){
+  this._driverInfoService.getdriverInfoDataByLeagueOrderedByPoints(2).subscribe(apiDrivers=>{
+    this.driversInfoNormal=apiDrivers
+    this.textoExplicativo="Los 3 pilotos lideres del mundial"
+
+  })
+}
+
  getAllDrivers(){
+    this._driverInfoService.getdriverInfoDataByLeague(2).subscribe(apiDrivers=>this.driversInfoNormal=apiDrivers)
     this._driverService.getDriverData().subscribe(apiEscuderia=>this.drivers=apiEscuderia);
  }
 
@@ -120,6 +143,29 @@ onSubmit() {
   //window.location.href="/admin";
   //window.location.reload();
 }
+
+onSelectChange(event:Event) {
+  const selectedOption = (event.target as HTMLSelectElement).value;
+  console.log(selectedOption)
+  if (selectedOption === 'points') {
+    this.getDriversOrderedByPoints()
+  } else if (selectedOption === 'rating') {
+    // Realizar acción correspondiente a la opción "Work"
+    // Por ejemplo, llamar a un endpoint relacionado con "Work"
+    this.loadWorkEndpoint();
+  }
+}
+
+loadHomeEndpoint() {
+  // Lógica para cargar el endpoint relacionado con "Home"
+  // Por ejemplo, realizar una solicitud HTTP al endpoint correspondiente
+}
+
+loadWorkEndpoint() {
+  // Lógica para cargar el endpoint relacionado con "Work"
+  // Por ejemplo, realizar una solicitud HTTP al endpoint correspondiente
+}
+
 
 
  loadData() {

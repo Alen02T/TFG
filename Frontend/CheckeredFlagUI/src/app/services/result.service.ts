@@ -19,7 +19,9 @@ export class ResultService {
     return this.http.get<Result[]>(environment.API_URL + '/Results/race/'+id);
   }
 
-
+  getWinnerOfRaceByRaceId(id:number):Observable<Result>{
+    return this.http.get<Result>(environment.API_URL + '/Results/winner/race/'+id);
+  }
 
 
   postResultData(body : any,teamId:number,points:number) : Result {

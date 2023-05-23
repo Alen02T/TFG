@@ -26,6 +26,9 @@ export class DriverService {
     return this.http.get<Driver[]>(environment.API_URL + '/Drivers/league/'+leagueId);
   }
 
+  getWinnerDriverByRaceId(raceId:number):Observable<Driver>{
+    return this.http.get<Driver>(environment.API_URL + '/Drivers/winner/race/'+raceId);
+  }
 
 
   updateDriver(driverId :number , name : string, lastname :string,wins:number,country:string,flag:string,number:number,points:number,podiums:number,imageDriver:string,team:number): Observable<any> {

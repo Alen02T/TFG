@@ -43,15 +43,15 @@ export class AdminDriversComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._driverInfoService.getdriverInfoDataByLeagueOrderedByPrice(1).subscribe(apiDriverInfo=>this.driversInfoOrderedByPrice=apiDriverInfo);
+    this._driverInfoService.getdriverInfoDataByLeagueOrderedByPrice(2).subscribe(apiDriverInfo=>this.driversInfoOrderedByPrice=apiDriverInfo);
     this.getPoints()
     this.getTopRatedDrivers()
-    this._driverService.getDriversByLeagueId(1).subscribe(apiDriver=>this.drivers=apiDriver);
+    this._driverService.getDriversByLeagueId(2).subscribe(apiDriver=>this.drivers=apiDriver);
   }
 
 
   getTopRatedDrivers(){
-    this._driverInfoService.getdriverInfoDataByLeagueOrderedByRating(1).subscribe(apiDriversInfo=>this.driversInfoByRating=apiDriversInfo)
+    this._driverInfoService.getdriverInfoDataByLeagueOrderedByRating(2).subscribe(apiDriversInfo=>this.driversInfoByRating=apiDriversInfo)
   }
 
   onDeleteDriver(driver:Driver) {
@@ -69,7 +69,7 @@ export class AdminDriversComponent implements OnInit {
 
 
   getPoints(){
-    this._driverInfoService.getdriverInfoDataByLeagueOrderedByPoints(1).subscribe(apiDriverInfo => {
+    this._driverInfoService.getdriverInfoDataByLeagueOrderedByPoints(2).subscribe(apiDriverInfo => {
       this.driversInfoByLeague=apiDriverInfo
 
       const colors: any[] | null = [];
