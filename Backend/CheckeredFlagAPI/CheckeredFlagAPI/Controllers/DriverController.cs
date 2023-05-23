@@ -39,6 +39,33 @@ namespace CheckeredFlagAPI.Controllers
         }
 
 
+        [HttpGet("winner/race/{raceId}")]
+        public async Task<ActionResult<Driver>> GetRaceWinner(int raceId)
+        {
+            var result = await _context.Results
+                .Where(c => c.raceId == raceId)
+                .OrderBy(c => c.position)
+                .FirstOrDefaultAsync();
+
+            if (result == null)
+            {
+                return NotFound(); // Retorna un resultado 404 si no se encuentra ningún resultado
+            }
+
+            // Obtener datos adicionales del piloto a través de una subconsulta
+            var driver = await _context.Drivers
+                .FirstOrDefaultAsync(d => d.driverId == result.driverId);
+
+            if (driver == null)
+            {
+                return NotFound(); // Retorna un resultado 404 si no se encuentra el piloto correspondiente
+            }
+
+            return Ok(driver);
+        }
+
+
+
         [HttpGet("price/{leagueId}")]
         public async Task<ActionResult<List<Driver>>> GetDriversByLeagueOrderedByValue(int leagueId)
         {

@@ -43,6 +43,8 @@ namespace CheckeredFlagAPI.Controllers
             return results;
         }
 
+
+
         /*
         [HttpPost]
         public async Task<ActionResult<List<Result>>> AddResult(Result Result)

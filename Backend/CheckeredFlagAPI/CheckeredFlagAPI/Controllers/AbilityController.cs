@@ -42,9 +42,6 @@ namespace CheckeredFlagAPI.Controllers
              if (Ability == null)
                 return BadRequest("Ability not found.");
             return Ok(Ability);
-
-
-            return Ok(Ability);
         }
 
         [HttpPost]

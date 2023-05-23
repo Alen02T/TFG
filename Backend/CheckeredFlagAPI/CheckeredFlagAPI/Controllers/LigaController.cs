@@ -122,9 +122,27 @@ namespace CheckeredFlagAPI.Controllers
 
             await _context.SaveChangesAsync();
 
-            return liga;
+            return Ok(liga);
         }
 
+        [HttpPut("{ligaId}/currentRound/{newCurrentRound}")]
+        public async Task<ActionResult> UpdateCurrentRound(int ligaId, int newCurrentRound)
+        {
+            var liga = await _context.Ligas.FindAsync(ligaId);
+
+            if (liga == null)
+            {
+                return NotFound(); // Retorna un resultado 404 si no se encuentra la liga correspondiente
+            }
+
+            liga.currentRound = newCurrentRound;
+           
+
+            _context.Entry(liga).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return Ok(liga); // Retorna un resultado 200 OK si la actualización se realiza correctamente
+        }
 
 
         // DELETE: api/Liga/5
