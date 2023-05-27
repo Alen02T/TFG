@@ -47,6 +47,12 @@ export class DriverService {
     return this.http.put<any>(environment.API_URL + '/Drivers/'+driverId, bodyData);
   }
 
+
+  updateDriverBody(driverId: number, bodyData: Driver): Observable<any> {
+    return this.http.put<any>(environment.API_URL + '/Drivers/' + driverId, bodyData);
+  }
+
+
   updateDriverTeam(driverId: number, team: number): Observable<any> {
     return this.http.put<any>(environment.API_URL + '/Drivers/' + driverId + '/team', team);
   }

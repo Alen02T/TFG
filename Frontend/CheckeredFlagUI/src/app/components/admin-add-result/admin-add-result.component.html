@@ -79,7 +79,7 @@
          <img style="background-repeat: no-repeat;background-size: contain;background-position: center ;background-image: url({{item.teamShieldImage}});background-color: #{{item.teamColor}};">
        </div>
        <p style="padding: 10px;">
-         <img style="width: 60px;" src="{{item.driverImageDriver}}" alt="">  {{item.driverName}}   <span style="color: goldenrod;font-size: 30px;font-weight: bold;float: right;">{{item.qualyGrid}}º</span>
+         <img style="width: 60px;" src="{{item.driverImageDriver}}" alt="">  {{item.driverLastName?.slice(0,3)!.toUpperCase()}}   <span style="color: goldenrod;font-size: 30px;font-weight: bold;float: right;">{{item.qualyGrid}}º</span>
        </p>
 
       </div>
@@ -89,7 +89,7 @@
 
 
     <div class="col-md-8">
-      <form (ngSubmit)="guardarResultados()">
+      <form (ngSubmit)="modificarPrecio()">
 
 
       <h1>Tabla Final</h1>

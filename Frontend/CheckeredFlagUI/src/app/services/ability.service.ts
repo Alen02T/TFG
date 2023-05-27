@@ -28,6 +28,10 @@ export class AbilityService {
     });
   }
 
+  updateAbility(updatedAbility: Ability,driverId:number): Observable<Ability> {
+    return this.http.put<Ability>(environment.API_URL +'/Ability/driver/'+driverId, updatedAbility);
+  }
+
   // postAbilityData(body: any, driverId: number): Observable<Ability> {
   //   let bodyData = new Ability(body,driverId);
   //   return this.http.post<Ability>(environment.API_URL + '/Drivers', bodyData).pipe(

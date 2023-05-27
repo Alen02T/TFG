@@ -53,6 +53,26 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(await _context.Abilities.ToListAsync());
         }
 
+        [HttpPut("driver/{driverId}")]
+        public async Task<ActionResult<Ability>> UpdateAbilityByDriverId(Ability request, int driverId)
+        {
+            var dbAbility = await _context.Abilities.
+               FirstOrDefaultAsync(s => s.driverId == driverId);
+            if (dbAbility == null)
+                return BadRequest("Stat not found.");
+
+            dbAbility.overtaking = request.overtaking;
+            dbAbility.defending = request.defending;
+            dbAbility.tireManagement = request.tireManagement;
+            dbAbility.consistency = request.consistency;
+            dbAbility.overall = request.overall;
+            dbAbility.experience = request.experience;
+            dbAbility.pace = request.pace;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dbAbility);
+        }
 
         [HttpPut]
         public async Task<ActionResult<List<Ability>>> UpdateAbility(Ability request)
