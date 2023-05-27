@@ -232,8 +232,11 @@
 
 
     <body>
+
       <div class="app">
+        <!-- <app-admin-cards></app-admin-cards> -->
         <header class="app-header">
+
           <div class="app-header-logo">
             <div class="logo">
               <span class="logo-icon">
@@ -246,6 +249,7 @@
             </div>
           </div>
           <div class="app-header-navigation">
+
             <div class="tabs">
               <a href="#">
                 Overview
@@ -269,7 +273,7 @@
           </div>
           <div class="app-header-actions">
             <button class="user-profile">
-              <span>Matheo Peterson</span>
+              <span>{{director?.name}}</span>
               <span>
                 <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
               </span>
@@ -334,7 +338,11 @@
               </div>
             </footer>
           </div>
+
           <div class="app-body-main-content">
+            <section>
+              <h4>ad</h4>
+            </section>
             <section class="service-section">
               <h2>Service</h2>
               <div class="service-section-header">
@@ -374,36 +382,6 @@
                       <i class="ph-caret-right-bold"></i>
                     </span>
                 </article>
-                <!-- <article class="tile">
-                  <div class="tile-header">
-                    <i class="ph-lightning-light"></i>
-                    <h3>
-                      <span>Piloto 2</span>
-                      <span>Leclerc <span style="font-weight: bold;font-style: italic;color: red;">16</span> </span>
-                    </h3>
-                  </div>
-                  <a href="#">
-                    <span>Go to service</span>
-                    <span style="background-image:url('/assets/driverImgs/charles.png');background-size: contain;" class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
-                    </span>
-                  </a>
-                </article>
-                <article class="tile">
-                  <div class="tile-header">
-                    <i class="ph-lightning-light"></i>
-                    <h3>
-                      <span>Piloto 3</span>
-                      <span>Verstappen <span style="font-weight: bold;font-style: italic;color: blue;">1</span> </span>
-                    </h3>
-                  </div>
-                  <a href="#">
-                    <span>Go to service</span>
-                    <span style="background-image:url('/assets/driverImgs/verstappen.png');background-size: contain;" class="icon-button">
-                      <i class="ph-caret-right-bold"></i>
-                    </span>
-                  </a>
-                </article> -->
               </div>
               <div class="service-section-footer">
                 <p>{{textoExplicativo}}</p>
@@ -411,85 +389,95 @@
             </section>
             <section class="transfer-section">
               <div class="transfer-section-header">
-                <h2>Latest transfers</h2>
+                <h2>Ronda {{grandPrix?.raceRound}}</h2>
                 <div class="filter-options">
-                  <p>Filter selected: more than 100 $</p>
-                  <button class="icon-button">
-                    <i class="ph-funnel"></i>
+                  <p>{{grandPrix?.raceName}}</p>
+                  <button class="icon-button fi fi-{{grandPrix?.circuitFlag}}">
                   </button>
-                  <button class="icon-button">
-                    <i class="ph-plus"></i>
+                  <button style="background-image: url({{winner?.imageDriver}});background-size: cover;" class="icon-button">
                   </button>
                 </div>
               </div>
+
               <div class="transfers">
-                <div class="transfer">
-                  <div class="transfer-logo">
-                    <img src="https://assets.codepen.io/285131/apple.svg" />
+                <div  *ngIf="raceResults.length==0" >
+                  <h6>Clasificacion</h6>
+                  <div class="transfer" *ngFor="let item of qualyResults;index as i">
+                    <div *ngIf="item.qualyFastestLap === true">
+                      <img width="25" src="/assets/stuff/fastest.png" alt="">
+                    </div>
+                    <div style="background-image:url({{item.driverImageDriver}}) ;background-size: cover;" class="transfer-logo">
+                    </div>
+                    <dl class="transfer-details">
+                      <div>
+
+                        <dt>{{item.driverName}}</dt>
+                        <dd>{{item.driverLastName!.slice(0,3).toUpperCase()}}</dd>
+                      </div>
+                      <div>
+                        <img width="70" src="{{item.teamShieldImage}}" alt="">
+                      </div>
+                      <div class="transfer-number">
+                        <img src="{{item.teamVehicleImage}}" alt="">
+                      </div>
+
+                    </dl>
+
+
+                </div>
+              </div>
+
+              <div  *ngIf="raceResults.length!=0" >
+
+
+                <div  style="padding: 10px;" [ngStyle]="{'background-color': i == 0 ? '#2a2c31' : 'inherit'}" class="transfer" *ngFor="let item of raceResults;index as i">
+                  <h6 style="margin-right: 5px;color: rgb(157, 0, 31);font-weight: bolder;">{{i+1}}</h6>
+                  <div style="background-image:url({{item.driverImageDriver}}) ;background-size: cover;" class="transfer-logo">
                   </div>
                   <dl class="transfer-details">
                     <div>
-                      <dt>Apple Inc.</dt>
-                      <dd>Apple ID Payment</dd>
+                      <dt>{{item.driverName}}</dt>
+                      <dd>{{item.driverLastName!.slice(0,3).toUpperCase()}}</dd>
                     </div>
                     <div>
-                      <dt>4012</dt>
-                      <dd>Last four digits</dd>
+                      <img width="70" src="{{item.teamShieldImage}}" alt="">
                     </div>
                     <div>
-                      <dt>28 Oct. 21</dt>
-                      <dd>Date payment</dd>
+                      <dt>{{item.resultPoints}} Pts</dt>
+                      <dd>{{item.resultGrid-item.resultPosition}}</dd>
                     </div>
                   </dl>
                   <div class="transfer-number">
-                    - $ 550
+                    <img src="{{item.teamVehicleImage}}" alt="">
                   </div>
+
+
+                  <ng-template #arrowUp>
+                    <span><i style="color: green" class="bi bi-caret-up-fill"></i></span>
+                  </ng-template>
+                  <ng-template #arrowDown>
+                    <span><i style="color: rgb(209, 33, 33);" class="bi bi-caret-down-fill"></i></span>
+                  </ng-template>
+                  <ng-template #arrowNone>
+                    <span><i style="color: gray;" class="bi bi-caret-right-fill"></i></span>
+                  </ng-template>
+                  <ng-container *ngIf="item.resultGrid > item.resultPosition; else ifCond">
+                    <ng-container *ngTemplateOutlet="arrowUp"></ng-container>
+                  </ng-container>
+                  <ng-template #ifCond>
+                    <ng-container *ngIf="item.resultGrid < item.resultPosition; else elseCond">
+                      <ng-container *ngTemplateOutlet="arrowDown"></ng-container>
+                    </ng-container>
+                  </ng-template>
+                  <ng-template #elseCond>
+                    <ng-container *ngTemplateOutlet="arrowNone"></ng-container>
+                  </ng-template>
+
+
                 </div>
-                <div class="transfer">
-                  <div class="transfer-logo">
-                    <img src="https://assets.codepen.io/285131/pinterest.svg" />
-                  </div>
-                  <dl class="transfer-details">
-                    <div>
-                      <dt>Pinterest</dt>
-                      <dd>2 year subscription</dd>
-                    </div>
-                    <div>
-                      <dt>5214</dt>
-                      <dd>Last four digits</dd>
-                    </div>
-                    <div>
-                      <dt>26 Oct. 21</dt>
-                      <dd>Date payment</dd>
-                    </div>
-                  </dl>
-                  <div class="transfer-number">
-                    - $ 120
-                  </div>
-                </div>
-                <div class="transfer">
-                  <div class="transfer-logo">
-                    <img src="https://assets.codepen.io/285131/warner-bros.svg" />
-                  </div>
-                  <dl class="transfer-details">
-                    <div>
-                      <dt>Warner Bros.</dt>
-                      <dd>Cinema</dd>
-                    </div>
-                    <div>
-                      <dt>2228</dt>
-                      <dd>Last four digits</dd>
-                    </div>
-                    <div>
-                      <dt>22 Oct. 21</dt>
-                      <dd>Date payment</dd>
-                    </div>
-                  </dl>
-                  <div class="transfer-number">
-                    - $ 70
-                  </div>
-                </div>
-                <div class="transfer">
+              </div>
+
+              <div class="transfer">
                   <div class="card-body">
                     <ul class="list-group list-group-flush">
 
@@ -516,6 +504,10 @@
                     </ul>
                 </div>
                 </div>
+
+
+
+
               </div>
             </section>
           </div>
@@ -564,21 +556,37 @@
                   </div>
                 </div>
               </div>
-              <div class="faq">
-                <p>Most frequently asked questions</p>
-                <div>
-                  <label>Question</label>
-                  <input type="text" placeholder="Type here">
+              <div class="payment-section-footer">
+                <section class="transfer-section">
+              <div class="transfer-section-header">
+                <h2>Latest Market Updates</h2>
+                <div class="filter-options">
+                  <p>Filter selected: more than 100 $</p>
+                  <button class="icon-button">
+                    <i class="ph-funnel"></i>
+                  </button>
+                  <button class="icon-button">
+                    <i class="ph-plus"></i>
+                  </button>
                 </div>
               </div>
-              <div class="payment-section-footer">
-                <button class="save-button">
-                  Save
-                </button>
-                <button class="settings-button">
-                  <i class="ph-gear"></i>
-                  <span>More settings</span>
-                </button>
+              <div class="transfers">
+                <div class="transfer" *ngFor="let item of driversOrderedByPoints">
+                  <div style="background-image:url({{item.driverImageDriver}}) ;background-size: cover;" class="transfer-logo">
+                  </div>
+                  <dl class="transfer-details">
+                    <div>
+                      <dt>{{item.driverName}}</dt>
+                      <dd>{{item.drivercurrentPrice | currency:'USD'}}</dd>
+                    </div>
+
+                  </dl>
+                  <div class="transfer-number">
+                   <span [ngStyle]="{'color': item.driverseasonChange < 0 ? 'red' : 'green'}">{{item.driverseasonChange}}</span>
+                  </div>
+                </div>
+              </div>
+            </section>
               </div>
 
             </section>

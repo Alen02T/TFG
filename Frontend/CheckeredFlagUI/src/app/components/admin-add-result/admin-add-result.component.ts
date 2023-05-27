@@ -214,6 +214,7 @@ export class AdminAddResultComponent implements OnInit {
     })
 
       this.modificarHabilidades()
+      this.modificarPrecio()
   }
 
   modificarHabilidades(){
@@ -376,7 +377,7 @@ export class AdminAddResultComponent implements OnInit {
       if (i < mitadSuperior) {
         let seasonChange = this.puntosPorPosicion[i] * cantidadGanadores
         let seasonChangeFloored=Math.floor(seasonChange / 1000) * 1000;
-        console.log("Gana dinero " + seasonChangeFloored)
+
         this._driverService.getDriverById(this.qualyResults![i].driverId).subscribe(apiAbility=>{
           this.driver=apiAbility
 
@@ -400,7 +401,7 @@ export class AdminAddResultComponent implements OnInit {
         console.log((sumaPerdedores-array[contador2]))
         let seasonChange =(sumaPerdedores-array[contador2])* cantidadPerdedores  //
         let seasonChangeFloored=Math.floor(seasonChange / 1000) * 1000;
-        console.log("Pierde dinero" + seasonChangeFloored)
+
         this._driverService.getDriverById(this.qualyResults![i].driverId).subscribe(apiAbility=>{
           this.driver=apiAbility
 

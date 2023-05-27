@@ -4,7 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
 import { driverInfo } from 'src/app/models/driverinfo.model';
+import { GrandPrix } from 'src/app/models/grandprix.model';
 import { Liga } from 'src/app/models/liga.model';
+import { qualyresult } from 'src/app/models/qualyresult.model';
+import { raceResult } from 'src/app/models/raceresult.model';
 import { Team } from 'src/app/models/team.model';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/AuthServices/auth.service';
@@ -13,7 +16,10 @@ import { DirectorService } from 'src/app/services/AuthServices/director.service'
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
+import { GrandPrixService } from 'src/app/services/grandPrix.service';
 import { LigaService } from 'src/app/services/liga.service';
+import { QualyResultService } from 'src/app/services/qualyresult.service';
+import { RaceResultService } from 'src/app/services/raceresult.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -44,18 +50,26 @@ export class AdminComponent implements OnInit {
   fechaInicial:Date | null;
   fechaFinal:Date | null;
 
+  bestDriversOrderedByPrice:driverInfo[] = [];
 
   driversOrderedByPoints:driverInfo[] | null;
   driversInfoNormal:driverInfo[] | null;
   teams:Team[] | null;
 
+  raceResults:raceResult[] =[];
   textoExplicativo:string="";
 
+  currentRound:number=0;
+  grandPrix:GrandPrix | null;
+  winner:Driver | null
+
+  qualyResults:qualyresult[] =[]
 
   constructor(private authService:AuthService,private _directorService:DirectorService,private router : Router,
     private _token:TokenHandlerService, private route: ActivatedRoute,private _cookie:CookieHandlerService,
     private _teamService:TeamService,private _driverService:DriverService,private _ligaService:LigaService,
-    private formBuilder: FormBuilder,private _driverInfoService:driverInfoService
+    private formBuilder: FormBuilder,private _driverInfoService:driverInfoService,
+    private _raceResultService:RaceResultService,private _grandPrixService:GrandPrixService,private _qualyResultsService:QualyResultService
     ) {
       this.fechaInicial=null;
       this.fechaFinal=null;
@@ -71,9 +85,10 @@ export class AdminComponent implements OnInit {
     this.email="";
     this.teamId=0;
 
+    this.grandPrix=null;
     this.ligaObj=null;
 
-
+      this.winner=null;
       this.teams=null;
       this.driversOrderedByPoints=null
       this.driversInfoNormal=null
@@ -81,10 +96,17 @@ export class AdminComponent implements OnInit {
   }
 
 
+  getMejorPilotoValorado(){
+    this._driverInfoService.getdriverInfoDataByLeagueOrderedByPrice(2).subscribe(apiDatos=>this.driversOrderedByPoints=apiDatos)
+  }
+
+
+
   ngOnInit(): void {
     this.getDirector();
     this.getAllDrivers();
     this.getTeams();
+    this.getMejorPilotoValorado()
   }
 
   getTeams(){
@@ -97,7 +119,28 @@ export class AdminComponent implements OnInit {
      .subscribe((x) => (this.director = x) && this.loadData());
  }
 
+  getRaceResult(currentRound:number){
+    this._raceResultService.getRaceResultByRound(currentRound).subscribe(apiDatos=>{
+      this.raceResults=apiDatos
+    })
+  }
 
+  getQualyResult(currentRound:number){
+    this._qualyResultsService.getQualyResultByRoundId(currentRound).subscribe(apiDatos=>{
+      this.qualyResults=apiDatos
+    })
+  }
+
+getWinnerRace(raceId:number){
+  this._driverService.getWinnerDriverByRaceId(raceId).subscribe(apiDriver=>this.winner=apiDriver)
+}
+
+getGrandPrix(currentRound:number){
+  this._grandPrixService.getGrandPrixByRound(currentRound).subscribe(apiDatos=>{
+    this.grandPrix=apiDatos
+    this.getWinnerRace(this.grandPrix.raceId)
+  })
+}
 
  getDirectores(){
    this._directorService.getDirectorData().subscribe(apiEscuderia => this.directores=apiEscuderia);
@@ -132,7 +175,7 @@ getDriversOrderedByPoints(){
 onSubmit() {
   this.getDirector();
   console.log(this.taskForm.value)
- this._ligaService.addLiga(this.taskForm.value).subscribe(
+  this._ligaService.addLiga(this.taskForm.value).subscribe(
       (response) => {
         console.log(response);
       },
@@ -174,8 +217,14 @@ loadWorkEndpoint() {
     this.nombre = this.director.name;
     this.email = this.director.email;
     this.teamId = this.director.leagueId;
-    this._ligaService.getLigaByDirector(this.director?.leagueId).subscribe(apiDirector=>{
+    this._ligaService.getLiga(this.director?.leagueId).subscribe(apiDirector=>{
       this.ligaObj=apiDirector
+
+      this.getGrandPrix(this.ligaObj.currentRound)
+      this.getRaceResult(this.ligaObj.currentRound)
+      this.getQualyResult(this.ligaObj.currentRound)
+
+
       this.fechaInicial=this.ligaObj.fechaInicio
       this.fechaFinal=this.ligaObj.fechaFin
       //this.getRestaTiempo(this.fechaInicial,this.fechaFinal)

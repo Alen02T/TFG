@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Driver } from 'src/app/models/driver.model';
 import { GrandPrix } from 'src/app/models/grandprix.model';
 import { Qualy } from 'src/app/models/qualy.model';
+import { qualyresult } from 'src/app/models/qualyresult.model';
 // import { qualyResult } from 'src/app/models/qualyResult.model';
 
 
@@ -29,7 +30,7 @@ export class SeeRaceComponent implements OnInit {
   //race:Race|null;
   raceId:number;
   qualys:Qualy[] | null;
-  // qualysResults:qualyResult[] | null;
+  qualysResults:qualyresult[] | null;
   constructor(
     private _grandPrixService:GrandPrixService,
     private activatedRoute:ActivatedRoute,
@@ -41,7 +42,7 @@ export class SeeRaceComponent implements OnInit {
     this.grandPrix=null;
     this.raceResults=null;
     this.qualys=null
-    // this.qualysResults=null;
+    this.qualysResults=null;
   }
 
   ngOnInit(): void {
@@ -53,7 +54,7 @@ export class SeeRaceComponent implements OnInit {
     //this._raceService.getRaceById(this.raceId).subscribe(apiEscuderia => this.race=apiEscuderia);
     this._grandPrixService.getGrandPrixByRound(this.raceId).subscribe(apiEscuderia => this.grandPrix=apiEscuderia);
     //this._raceResultService.getRaceResultById(this.raceId).subscribe(apiEscuderia => this.raceResult=apiEscuderia);
-    // this._qualyResultService.getQualyResultByGrandPrix(this.raceId).subscribe((x) => (this.qualysResults=x));
+    this._qualyResultService.getQualyResultByGrandPrix(this.raceId).subscribe((x) => (this.qualysResults=x));
     this._raceResultService.getRaceResultByGrandPrix(this.raceId).subscribe((x) => (this.raceResults=x));
   }
 
