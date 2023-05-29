@@ -1,75 +1,3 @@
-body {
-  margin: 0;
-  padding-top: 40px;
-  color: #2e323c;
-  background: #f5f6fa;
-  position: relative;
-  height: 100%;
-}
-.account-settings .user-profile {
-  margin: 0 0 1rem 0;
-  padding-bottom: 1rem;
-  text-align: center;
-}
-.account-settings .user-profile .user-avatar {
-  margin: 0 0 1rem 0;
-}
-.account-settings .user-profile .user-avatar img {
-  width: 90px;
-  height: 90px;
-  -webkit-border-radius: 100px;
-  -moz-border-radius: 100px;
-  border-radius: 100px;
-}
-.account-settings .user-profile h5.user-name {
-  margin: 0 0 0.5rem 0;
-}
-.account-settings .user-profile h6.user-email {
-  margin: 0;
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: #9fa8b9;
-}
-.account-settings .about {
-  margin: 2rem 0 0 0;
-  text-align: center;
-}
-.account-settings .about h5 {
-  margin: 0 0 15px 0;
-  color: #007ae1;
-}
-.account-settings .about p {
-  font-size: 0.825rem;
-}
-.form-control {
-  border: 1px solid #cfd1d8;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  font-size: .825rem;
-  background: #ffffff;
-  color: #2e323c;
-}
-
-.card {
-  background: #ffffff;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-  border: 0;
-  margin-bottom: 1rem;
-}
-.modal-fullscreen .modal-content {
-  font-size: 1.5rem;
-  border-radius: 0;
-}
-
-
-
-
-
-
-
 /* (A) FULL PAGE OVERLAY */
 #owrap {
   /* (A1) COVER ENTIRE SCREEN */
@@ -104,32 +32,43 @@ body {
 }
 
 
+/* (A) FULL PAGE OVERLAY */
+#owrap2 {
+  /* (A1) COVER ENTIRE SCREEN */
+  width: 100%; height: 100%;
+  position: fixed; top: 0; left: 0; z-index: 999;
+  background: rgba(0, 0, 0, 0.5);
+}
+#owrap2 {
+  /* (A2) CENTER DIALOG BOX */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-body {
-  background: #141414;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
-  color: #6d6d6d;
+/* (B) DIALOG BOX COSMETICS */
+#obox2 {
+
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}#owrap2 {
+  /* (A3) HIDDEN BY DEFAULT */
+  transition: opacity 0.2s;
+  visibility: hidden;
   opacity: 0;
-  animation: fade-in 500ms ease 200ms 1 forwards;
 }
-body h1 {
-  color: #fff;
-  font-size: 50px;
+
+/* (A4) SHOW */
+#owrap2.show {
+  visibility: visible;
+  opacity: 1;
 }
-body a {
-  padding: 5px 15px;
-  color: #6d6d6d;
-  font-size: 17px;
-  text-decoration: none;
-  text-transform: uppercase;
-  border: 1px solid #6d6d6d;
-  transition: all 300ms ease;
-}
-body a:hover {
-  color: #ebecec;
-  border: 1px solid #ebecec;
-}
+
+
+
+
+
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -353,28 +292,63 @@ body a:hover {
 .profile svg  {
   width: 100px;
 }
-/* @keyframes bg-fade {
-  0% {
-    background: linear-gradient(to bottom right, #33adfe, #8e44ad);
- }
-  40% {
-    background: linear-gradient(to bottom right, #14dad6, #1fba2c);
- }
-  45% {
-    background: linear-gradient(to bottom right, #4ed82f, #c7aa18);
- }
-  55% {
-    background: #e09927;
- }
-  60% {
-    background: #86a546;
- }
-} */
+.account-settings .user-profile {
+  margin: 0 0 1rem 0;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+.account-settings .user-profile .user-avatar {
+  margin: 0 0 1rem 0;
+}
+.account-settings .user-profile .user-avatar img {
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}
+.account-settings .user-profile h5.user-name {
+  margin: 0 0 0.5rem 0;
+}
+.account-settings .user-profile h6.user-email {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #9fa8b9;
+}
+.account-settings .about {
+  margin: 2rem 0 0 0;
+  text-align: center;
+}
+.account-settings .about h5 {
+  margin: 0 0 15px 0;
+  color: #007ae1;
+}
+.account-settings .about p {
+  font-size: 0.825rem;
+}
+.form-control {
+  border: 1px solid #cfd1d8;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-size: .825rem;
+  background: #ffffff;
+  color: #2e323c;
+}
 
-
-
-
-.common{
+.card {
+  background: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 0;
+  margin-bottom: 1rem;
+}
+.modal-fullscreen .modal-content {
+  font-size: 1.5rem;
+  border-radius: 0;
+}.common{
   cursor: pointer;
   background: linear-gradient(to bottom right, #33adfe, #8e44ad);
   border: 2px solid black;

@@ -247,9 +247,9 @@ export class AdminRadarChartComponent implements OnInit {
 
   ngOnInit(): void {
    this.cargarRadar(this.abilityParameter!)
-  this.cargarLineChart()
-  this.cargarPosicionDeGridPosicionFinal()
-  this.cargarPuntosObtenidosvsExperiencia()
+  // this.cargarLineChart()
+  // this.cargarPosicionDeGridPosicionFinal()
+  // this.cargarPuntosObtenidosvsExperiencia()
   }
 
 

@@ -28,6 +28,11 @@ export class TeamService {
     return this.http.get<Team[]>(environment.API_URL + '/team/points');
   }
 
+
+  addTeam(team: Team): Observable<Team> {
+    return this.http.post<Team>(environment.API_URL + '/Team/' , team);
+  }
+
   updateTeam(teamId:number,country:string,flag:string,color:string,name:string,director:string,points:number,engine:string,shieldImage:string,vehicleImage:string): Observable<any> {
     let bodyData =new Team();
     bodyData.teamId=teamId;

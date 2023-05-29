@@ -63,6 +63,7 @@ import { AdminRacesManagementComponent } from './components/admin-races-manageme
 import { ResultService } from './services/result.service';
 import { AdminRadarChartComponent } from './components/admin-radar-chart/admin-radar-chart.component';
 import { AdminChartsComponent } from './components/admin-charts/admin-charts.component';
+import { AdminAddTeamComponent } from './components/admin-add-team/admin-add-team.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +94,8 @@ import { AdminChartsComponent } from './components/admin-charts/admin-charts.com
     AdminAddResultComponent,
     AdminRacesManagementComponent,
     AdminRadarChartComponent,
-    AdminChartsComponent
+    AdminChartsComponent,
+    AdminAddTeamComponent
   ],
   imports: [
     BrowserModule,

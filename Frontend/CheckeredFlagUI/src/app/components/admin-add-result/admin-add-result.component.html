@@ -111,9 +111,21 @@
               <td> <span style="float: left; color: #{{driver.teamColor}};font-size: 15px;font-weight: 900;font-style: italic;"> {{driver.driverNumber}}</span>
                 <span style="font-weight: bold;text-align: center;">{{driver.driverName}} <strong> {{driver.driverLastName}}</strong></span>
               </td>
-              <td><img width="100" src="{{driver.teamShieldImage}}" alt=""></td>
+              <td style="width: 150px; background-image: url({{driver.teamShieldImage}});background-size: contain;background-position: center;background-repeat: no-repeat;">
+                <!-- <img style="max-width:100px;max-height: 110px;"   src="{{driver.teamShieldImage}}" alt=""> -->
+              </td>
               <td style="border-left: 2px solid black;"><img width="100" src="{{driver.teamVehicleImage}}" alt=""></td>
               <td>{{puntosPorPosicion[i]}}</td>
+
+
+                <!-- Resto de las columnas de la tabla -->
+                <td>
+                  <input type="checkbox" (change)="onCheckboxChange(i)">
+                </td>
+
+
+
+
               <td> <input  type="checkbox" [checked]="selectedDriverIndex === i" (change)="selectDriver(i)">
                 <ng-container *ngIf="selectedDriverIndex === i">
                   <img src="/assets/stuff/fastest.png" alt="Imagen">

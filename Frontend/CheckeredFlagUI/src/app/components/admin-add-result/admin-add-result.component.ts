@@ -40,6 +40,9 @@ export class AdminAddResultComponent implements OnInit {
   stat:Stat | null;
   ability:Ability | null;
 
+
+
+
   puntosPorPosicion = [
     25, // Posición 0
     18, // Posición 1
@@ -436,6 +439,17 @@ export class AdminAddResultComponent implements OnInit {
     // })
     // })
   }
+
+
+  onCheckboxChange(index: number) {
+    console.log(index)
+    let selectedDriver = this.qualyResults![index]
+    console.log(selectedDriver)
+    this.qualyResults?.splice(index, 1); // Elimina la fila del índice seleccionado
+    this.qualyResults?.push(selectedDriver); // Agrega la fila al final del array
+  }
+
+
 
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe((parameters: any) => {

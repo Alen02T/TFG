@@ -1,4 +1,7 @@
 /* Table Styles */
+tr.selected {
+  filter: grayscale(100%);
+}
 
 .table-wrapper{
     margin: 10px 70px 70px;
