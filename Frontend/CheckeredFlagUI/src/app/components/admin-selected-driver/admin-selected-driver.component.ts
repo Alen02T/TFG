@@ -5,10 +5,12 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 import { map } from 'rxjs';
 import { Ability } from 'src/app/models/ability.model';
 import { Driver } from 'src/app/models/driver.model';
+import { raceResult } from 'src/app/models/raceresult.model';
 import { Stat } from 'src/app/models/stat.model';
 import { Team } from 'src/app/models/team.model';
 import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
+import { RaceResultService } from 'src/app/services/raceresult.service';
 import { StatService } from 'src/app/services/stat.service';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -35,11 +37,12 @@ export class AdminSelectedDriverComponent implements OnInit {
   teamSelectedNumber:number;
   allAvailableTeams = [];
   chartData: Ability=new Ability;
+  raceResults:raceResult[] =[]
 
   constructor(private activatedRoute : ActivatedRoute,
     private _driverService:DriverService,private _abilityService:AbilityService,
     private _teamService:TeamService,private _statService:StatService,
-    private formBuilder: FormBuilder,private _router:Router
+    private formBuilder: FormBuilder,private _router:Router,private _raceResultService:RaceResultService
 
     ) {
       this.availableTeams=null;
@@ -113,9 +116,9 @@ export class AdminSelectedDriverComponent implements OnInit {
 
 
   }
-reloadPage() {
-  location.reload();
-}
+  reloadPage() {
+    location.reload();
+  }
 
 
 
@@ -161,9 +164,12 @@ reloadPage() {
       this._statService.getDriverStats(this.driverId).subscribe(apiDatos=>this.stat=apiDatos)
       this._teamService.getAvailableTeams(1).subscribe(apiTeams=>this.availableTeams=apiTeams)
 
+      this._raceResultService.getRaceResultByDriver(this.driverId).subscribe(apiDriver=>this.raceResults=apiDriver)
+
       this._driverService.getDriverById(this.driverId).subscribe(apiDriver => {
         this.driver = apiDriver;
         this._teamService.getTeamById(this.driver.team).subscribe(apiDriver => this.team=apiDriver);
+
       });
 
       this._abilityService.getDriverAbility(this.driverId).subscribe(

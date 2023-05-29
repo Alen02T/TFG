@@ -8,6 +8,7 @@ import { Stat } from 'src/app/models/stat.model';
 import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
+import { RaceService } from 'src/app/services/race.service';
 import { RaceResultService } from 'src/app/services/raceresult.service';
 import { StatService } from 'src/app/services/stat.service';
 
@@ -23,13 +24,15 @@ export class AdminRadarChartComponent implements OnInit {
 
   @Input() abilityParameter:number| null;
 
-
+  driver2:Driver=new Driver()
   stat:Stat | null
   ability:Ability | null
   driver:driverInfo | null
 
+
   constructor(private _statService:StatService,private _abilityService:AbilityService,
-    private _driverService:DriverService,private _driverInfoService:driverInfoService){
+    private _driverService:DriverService,private _driverInfoService:driverInfoService,
+    private _raceService:RaceService ){
     this.stat=null;
     this.ability=null;
     this.abilityParameter=null
@@ -241,12 +244,57 @@ export class AdminRadarChartComponent implements OnInit {
     new Chart(graph as any, config as any);
 
   }
+buclePilotos(myLineChart:Chart){
+    this._driverService.getDriversByLeagueId(2).subscribe((x) => {
+      x.forEach((element) => {
+        this._driverService.getDriverById(element.driverId).subscribe(apiDriver => this.driver2=apiDriver);
+        let combinado = element.name //+ ' | ' + element.number
+        this.addDataSet(myLineChart,combinado!,element.driverId)
+      });
+    });
+
+  }
+
+ crearGraficaDeTodos(){
+    const image = new Image();
+    image.src = '/assets/img/F1.svg';
+
+    this._raceService.getRaceData().subscribe((x) => {
+
+      x.forEach((element) => {
+        const nombreCircuito:string = element.name as string
+        labels.push(nombreCircuito)
+      });
+    });
+
+  const labels: string[] = ['F1'];
+  let label = "persona"
+
+  const data = {
+    labels: labels,
+    datasets: []
+  };
+
+  var grafica = <HTMLCanvasElement> document.getElementById("grafica2");
+
+  const config = {
+    type: 'line',
+    data: data,
+    options: {},
+  };
 
 
+    const myLineChart = new Chart(grafica, config as any);
 
+    this.buclePilotos(myLineChart)
+    myLineChart.update();
+
+
+}
 
   ngOnInit(): void {
    this.cargarRadar(this.abilityParameter!)
+  //  this.crearGraficaDeTodos()
   // this.cargarLineChart()
   // this.cargarPosicionDeGridPosicionFinal()
   // this.cargarPuntosObtenidosvsExperiencia()

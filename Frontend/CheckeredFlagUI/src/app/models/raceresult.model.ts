@@ -12,7 +12,7 @@ export class raceResult {
 
   raceYear: number;
   raceRound: number;
-
+  raceName:string | null;
 
   resultGrid:  number;
   resultPosition: number;
@@ -36,6 +36,7 @@ export class raceResult {
 
     this.raceYear = 0;
     this.raceRound = 0;
+    this.raceName=null;
 
     this.resultGrid=0;
     this.resultPosition=0;

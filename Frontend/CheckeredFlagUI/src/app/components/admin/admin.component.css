@@ -521,14 +521,14 @@ div {
   border:2px solid black
 } */
 body {
-  line-height: 1.5;
+
   height: auto;
   font-family: "Be Vietnam Pro", sans-serif;
   background-color:#000 ;
   color: #fff;
   display: flex;
-  padding-top: 3vw;
-  padding-bottom: 3vw;
+
+
   justify-content: center;
 }
 *, *:before, *:after {
@@ -545,14 +545,14 @@ a {
   color: inherit;
 }
 .responsive-wrapper {
-  width: 90%;
+  width: 95%;
   max-width: 1600px;
   margin-left: auto;
   margin-right: auto;
 }
 .app {
   min-height: 80vh;
-  width: 95%;
+  width: 100%;
   max-width: 1600px;
   background-color: #1f1f1f;
   padding: 2vw 4vw 6vw;

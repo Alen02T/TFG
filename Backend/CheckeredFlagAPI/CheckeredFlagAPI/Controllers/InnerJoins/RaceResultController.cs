@@ -45,7 +45,8 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
 
                                       RaceYear = ra.year,
                                       RaceRound = ra.round,
-
+                                      RaceName = ra.name,
+                                     
                                       ResultGrid = r.grid,
                                       ResultPosition = r.position,
                                       ResultPoints = r.points,
@@ -84,6 +85,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                       RaceId = ra.Id,
                                       RaceYear = ra.year,
                                       RaceRound = ra.round,
+                                      RaceName = ra.name,
 
                                       ResultGrid = r.grid,
                                       ResultPosition = r.position,
@@ -123,6 +125,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                       RaceId = ra.Id,
                                       RaceYear = ra.year,
                                       RaceRound = ra.round,
+                                      RaceName=ra.name,
 
                                       ResultGrid = r.grid,
                                       ResultPosition = r.position,
@@ -163,6 +166,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                       RaceId = ra.Id,
                                       RaceYear = ra.year,
                                       RaceRound = ra.round,
+                                      RaceName = ra.name,
 
                                       ResultGrid = r.grid,
                                       ResultPosition = r.position,
@@ -201,6 +205,7 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
 
                                       RaceYear = ra.year,
                                       RaceRound = ra.round,
+                                      RaceName = ra.name,
 
                                       ResultGrid = r.grid,
                                       ResultPosition = r.position,

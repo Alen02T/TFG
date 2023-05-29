@@ -187,71 +187,25 @@
           </div>
         </div>
 
-        <!-- <div class="col">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="ruta-de-la-imagen-del-piloto" alt="imagen del piloto" class="img-fluid">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title" style="text-align: left;">Nombre del piloto</h5>
-                  <p class="card-text">Habilidades:</p>
-                  <div class="row">
-                    <div class="col-sm-6">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Habilidad 1</li>
-                        <li class="list-group-item">Habilidad 2</li>
-                        <li class="list-group-item">Habilidad 3</li>
-                      </ul>
-                    </div>
-                    <div class="col-sm-6">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Habilidad 4</li>
-                        <li class="list-group-item">Habilidad 5</li>
-                        <li class="list-group-item">Habilidad 6</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
-
-
-
 
       </div>
-      <h1>Results</h1>
+      <h1 style="text-align: left;">Resultados de Carrera</h1>
       <table class="table">
         <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+          <tr >
+            <th scope="col">Ronda</th>
+            <th scope="col">Carrera</th>
+            <th colspan="2">Puntos</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
+          <tr *ngFor="let item of raceResults">
+            <th scope="row">{{item.raceRound}}</th>
+            <td>{{item.raceName}}</td>
+            <td>{{item.resultPoints}}</td>
+            <td *ngIf="item.resultFastestLap=== true">
+              <img width="25" src="/assets/stuff/fastest.png" alt="">
+            </td>
           </tr>
         </tbody>
       </table>

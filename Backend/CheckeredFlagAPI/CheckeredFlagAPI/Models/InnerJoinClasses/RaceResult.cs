@@ -18,7 +18,7 @@
         //Race
         public int RaceYear { get; set; }
         public int RaceRound { get; set; }
-
+        public string RaceName { get; set; }
 
         //Piloto
         public int DriverId { get; set; }

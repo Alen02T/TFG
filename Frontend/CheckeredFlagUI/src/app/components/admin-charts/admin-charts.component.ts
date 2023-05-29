@@ -7,6 +7,7 @@ import { RaceService } from 'src/app/services/race.service';
 import { RaceResultService } from 'src/app/services/raceresult.service';
 import { ResultService } from 'src/app/services/result.service';
 import 'chartjs-plugin-labels';
+import { StatService } from 'src/app/services/stat.service';
 
 @Component({
   selector: 'app-admin-charts',
@@ -30,7 +31,8 @@ export class AdminChartsComponent implements OnInit {
   constructor(private _raceResultService:RaceResultService,
     private _raceService:RaceService,
     private _driverService:DriverService,
-    private _resultService:ResultService){
+    private _resultService:ResultService,
+    private _statService:StatService){
 
   }
 
@@ -93,32 +95,6 @@ export class AdminChartsComponent implements OnInit {
     });
   }
 
-  createBarChart(): void {
-    const barCanvas = <HTMLCanvasElement>document.getElementById('bar-chart');
-    this.barChart = new Chart(barCanvas, {
-      type: 'bar',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [
-          {
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-  }
 
   createPieChart(): void {
     const pieCanvas = <HTMLCanvasElement>document.getElementById('pie-chart');
@@ -152,17 +128,12 @@ export class AdminChartsComponent implements OnInit {
 
   //Se añade un dataset
   addDataSet(myLineChart:Chart,driverName:string,driverId:number){
+
     const puntosSumadosPiloto:number[]=[0];
     const puntosPiloto:number[] = [0];
     let sumaPiloto=0
 
-
-
-
-
     this._raceResultService.getRaceResultByDriver(driverId).subscribe((x) => {
-
-
 
       x.forEach((element) => {
         puntosPiloto.push(element.resultPoints);
@@ -259,8 +230,8 @@ export class AdminChartsComponent implements OnInit {
   ngOnInit(): void {
     this.createAreaChart()
     this.crearGraficaDeTodos()
-
-
+    // this.createBarChart()
+    this.crearBarChartPuntosPilotos()
 
   }
 
@@ -319,51 +290,65 @@ export class AdminChartsComponent implements OnInit {
     });
   }
 
-  getCustomizedChart(){
-    const options = {
-      plugins: {
-        labels: {
-          render: 'image',
-          images: [
-            {
-              src: 'ruta-de-la-imagen-1.png',
-              width: 20,
-              height: 20
-            },
-            {
-              src: 'ruta-de-la-imagen-2.png',
-              width: 20,
-              height: 20
-            },
-            {
-              src: 'ruta-de-la-imagen-3.png',
-              width: 20,
-              height: 20
-            }
-          ]
+
+
+
+
+
+
+
+//Crear barra graficos | Para los pilotos
+createBarChart(): void {
+  const barCanvas = <HTMLCanvasElement>document.getElementById('bar-chart');
+  this.barChart = new Chart(barCanvas, {
+    type: 'bar',
+    data: {
+      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      datasets: [
+        {
+          label: '# of Votes',
+          data: [12, 19, 3, 5, 2, 3],
+          backgroundColor: 'rgba(255, 99, 132, 0.5)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
         }
-      },
+      ]
+    },
+    options: {
       responsive: true,
-      maintainAspectRatio: false,
       scales: {
-        x: {
-          display: true,
-          title: {
-            display: true,
-            text: 'Eje X'
-          }
-        },
         y: {
-          display: true,
-          title: {
-            display: true,
-            text: 'Eje Y'
-          }
+          beginAtZero: true
         }
       }
-    };
+    }
+  });
+}
 
 
-  }
+
+crearBarChartPuntosPilotos(){
+  const labels: string[] = ['F1'];
+  let label = "persona"
+
+  const data = {
+    labels: labels,
+    datasets: []
+  };
+
+  var grafica = <HTMLCanvasElement> document.getElementById("bar-chart");
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {},
+  };
+
+
+    const myLineChart = new Chart(grafica, config as any);
+
+    this.buclePilotos(myLineChart)
+    myLineChart.update();
+}
 
 }

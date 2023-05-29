@@ -298,10 +298,6 @@
           <div class="app-body-navigation">
             <nav class="navigation">
               <a href="#">
-                <i class="bi bi-speedometer"></i>
-                <span>Dashboard</span>
-              </a>
-              <a href="#">
                 <a routerLink="drivers">
                   <i class="bi bi-person-vcard-fill"></i>
                   <span>Drivers</span>
@@ -311,21 +307,21 @@
                 <i class="bi bi-people-fill"></i>
                 <span>Teams</span>
               </a>
-              <a href="#">
+              <a routerLink="charts">
                 <i class="bi bi-reception-4"></i>
                 <span>Charts</span>
               </a>
               <a routerLink="addResults">
-                <i class="bi bi-wrench-adjustable-circle-fill"></i>
+                <i class="bi bi-tools"></i>
                 <span>Results</span>
               </a>
-              <a href="Qualy">
+              <!-- <a href="Qualy">
                 <i class="bi bi-server"></i>
                 <span>Results Management</span>
-              </a>
+              </a> -->
 
                 <a routerLink="races-management">
-                  <i class="bi bi-tools"></i>
+                  <i class="bi bi-speedometer"></i>
                   <span>Races Management</span>
                 </a>
 
@@ -341,7 +337,17 @@
 
           <div class="app-body-main-content">
             <section>
-              <h4>ad</h4>
+              <div class="jumbotron">
+                <small>Informacion De Liga</small>
+                <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+                  <div class="col-md-6 px-0">
+                    <h1 class=" fst-italic">League {{ligaObj?.nombre}}</h1>
+                    <p>{{ligaObj?.descripcion}}</p>
+                    <p class="lead mb-0"><a  [routerLink]="'/MyLeague'"  class="text-white fw-bold">Acceder...</a></p>
+                  </div>
+                </div>
+              </div>
+
             </section>
             <section class="service-section">
               <h2>Service</h2>
@@ -403,14 +409,12 @@
                 <div  *ngIf="raceResults.length==0" >
                   <h6>Clasificacion</h6>
                   <div class="transfer" *ngFor="let item of qualyResults;index as i">
-                    <div *ngIf="item.qualyFastestLap === true">
-                      <img width="25" src="/assets/stuff/fastest.png" alt="">
-                    </div>
+
                     <div style="background-image:url({{item.driverImageDriver}}) ;background-size: cover;" class="transfer-logo">
                     </div>
+                    <span> | <span style="color: gold;font-weight: bold;">{{i+1}}</span> </span>
                     <dl class="transfer-details">
                       <div>
-
                         <dt>{{item.driverName}}</dt>
                         <dd>{{item.driverLastName!.slice(0,3).toUpperCase()}}</dd>
                       </div>
