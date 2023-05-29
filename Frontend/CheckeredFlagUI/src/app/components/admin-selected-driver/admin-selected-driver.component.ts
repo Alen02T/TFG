@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgSelectComponent } from '@ng-select/ng-select';
+import { map } from 'rxjs';
 import { Ability } from 'src/app/models/ability.model';
 import { Driver } from 'src/app/models/driver.model';
 import { Stat } from 'src/app/models/stat.model';
@@ -17,10 +18,12 @@ import { TeamService } from 'src/app/services/team.service';
   styleUrls: ['./admin-selected-driver.component.css']
 })
 export class AdminSelectedDriverComponent implements OnInit {
+  ability:Ability | null;
+//Le paso este dato al admin chart
 
   driverId:number;
   driver:Driver |null;
-  ability:Ability | null;
+
   stat:Stat | null;
   team:Team | null;
   teamId:number;
@@ -31,6 +34,7 @@ export class AdminSelectedDriverComponent implements OnInit {
   teamForm:FormGroup;
   teamSelectedNumber:number;
   allAvailableTeams = [];
+  chartData: Ability=new Ability;
 
   constructor(private activatedRoute : ActivatedRoute,
     private _driverService:DriverService,private _abilityService:AbilityService,
@@ -162,13 +166,12 @@ reloadPage() {
         this._teamService.getTeamById(this.driver.team).subscribe(apiDriver => this.team=apiDriver);
       });
 
-
-
-
       this._abilityService.getDriverAbility(this.driverId).subscribe(
         apiDriver => {
           if (apiDriver) {
             this.ability = apiDriver;
+            // Pasa los datos al componente app-admin-radar-chart aquí
+            // Por ejemplo:
           } else {
             console.log('No se encontró información de habilidades para el piloto');
           }
@@ -177,12 +180,6 @@ reloadPage() {
           console.error('Ocurrió un error al obtener la información de habilidades del piloto:', error);
         }
       );
-
-
-      //Faltan estadisticas
-
-
-  });
-}
-
+    }
+  )}
 }

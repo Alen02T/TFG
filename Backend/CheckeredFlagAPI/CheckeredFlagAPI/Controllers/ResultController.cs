@@ -44,6 +44,15 @@ namespace CheckeredFlagAPI.Controllers
         }
 
 
+        [HttpGet("driver/{driverId}")]
+        public async Task<ActionResult<List<Result>>> GetDriverResults(int driverId)
+        {
+            var results = await _context.Results.OrderBy(Results=>Results.raceId)
+                .Where(c => c.driverId == driverId)
+                .ToListAsync();
+
+            return results;
+        }
 
         /*
         [HttpPost]

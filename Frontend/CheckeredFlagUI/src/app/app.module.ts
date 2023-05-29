@@ -61,6 +61,8 @@ import { RaceService } from './services/race.service';
 import { AdminAddResultComponent } from './components/admin-add-result/admin-add-result.component';
 import { AdminRacesManagementComponent } from './components/admin-races-management/admin-races-management.component';
 import { ResultService } from './services/result.service';
+import { AdminRadarChartComponent } from './components/admin-radar-chart/admin-radar-chart.component';
+import { AdminChartsComponent } from './components/admin-charts/admin-charts.component';
 
 @NgModule({
   declarations: [
@@ -89,7 +91,9 @@ import { ResultService } from './services/result.service';
     AdminSelectedTeamComponent,
     AdminAddRacesComponent,
     AdminAddResultComponent,
-    AdminRacesManagementComponent
+    AdminRacesManagementComponent,
+    AdminRadarChartComponent,
+    AdminChartsComponent
   ],
   imports: [
     BrowserModule,
@@ -109,7 +113,7 @@ import { ResultService } from './services/result.service';
     DragDropModule,
     MatTabsModule,
     MatSelectModule,
-    MatSliderModule
+    MatSliderModule,
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService

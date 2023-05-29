@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TeamsComponent } from './components/teams/teams.component';
 import { LoginComponent } from './components/login/login.component';
@@ -21,6 +21,8 @@ import { AdminSelectedTeamComponent } from './components/admin-selected-team/adm
 import { AdminAddRacesComponent } from './components/admin-add-races/admin-add-races.component';
 import { AdminAddResultComponent } from './components/admin-add-result/admin-add-result.component';
 import { AdminRacesManagementComponent } from './components/admin-races-management/admin-races-management.component';
+import { AdminRadarChartComponent } from './components/admin-radar-chart/admin-radar-chart.component';
+import { AdminChartsComponent } from './components/admin-charts/admin-charts.component';
 
 const routes: Routes = [
 
@@ -117,6 +119,14 @@ const routes: Routes = [
     path: 'MyLeague',
     component: HomeLeagueComponent,
   },
+  {
+    path:'radar',
+    component:AdminRadarChartComponent
+  },
+  {
+    path:'admin/charts',
+    component:AdminChartsComponent
+  }
 
 
 ];

@@ -19,6 +19,10 @@ export class RaceResultService {
     return this.http.get<raceResult[]>(environment.API_URL + '/RaceResult/GrandPrix/'+id);
   }
 
+  getRaceResultByDriver(driverId : number) : Observable<raceResult[]>{
+    return this.http.get<raceResult[]>(environment.API_URL + '/RaceResult/driver/'+driverId);
+  }
+
   getRaceResultByRound(id : number) : Observable<raceResult[]>{
     return this.http.get<raceResult[]>(environment.API_URL + '/RaceResult/GrandPrix/round/'+id);
   }

@@ -98,6 +98,44 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
             return raceResultList;
         }
 
+        [HttpGet("driver/{driverId}")]
+        public ActionResult<List<RaceResult>> GetAllRaceResultByDriverId(int driverId)
+        {
+            //var _context = new UserRegistrationContext();
+            var raceResultList = (from r in _context.Results
+                                  join d in _context.Drivers on r.driverId equals d.driverId
+                                  join t in _context.Teams on r.teamId equals t.teamId
+                                  join ra in _context.Races on r.raceId equals ra.Id
+                                  where driverId.Equals(d.driverId)
+                                  orderby ra.round
+                                  select new RaceResult()
+                                  {
+                                      ResultId = r.resultId,
+
+
+                                      DriverName = d.Name,
+                                      DriverLastName = d.Lastname,
+                                      DriverCountry = d.Country,
+                                      DriverFlag = d.Flag,
+                                      DriverNumber = d.Number,
+                                      DriverImageDriver = d.imageDriver,
+
+                                      RaceId = ra.Id,
+                                      RaceYear = ra.year,
+                                      RaceRound = ra.round,
+
+                                      ResultGrid = r.grid,
+                                      ResultPosition = r.position,
+                                      ResultPoints = r.points,
+                                      ResultFastestLap = r.fastestLap,
+
+                                      TeamColor = t.color,
+                                      TeamName = t.name,
+                                      TeamShieldImage = t.shieldImage,
+                                      TeamVehicleImage = t.vehicleImage,
+                                  }).ToList();
+            return raceResultList;
+        }
 
 
         [HttpGet("GrandPrix/round/{roundId}")]

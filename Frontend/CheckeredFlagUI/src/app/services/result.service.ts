@@ -15,6 +15,10 @@ export class ResultService {
     return this.http.get<Result>(environment.API_URL + '/Results/'+id);
   }
 
+  getResultOfDriverId(driverId : number) : Observable<Result[]>{
+    return this.http.get<Result[]>(environment.API_URL + '/Result/driver/'+driverId);
+  }
+
    getResultsOfRaceByData(id : number) : Observable<Result[]>{
     return this.http.get<Result[]>(environment.API_URL + '/Results/race/'+id);
   }
