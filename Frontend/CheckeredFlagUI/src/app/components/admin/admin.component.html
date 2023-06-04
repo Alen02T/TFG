@@ -372,8 +372,9 @@
                 </div> -->
                 <div class="dropdown-field">
                   <select (change)="onSelectChange($event)">
-                    <option value="rating">Work</option>
                     <option value="points">Points</option>
+                    <option value="rating">Work</option>
+
                   </select>
 
                   <i class="ph-caret-down"></i>
@@ -388,7 +389,7 @@
                 </button>
               </div>
               <div class="tiles">
-                <article [routerLink]="'drivers/'+item.driverId" style="background-color: #{{item.teamColor}};" *ngFor="let item of driversInfoNormal?.slice(0,3);index as i"  class="tile">
+                <article [routerLink]="'drivers/'+item.driverId" style="background-color: {{item.teamColor}};" *ngFor="let item of driversInfoNormal?.slice(0,3);index as i"  class="tile">
                   <div class="tile-header">
                     <i class="ph-lightning-light"></i>
                     <h3>
@@ -556,7 +557,7 @@
               </div>
               <div class="payments">
                 <div style="cursor: pointer;" [routerLink]="'teams/'+item.teamId" *ngFor="let item of teams"   class="payment">
-                  <div style="background-color: #{{item.color}};" class="card">
+                  <div style="background-color: {{item.color}};" class="card">
                     <span><img width="60" src="{{item.shieldImage}}" alt=""></span>
                     <span>
                       {{item.points}}Pts

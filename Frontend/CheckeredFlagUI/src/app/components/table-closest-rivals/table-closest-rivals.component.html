@@ -1,0 +1,70 @@
+
+<div style="max-width: 400px;" class="container">
+  <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center">
+    <mat-tab label="Points">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Posicion</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Puntos</th>
+            <th colspan="2" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of arrayPilotos;index as i">
+            <th>{{item.numero}}º</th>
+            <td>{{item.driverName}}</td>
+            <td>{{item.driverPoints}}</td>
+            <td style="background-color: lightgreen;" *ngIf="item.driverId == driverId">*</td>
+            <th scope="row"></th>
+          </tr>
+        </tbody>
+      </table>
+
+    </mat-tab>
+    <mat-tab label="Wins">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Posicion</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Victorias</th>
+            <th colspan="2" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of arrayPilotosWins;index as i">
+            <th>{{item.numero}}º</th>
+            <td>{{item.driverName}}</td>
+            <td>{{item.driverWins}}</td>
+            <td style="background-color: lightgreen;" *ngIf="item.driverId == driverId">*</td>
+            <th scope="row"></th>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+    <mat-tab label="Podiums">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Posicion</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Podios</th>
+            <th colspan="2" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of arrayPilotosPodios;index as i">
+            <th>{{item.numero}}º</th>
+            <td>{{item.driverName}}</td>
+            <td>{{item.driverPodiums}}</td>
+            <td style="background-color: lightgreen;" *ngIf="item.driverId == driverId">*</td>
+            <th scope="row"></th>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+

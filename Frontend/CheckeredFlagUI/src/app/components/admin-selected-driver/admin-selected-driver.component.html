@@ -77,7 +77,10 @@
 <div class="container text-center">
   <div class="row">
     <div style="background-color: rgb(253, 243, 213);padding: 20px;" class=" col">
-      <app-admin-radar-chart class="container" [abilityParameter]="driverId"></app-admin-radar-chart>
+      <app-admin-radar-chart style="max-width:300px;max-height: 300px;" [abilityParameter]="driverId"></app-admin-radar-chart>
+
+      <h3>Closest Rivals</h3>
+     <app-table-closest-rivals class="container" [driverId]="driverId"></app-table-closest-rivals>
 
     </div>
     <div class="col-md-8">
@@ -95,18 +98,23 @@
                 <td>Season Start Price</td>
                 <td>{{driver?.seasonStartPrice}}</td>
               </tr>
-              <!-- <tr>
+              <tr>
                 <td>DNF Rate</td>
                 <td>{{stat?.dnfs}}</td>
-              </tr> -->
+              </tr>
               <tr>
                 <td>Week Change</td>
                 <td>{{driver?.seasonChange}}</td>
               </tr>
               <tr>
                 <td>Podium Rate</td>
-                <td>{{stat?.beatTeamMateRate}} % </td>
+                <td>{{podiumAverage}}%</td>
               </tr>
+              <tr>
+                <td>Average Points Per Race</td>
+                <td>{{sumaTotal}}Pts</td>
+              </tr>
+
             </tbody>
           </table>
         </div>
@@ -130,10 +138,14 @@
                 <td>Podiums</td>
                 <td>{{stat?.podiums}}</td>
               </tr>
-              <!-- <tr>
-                <td>Highest Grid Pos</td>
-                <td>{{stat?.highestGridPos}}</td>
-              </tr> -->
+              <tr>
+                <td>Average Position</td>
+                <td>{{posicionTotal}}</td>
+              </tr>
+              <tr>
+                <td>Fastest Laps</td>
+                <td>{{stat?.fastestLaps}}</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -196,14 +208,15 @@
           <tr >
             <th scope="col">Ronda</th>
             <th scope="col">Carrera</th>
-            <th colspan="2">Puntos</th>
+            <th colspan="3">Puntos y Posicion</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let item of raceResults">
             <th scope="row">{{item.raceRound}}</th>
             <td>{{item.raceName}}</td>
-            <td>{{item.resultPoints}}</td>
+            <td ><span style="color: crimson;font-weight: bolder;font-size: 15px;">{{item.resultPosition}}º</span> </td>
+            <td >{{item.resultPoints}}</td>
             <td *ngIf="item.resultFastestLap=== true">
               <img width="25" src="/assets/stuff/fastest.png" alt="">
             </td>

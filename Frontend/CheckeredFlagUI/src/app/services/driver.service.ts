@@ -22,6 +22,10 @@ export class DriverService {
     return this.http.get<Driver[]>(environment.API_URL + '/Drivers/team/'+id);
   }
 
+  getDriversOrderedByMoney(leagueId:number): Observable<Driver[]>{
+    return this.http.get<Driver[]>(environment.API_URL + '/Drivers/price/'+leagueId);
+  }
+
   getDriversByLeagueId(leagueId : number) : Observable<Driver[]>{
     return this.http.get<Driver[]>(environment.API_URL + '/Drivers/league/'+leagueId);
   }

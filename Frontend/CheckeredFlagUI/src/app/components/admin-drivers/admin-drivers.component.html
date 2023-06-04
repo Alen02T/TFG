@@ -14,7 +14,7 @@
             <h5 class="my-3">My Drivers</h5>
             <div class="fm-menu">
               <div class="list-group list-group-flush">
-                <a *ngFor="let driverInfo of driversInfoByLeague" class="list-group-item py-1"><span>{{driverInfo.driverName}}</span><i style="color:#{{driverInfo.teamColor}};float:right" class="bi bi-circle-fill"></i></a>
+                <a *ngFor="let driverInfo of driversInfoByLeague" class="list-group-item py-1"><span>{{driverInfo.driverName}}</span><i style="color:{{driverInfo.teamColor}};float:right" class="bi bi-circle-fill"></i></a>
 
               </div>
             </div>
@@ -81,7 +81,7 @@
                     <p class="mb-1 mt-4"><span>{{driversRate.overall}}/100</span><img class="float-end" width="30" src="{{driversRate.teamShieldImage}}" alt="">
                     </p>
                     <div class="progress" style="height: 7px;">
-                      <div class="progress-bar" role="progressbar" style="background-color:#{{driversRate.teamColor}};width: {{driversRate.overall}}%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress-bar" role="progressbar" style="background-color:{{driversRate.teamColor}};width: {{driversRate.overall}}%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </div>
                 </div>
@@ -113,7 +113,7 @@
                       <div class="d-flex align-items-center">
                         <div><i class="bx bxs-file-pdf me-2 font-24 text-danger"></i>
                         </div>
-                        <div style="color: #{{driverInfo.teamColor}};" class="font-weight-bold">{{driverInfo.driverName}} {{driverInfo.driverLastName}}</div>
+                        <div class="font-weight-bold">{{driverInfo.driverName}} {{driverInfo.driverLastName}}</div>
                       </div>
                     </td>
                     <td >{{driverInfo.teamName}} <img width="50" src="{{driverInfo.teamShieldImage}}" alt=""> </td>

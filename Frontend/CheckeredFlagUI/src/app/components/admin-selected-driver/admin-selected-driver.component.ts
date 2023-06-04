@@ -40,8 +40,10 @@ export class AdminSelectedDriverComponent implements OnInit {
   allAvailableTeams = [];
   chartData: Ability=new Ability;
   raceResults:raceResult[] =[]
-
+  sumaTotal=0
   director:Director = new Director()
+  posicionTotal=0
+  podiumAverage=0
 
   constructor(private activatedRoute : ActivatedRoute,
     private _driverService:DriverService,private _abilityService:AbilityService,
@@ -187,7 +189,22 @@ export class AdminSelectedDriverComponent implements OnInit {
 
       this._statService.getDriverStats(this.driverId).subscribe(apiDatos=>this.stat=apiDatos)
 
-      this._raceResultService.getRaceResultByDriver(this.driverId).subscribe(apiDriver=>this.raceResults=apiDriver)
+      this._raceResultService.getRaceResultByDriver(this.driverId).subscribe(apiTeams=>{
+        this.raceResults=apiTeams
+        let length=this.raceResults.length
+
+
+        this.raceResults.forEach(element => {
+          this.sumaTotal+=element.resultPoints
+          this.posicionTotal+=element.resultPosition
+          if(element.resultPosition<=3){
+            this.podiumAverage++
+          }
+        });
+        this.sumaTotal=this.sumaTotal/length
+        this.posicionTotal=this.posicionTotal/length
+        this.podiumAverage=(this.podiumAverage/length)*100
+      })
 
       this._driverService.getDriverById(this.driverId).subscribe(apiDriver => {
         this.driver = apiDriver;

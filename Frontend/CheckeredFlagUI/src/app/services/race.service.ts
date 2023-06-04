@@ -15,6 +15,10 @@ export class RaceService {
     return this.http.get<Race>(environment.API_URL + '/Race/'+id);
   }
 
+  getRacesByLeagueId(leagueId : number) : Observable<Race[]>{
+    return this.http.get<Race[]>(environment.API_URL + '/Race/league/'+leagueId);
+  }
+
 
   addRace(race: Race): Observable<Race> {
     return this.http.post<Race>(environment.API_URL + '/Race/', race);

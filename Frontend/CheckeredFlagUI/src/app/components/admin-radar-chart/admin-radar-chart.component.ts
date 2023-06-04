@@ -63,8 +63,8 @@ export class AdminRadarChartComponent implements OnInit {
       const newDataset = {
         label: driverName,
         data: datos,
-        backgroundColor:this.hexToRgba('#'+this.driver?.teamColor, 0.5),
-        borderColor: '#'+this.driver?.teamColor,
+        backgroundColor:this.hexToRgba(""+this.driver?.teamColor, 0.5),
+        borderColor:""+this.driver?.teamColor,
       };
       myLineChart.data.datasets.push(newDataset);
       myLineChart.update();

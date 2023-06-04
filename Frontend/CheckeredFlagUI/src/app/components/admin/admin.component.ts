@@ -145,8 +145,8 @@ getGrandPrix(leagueId:number,currentRound:number){
    this._directorService.getDirectorData().subscribe(apiEscuderia => this.directores=apiEscuderia);
  }
 
-getDriversOrderedByPoints(){
-  this._driverInfoService.getdriverInfoDataByLeagueOrderedByPoints(2).subscribe(apiDrivers=>{
+getDriversOrderedByPoints(leagueId:number){
+  this._driverInfoService.getdriverInfoDataByLeagueOrderedByPoints(leagueId).subscribe(apiDrivers=>{
     this.driversInfoNormal=apiDrivers
     this.textoExplicativo="Los 3 pilotos lideres del mundial"
 
@@ -190,7 +190,7 @@ onSelectChange(event:Event) {
   const selectedOption = (event.target as HTMLSelectElement).value;
   console.log(selectedOption)
   if (selectedOption === 'points') {
-    this.getDriversOrderedByPoints()
+    this.getDriversOrderedByPoints(this.director!.leagueId)
   } else if (selectedOption === 'rating') {
     // Realizar acción correspondiente a la opción "Work"
     // Por ejemplo, llamar a un endpoint relacionado con "Work"

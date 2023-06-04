@@ -10,6 +10,8 @@ import 'chartjs-plugin-labels';
 import { StatService } from 'src/app/services/stat.service';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { Director } from 'src/app/models/director.model';
+import { Stat } from 'src/app/models/stat.model';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-admin-charts',
@@ -24,6 +26,8 @@ export class AdminChartsComponent implements OnInit {
   areaChart:Chart | undefined
 
   customizedChart:Chart | undefined
+
+  stat:Stat = new Stat()
 
   raceResults:raceResult[]=[];
   drivers:Driver[] =[]
@@ -160,11 +164,6 @@ export class AdminChartsComponent implements OnInit {
       myLineChart.data.datasets.push(newDataset)
       myLineChart.update();
     });
-
-
-
-
-
   }
 
 
@@ -199,13 +198,14 @@ crearGraficaDeTodos(leagueId:number){
     const image = new Image();
     image.src = '/assets/img/F1.svg';
 
-    this._raceService.getRaceData().subscribe((x) => {
+    this._raceService.getRacesByLeagueId(leagueId).subscribe((x) => {
 
-      x.forEach((element) => {
+      x.forEach((element:any) => {
         const nombreCircuito:string = element.name as string
         labels.push(nombreCircuito)
       });
     });
+
 
   const labels: string[] = ['F1'];
   let label = "persona"
@@ -242,16 +242,13 @@ loadData(){
   if(this.director!=null){
     this.createAreaChart()
     this.crearGraficaDeTodos(this.director.leagueId)
-    // this.createBarChart()
-    this.crearBarChartPuntosPilotos(this.director.leagueId)
+    this.crearBarChart(this.director.leagueId)
+    this.crearBarChartMoney(this.director.leagueId)
   }
 }
 
   ngOnInit(): void {
     this.getDirector()
-
-
-
   }
 
   createChart() {
@@ -310,64 +307,129 @@ loadData(){
   }
 
 
-
-
-
-
-
-
 //Crear barra graficos | Para los pilotos
-createBarChart(): void {
-  const barCanvas = <HTMLCanvasElement>document.getElementById('bar-chart');
-  this.barChart = new Chart(barCanvas, {
-    type: 'bar',
-    data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-      datasets: [
-        {
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: 'rgba(255, 99, 132, 0.5)',
-          borderColor: 'rgba(255, 99, 132, 1)',
-          borderWidth: 1
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
+// createBarChart(): void {
+//   const barCanvas = <HTMLCanvasElement>document.getElementById('bar-chart');
+//   this.barChart = new Chart(barCanvas, {
+//     type: 'bar',
+//     data: {
+//       labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+//       datasets: [
+//         {
+//           label: '# of Votes',
+//           data: [12, 19, 3, 5, 2, 3],
+//           backgroundColor: 'rgba(255, 99, 132, 0.5)',
+//           borderColor: 'rgba(255, 99, 132, 1)',
+//           borderWidth: 1
+//         }
+//       ]
+//     },
+//     options: {
+//       responsive: true,
+//       scales: {
+//         y: {
+//           beginAtZero: true
+//         }
+//       }
+//     }
+//   });
+// }
+
+
+
+crearBarChart(idLeague:number) {
+  const graph: any = document.querySelector("#bar-chart");
+
+  const arrayPuntos: number[] = [];
+  const nombreArray: string[] = [];
+
+  this._driverService.getDriversByLeagueId(idLeague).subscribe(apiDrivers => {
+    this.drivers = apiDrivers;
+
+    // Crear un array de observables para las solicitudes de estadísticas
+    const observables = this.drivers.map(driver =>
+      this._statService.getDriverStats(driver.driverId)
+    );
+
+    // Combinar las solicitudes usando forkJoin
+    forkJoin(observables).subscribe((apiDatos: any[]) => {
+      apiDatos.forEach(stat => {
+        arrayPuntos.push(stat.points);
+      });
+
+      this.drivers.forEach(driver => {
+        nombreArray.push(driver.name);
+      });
+
+      console.log(arrayPuntos);
+      console.log(nombreArray);
+
+      const data = {
+        labels: nombreArray,
+        datasets: [{
+          label: "Puntos",
+          data: arrayPuntos,
+          backgroundColor: this.generarColorAleatorio()
+        }]
+      };
+
+      const config: any = {
+        type: 'bar',
+        data: data,
+      };
+
+      new Chart(graph, config);
+    });
+  });
+}
+
+
+crearBarChartMoney(idLeague:number) {
+  const graph: any = document.querySelector("#bar-chart-money");
+
+  const arrayDinero: number[] = [];
+  const nombreArray: string[] = [];
+
+  this._driverService.getDriversOrderedByMoney(idLeague).subscribe(apiDrivers => {
+    this.drivers = apiDrivers;
+
+
+
+
+      this.drivers.forEach(driver => {
+
+        nombreArray.push(driver.name);
+        arrayDinero.push(driver.currentPrice)
+      });
+
+      console.log(arrayDinero);
+      console.log(nombreArray);
+
+      const data = {
+        labels: nombreArray,
+        datasets: [{
+          label: "Precio",
+          data: arrayDinero,
+          backgroundColor: 'rgba(9, 222, 32, 0.2)'
+        }]
+      };
+
+      const config: any = {
+        type: 'bar',
+        data: data,
+      };
+
+      new Chart(graph, config);
+
   });
 }
 
 
 
-crearBarChartPuntosPilotos(leagueId:number){
-  const labels: string[] = ['F1'];
-  let label = "persona"
-
-  const data = {
-    labels: labels,
-    datasets: []
-  };
-
-  var grafica = <HTMLCanvasElement> document.getElementById("bar-chart");
-
-  const config = {
-    type: 'bar',
-    data: data,
-    options: {},
-  };
 
 
-    const myLineChart = new Chart(grafica, config as any);
 
-    this.buclePilotos(myLineChart,leagueId)
-    myLineChart.update();
-}
+
+
 
 }
