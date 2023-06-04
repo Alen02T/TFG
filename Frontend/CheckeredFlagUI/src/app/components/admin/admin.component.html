@@ -249,8 +249,20 @@
             </div>
           </div>
           <div class="app-header-navigation">
-
             <div class="tabs">
+              <div *ngIf="teams?.length==0" class="alert alert-warning" role="alert">
+                Crea pilotos y equipos para empezar tu mundial
+                <button [routerLink]="'/admin/addTeam'" class="btn btn-primary">Equipos</button>
+
+              </div>
+              <div *ngIf="driversCount?.length==0" class="alert alert-warning" role="alert">
+                Crea ahora un piloto
+                <button [routerLink]="'/admin/addDriver'" class="btn btn-primary">Pilotos</button>
+              </div>
+
+            </div>
+
+            <!-- <div class="tabs">
               <a href="#">
                 Overview
               </a>
@@ -269,22 +281,22 @@
               <a href="#">
                 Business
               </a>
-            </div>
+            </div> -->
           </div>
-          <div class="app-header-actions">
+          <div [hidden]="director!=null" class="app-header-actions">
             <button class="user-profile">
               <span>{{director?.name}}</span>
               <span>
-                <img src="https://assets.codepen.io/285131/almeria-avatar.jpeg" />
+                <img src="/assets/img/vasseur.jpg" />
               </span>
             </button>
             <div class="app-header-actions-buttons">
-              <button class="icon-button large">
-                <i class="ph-magnifying-glass"></i>
+              <button  style="background-color: red;" class="icon-button large">
+                <i class="bi bi-door-closed"></i>
               </button>
-              <button class="icon-button large">
+              <!-- <button class="icon-button large">
                 <i class="ph-bell"></i>
-              </button>
+              </button> -->
             </div>
           </div>
           <div class="app-header-mobile">
@@ -294,8 +306,14 @@
           </div>
 
         </header>
-        <div class="app-body">
-          <div class="app-body-navigation">
+        <div style="min-height: 90vh;"  class="app-body">
+
+          <div *ngIf="ligaObj==null" class="app-body-main-content" style="position: absolute;top: 50%;left: 40%;">
+            <h2>Debes Añadir una Liga</h2>
+            <button [routerLink]="'/addLiga'" class="btn btn-warning">Completar </button>
+          </div>
+
+          <div  *ngIf="director!=null && ligaObj!=null"  class="app-body-navigation">
             <nav class="navigation">
               <a href="#">
                 <a routerLink="drivers">
@@ -311,15 +329,10 @@
                 <i class="bi bi-reception-4"></i>
                 <span>Charts</span>
               </a>
-              <a routerLink="addResults">
+              <a routerLink="addRaces">
                 <i class="bi bi-tools"></i>
-                <span>Results</span>
+                <span>Add Races</span>
               </a>
-              <!-- <a href="Qualy">
-                <i class="bi bi-server"></i>
-                <span>Results Management</span>
-              </a> -->
-
                 <a routerLink="races-management">
                   <i class="bi bi-speedometer"></i>
                   <span>Races Management</span>
@@ -335,7 +348,8 @@
             </footer>
           </div>
 
-          <div class="app-body-main-content">
+          <div  *ngIf="director!=null && ligaObj!=null"  class="app-body-main-content">
+
             <section>
               <div class="jumbotron">
                 <small>Informacion De Liga</small>
@@ -347,27 +361,26 @@
                   </div>
                 </div>
               </div>
-
             </section>
+
             <section class="service-section">
-              <h2>Service</h2>
+              <h2>Pilotos</h2>
               <div class="service-section-header">
-                <div class="search-field">
+                <!-- <div class="search-field">
                   <i class="ph-magnifying-glass"></i>
                   <input type="text" placeholder="Account number">
-                </div>
+                </div> -->
                 <div class="dropdown-field">
                   <select (change)="onSelectChange($event)">
-                    <option value="points">Points</option>
                     <option value="rating">Work</option>
-
+                    <option value="points">Points</option>
                   </select>
 
                   <i class="ph-caret-down"></i>
                 </div>
-                <button class="flat-button">
+                <!-- <button class="flat-button">
                   Search
-                </button>
+                </button> -->
               </div>
               <div class="mobile-only">
                 <button class="flat-button">
@@ -485,7 +498,7 @@
                   <div class="card-body">
                     <ul class="list-group list-group-flush">
 
-                        <li [routerLink]="'drivers/'+driver.driverId" *ngFor="let driver of drivers" class="list-group-item pt-0" style="cursor:pointer;">
+                        <li [routerLink]="'drivers/'+driver.driverId" *ngFor="let driver of driversCount" class="list-group-item pt-0" style="cursor:pointer;">
 
                             <div  class="d-flex align-items-center">
                                 <div class="flex-shrink-0 me-3">
@@ -515,13 +528,13 @@
               </div>
             </section>
           </div>
-          <div class="app-body-sidebar">
+          <div  *ngIf="director!=null && ligaObj!=null"  class="app-body-sidebar">
             <section class="payment-section">
               <h2>Equipos</h2>
               <div class="payment-section-header">
                 <p>Mejores equipos del momento</p>
                 <div>
-                  <button class="card-button mastercard">
+                  <!-- <button class="card-button mastercard">
                     <svg width="2001" height="1237" viewBox="0 0 2001 1237" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g id="a624784f2834e21c94a1c0c9a58bbbaa">
                         <path id="7869b07bea546aa59a5ee138adbcfd5a" d="M1270.57 1104.15H729.71V132.15H1270.58L1270.57 1104.15Z" fill="currentColor"></path>
@@ -529,8 +542,8 @@
                         <path id="67f94b4d1b83252a6619ed6e0cc0a3a1" d="M2000.25 618.17C2000.25 959.58 1723.53 1236.34 1382.16 1236.34C1243.56 1236.54 1108.95 1189.97 1000.11 1104.17C1143.91 990.98 1236.23 815.35 1236.23 618.17C1236.23 420.99 1143.91 245.36 1000.11 132.17C1108.95 46.3673 1243.56 -0.201169 1382.15 -2.24915e-05C1723.52 -2.24915e-05 2000.24 276.76 2000.24 618.17" fill="currentColor"></path>
                       </g>
                     </svg>
-                  </button>
-                  <button class="card-button visa active">
+                  </button> -->
+                  <!-- <button class="card-button visa active">
                     <svg xmlns="http://www.w3.org/2000/svg" width="2500" height="2500" viewBox="0 0 141.732 141.732">
                       <g fill="currentColor">
                         <path d="M62.935 89.571h-9.733l6.083-37.384h9.734zM45.014 52.187L35.735 77.9l-1.098-5.537.001.002-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s4.691.976 10.181 4.273l8.456 32.479h10.141l15.485-37.385H45.014zM121.569 89.571h8.937l-7.792-37.385h-7.824c-3.613 0-4.493 2.786-4.493 2.786L95.881 89.571h10.146l2.029-5.553h12.373l1.14 5.553zm-10.71-13.224l5.114-13.99 2.877 13.99h-7.991zM96.642 61.177l1.389-8.028s-4.286-1.63-8.754-1.63c-4.83 0-16.3 2.111-16.3 12.376 0 9.658 13.462 9.778 13.462 14.851s-12.075 4.164-16.06.965l-1.447 8.394s4.346 2.111 10.986 2.111c6.642 0 16.662-3.439 16.662-12.799 0-9.72-13.583-10.625-13.583-14.851.001-4.227 9.48-3.684 13.645-1.389z" />
@@ -538,11 +551,11 @@
                       <path d="M34.638 72.364l-3.275-16.812s-.396-3.366-4.617-3.366h-15.34l-.18.633s7.373 1.528 14.445 7.253c6.762 5.472 8.967 12.292 8.967 12.292z" fill="currentColor" />
                       <path fill="none" d="M0 0h141.732v141.732H0z" />
                     </svg>
-                  </button>
+                  </button> -->
                 </div>
               </div>
               <div class="payments">
-                <div *ngFor="let item of teams"   class="payment">
+                <div style="cursor: pointer;" [routerLink]="'teams/'+item.teamId" *ngFor="let item of teams"   class="payment">
                   <div style="background-color: #{{item.color}};" class="card">
                     <span><img width="60" src="{{item.shieldImage}}" alt=""></span>
                     <span>

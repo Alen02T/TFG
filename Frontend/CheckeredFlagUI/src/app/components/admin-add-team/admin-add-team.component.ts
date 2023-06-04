@@ -1,7 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Director } from 'src/app/models/director.model';
 import { Team } from 'src/app/models/team.model';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { TeamService } from 'src/app/services/team.service';
 
@@ -19,9 +21,12 @@ export class AdminAddTeamComponent implements OnInit {
   availableTeams:Team[] = [];
   team:Team=new Team();
   disabled: boolean = true;
+
+  director:Director = new Director()
+
   constructor(private _driverService:DriverService,
     private _teamService:TeamService
-    ,private formBuilder: FormBuilder,private router:Router) {
+    ,private formBuilder: FormBuilder,private router:Router,private _token:TokenHandlerService) {
     this.miElemento=ElementRef;
     this.miElemento2=ElementRef
 
@@ -41,9 +46,15 @@ export class AdminAddTeamComponent implements OnInit {
       championships: [0],
       shieldImage: [null,Validators.required],
       vehicleImage: [null,Validators.required],
-      leagueId: [1]
+      leagueId: [0]
     });
   }
+
+  getDirector(){
+    this._token
+     .getDirector()
+     .subscribe((x) => (this.director = x));
+ }
 
   obtenerSrcImagen(string:any) {
     this.imagenElegida=string;
@@ -59,6 +70,7 @@ export class AdminAddTeamComponent implements OnInit {
 
 
   submitForm() {
+    this.teamForm.get("leagueId")?.setValue(this.director.leagueId)
     console.log(this.teamForm.value);
     this._teamService.addTeam(this.teamForm.value).subscribe((response: any) => {
       console.log(response);
@@ -67,15 +79,12 @@ export class AdminAddTeamComponent implements OnInit {
   }
 
 
- reloadPage() {
-    location.reload();
-  }
-
 
   ngOnInit() {
+    this.getDirector()
     // this.calcularOverall()
     // this._teamService.getAvailableTeams(1).subscribe(apiTeams=>this.availableTeams=apiTeams)
-    this._teamService.getTeamsByLeagueOrdererByPoints(1).subscribe(apiTeam=>this.teams=apiTeam);
+    // this._teamService.getTeamsByLeagueOrdererByPoints(1).subscribe(apiTeam=>this.teams=apiTeam);
   }
 
   getTeam(idDriver:number){

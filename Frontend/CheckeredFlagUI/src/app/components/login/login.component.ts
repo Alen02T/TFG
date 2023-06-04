@@ -21,8 +21,12 @@ export class LoginComponent implements OnInit {
 
 
   register(user: User) {
-    this.authService.register(user).subscribe();
+    this.authService.register(user).subscribe(() => {
+      // window.location.reload();
+      // this.router.navigateByUrl('/login');
+    });
   }
+
 
   login(user: User) {
     this.authService.login(user).subscribe((token: string) => {

@@ -80,7 +80,7 @@ namespace CheckeredFlagAPI.Controllers
         public async Task<ActionResult<List<Team>>> GetAvailableTeams(int leagueId)
         {
             var teams = await _context.Teams
-             .Where(t => _context.Drivers.Count(d => d.team == t.teamId) == 1 || !_context.Drivers.Any(d => d.team == t.teamId) && t.leagueId == leagueId)
+             .Where(t => _context.Drivers.Count(d => d.team == t.teamId) == 1 && t.leagueId == leagueId || !_context.Drivers.Any(d => d.team == t.teamId) && t.leagueId == leagueId)
              .ToListAsync();
             return teams;
 

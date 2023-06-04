@@ -13,5 +13,7 @@ namespace CheckeredFlagAPI.Services.DirectorService
 
         public DirectorDTO Add(DirectorDTO guid);
 
+        public DirectorDTO Update(int guid,DirectorDTO body);
+
     }
 }

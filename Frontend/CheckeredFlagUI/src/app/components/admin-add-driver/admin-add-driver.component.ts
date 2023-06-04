@@ -1,9 +1,13 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
 import { Team } from 'src/app/models/team.model';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
+import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
+import { StatService } from 'src/app/services/stat.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -20,7 +24,8 @@ export class AdminAddDriverComponent implements OnInit {
 
   pilotForm: FormGroup; // Define la variable del formulario
   // statForm: FormGroup;
-
+  abilityForm:FormGroup
+  statForm:FormGroup
   // abilityForm: FormGroup;
 
   overall:number;
@@ -30,20 +35,19 @@ export class AdminAddDriverComponent implements OnInit {
 
   selectedTeam:number;
 
-
+  director:Director = new Director()
   imagenElegida:string;
   isLinear = false;
 
 
   constructor(private _driverService:DriverService,
     private _teamService:TeamService
-    ,private formBuilder: FormBuilder,private router:Router) {
+    ,private formBuilder: FormBuilder,private _abilityService:AbilityService,private _statService:StatService,
+    private router:Router,private _token:TokenHandlerService) {
     this.driver=null;
 
     this.team=null;
     this.availableTeams=null;
-
-
 
     this.miElemento=ElementRef;
 
@@ -70,33 +74,29 @@ export class AdminAddDriverComponent implements OnInit {
 
 
 
-    // this.abilityForm = this.formBuilder.group({
-    //   driverId: [0, Validators.required],
-    //   abilityId: [0, Validators.required],
-    //   overtaking: [0, Validators.required],
-    //   defending: [0, Validators.required],
-    //   tireManagement: [0, Validators.required],
-    //   consistency: [0, Validators.required],
-    //   experience: [0, Validators.required],
-    //   pace: [0, Validators.required],
-    //   overall: [0, Validators.required],
-    // });
+    this.statForm = this.formBuilder.group({
+      driverId: [0, Validators.required],
+      points: [0, Validators.required],
+      dnfs: [0, Validators.required],
+      wins: [0, Validators.required],
+      poles: [0, Validators.required],
+      fastestLaps: [0, Validators.required],
+      podiums: [0, Validators.required],
+      highestGridPos: [0, Validators.required],
+      beatTeamMateRate: [0, Validators.required],
+      highestScoringTrack: [0, Validators.required]
+    });
 
-    // this.statForm = this.formBuilder.group({
-    //   driverId: [0, Validators.required],
-    //   name: [null, Validators.required],
-    //   lastname: [null, Validators.required],
-    //   age: [0, Validators.required],
-    //   country: ['España', Validators.required],
-    //   flag: ['es', Validators.required],
-    //   number: [0, Validators.required],
-    //   imageDriver: ["", Validators.required],
-    //   seasonStartPrice: [800000, Validators.required],
-    //   currentPrice: [800000, Validators.required],
-    //   seasonChange: [0, Validators.required],
-    //   team: [0, Validators.required],
-    //   leagueId: [0, Validators.required]
-    // });
+    this.abilityForm = this.formBuilder.group({
+      driverId: [0, Validators.required],
+      overtaking: [50, Validators.required],
+      defending: [50, Validators.required],
+      tireManagement: [50, Validators.required],
+      consistency: [50, Validators.required],
+      experience: [50, Validators.required],
+      pace: [50, Validators.required],
+      overall: [50, Validators.required],
+    });
 
   }
 
@@ -111,6 +111,26 @@ export class AdminAddDriverComponent implements OnInit {
 
   // }
 
+  getDirector(){
+    this._token
+     .getDirector()
+     .subscribe((x) => (this.director = x)  && this.loadData());
+
+
+ }
+ loadData() {
+
+  // Saving field values for checking if there are changes
+  if (this.director != null) {
+    this._teamService.getAvailableTeams(this.director.leagueId).subscribe(apiTeams=>{
+      this.availableTeams=apiTeams
+      console.log(this.availableTeams)
+    })
+
+  }
+
+}
+
   obtenerSrcImagen(string:any) {
     this.imagenElegida=string;
     console.log(this.imagenElegida)
@@ -119,11 +139,52 @@ export class AdminAddDriverComponent implements OnInit {
 
 
 
+  submitForm() {
+    this.pilotForm.get("leagueId")?.setValue(this.director.leagueId);
+    console.log(this.pilotForm.value);
 
-  submitForm(){
-    this._driverService.postDriverData(this.pilotForm.value,1);
-    this.router.navigate(['/admin/']);
+    this._driverService.postDriverData(this.pilotForm.value).subscribe(
+      (response) => {
+        // Obtener la ID generada del piloto
+        const pilotoId = response.driverId;
+        console.log("ID del piloto agregado:", pilotoId);
+
+        // Asignar la ID al formulario
+        this.abilityForm.get("driverId")?.setValue(pilotoId);
+        this.statForm.get("driverId")?.setValue(pilotoId);
+
+        // Continuar con las operaciones necesarias
+        this._abilityService.postAbilityData(this.abilityForm.value).subscribe(
+          (response) => {
+            console.log('Respuesta recibida');
+            // Manejar la respuesta del servicio como sea necesario
+          },
+          (error) => {
+            console.error('Error capturado en el componente');
+            // Manejar el error del servicio como sea necesario
+          }
+        );
+
+        this._statService.postStatData(this.statForm.value).subscribe(
+          (response) => {
+            console.log('Respuesta recibida');
+            // Manejar la respuesta del servicio como sea necesario
+          },
+          (error) => {
+            console.error('Error capturado en el componente');
+            // Manejar el error del servicio como sea necesario
+          }
+        );
+      },
+      (error) => {
+        console.error("Error al agregar el piloto:", error);
+      }
+    );
+
+    // Continuar con la navegación o las operaciones necesarias
+    // this.router.navigate(['/admin/']);
   }
+
 
  reloadPage() {
     location.reload();
@@ -132,8 +193,9 @@ export class AdminAddDriverComponent implements OnInit {
 
   ngOnInit() {
     // this.calcularOverall()
-    this._teamService.getAvailableTeams(1).subscribe(apiTeams=>this.availableTeams=apiTeams)
-    this._teamService.getTeamData().subscribe(apiTeam=>this.teams=apiTeam);
+    this.getDirector()
+
+    // this._teamService.getTeamData().subscribe(apiTeam=>this.teams=apiTeam);
   }
 
   getTeam(idDriver:number){

@@ -27,13 +27,17 @@ export class DirectorService {
     );
   }
 
+  updateDirector(id: number, updatedDirector: Director): Observable<Director> {
+    return this.http.put<Director>(environment.API_URL+"/Directores/"+id, updatedDirector);
+  }
+
   postDirectorData<T>(body: any): Observable<HttpResponse<T>> {
     let bodyData = new Director();
     bodyData.name = body.name;
     bodyData.email = body.email;
     bodyData.leagueId=body.leagueId;
 
-    return this.http.post<T>(environment.API_URL + 'Directores', bodyData, {
+    return this.http.post<T>(environment.API_URL + '/Directores', bodyData, {
       observe: 'response',
     });
   }

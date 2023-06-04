@@ -28,11 +28,12 @@
         <h4>Elige el equipo</h4>
 
 
-        <form style="border: 2px solid black;" class="container">
-        <ng-select [items]="availableTeams"
+        <form style="border: 2px solid black;background-color: white;" class="container">
+        <ng-select class="ng-select-custom" [items]="availableTeams"
            [addTag]="addTagFn"
            bindLabel="name"
-           (change)="onSelectionChange($event)"
+           (change)="onSelectionChange($event)
+           "
           >
         </ng-select>
 
@@ -94,10 +95,10 @@
                 <td>Season Start Price</td>
                 <td>{{driver?.seasonStartPrice}}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>DNF Rate</td>
                 <td>{{stat?.dnfs}}</td>
-              </tr>
+              </tr> -->
               <tr>
                 <td>Week Change</td>
                 <td>{{driver?.seasonChange}}</td>
@@ -129,14 +130,14 @@
                 <td>Podiums</td>
                 <td>{{stat?.podiums}}</td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td>Highest Grid Pos</td>
                 <td>{{stat?.highestGridPos}}</td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
-        <div style="background-color: black;" class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
+        <!-- <div style="background-color: black;" class="d-flex align-items-center p-3 my-3 text-white-50 bg-purple rounded box-shadow">
           <img class="mr-3" src="/assets/teamImgs/logo/astonMartinLogo.svg" alt="" width="48" height="48">
           <div class="lh-100">
             <small>Highest Scoring Track</small>
@@ -147,9 +148,9 @@
           <div style="display: inline-block;background-color: aliceblue;position: relative;right: 0;" class="rightside">
             <span class="fi fi-{{ driver?.flag }}"></span>
           </div>
-        </div>
+        </div> -->
 
-        <h1 style="text-align: left;">Compañero de Equipo</h1>
+        <h1 style="text-align: left;">Estadisticas de Piloto </h1>
         <div class="col">
           <div style="height: auto;" class="card mb-3">
             <div class="row g-0">

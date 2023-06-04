@@ -67,9 +67,41 @@ export class DriverService {
 
 
 
-  postDriverData(body : any,leagueId:number):Observable<Driver> {
-    let bodyData = new Driver();
+  // postDriverData(body : any):Observable<Driver> {
+  //   let bodyData = new Driver();
 
+  //   bodyData.name=body.name;
+  //   bodyData.lastname=body.lastname;
+  //   bodyData.age=body.age;
+  //   bodyData.imageDriver=body.imageDriver;
+  //   bodyData.number=body.number;
+  //   bodyData.currentPrice=body.currentPrice;
+  //   bodyData.seasonChange=body.seasonChange;
+  //   bodyData.seasonStartPrice=body.seasonStartPrice;
+
+  //   bodyData.country=body.country;
+  //   bodyData.flag=body.flag;
+
+
+  //   bodyData.leagueId=body.leagueId;
+  //   bodyData.team=body.team;
+
+  //   let result = new Driver();
+  //   this.http.post<Driver>(environment.API_URL + '/Drivers', bodyData)
+  //     .subscribe(
+  //       (response) => {
+  //         console.log('response received')
+  //         result = response;
+  //       },
+  //       (error) => {
+  //         console.error('error caught in component')
+  //       }
+  //     )
+  //     return this.http.post<Driver>(environment.API_URL + '/Drivers', bodyData);
+  // }
+
+  postDriverData(body: Driver): Observable<Driver> {
+    let bodyData = new Driver();
     bodyData.name=body.name;
     bodyData.lastname=body.lastname;
     bodyData.age=body.age;
@@ -83,21 +115,11 @@ export class DriverService {
     bodyData.flag=body.flag;
 
 
-    bodyData.leagueId=leagueId;
+    bodyData.leagueId=body.leagueId;
     bodyData.team=body.team;
 
-    let result = new Driver();
-    this.http.post<Driver>(environment.API_URL + '/Drivers', bodyData)
-      .subscribe(
-        (response) => {
-          console.log('response received')
-          result = response;
-        },
-        (error) => {
-          console.error('error caught in component')
-        }
-      )
-      return this.http.post<Driver>(environment.API_URL + '/Drivers', bodyData);
+    return this.http.post<Driver>(environment.API_URL + '/Drivers', bodyData);
   }
+
 
 }

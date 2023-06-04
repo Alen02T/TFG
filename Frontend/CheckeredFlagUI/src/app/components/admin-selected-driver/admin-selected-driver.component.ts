@@ -4,10 +4,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { map } from 'rxjs';
 import { Ability } from 'src/app/models/ability.model';
+import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { Stat } from 'src/app/models/stat.model';
 import { Team } from 'src/app/models/team.model';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { RaceResultService } from 'src/app/services/raceresult.service';
@@ -39,10 +41,13 @@ export class AdminSelectedDriverComponent implements OnInit {
   chartData: Ability=new Ability;
   raceResults:raceResult[] =[]
 
+  director:Director = new Director()
+
   constructor(private activatedRoute : ActivatedRoute,
     private _driverService:DriverService,private _abilityService:AbilityService,
     private _teamService:TeamService,private _statService:StatService,
-    private formBuilder: FormBuilder,private _router:Router,private _raceResultService:RaceResultService
+    private formBuilder: FormBuilder,private _router:Router,
+    private _raceResultService:RaceResultService,private _token:TokenHandlerService
 
     ) {
       this.availableTeams=null;
@@ -157,12 +162,30 @@ export class AdminSelectedDriverComponent implements OnInit {
 
   }
 
+  getDirector(){
+    this._token
+     .getDirector()
+     .subscribe((x) => (this.director = x)  && this.loadData());
+
+
+ }
+ loadData() {
+
+  // Saving field values for checking if there are changes
+  if (this.director != null) {
+    this._teamService.getAvailableTeams(this.director.leagueId).subscribe(apiTeams=>this.availableTeams=apiTeams)
+
+  }
+
+}
+
+
   ngOnInit(): void {
+    this.getDirector()
     this.activatedRoute.paramMap.subscribe((parameters: any) => {
       this.driverId = parameters.get('id');
 
       this._statService.getDriverStats(this.driverId).subscribe(apiDatos=>this.stat=apiDatos)
-      this._teamService.getAvailableTeams(1).subscribe(apiTeams=>this.availableTeams=apiTeams)
 
       this._raceResultService.getRaceResultByDriver(this.driverId).subscribe(apiDriver=>this.raceResults=apiDriver)
 

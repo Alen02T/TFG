@@ -54,6 +54,7 @@ export class AdminComponent implements OnInit {
 
   driversOrderedByPoints:driverInfo[] | null;
   driversInfoNormal:driverInfo[] | null;
+  driversCount:Driver[] | null = [];
   teams:Team[] | null;
 
   raceResults:raceResult[] =[];
@@ -96,21 +97,19 @@ export class AdminComponent implements OnInit {
   }
 
 
-  getMejorPilotoValorado(){
-    this._driverInfoService.getdriverInfoDataByLeagueOrderedByPrice(2).subscribe(apiDatos=>this.driversOrderedByPoints=apiDatos)
+  getMejorPilotoValorado(id:number){
+    this._driverInfoService.getdriverInfoDataByLeagueOrderedByPrice(id).subscribe(apiDatos=>this.driversOrderedByPoints=apiDatos)
   }
 
 
 
   ngOnInit(): void {
     this.getDirector();
-    this.getAllDrivers();
-    this.getTeams();
-    this.getMejorPilotoValorado()
+
   }
 
-  getTeams(){
-    this._teamService.getTeamData().subscribe(apiDatos=>this.teams=apiDatos)
+  getTeams(id:number){
+    this._teamService.getTeamsByLeagueOrdererByPoints(id).subscribe(apiDatos=>this.teams=apiDatos)
   }
 
   getDirector(){
@@ -154,9 +153,9 @@ getDriversOrderedByPoints(){
   })
 }
 
- getAllDrivers(){
-    this._driverInfoService.getdriverInfoDataByLeague(2).subscribe(apiDrivers=>this.driversInfoNormal=apiDrivers)
-    this._driverService.getDriverData().subscribe(apiEscuderia=>this.drivers=apiEscuderia);
+ getAllDrivers(id:number){
+    this._driverService.getDriversByLeagueId(id).subscribe(apiDrivers=>this.driversCount=apiDrivers)
+    // this._driverService.getDriverData().subscribe(apiEscuderia=>this.drivers=apiEscuderia);
  }
 
 
@@ -212,11 +211,15 @@ loadWorkEndpoint() {
 
 
  loadData() {
+
   // Saving field values for checking if there are changes
   if (this.director != null) {
+
     this.nombre = this.director.name;
     this.email = this.director.email;
     this.teamId = this.director.leagueId;
+
+
     this._ligaService.getLiga(this.director?.leagueId).subscribe(apiDirector=>{
       this.ligaObj=apiDirector
 
@@ -229,9 +232,18 @@ loadWorkEndpoint() {
       this.fechaFinal=this.ligaObj.fechaFin
       //this.getRestaTiempo(this.fechaInicial,this.fechaFinal)
     });
+
+    this.getAllDrivers(this.director.leagueId);
+    this.getTeams(this.director.leagueId);
+    this.getMejorPilotoValorado(this.director.leagueId)
+
+
+
   }
 
 }
+
+
 
 
 getRestaTiempo(dateInicial:any, dateFinal:any){

@@ -40,6 +40,24 @@ namespace CheckeredFlagAPI.Services.DirectorService
             return _mapper.Map<DirectorDTO>(_context.Directores.FirstOrDefault(x => x.Email == email));
         }
 
+        public DirectorDTO Update(int directorId, DirectorDTO updatedDirector)
+        {
+            var existingDirector = _context.Directores.FirstOrDefault(x => x.Id == directorId);
+            if (existingDirector == null)
+            {
+                throw new Exception("Director not found");
+            }
+
+            // Update the properties of the existing director with the values from the updatedDirector DTO
+            existingDirector.Email = updatedDirector.Email;
+            existingDirector.Name = updatedDirector.Name;
+            // Add other properties that you want to update
+
+            _context.SaveChanges();
+
+            return _mapper.Map<DirectorDTO>(existingDirector);
+        }
+
 
 
 

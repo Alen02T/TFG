@@ -41,6 +41,7 @@ export class TokenHandlerService {
   getDirector(): Observable<Director> {
     //var email = this.getEmail();
     //console.log(this.getEmail())
+
     return this._director.getUserDirectorData(this.getEmail());
   }
 }

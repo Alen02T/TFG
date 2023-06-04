@@ -60,6 +60,17 @@ namespace CheckeredFlagAPI.Controllers
             return ligaDirector;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<Liga>> AddLiga(Liga liga)
+        {
+            _context.Ligas.Add(liga);
+            await _context.SaveChangesAsync();
+
+            return Ok(liga);
+        }
+
+
+
         // PUT: api/Liga/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLiga(int id, Liga liga)

@@ -24,9 +24,14 @@ import { AdminRacesManagementComponent } from './components/admin-races-manageme
 import { AdminRadarChartComponent } from './components/admin-radar-chart/admin-radar-chart.component';
 import { AdminChartsComponent } from './components/admin-charts/admin-charts.component';
 import { AdminAddTeamComponent } from './components/admin-add-team/admin-add-team.component';
+import { AddLigaComponent } from './components/add-liga/add-liga.component';
 
 const routes: Routes = [
 
+  {
+    path:'addLiga',
+    component:AddLigaComponent
+  },
  {
     path: 'teams',
     component: TeamsComponent,

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Director } from 'src/app/models/director.model';
+import { User } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/AuthServices/auth.service';
+import { DirectorService } from 'src/app/services/AuthServices/director.service';
 
 @Component({
   selector: 'app-register',
@@ -9,38 +13,52 @@ import { Director } from 'src/app/models/director.model';
 })
 export class RegisterComponent {
   director = new Director();
-  email = new FormControl('', [Validators.required, Validators.email]);
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  thirdFormGroup:FormGroup;
 
-  constructor() {
+  // firstFormGroup: FormGroup;
+
+  user = new User();
+
+  formulario:FormGroup
+
+  constructor(private _authService:AuthService,private formBuilder:FormBuilder,
+    private _directorService:DirectorService,private _router:Router) {
+
+    this.formulario = this.formBuilder.group({
+    })
 
 
+}
 
-    this.firstFormGroup = new FormGroup({
-      firstCtrl: new FormControl('', Validators.required),
-      secondCtrl: new FormControl('', Validators.required)
-    });
-    this.secondFormGroup = new FormGroup({
-     // thirdCtrl: new FormControl('', Validators.required),
-      fourthCtrl: new FormControl('', Validators.required)
-    });
-    this.thirdFormGroup = new FormGroup({
-      fifthCtrl: new FormControl('', Validators.required),
-      //sixthCtrl: new FormControl('', Validators.required)
-    });
+crearFormulario(){
+  this.formulario = this.formBuilder.group({
+    email: ['', [Validators.required, Validators.email]],
+    name: ['', Validators.required],
+    password: ['', Validators.required]
+  });
+
+}
+
+register(user: User) {
+
+  this._authService.register(user).subscribe(() => {
+  });
+
+  let director = new Director();
+
+  director.email = user.email;
+  director.name = user.name;
+  director.leagueId = 0;
+
+
+  this._directorService.postDirectorData(director).subscribe(() => {
+    this._router.navigateByUrl('/addLiga');
+  });
 
 }
 
 
 
-
-getErrorMessage() {
-  if (this.email.hasError('required')) {
-    return 'You must enter a value';
-  }
-
-  return this.email.hasError('email') ? 'Not a valid email' : '';
+ngOnInit() {
+  this.crearFormulario();
 }
 }

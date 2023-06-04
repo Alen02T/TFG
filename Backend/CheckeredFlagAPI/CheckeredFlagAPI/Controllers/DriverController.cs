@@ -109,7 +109,7 @@ namespace CheckeredFlagAPI.Controllers
 
 
 
-
+        /*
         [HttpPost]
         public async Task<ActionResult<List<Driver>>> AddDriver(Driver Driver)
         {
@@ -117,7 +117,17 @@ namespace CheckeredFlagAPI.Controllers
             await _context.SaveChangesAsync();
 
             return Ok(await _context.Drivers.ToListAsync());
+        }*/
+
+        [HttpPost]
+        public async Task<ActionResult<Driver>> PostDriver(Driver driver)
+        {
+            _context.Drivers.Add(driver);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("Get", new { id = driver.driverId }, driver);
         }
+
 
 
         [HttpPut]

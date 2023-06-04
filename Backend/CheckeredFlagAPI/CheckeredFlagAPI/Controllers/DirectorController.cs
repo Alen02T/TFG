@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CheckeredFlagAPI.Data;
 using CheckeredFlagAPI.Entity;
+using CheckeredFlagAPI.Models;
 using CheckeredFlagAPI.Models.AuthModels;
 using CheckeredFlagAPI.Services.DirectorService;
 using Microsoft.AspNetCore.Authorization;
@@ -55,7 +56,46 @@ namespace CheckeredFlagAPI.Controllers
 
                 return Ok(result);
             }
+        /*
+        [HttpPut("{directorId}")]
+        public IActionResult UpdateDirector(int directorId, [FromBody] DirectorDTO updatedDirector)
+        {
+            try
+            {
+                var existingDirector = _directorService.GetByID(directorId);
+                if (existingDirector == null)
+                {
+                    return NotFound();
+                }
 
+                updatedDirector.Id = directorId;
+                var updatedDirectorDTO = _directorService.Update(directorId, updatedDirector);
+
+                return Ok(updatedDirectorDTO);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while updating the director: {ex.Message}");
+            }
+        }*/
+
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateDriver([FromRoute] int id, DirectorDTO request)
+        {
+            var dbDirector = await _context.Directores.FindAsync(id);
+            if (dbDirector == null)
+                return BadRequest("Driver not found.");
+            //dbTask.Id = request.Id;
+            dbDirector.Name = request.Name;
+            dbDirector.Email = request.Email;
+            dbDirector.LeagueId= request.LeagueId;
+          
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dbDirector);
+        }
 
         [HttpPost]
         public async Task<IActionResult> CrearDirector([FromBody] DirectorDTO directorDTO)
