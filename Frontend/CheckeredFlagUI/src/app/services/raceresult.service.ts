@@ -23,8 +23,8 @@ export class RaceResultService {
     return this.http.get<raceResult[]>(environment.API_URL + '/RaceResult/driver/'+driverId);
   }
 
-  getRaceResultByRound(id : number) : Observable<raceResult[]>{
-    return this.http.get<raceResult[]>(environment.API_URL + '/RaceResult/GrandPrix/round/'+id);
+  getRaceResultByRound(leagueId:number,id : number) : Observable<raceResult[]>{
+    return this.http.get<raceResult[]>(environment.API_URL + '/RaceResult/GrandPrix/'+leagueId+'/round/'+id);
   }
 
 

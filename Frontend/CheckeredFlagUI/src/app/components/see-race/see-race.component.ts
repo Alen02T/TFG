@@ -52,7 +52,7 @@ export class SeeRaceComponent implements OnInit {
 
     this._qualyService.getQualysByRace(this.raceId).subscribe(apiEscuderia=>this.qualys=apiEscuderia);
     //this._raceService.getRaceById(this.raceId).subscribe(apiEscuderia => this.race=apiEscuderia);
-    this._grandPrixService.getGrandPrixByRound(this.raceId).subscribe(apiEscuderia => this.grandPrix=apiEscuderia);
+    this._grandPrixService.getGrandPrixByRound(2,this.raceId).subscribe(apiEscuderia => this.grandPrix=apiEscuderia);
     //this._raceResultService.getRaceResultById(this.raceId).subscribe(apiEscuderia => this.raceResult=apiEscuderia);
     this._qualyResultService.getQualyResultByGrandPrix(this.raceId).subscribe((x) => (this.qualysResults=x));
     this._raceResultService.getRaceResultByGrandPrix(this.raceId).subscribe((x) => (this.raceResults=x));

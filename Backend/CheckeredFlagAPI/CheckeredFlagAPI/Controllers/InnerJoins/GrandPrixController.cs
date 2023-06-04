@@ -60,14 +60,14 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
 
 
 
-        [HttpGet("round/{roundId}")]
-        public ActionResult<GrandPrix> GetGrandPrixByRoundNumber(int roundId)
+        [HttpGet("{leagueId}/round/{roundId}")]
+        public ActionResult<GrandPrix> GetGrandPrixByRoundNumber(int leagueId,int roundId)
         {
             //var _context = new UserRegistrationContext();
             var grandprixList = (from r in _context.Races
                                  join c in _context.Circuits on r.Circuit equals c.circuitId
                                  join s in _context.Sponsors on r.Sponsor equals s.sponsorId
-                                 where r.round == roundId
+                                 where r.round == roundId && r.leagueId == leagueId
                                  select new GrandPrix()
                                  {
                                      RaceId = r.Id,

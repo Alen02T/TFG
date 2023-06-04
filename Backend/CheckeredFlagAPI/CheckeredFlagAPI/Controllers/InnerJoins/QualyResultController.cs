@@ -98,15 +98,15 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
         }
 
         
-        [HttpGet("round/{raceRound}")]
-        public ActionResult<List<QualyResult>> GetAllQualyRaceRoundById(int raceRound)
+        [HttpGet("{leagueId}/round/{raceRound}")]
+        public ActionResult<List<QualyResult>> GetAllQualyRaceRoundById(int leagueId, int raceRound)
         {
             //var _context = new UserRegistrationContext();
             var raceResultList = (from q in _context.Qualys
                                   join d in _context.Drivers on q.DriverId equals d.driverId
                                   join t in _context.Teams on q.TeamId equals t.teamId
                                   join ra in _context.Races on q.RaceId equals ra.Id
-                                  where raceRound.Equals(ra.round)
+                                  where raceRound.Equals(ra.round) && leagueId.Equals(ra.leagueId)
                                   orderby q.Grid
                                   select new QualyResult()
                                   {
@@ -133,6 +133,8 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
                                       TeamName = t.name,
                                       TeamShieldImage = t.shieldImage,
                                       TeamVehicleImage = t.vehicleImage,
+
+                                      
                                   }).ToList();
             return raceResultList;
         }

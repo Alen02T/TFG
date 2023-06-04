@@ -8,6 +8,8 @@ import { RaceResultService } from 'src/app/services/raceresult.service';
 import { ResultService } from 'src/app/services/result.service';
 import 'chartjs-plugin-labels';
 import { StatService } from 'src/app/services/stat.service';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
+import { Director } from 'src/app/models/director.model';
 
 @Component({
   selector: 'app-admin-charts',
@@ -27,12 +29,13 @@ export class AdminChartsComponent implements OnInit {
   drivers:Driver[] =[]
 
   driver:Driver = new Driver()
-
+  director:Director = new Director()
   constructor(private _raceResultService:RaceResultService,
     private _raceService:RaceService,
     private _driverService:DriverService,
     private _resultService:ResultService,
-    private _statService:StatService){
+    private _statService:StatService,
+    private _token:TokenHandlerService){
 
   }
 
@@ -178,8 +181,8 @@ export class AdminChartsComponent implements OnInit {
     myLineChart.update();
   }
 
-  buclePilotos(myLineChart:Chart){
-    this._driverService.getDriversByLeagueId(2).subscribe((x) => {
+  buclePilotos(myLineChart:Chart,id:number){
+    this._driverService.getDriversByLeagueId(id).subscribe((x) => {
       x.forEach((element) => {
         this._driverService.getDriverById(element.driverId).subscribe(apiDriver => this.driver=apiDriver);
         let combinado = element.name //+ ' | ' + element.number
@@ -189,7 +192,10 @@ export class AdminChartsComponent implements OnInit {
 
   }
 
-  crearGraficaDeTodos(){
+
+
+
+crearGraficaDeTodos(leagueId:number){
     const image = new Image();
     image.src = '/assets/img/F1.svg';
 
@@ -220,18 +226,31 @@ export class AdminChartsComponent implements OnInit {
 
     const myLineChart = new Chart(grafica, config as any);
 
-    this.buclePilotos(myLineChart)
+    this.buclePilotos(myLineChart,leagueId)
     myLineChart.update();
 
 
 }
 
+getDirector(){
+  this._token
+   .getDirector()
+   .subscribe((x) => (this.director = x) && this.loadData());
+}
+
+loadData(){
+  if(this.director!=null){
+    this.createAreaChart()
+    this.crearGraficaDeTodos(this.director.leagueId)
+    // this.createBarChart()
+    this.crearBarChartPuntosPilotos(this.director.leagueId)
+  }
+}
 
   ngOnInit(): void {
-    this.createAreaChart()
-    this.crearGraficaDeTodos()
-    // this.createBarChart()
-    this.crearBarChartPuntosPilotos()
+    this.getDirector()
+
+
 
   }
 
@@ -327,7 +346,7 @@ createBarChart(): void {
 
 
 
-crearBarChartPuntosPilotos(){
+crearBarChartPuntosPilotos(leagueId:number){
   const labels: string[] = ['F1'];
   let label = "persona"
 
@@ -347,7 +366,7 @@ crearBarChartPuntosPilotos(){
 
     const myLineChart = new Chart(grafica, config as any);
 
-    this.buclePilotos(myLineChart)
+    this.buclePilotos(myLineChart,leagueId)
     myLineChart.update();
 }
 

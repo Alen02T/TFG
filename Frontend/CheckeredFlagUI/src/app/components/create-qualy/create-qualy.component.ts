@@ -11,6 +11,8 @@ import { GrandPrixService } from 'src/app/services/grandPrix.service';
 import { GrandPrix } from 'src/app/models/grandprix.model';
 import { driverInfo } from 'src/app/models/driverinfo.model';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
+import { Director } from 'src/app/models/director.model';
 
 @Component({
   selector: 'app-create-qualy',
@@ -55,12 +57,13 @@ export class CreateQualyComponent implements OnInit {
   polePiloto:number=0;
 
   raceId:number=0;
-
+  director:Director = new Director()
   grandPrix:GrandPrix | null;
 
   constructor(private _qualyService:QualyService,private _driverService:DriverService,
     private _activatedRoute:ActivatedRoute,private _grandPrix:GrandPrixService,
-    private _driverInfo:driverInfoService,private router:Router) {
+    private _driverInfo:driverInfoService,private router:Router,
+    private _token:TokenHandlerService) {
 
     this.driverPoleMan=null
     this.qualies2=null;
@@ -71,22 +74,30 @@ export class CreateQualyComponent implements OnInit {
    }
 
 
+   getDirector(){
+    this._token
+     .getDirector()
+     .subscribe((x) => (this.director = x) && this.loadData());
+ }
+
+ loadData(){
+  if(this.director!=null){
+    this._grandPrix.getGrandPrixByRaceID(this.raceId).subscribe(apiGp=>this.grandPrix=apiGp)
 
 
-
+    this._driverService.getDriversByLeagueId(this.director.leagueId).subscribe(apiDrivers => {
+      this.drivers=apiDrivers
+    });
+    this._qualyService.getAllQualys().subscribe(apiQualy=>this.qualies=apiQualy);
+  }
+ }
 
   ngOnInit(): void {
   this._activatedRoute.paramMap.subscribe((parameters: any) => {
         this.raceId = parameters.get('id');
     });
 
-    this._grandPrix.getGrandPrixByRaceID(this.raceId).subscribe(apiGp=>this.grandPrix=apiGp)
-
-
-    this._driverService.getDriverData().subscribe(apiDrivers => {
-      this.drivers=apiDrivers
-    });
-    this._qualyService.getAllQualys().subscribe(apiQualy=>this.qualies=apiQualy);
+    this.getDirector()
   }
 
 

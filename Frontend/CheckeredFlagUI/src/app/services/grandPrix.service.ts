@@ -11,8 +11,8 @@ export class GrandPrixService {
     return this.http.get<GrandPrix[]>(environment.API_URL + '/GrandPrix');
   }
 
-  getGrandPrixByRound(roundId : number) : Observable<GrandPrix>{
-    return this.http.get<GrandPrix>(environment.API_URL + '/GrandPrix/round/'+roundId);
+  getGrandPrixByRound(leagueId:number,roundId : number) : Observable<GrandPrix>{
+    return this.http.get<GrandPrix>(environment.API_URL + '/GrandPrix/'+leagueId+'/round/'+roundId);
   }
   getGrandPrixByRaceID(raceId : number) : Observable<GrandPrix>{
     return this.http.get<GrandPrix>(environment.API_URL + '/GrandPrix/race/'+raceId);

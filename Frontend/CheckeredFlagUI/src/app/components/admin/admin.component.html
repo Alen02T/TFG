@@ -262,7 +262,7 @@
 
             </div>
 
-            <!-- <div class="tabs">
+            <div class="tabs">
               <a href="#">
                 Overview
               </a>
@@ -281,9 +281,9 @@
               <a href="#">
                 Business
               </a>
-            </div> -->
+            </div>
           </div>
-          <div [hidden]="director!=null" class="app-header-actions">
+          <div [hidden]="director==null" class="app-header-actions">
             <button class="user-profile">
               <span>{{director?.name}}</span>
               <span>

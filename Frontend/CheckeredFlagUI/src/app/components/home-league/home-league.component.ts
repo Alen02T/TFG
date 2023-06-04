@@ -96,7 +96,7 @@ export class HomeLeagueComponent implements OnInit {
 
   ngOnInit(): void {
     //this._teamService.getTeamData().subscribe(apiEscuderia=>this.teams=apiEscuderia)
-    this._grandPrixService.getGrandPrixByRound(this.getLastRace()).subscribe(apiEscuderia => this.grandPrix=apiEscuderia);
+    this._grandPrixService.getGrandPrixByRound(2,1).subscribe(apiEscuderia => this.grandPrix=apiEscuderia);
     this._raceResultService.getRaceResultByGrandPrix(this.getLastRace()).subscribe((x) =>
     {(
       this.raceResults=x)
@@ -171,7 +171,7 @@ export class HomeLeagueComponent implements OnInit {
       this.driversInfo=apiStandings
 
     });
-    this._grandPrixService.getGrandPrixByRound(this.getLastRace()).subscribe(apiStandings=>{
+    this._grandPrixService.getGrandPrixByRound(2,1).subscribe(apiStandings=>{
       this.grandPrix=apiStandings
 
     });

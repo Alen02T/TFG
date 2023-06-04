@@ -20,8 +20,8 @@ export class QualyResultService {
     return this.http.get<qualyresult[]>(environment.API_URL + '/QualyResult/race/'+id);
   }
 
-  getQualyResultByRoundId(id : number) : Observable<qualyresult[]>{
-    return this.http.get<qualyresult[]>(environment.API_URL + '/QualyResult/round/'+id);
+  getQualyResultByRoundId(raceId:number ,id : number) : Observable<qualyresult[]>{
+    return this.http.get<qualyresult[]>(environment.API_URL + '/QualyResult/'+raceId+'/round/'+id);
   }
 
 }

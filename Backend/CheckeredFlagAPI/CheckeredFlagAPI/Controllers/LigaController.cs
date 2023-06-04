@@ -135,6 +135,48 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(liga);
         }
+        /*
+        [HttpDelete("{idLiga}/circuitos")]
+        public async Task<ActionResult<Liga>> DeleteCircuitos(int idLiga)
+        {
+            var liga = await _context.Ligas.FindAsync(idLiga);
+
+            if (liga == null)
+            {
+                return NotFound();
+            }
+
+            liga.Circuits = new List<Circuit>();
+
+
+            await _context.SaveChangesAsync();
+
+            return Ok(liga);
+        }*/
+        [HttpDelete("{idLiga}/circuitos")]
+        public async Task<ActionResult<Liga>> DeleteCircuitos(int idLiga)
+        {
+            var liga = await _context.Ligas.FindAsync(idLiga);
+
+            if (liga == null)
+            {
+                return NotFound();
+            }
+
+            // Eliminar los registros de CircuitLiga asociados a la liga
+            var deleteCommand = $"DELETE FROM CircuitLiga WHERE LigasId = {idLiga}";
+            await _context.Database.ExecuteSqlRawAsync(deleteCommand);
+
+            // Borrar el array de circuitos en la liga
+            liga.Circuits = new List<Circuit>();
+
+            await _context.SaveChangesAsync();
+
+            return Ok(liga);
+        }
+
+
+
 
         [HttpPut("{ligaId}/currentRound/{newCurrentRound}")]
         public async Task<ActionResult> UpdateCurrentRound(int ligaId, int newCurrentRound)

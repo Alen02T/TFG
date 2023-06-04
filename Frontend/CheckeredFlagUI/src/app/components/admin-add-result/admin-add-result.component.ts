@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Ability } from 'src/app/models/ability.model';
 import { Circuit } from 'src/app/models/circuit.model';
+import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
 import { Liga } from 'src/app/models/liga.model';
 import { Qualy } from 'src/app/models/qualy.model';
@@ -10,6 +11,7 @@ import { qualyresult } from 'src/app/models/qualyresult.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { Result } from 'src/app/models/result.model';
 import { Stat } from 'src/app/models/stat.model';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { GrandPrixService } from 'src/app/services/grandPrix.service';
@@ -41,7 +43,7 @@ export class AdminAddResultComponent implements OnInit {
   ability:Ability | null;
 
 
-
+  director:Director = new Director()
 
   puntosPorPosicion = [
     25, // Posición 0
@@ -79,7 +81,7 @@ export class AdminAddResultComponent implements OnInit {
     private _qualyService:QualyService,private _router:Router,
     private _resultService:ResultService,
     private _statService:StatService,private _abilityService:AbilityService,
-    private _driverService:DriverService) {
+    private _driverService:DriverService,private _token:TokenHandlerService) {
 
       this.qualyResults=null;
       this.liga=null;
@@ -122,7 +124,22 @@ export class AdminAddResultComponent implements OnInit {
     }
 
 
+    getDirector(){
+      this._token
+       .getDirector()
+       .subscribe((x) => (this.director = x) && this.loadData());
+   }
 
+
+   loadData(){
+    if(this.director!=null){
+      this._ligaService.getLigaWithCircuits(this.director.leagueId).subscribe(apiDatos => {
+        this.liga = apiDatos;
+        this.circuitosSeleccionados = [...apiDatos.circuits];
+        this._qualyResultService.getQualyResultByRoundId(this.director.leagueId,this.liga!.currentRound).subscribe(apiDatos=>this.qualyResults=apiDatos)
+      });
+    }
+   }
 
   guardarResultados(){
       if (!this.isCheckboxSelected()) {
@@ -454,16 +471,14 @@ export class AdminAddResultComponent implements OnInit {
   ngOnInit(): void {
     this._activatedRoute.paramMap.subscribe((parameters: any) => {
       this.raceId = parameters.get('id');
+
+      this.getDirector()
   });
 
 
 
 
-  this._ligaService.getLigaWithCircuits(2).subscribe(apiDatos => {
-    this.liga = apiDatos;
-    this.circuitosSeleccionados = [...apiDatos.circuits];
-    this._qualyResultService.getQualyResultByRoundId(this.liga!.currentRound).subscribe(apiDatos=>this.qualyResults=apiDatos)
-  });
+
 
 
   }

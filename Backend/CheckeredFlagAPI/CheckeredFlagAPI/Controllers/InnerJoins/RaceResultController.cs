@@ -141,15 +141,15 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
         }
 
 
-        [HttpGet("GrandPrix/round/{roundId}")]
-        public ActionResult<List<RaceResult>> GetRaceResultsByRoundId(int roundId)
+        [HttpGet("GrandPrix/{leagueId}/round/{roundId}")]
+        public ActionResult<List<RaceResult>> GetRaceResultsByRoundId(int leagueId,int roundId)
         {
             //var _context = new UserRegistrationContext();
             var raceResultList = (from r in _context.Results
                                   join d in _context.Drivers on r.driverId equals d.driverId
                                   join t in _context.Teams on r.teamId equals t.teamId
                                   join ra in _context.Races on r.raceId equals ra.Id
-                                  where roundId.Equals(ra.round)
+                                  where roundId.Equals(ra.round) && leagueId.Equals(ra.leagueId)
                                   orderby r.position
                                   select new RaceResult()
                                   {

@@ -39,6 +39,12 @@ export class LigaService {
     return this.http.post<Liga>(environment.API_URL + '/Liga/'+idLiga+'/seleccionar-circuitos/', circuitoIds);
   }
 
+  deleteCircuitos(idLiga: number): Observable<Liga> {
+    // const url = `${environment.API_URL}/ligas/${idLiga}/circuitos`;
+
+    return this.http.delete<Liga>(environment.API_URL + '/Liga/'+idLiga+'/circuitos/');
+  }
+
 
   updateCurrentRound(ligaId: number, newCurrentRound: number): Observable<Liga> {
     const url = `${environment.API_URL}/Liga/${ligaId}/currentRound/${newCurrentRound}`;

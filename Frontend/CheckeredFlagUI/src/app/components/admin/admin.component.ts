@@ -118,14 +118,14 @@ export class AdminComponent implements OnInit {
      .subscribe((x) => (this.director = x) && this.loadData());
  }
 
-  getRaceResult(currentRound:number){
-    this._raceResultService.getRaceResultByRound(currentRound).subscribe(apiDatos=>{
+  getRaceResult(leagueId:number,currentRound:number){
+    this._raceResultService.getRaceResultByRound(leagueId,currentRound).subscribe(apiDatos=>{
       this.raceResults=apiDatos
     })
   }
 
-  getQualyResult(currentRound:number){
-    this._qualyResultsService.getQualyResultByRoundId(currentRound).subscribe(apiDatos=>{
+  getQualyResult(id:number,currentRound:number){
+    this._qualyResultsService.getQualyResultByRoundId(id,currentRound).subscribe(apiDatos=>{
       this.qualyResults=apiDatos
     })
   }
@@ -134,8 +134,8 @@ getWinnerRace(raceId:number){
   this._driverService.getWinnerDriverByRaceId(raceId).subscribe(apiDriver=>this.winner=apiDriver)
 }
 
-getGrandPrix(currentRound:number){
-  this._grandPrixService.getGrandPrixByRound(currentRound).subscribe(apiDatos=>{
+getGrandPrix(leagueId:number,currentRound:number){
+  this._grandPrixService.getGrandPrixByRound(leagueId,currentRound).subscribe(apiDatos=>{
     this.grandPrix=apiDatos
     this.getWinnerRace(this.grandPrix.raceId)
   })
@@ -223,9 +223,9 @@ loadWorkEndpoint() {
     this._ligaService.getLiga(this.director?.leagueId).subscribe(apiDirector=>{
       this.ligaObj=apiDirector
 
-      this.getGrandPrix(this.ligaObj.currentRound)
-      this.getRaceResult(this.ligaObj.currentRound)
-      this.getQualyResult(this.ligaObj.currentRound)
+      this.getGrandPrix(this.ligaObj.id, this.ligaObj.currentRound)
+      this.getRaceResult(this.ligaObj.id,this.ligaObj.currentRound)
+      this.getQualyResult(this.ligaObj.id,this.ligaObj.currentRound)
 
 
       this.fechaInicial=this.ligaObj.fechaInicio

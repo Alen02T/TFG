@@ -12,6 +12,8 @@ import { GrandPrix } from 'src/app/models/grandprix.model';
 import { SponsorService } from 'src/app/services/sponsor.service';
 import { Sponsor } from 'src/app/models/sponsor.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
+import { Director } from 'src/app/models/director.model';
 
 @Component({
   selector: 'app-admin-add-races',
@@ -56,12 +58,14 @@ export class AdminAddRacesComponent implements OnInit {
   selectedCircuitImage: string | null ;
   selectedCircuitMap: string | null ;
 
+  director:Director = new Director()
+
   raceForm: FormGroup;
   showMessage = false;
    constructor(private _raceService:RaceService,
     private _circuitService:CircuitService,
     private _ligaService:LigaService,private _grandPrixService:GrandPrixService,
-    private _sponsorService:SponsorService,private formBuilder:FormBuilder,
+    private _sponsorService:SponsorService,private formBuilder:FormBuilder,private _token:TokenHandlerService
 ) {
 
       this.selectedGp=null;
@@ -109,7 +113,7 @@ export class AdminAddRacesComponent implements OnInit {
       console.log(this.selectedCircuits)
     }
 
-    crearCarreras(circuitoIds: Circuit[],arraySponsors:any): void {
+    crearCarreras(circuitoIds: Circuit[],arraySponsors:any,leagueId:number): void {
 
       const currentDate = new Date();
       const day = currentDate.getDate().toString().padStart(2, '0');
@@ -142,7 +146,7 @@ export class AdminAddRacesComponent implements OnInit {
           round: index+1,
           sponsor: arraySponsors[index],
           circuit: circuitoIds[index].circuitId,
-          leagueId:2
+          leagueId:leagueId
         };
 
 
@@ -184,7 +188,7 @@ export class AdminAddRacesComponent implements OnInit {
       }
     }
 
-    submitCircuitos(){
+    submitCircuitos(leagueId:number){
       const arraySponsors: number[] = []
 
       //Esto es para la API
@@ -211,29 +215,19 @@ export class AdminAddRacesComponent implements OnInit {
           this.showMessage = false;
         });
       }else{
-
-
         //Metodo para la liga
-        this._ligaService.añadirCircuitosAlaLiga(2, circuitoIds).subscribe(
+        this._ligaService.añadirCircuitosAlaLiga(leagueId, circuitoIds).subscribe(
           () => {
             console.log("Circuitos añadidos correctamente");
             this.selectedCircuits = [];
-            this.crearCarreras(circuitos,arraySponsors)
+            this.crearCarreras(circuitos,arraySponsors,leagueId)
           },
           error => {
             console.error("Error al añadir circuitos:", error);
           }
         );
-
-
-
       }
-
-
-
     }
-
-
 
     delay(ms:any) {
       return new Promise(resolve => setTimeout(resolve, ms));
@@ -247,9 +241,9 @@ export class AdminAddRacesComponent implements OnInit {
 
 
 
-      getLigaWithCircuits(): void {
+      getLigaWithCircuits(leagueId:number): void {
     //Esta funcion te devuelve los circuitos al pasarle la id de la liga en la que pertenecen
-        this._ligaService.getLigaWithCircuits(2).subscribe(response => {
+        this._ligaService.getLigaWithCircuits(leagueId).subscribe(response => {
           this.liga = response;
           this.circuits = response.circuits;
 
@@ -269,19 +263,32 @@ export class AdminAddRacesComponent implements OnInit {
 
       }
 
+      loadData(){
+        if(this.director!=null){
+          console.log(this.director)
+          // this._raceService.getRaceData().subscribe(apiRaces=>this.races=apiRaces)
+          this._circuitService.getCircuitData().subscribe(apiCircuits=>this.Allcircuits=apiCircuits)
+
+
+          this.getLigaWithCircuits(this.director.leagueId)
+          this._grandPrixService.getGrandPrixRacesByLeagueIdOrderedByRound(this.director.leagueId).subscribe(apiGrandPrix=>this.grandPrixes=apiGrandPrix)
+
+          this._sponsorService.getSponsorData().subscribe(apiSponsors=>this.sponsors=apiSponsors)
+        }
+      }
+
+      getDirector(){
+        this._token
+         .getDirector()
+         .subscribe((x) => (this.director = x) && this.loadData());
+     }
 
 
     ngOnInit(): void {
+      this.getDirector()
       //Cargo todos los circuitos
       // this._grandPrixService.getGrandPrixData().subscribe(apiGrandPrix=>this.grandPrixes=apiGrandPrix)
-      this._raceService.getRaceData().subscribe(apiRaces=>this.races=apiRaces)
-      this._circuitService.getCircuitData().subscribe(apiCircuits=>this.Allcircuits=apiCircuits)
 
-
-      this.getLigaWithCircuits()
-      this._grandPrixService.getGrandPrixRacesByLeagueIdOrderedByRound(2).subscribe(apiGrandPrix=>this.grandPrixes=apiGrandPrix)
-
-      this._sponsorService.getSponsorData().subscribe(apiSponsors=>this.sponsors=apiSponsors)
     }
 
 
