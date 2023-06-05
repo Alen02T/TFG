@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DriverStandingsService } from 'src/app/services/driverStandings/driver-standings.service';
 
 @Component({
   selector: 'app-table-drivers',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableDriversPage implements OnInit {
 
-  constructor() { }
+  standings:any
+
+  constructor(private _standingsService:DriverStandingsService) { }
 
   ngOnInit() {
+    this._standingsService.getStandingsFrom2023().subscribe(apiDatos=>{
+      this.standings=apiDatos
+      console.log(this.standings)
+    })
   }
 
 }
