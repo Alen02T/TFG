@@ -1,0 +1,7 @@
+{
+  "name": "checkered-flag-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
