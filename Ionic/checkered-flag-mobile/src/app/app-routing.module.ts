@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'tab-menu',
     loadChildren: () => import('./components/tab-menu/tab-menu.module').then( m => m.TabMenuPageModule)
   },
+  {
+    path: 'drivers',
+    loadChildren: () => import('./components/table-drivers/table-drivers.module').then( m => m.TableDriversPageModule)
+  },
 ];
 
 @NgModule({
