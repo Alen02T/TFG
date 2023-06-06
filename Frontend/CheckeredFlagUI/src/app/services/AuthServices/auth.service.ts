@@ -39,6 +39,7 @@ export class AuthService {
     //this.cookie.delete('authToken');
     this._cookieHandler.closeToken();
     this.router.navigate(['/'], {queryParams: {loggedOut: 'success'}});
+    window.location.reload()
 
 }
 }

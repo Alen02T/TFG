@@ -129,8 +129,7 @@ export class AdminChartsComponent implements OnInit {
           colorAleatorios.push(this.generarColorAleatorio())
         });
 
-        console.log(arrayPuntos);
-        console.log(nombreArray);
+
 
         const data = {
           labels: nombreArray,
@@ -179,8 +178,6 @@ export class AdminChartsComponent implements OnInit {
           colorAleatorios.push(this.generarColorAleatorio())
         });
 
-        console.log(arrayPuntos);
-        console.log(nombreArray);
 
         const data = {
           labels: nombreArray,
@@ -441,8 +438,6 @@ crearBarChart(idLeague:number) {
         nombreArray.push(driver.name);
       });
 
-      console.log(arrayPuntos);
-      console.log(nombreArray);
 
       const data = {
         labels: nombreArray,
@@ -482,8 +477,7 @@ crearBarChartMoney(idLeague:number) {
         arrayDinero.push(driver.currentPrice)
       });
 
-      console.log(arrayDinero);
-      console.log(nombreArray);
+
 
       const data = {
         labels: nombreArray,

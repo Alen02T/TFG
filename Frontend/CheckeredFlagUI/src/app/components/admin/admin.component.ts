@@ -112,6 +112,10 @@ export class AdminComponent implements OnInit {
     this._teamService.getTeamsByLeagueOrdererByPoints(id).subscribe(apiDatos=>this.teams=apiDatos)
   }
 
+  logout(){
+    this.authService.logout()
+  }
+
   getDirector(){
     this._token
      .getDirector()

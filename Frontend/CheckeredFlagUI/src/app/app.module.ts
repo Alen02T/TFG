@@ -66,6 +66,7 @@ import { AdminChartsComponent } from './components/admin-charts/admin-charts.com
 import { AdminAddTeamComponent } from './components/admin-add-team/admin-add-team.component';
 import { AddLigaComponent } from './components/add-liga/add-liga.component';
 import { TableClosestRivalsComponent } from './components/table-closest-rivals/table-closest-rivals.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -99,7 +100,8 @@ import { TableClosestRivalsComponent } from './components/table-closest-rivals/t
     AdminChartsComponent,
     AdminAddTeamComponent,
     AddLigaComponent,
-    TableClosestRivalsComponent
+    TableClosestRivalsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

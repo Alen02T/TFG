@@ -1,3 +1,22 @@
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cerrar Sesion</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Seguro que quieres continuar?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-warning" (click)="logout()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--  <div style="background-color: rgba(33, 37, 41);color:white" class="page-wrapper chiller-theme toggled">
   <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
     <i class="fas fa-bars"></i>
@@ -284,16 +303,17 @@
             </div>
           </div>
           <div [hidden]="director==null" class="app-header-actions">
-            <button class="user-profile">
+            <button [routerLink]="'/profile'" class="user-profile">
               <span>{{director?.name}}</span>
               <span>
                 <img src="/assets/img/vasseur.jpg" />
               </span>
             </button>
             <div class="app-header-actions-buttons">
-              <button  style="background-color: red;" class="icon-button large">
+              <button  class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"  style="background-color: red;" class="icon-button large">
                 <i class="bi bi-door-closed"></i>
               </button>
+              <!-- <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float: right;background-color: rgb(147, 44, 147);">Logout</button> -->
               <!-- <button class="icon-button large">
                 <i class="ph-bell"></i>
               </button> -->

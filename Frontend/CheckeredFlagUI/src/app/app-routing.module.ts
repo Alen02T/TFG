@@ -27,6 +27,7 @@ import { AdminAddTeamComponent } from './components/admin-add-team/admin-add-tea
 import { AddLigaComponent } from './components/add-liga/add-liga.component';
 import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
 
@@ -47,6 +48,11 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate:[AuthGuard]
   },
   {
