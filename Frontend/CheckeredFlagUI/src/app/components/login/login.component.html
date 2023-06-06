@@ -1,7 +1,46 @@
-<input [(ngModel)]="user.email"  type="email" placeholder="Email" />
+<!-- <input [(ngModel)]="user.email"  type="email" placeholder="Email" />
 <input [(ngModel)]="user.password" type="password" placeholder="Password"  />
 <a href="#">Forgot your password?</a>
-<button (click)="login(user)">Sign In</button>
-<button (click)="register(user)">register</button>
+<button (click)="login(user)">Sign In</button> -->
+<!-- <button (click)="register(user)">register</button> -->
 
 <!-- <button mat-button [routerLink]="['/register']" routerLinkActive="router-link-active" >Ir a register</button> -->
+<section  [@fadeInOut]="currentImageIndex" #sectionElement class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="min-height: 100vh; background-size: cover; ">
+  <div class="container-fluid">
+    <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
+      <div class="col-12 col-md-4 col-lg-3   h-50 ">
+        <div class="card shadow">
+          <div class="card-body mx-auto">
+            <h4 class="card-title mt-3 text-center">Login</h4>
+            <p class="text-center">Sign In</p>
+            <p class="text-muted font-weight-bold ">
+              <span>CHECKERED FLAG</span>
+            </p>
+
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <!-- <span class="input-group-text"> <i class="fa fa-user"></i> </span> -->
+                  <input [(ngModel)]="user.email"  type="email" placeholder="Email" />
+                </div>
+
+              </div>
+              <div class="form-group input-group">
+                <div class="input-group-prepend">
+                  <!-- <span class="input-group-text"> <i class="fa fa-envelope"></i> </span> -->
+                  <input [(ngModel)]="user.password" type="password" placeholder="Password"  />
+                </div>
+
+              </div>
+              <div class="form-group">
+                <button (click)="login(user)">Sign In</button>
+              </div>
+              <p class="text-center">Don't have an account?
+                <a [routerLink]="'/register'">Sign Up</a>
+              </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

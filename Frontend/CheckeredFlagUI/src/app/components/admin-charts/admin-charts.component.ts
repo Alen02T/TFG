@@ -12,6 +12,7 @@ import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler
 import { Director } from 'src/app/models/director.model';
 import { Stat } from 'src/app/models/stat.model';
 import { forkJoin } from 'rxjs';
+import { AuthService } from 'src/app/services/AuthServices/auth.service';
 
 @Component({
   selector: 'app-admin-charts',
@@ -39,7 +40,8 @@ export class AdminChartsComponent implements OnInit {
     private _driverService:DriverService,
     private _resultService:ResultService,
     private _statService:StatService,
-    private _token:TokenHandlerService){
+    private _token:TokenHandlerService,
+    private _authService:AuthService){
 
   }
 
@@ -458,7 +460,9 @@ crearBarChart(idLeague:number) {
   });
 }
 
-
+logout(){
+  this._authService.logout()
+}
 crearBarChartMoney(idLeague:number) {
   const graph: any = document.querySelector("#bar-chart-money");
 

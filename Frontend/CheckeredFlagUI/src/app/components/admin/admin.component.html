@@ -446,9 +446,9 @@
                     <div style="background-image:url({{item.driverImageDriver}}) ;background-size: cover;" class="transfer-logo">
                     </div>
                     <span> | <span style="color: gold;font-weight: bold;">{{i+1}}</span> </span>
-                    <dl class="transfer-details">
-                      <div>
-                        <dt>{{item.driverName}}</dt>
+                    <dl  class="transfer-details">
+                      <div [routerLink]="'/admin/drivers/'+item.driverId">
+                        <dt >{{item.driverName}}</dt>
                         <dd>{{item.driverLastName!.slice(0,3).toUpperCase()}}</dd>
                       </div>
                       <div>
@@ -596,19 +596,19 @@
               <div class="payment-section-footer">
                 <section class="transfer-section">
               <div class="transfer-section-header">
-                <h2>Latest Market Updates</h2>
+                <h2>Market Updates</h2>
                 <div class="filter-options">
-                  <p>Filter selected: more than 100 $</p>
-                  <button class="icon-button">
-                    <i class="ph-funnel"></i>
+                  <p>Pilotos ordenados con mas valor de mercado</p>
+                  <button style="background-color: gold;" class="icon-button">
+                    <i style="color: black;" class="bi bi-currency-dollar"></i>
                   </button>
-                  <button class="icon-button">
-                    <i class="ph-plus"></i>
+                  <button style="background-color: green;"  class="icon-button">
+                    <i class="bi bi-caret-up-fill"></i>
                   </button>
                 </div>
               </div>
               <div class="transfers">
-                <div class="transfer" *ngFor="let item of driversOrderedByPoints">
+                <div  [routerLink]="'/admin/drivers/'+item.driverId"  class="transfer" *ngFor="let item of driversOrderedByPoints">
                   <div style="background-image:url({{item.driverImageDriver}}) ;background-size: cover;" class="transfer-logo">
                   </div>
                   <dl class="transfer-details">
