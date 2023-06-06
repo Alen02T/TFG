@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>table-drivers</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">table-drivers</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+
+
+
+  <div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
+
+		<!--Title-->
+		<h1 class="flex items-center font-sans font-bold break-normal text-indigo-500 px-2 py-8 text-xl md:text-2xl">
+			Drivers Ranking
+		</h1>
+
+
+		<!--Card-->
+		<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+
+
+			<table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+				<thead>
+					<tr>
+						<th data-priority="1">Name</th>
+						<th data-priority="2">Position</th>
+						<th data-priority="3">Office</th>
+						<th data-priority="4">Age</th>
+						<th data-priority="5">Start date</th>
+						<th data-priority="6">Salary</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let item of standings">
+						<td>{{item | json}}</td>
+					</tr>
+
+					<!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
+
+				</tbody>
+
+			</table>
+
+
+		</div>
+		<!--/Card-->
+
+
+	</div>
+	<!--/container-->
+
+</ion-content>
