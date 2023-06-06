@@ -555,7 +555,7 @@
                 </div>
               </div>
               <div class="payments">
-                <div style="cursor: pointer;" [routerLink]="'teams/'+item.teamId" *ngFor="let item of teams"   class="payment">
+                <div style="cursor: pointer;" [routerLink]="'teams/'+item.teamId" *ngFor="let item of teams?.slice(0,(teams!.length/2))"   class="payment">
                   <div style="background-color: {{item.color}};" class="card">
                     <span><img width="60" src="{{item.shieldImage}}" alt=""></span>
                     <span>

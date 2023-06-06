@@ -39,6 +39,7 @@ export class AdminAddDriverComponent implements OnInit {
   imagenElegida:string;
   isLinear = false;
 
+  disabledInput:boolean=true
 
   constructor(private _driverService:DriverService,
     private _teamService:TeamService
@@ -48,6 +49,7 @@ export class AdminAddDriverComponent implements OnInit {
 
     this.team=null;
     this.availableTeams=null;
+
 
     this.miElemento=ElementRef;
 

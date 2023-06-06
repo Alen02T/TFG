@@ -48,7 +48,7 @@ export class AdminChartsComponent implements OnInit {
     const areaCanvas = <HTMLCanvasElement>document.getElementById('area-chart');
 
     this.areaChart != new Chart(areaCanvas, {
-      type: 'line',
+      type: 'pie',
       data: {
         labels: ['January', 'February', 'March', 'April', 'May', 'June'],
         datasets: [
@@ -58,7 +58,7 @@ export class AdminChartsComponent implements OnInit {
             backgroundColor: 'rgba(54, 162, 235, 0.5)',
             borderColor: 'rgb(54, 162, 235)',
             borderWidth: 2,
-            fill: 'origin'
+
           }
         ]
       },
@@ -103,23 +103,102 @@ export class AdminChartsComponent implements OnInit {
   }
 
 
-  createPieChart(): void {
-    const pieCanvas = <HTMLCanvasElement>document.getElementById('pie-chart');
-    this.pieChart != new Chart(pieCanvas, {
-      type: 'pie',
-      data: {
-        labels: ['Red', 'Blue', 'Yellow'],
-        datasets: [
-          {
-            data: [10, 20, 15],
-            backgroundColor: ['rgb(255, 99, 132)', 'rgb(54, 162, 235)', 'rgb(255, 205, 86)'],
-            hoverOffset: 4
-          }
-        ]
-      },
-      options: {
-        responsive: true
-      }
+  createPieChart(leagueId:number): void {
+    const graph: any = document.querySelector("#pie-chart");
+
+    const arrayPuntos: number[] = [];
+    const nombreArray: string[] = [];
+    const colorAleatorios:string[]=[]
+
+    this._driverService.getDriversByLeagueId(leagueId).subscribe(apiDrivers => {
+      this.drivers = apiDrivers;
+
+      // Crear un array de observables para las solicitudes de estadísticas
+      const observables = this.drivers.map(driver =>
+        this._statService.getDriverStats(driver.driverId)
+      );
+
+      // Combinar las solicitudes usando forkJoin
+      forkJoin(observables).subscribe((apiDatos: any[]) => {
+        apiDatos.forEach(stat => {
+          arrayPuntos.push(stat.points);
+        });
+
+        this.drivers.forEach(driver => {
+          nombreArray.push(driver.name);
+          colorAleatorios.push(this.generarColorAleatorio())
+        });
+
+        console.log(arrayPuntos);
+        console.log(nombreArray);
+
+        const data = {
+          labels: nombreArray,
+          datasets: [{
+            label: "Puntos",
+            data: arrayPuntos,
+            backgroundColor: colorAleatorios
+          }]
+        };
+
+
+        const config: any = {
+          type: 'pie',
+          data: data,
+        };
+
+        new Chart(graph, config);
+      });
+    });
+  }
+
+
+  createPieChartWins(leagueId:number): void {
+    const graph: any = document.querySelector("#pie-chart-wins");
+
+    const arrayPuntos: number[] = [];
+    const nombreArray: string[] = [];
+    const colorAleatorios:string[]=[]
+
+    this._driverService.getDriversByLeagueId(leagueId).subscribe(apiDrivers => {
+      this.drivers = apiDrivers;
+
+      // Crear un array de observables para las solicitudes de estadísticas
+      const observables = this.drivers.map(driver =>
+        this._statService.getDriverStats(driver.driverId)
+      );
+
+      // Combinar las solicitudes usando forkJoin
+      forkJoin(observables).subscribe((apiDatos: any[]) => {
+        apiDatos.forEach(stat => {
+          arrayPuntos.push(stat.wins);
+        });
+
+        this.drivers.forEach(driver => {
+          nombreArray.push(driver.name);
+          colorAleatorios.push(this.generarColorAleatorio())
+        });
+
+        console.log(arrayPuntos);
+        console.log(nombreArray);
+
+        const data = {
+          labels: nombreArray,
+          datasets: [{
+            label: "Puntos",
+            data: arrayPuntos,
+            backgroundColor: colorAleatorios
+          }]
+        };
+
+
+        const config: any = {
+          type: 'doughnut',
+          data: data,
+        };
+
+        new Chart(graph, config);
+      });
     });
   }
 
@@ -240,10 +319,11 @@ getDirector(){
 
 loadData(){
   if(this.director!=null){
-    this.createAreaChart()
+    this.createPieChartWins(this.director.leagueId)
     this.crearGraficaDeTodos(this.director.leagueId)
     this.crearBarChart(this.director.leagueId)
     this.crearBarChartMoney(this.director.leagueId)
+    this.createPieChart(this.director.leagueId)
   }
 }
 

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Director } from 'src/app/models/director.model';
 import { driverInfo } from 'src/app/models/driverinfo.model';
 import { GrandPrix } from 'src/app/models/grandprix.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { Team } from 'src/app/models/team.model';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
 import { GrandPrixService } from 'src/app/services/grandPrix.service';
@@ -45,14 +47,14 @@ export class HomeLeagueComponent implements OnInit {
   redbullImg:string;
 
 
-
+  director:Director=new Director()
 
   constructor(private _grandPrixService:GrandPrixService,
     private _driverService:DriverService,
     // private _resultService:ResultService,
     private _teamService:TeamService,
     private _driverinfoService:driverInfoService,
-    private _raceResultService:RaceResultService) {
+    private _raceResultService:RaceResultService,private _token:TokenHandlerService) {
     this.orderedTeamsByPoints=null;
     this.teams=null;
     this.grandPrix=null;
@@ -93,87 +95,92 @@ export class HomeLeagueComponent implements OnInit {
     return (environment.BEFORERACEID);
   }
 
+  getDirector(){
+    this._token
+     .getDirector()
+     .subscribe((x) => (this.director = x) && this.loadData());
+ }
+
+loadData(){
+  if(this.director!=null){
+
+        this._grandPrixService.getGrandPrixByRound(this.director.leagueId,2).subscribe(apiEscuderia => this.grandPrix=apiEscuderia);
+        this._raceResultService.getRaceResultByGrandPrix(this.getLastRace()).subscribe((x) =>
+        {(
+          this.raceResults=x)
+          if(this.raceResults.length==0){
+            // this.antes = true;
+
+            // this.firstPosImage="/assets/img/parrilla.jpg"
+            // this.firstText="Los pilotos ya estan preparados"
+            // this.firstTitle="Arranca la temporada!"
+
+            // this.secondPosImage="/assets/img/possibleChamp.jpg"
+            // this.secondTitle="Posible Campeon";
+            // this.secondText="Los expertos apuntan a un piloto de la escuderia del cabalino rampante "
+
+            // this.thirdText="A la espera de aprobar mas circuitos para el campeonato"
+            // this.thirdTitle="Posibles Circuitos"
+            // this.thirdPosImage="/assets/img/selectCircuits.jpg"
+
+            // this.lastText="Los equipos estan terminando los ultimos preparativos"
+            // this.lastTitle="Tension en las escuderias"
+
+            // this.teamsImage="/assets/img/parrillaTeams.jpg"
+
+          }
+        });
+
+        this._raceResultService.getRaceResultData().subscribe((x) =>
+        {(
+          this.raceResults=x)
+          if(this.raceResults.length==0){
+
+            this.antes = true;
+
+            this.firstPosImage="/assets/img/parrilla.jpg"
+            this.firstText="Los pilotos ya estan preparados"
+            this.firstTitle="Arranca la temporada!"
+
+            this.secondPosImage="/assets/img/possibleChamp.jpg"
+            this.secondTitle="Regulacion de monoplazas similar";
+            this.secondText="Cualquiera puede ser campeon..."
+
+            this.thirdText="A la espera de aprobar mas circuitos para el campeonato"
+            this.thirdTitle="Posibles Circuitos"
+            this.thirdPosImage="/assets/img/selectCircuits.jpg"
+
+            this.lastText="Los equipos estan terminando los ultimos preparativos"
+            this.lastTitle="Tension en la s escuderias"
+
+            this.teamsImage="/assets/img/parrillaTeams.jpg"
+
+          }
+        });
+
+        this._teamService.getTeamsByLeagueOrdererByPoints(this.director.leagueId).subscribe(apiEscuderia=>{
+          this.teams=apiEscuderia
+        })
+
+
+
+
+        this._teamService.getTeamsByLeagueOrdererByPoints(this.director.leagueId).subscribe(apiEscuderia =>{
+          this.orderedTeamsByPoints=apiEscuderia
+        });
+
+        this._driverinfoService.getdriverInfoDataByLeagueOrderedByPoints(this.director.leagueId).subscribe(apiStandings=>{
+          this.driversInfo=apiStandings
+
+        });
+        this._grandPrixService.getGrandPrixByRound(2,1).subscribe(apiStandings=>{
+          this.grandPrix=apiStandings
+
+        });
+  }
+}
 
   ngOnInit(): void {
-    //this._teamService.getTeamData().subscribe(apiEscuderia=>this.teams=apiEscuderia)
-    this._grandPrixService.getGrandPrixByRound(2,1).subscribe(apiEscuderia => this.grandPrix=apiEscuderia);
-    this._raceResultService.getRaceResultByGrandPrix(this.getLastRace()).subscribe((x) =>
-    {(
-      this.raceResults=x)
-      if(this.raceResults.length==0){
-
-        // this.antes = true;
-
-        // this.firstPosImage="/assets/img/parrilla.jpg"
-        // this.firstText="Los pilotos ya estan preparados"
-        // this.firstTitle="Arranca la temporada!"
-
-        // this.secondPosImage="/assets/img/possibleChamp.jpg"
-        // this.secondTitle="Posible Campeon";
-        // this.secondText="Los expertos apuntan a un piloto de la escuderia del cabalino rampante "
-
-        // this.thirdText="A la espera de aprobar mas circuitos para el campeonato"
-        // this.thirdTitle="Posibles Circuitos"
-        // this.thirdPosImage="/assets/img/selectCircuits.jpg"
-
-        // this.lastText="Los equipos estan terminando los ultimos preparativos"
-        // this.lastTitle="Tension en las escuderias"
-
-        // this.teamsImage="/assets/img/parrillaTeams.jpg"
-
-      }
-    });
-    this._raceResultService.getRaceResultData().subscribe((x) =>
-    {(
-      this.raceResults=x)
-      if(this.raceResults.length==0){
-
-        this.antes = true;
-
-
-
-        this.firstPosImage="/assets/img/parrilla.jpg"
-        this.firstText="Los pilotos ya estan preparados"
-        this.firstTitle="Arranca la temporada!"
-
-        this.secondPosImage="/assets/img/possibleChamp.jpg"
-        this.secondTitle="Posible Campeon";
-        this.secondText="Los expertos apuntan a un piloto de la escuderia del cabalino rampante "
-
-        this.thirdText="A la espera de aprobar mas circuitos para el campeonato"
-        this.thirdTitle="Posibles Circuitos"
-        this.thirdPosImage="/assets/img/selectCircuits.jpg"
-
-        this.lastText="Los equipos estan terminando los ultimos preparativos"
-        this.lastTitle="Tension en las escuderias"
-
-        this.teamsImage="/assets/img/parrillaTeams.jpg"
-
-
-
-
-      }
-    });
-
-    this._teamService.getTeamData().subscribe(apiEscuderia=>{
-      this.teams=apiEscuderia
-
-    })
-
-
-
-
-    this._teamService.getTeamsOrdererByPoints().subscribe(apiEscuderia =>{
-      this.orderedTeamsByPoints=apiEscuderia
-    });
-
-    this._driverinfoService.getdriverInfoData().subscribe(apiStandings=>{
-      this.driversInfo=apiStandings
-
-    });
-    this._grandPrixService.getGrandPrixByRound(2,1).subscribe(apiStandings=>{
-      this.grandPrix=apiStandings
-
-    });
-}
+    this.getDirector()
+  }
 }

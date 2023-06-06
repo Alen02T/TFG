@@ -2,17 +2,17 @@
 <app-admin-header></app-admin-header>
 
 
-<div #miElemento class="prueba" style="background-color: lightgray;" >
-  <div class="container">
+<div #miElemento class="prueba" style="background-color: #030a18;color: lightgray;" >
+  <div class="container" >
 
 
-  <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+  <div class="row flex-lg-row-reverse align-items-center g-5 py-5" >
 
 
     <div  [hidden]="team==null" class="col-10 col-sm-8 col-lg-6">
       <img src="{{team?.shieldImage}}" class="d-block mx-lg-auto img-fluid" width="350" height="240" >
     </div>
-    <div  class="container col-lg-6">
+    <div  class="container col-lg-6" >
         <h3>{{driver?.lastname}}</h3>
       <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">{{driver?.name}}</h1>
 
@@ -74,10 +74,14 @@
 </div>
 </div>
 
-<div class="container text-center">
+<main  style="background-color: #192031;color: white;">
+
+
+
+<div class="container text-center" >
   <div class="row">
-    <div style="background-color: rgb(253, 243, 213);padding: 20px;" class=" col">
-      <app-admin-radar-chart style="max-width:300px;max-height: 300px;" [abilityParameter]="driverId"></app-admin-radar-chart>
+    <div style="background-color: rgb(132, 158, 184);padding: 20px;;" class=" col">
+      <app-admin-radar-chart style="max-width:300px;max-height: 300px;color: white;" [abilityParameter]="driverId"></app-admin-radar-chart>
 
       <h3>Closest Rivals</h3>
      <app-table-closest-rivals class="container" [driverId]="driverId"></app-table-closest-rivals>
@@ -163,7 +167,7 @@
         </div> -->
 
         <h1 style="text-align: left;">Estadisticas de Piloto </h1>
-        <div class="col">
+        <div class="col" style="color: black;">
           <div style="height: auto;" class="card mb-3">
             <div class="row g-0">
               <div class="col-md-4" style="background-image: url('{{driver?.imageDriver}}');background-repeat: no-repeat;background-size: contain;">
@@ -203,7 +207,7 @@
 
       </div>
       <h1 style="text-align: left;">Resultados de Carrera</h1>
-      <table class="table">
+      <table class="table" style="color: white;">
         <thead>
           <tr >
             <th scope="col">Ronda</th>
@@ -238,10 +242,10 @@
     Esto es un mensaje de Bootstrap Toast.
   </div>
 </div>
+</main>
 
 
-
-<div class="container">
+<!-- <div class="container">
   <h2>Footer hermano</h2>
 </div>
-
+ -->

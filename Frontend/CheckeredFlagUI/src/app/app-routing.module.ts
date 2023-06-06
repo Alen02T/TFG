@@ -25,12 +25,15 @@ import { AdminRadarChartComponent } from './components/admin-radar-chart/admin-r
 import { AdminChartsComponent } from './components/admin-charts/admin-charts.component';
 import { AdminAddTeamComponent } from './components/admin-add-team/admin-add-team.component';
 import { AddLigaComponent } from './components/add-liga/add-liga.component';
+import { AuthGuard } from './guards/auth.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
 
   {
     path:'addLiga',
-    component:AddLigaComponent
+    component:AddLigaComponent,
+    canActivate:[AuthGuard]
   },
  {
     path: 'teams',
@@ -39,47 +42,58 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+    canActivate:[LoginGuard]
   },
   {
     path: 'admin',
     component: AdminComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/drivers',
     component: AdminDriversComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/drivers/:id',
     component: AdminSelectedDriverComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/teams/:id',
     component: AdminSelectedTeamComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/addDriver',
     component: AdminAddDriverComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/addRaces',
     component: AdminAddRacesComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/addTeam',
     component: AdminAddTeamComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/races-management/addResults/:id',
     component: AdminAddResultComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/teams',
     component: AdminTeamsComponent,
+    canActivate:[AuthGuard]
   },
 
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate:[LoginGuard]
   },
   {
     path: 'cards',
@@ -116,10 +130,12 @@ const routes: Routes = [
   {
     path: 'Qualy/:id',
     component:CreateQualyComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'admin/races-management',
     component:AdminRacesManagementComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'GrandPrix/:id',
@@ -130,12 +146,10 @@ const routes: Routes = [
     component: HomeLeagueComponent,
   },
   {
-    path:'radar',
-    component:AdminRadarChartComponent
-  },
-  {
     path:'admin/charts',
-    component:AdminChartsComponent
+    component:AdminChartsComponent,
+    canActivate:[AuthGuard]
+
   }
 
 

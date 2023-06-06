@@ -1,4 +1,4 @@
-<app-admin-header></app-admin-header>
+<!-- <app-admin-header></app-admin-header> -->
 
 
 
@@ -134,9 +134,9 @@
 
 
 
+<main style="background-color:#192031;min-height: 100vh;padding: 20px;">
 
-
-<div class="container">
+<div class="container" >
   <div class="row gutters">
     <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
       <div class="card h-100">
@@ -173,7 +173,7 @@
         </div>
 
 </div></div>
-<form [formGroup]="pilotForm" (ngSubmit)="submitForm()">
+<form [formGroup]="pilotForm" (ngSubmit)="submitForm()" style="padding: 20px;">
   <div class="mb-3">
     <label for="name" class="form-label">Name</label>
     <input type="text" formControlName="name" class="form-control" id="name" required>
@@ -202,7 +202,7 @@
   <div class="mb-3">
     <small>Haz click en el boton amarillo</small><br>
     <label for="imageDriver" class="form-label">Añade tu Foto!</label>
-    <input type="text" formControlName="imageDriver" class="form-control" id="imageDriver">
+    <input [readonly]="disabledInput" type="text" formControlName="imageDriver" class="form-control" id="imageDriver">
   </div>
  <!-- <label for="team" class="form-label">Team</label>
     <input type="number" formControlName="team" class="form-control" id="team" required> -->
@@ -407,3 +407,5 @@
 
 </div>
 
+
+</main>

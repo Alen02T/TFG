@@ -3,7 +3,7 @@
 
 <body style="height: auto;">
   <div style="font-family: FormulaRegular;" class="driver-cards" >
-   <div [routerLink]="'/Drivers/'+driver.driverId" class="flip-card" *ngFor="let driver of driversInfo" style="--team-color: #{{driver.teamColor}};" >
+   <div [routerLink]="'/Drivers/'+driver.driverId" class="flip-card" *ngFor="let driver of driversInfo" style="--team-color: {{driver.teamColor}};" >
       <div class="flip-card-inner" >
         <div class="driver-card card-background" >
          <div class="driver-image-layer" >
