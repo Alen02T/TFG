@@ -134,7 +134,7 @@ body {
   position: absolute;
   left: 72px;
   bottom: -60px;
-  color: rgba(0,0,0,0.05);
+  color: rgba(0,0,0,0.15);
   font-size: 170px;
   font-weight: 700;
 }
@@ -189,17 +189,17 @@ body {
 /* Pikachu */
 
 .flex--pikachu .flex__item--left {
-  background: #f8d41f;
+  background: #abda4d;
 }
 
 .flex--pikachu .flex__item--right {
-  background: #f4ecc5;
+  background: #f6f6f6;
 }
 
 /* Blaziken */
 
 .flex--blaziken .flex__item--left {
-  background: #f64f37;
+  background: #b31515;
 }
 
 .flex--blaziken .flex__item--right {
@@ -209,7 +209,7 @@ body {
 /* Dialga */
 
 .flex--dialga .flex__item--left {
-  background: #476089;
+  background: #003399;
 }
 
 .flex--dialga .flex__item--right {
@@ -219,7 +219,7 @@ body {
 /* Zekrom */
 
 .flex--zekrom .flex__item--left {
-  background: #424242;
+  background: #5d0e8a;
 }
 
 .flex--zekrom .flex__item--right {
@@ -274,4 +274,66 @@ body {
 .flex__container.animate--end .pokemon__img {
   transform: translate3d(200px,0,0);
   opacity: 0;
+}
+
+
+.fill-button {
+  position: relative;
+  overflow:hidden;
+  display:inline-block;
+  width:150px;
+  height:30px;
+  border:1px solid #35495e;
+  text-align:center;
+  box-sizing:border-box;
+  color:#010101;
+  background-color: #d3a200;
+  text-decoration:none;
+  cursor: pointer;
+  line-height:28px;
+  font-family: 'arial';
+  border-radius: 4px;
+}
+.fill-button > span {
+  display:block;
+}
+.fill-button > .fill-button-hover:after, .fill-button > .fill-button-hover:before {
+  position:absolute;
+  top:0;
+  opacity:0;
+  display:block;
+  content:"";
+  width:0;
+  height:30px;
+}
+.fill-button > .fill-button-hover:after {
+  background-color:#35495e;
+  transform:skewX(45deg);
+  transform-origin:center center;
+  transition:all .35s, opacity .4s;
+  left:50%;
+}
+.fill-button .fill-button-hover:before {
+  background-color:#d3a200;
+  transition:opacity 1s;
+}
+.fill-button .fill-button-text {
+  z-index:1;
+  position:relative;
+  color:#35495e;
+  transition:color .35s;
+}
+.fill-button:hover .fill-button-text {
+  color:#d3a200;
+}
+.fill-button .fill-button-hover:hover:after {
+  opacity:1;
+  left:2%;
+  width:95%;
+  transform:skewX(45deg);
+}
+.fill-button > .fill-button-hover:hover:before {
+  opacity: 1;
+  left: 0;
+  width:100%;
 }

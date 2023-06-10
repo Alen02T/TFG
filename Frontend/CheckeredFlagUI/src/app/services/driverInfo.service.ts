@@ -29,8 +29,8 @@ export class driverInfoService {
     return this.http.get<driverInfo[]>(environment.API_URL + '/DriverInfo');
   }
 
-  getdriverInfoDataByDriverId(id : number) : Observable<driverInfo> {
-    return this.http.get<driverInfo>(environment.API_URL + '/DriverInfo/'+id);
+  getdriverInfoDataByDriverId(leagueId:number,id : number) : Observable<driverInfo> {
+    return this.http.get<driverInfo>(environment.API_URL + '/DriverInfo/'+leagueId+'/'+id);
   }
 
 

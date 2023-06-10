@@ -29,6 +29,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { LoginGuard } from './guards/login.guard';
 import { ProfileComponent } from './components/profile/profile.component';
 
+
 const routes: Routes = [
 
   {
@@ -156,9 +157,13 @@ const routes: Routes = [
     component:AdminChartsComponent,
     canActivate:[AuthGuard]
 
+  },
+
+  { path: 'errores', loadChildren: () => import('./components/errores/errores.module').then(m => m.ErroresModule) },
+  {
+    path:'**',
+    redirectTo:'errores'
   }
-
-
 ];
 
 @NgModule({

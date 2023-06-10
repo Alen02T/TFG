@@ -398,7 +398,7 @@ export class AdminAddResultComponent implements OnInit {
         let seasonChange = this.puntosPorPosicion[i] * cantidadGanadores
         let seasonChangeFloored=Math.floor(seasonChange / 1000) * 1000;
 
-        this._driverService.getDriverById(this.qualyResults![i].driverId).subscribe(apiAbility=>{
+        this._driverService.getDriverById(this.director.leagueId,this.qualyResults![i].driverId).subscribe(apiAbility=>{
           this.driver=apiAbility
 
           this.driver.seasonChange=this.driver.seasonChange+seasonChangeFloored
@@ -422,7 +422,7 @@ export class AdminAddResultComponent implements OnInit {
         let seasonChange =(sumaPerdedores-array[contador2])* cantidadPerdedores  //
         let seasonChangeFloored=Math.floor(seasonChange / 1000) * 1000;
 
-        this._driverService.getDriverById(this.qualyResults![i].driverId).subscribe(apiAbility=>{
+        this._driverService.getDriverById(this.director.leagueId,this.qualyResults![i].driverId).subscribe(apiAbility=>{
           this.driver=apiAbility
 
           this.driver.seasonChange=this.driver.seasonChange-seasonChangeFloored

@@ -10,6 +10,4 @@ export class Director {
     this.email='';
     this.leagueId=0;
   }
-
-
 }

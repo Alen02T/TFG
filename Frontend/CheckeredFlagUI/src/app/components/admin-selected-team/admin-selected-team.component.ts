@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
 import { driverInfo } from 'src/app/models/driverinfo.model';
 import { Team } from 'src/app/models/team.model';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
 import { StatService } from 'src/app/services/stat.service';
@@ -19,12 +21,13 @@ export class AdminSelectedTeamComponent implements OnInit {
   drivers:Driver[] | null;
   orderedTeams:Team[] | null;
 
+  director:Director = new Director()
 
   firstDriverInfo:driverInfo | null;
   secondDriverInfo:driverInfo | null;
 
   constructor(private activatedRoute:ActivatedRoute,
-    private _teamService:TeamService,private _driverService:DriverService,
+    private _teamService:TeamService,private _driverService:DriverService,private _token:TokenHandlerService,
     private _statService:StatService,private _driverInfoService:driverInfoService) {
     this.teamId=0;
     this.team=null;
@@ -35,23 +38,35 @@ export class AdminSelectedTeamComponent implements OnInit {
     this.secondDriverInfo=null
    }
 
-  ngOnInit(): void {
+   getDirector(){
+    this._token
+     .getDirector()
+     .subscribe((x) => (this.director = x) && this.loadData());
+ }
 
-    this.activatedRoute.paramMap.subscribe((parameters: any) => {
-      this.teamId = parameters.get('id');
-    });
-
+ loadData(){
+  if(this.director!=null){
     this._teamService.getTeamById(this.teamId).subscribe(apiTeam=>this.team=apiTeam);
     this._driverService.getDriversByEscuderia(this.teamId).subscribe(apiTeam=>{
       this.drivers=apiTeam
 
-      this._driverInfoService.getdriverInfoDataByDriverId(this.drivers[0].driverId).subscribe(apiDriverInfo=>this.firstDriverInfo=apiDriverInfo)
-      this._driverInfoService.getdriverInfoDataByDriverId(this.drivers[1].driverId).subscribe(apiDriverInfo=>this.secondDriverInfo=apiDriverInfo)
+      this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId,this.drivers[0].driverId).subscribe(apiDriverInfo=>this.firstDriverInfo=apiDriverInfo)
+      this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId,this.drivers[1].driverId).subscribe(apiDriverInfo=>this.secondDriverInfo=apiDriverInfo)
 
 
       this._teamService.getTeamsOrdererByPoints().subscribe(apiTeam=>this.orderedTeams=apiTeam);
 
     })
+  }
+ }
+
+  ngOnInit(): void {
+    this.getDirector()
+    this.activatedRoute.paramMap.subscribe((parameters: any) => {
+      this.teamId = parameters.get('id');
+    });
+
+
 
 
 

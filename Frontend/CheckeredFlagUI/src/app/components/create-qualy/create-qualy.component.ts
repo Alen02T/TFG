@@ -216,7 +216,7 @@ export class CreateQualyComponent implements OnInit {
           fastestLap:true,
         };
 
-        this._driverInfo.getdriverInfoDataByDriverId(this.polePiloto).subscribe(apiDatos=>this.driverPoleMan=apiDatos)
+        this._driverInfo.getdriverInfoDataByDriverId(this.director.leagueId,this.polePiloto).subscribe(apiDatos=>this.driverPoleMan=apiDatos)
         this.qualyArray2.push(qualy)
 
         //console.log("Modelo: " , qualy)

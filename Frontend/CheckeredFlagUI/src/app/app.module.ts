@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TeamsComponent } from './components/teams/teams.component';
 import { TeamService } from './services/team.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './components/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -67,6 +67,7 @@ import { AdminAddTeamComponent } from './components/admin-add-team/admin-add-tea
 import { AddLigaComponent } from './components/add-liga/add-liga.component';
 import { TableClosestRivalsComponent } from './components/table-closest-rivals/table-closest-rivals.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { AuthInterceptor } from './services/AuthServices/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,14 @@ import { ProfileComponent } from './components/profile/profile.component';
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
   ,SponsorService,GrandPrixService,QualyService,RaceResultService,QualyResultService
-,LigaService,RaceService,ResultService],
+,LigaService,RaceService,ResultService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }
+
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

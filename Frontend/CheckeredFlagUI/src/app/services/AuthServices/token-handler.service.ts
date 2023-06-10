@@ -37,11 +37,13 @@ export class TokenHandlerService {
     }
   }
 
-  // 3. Get Empleado
+  // 3. Get Director
   getDirector(): Observable<Director> {
     //var email = this.getEmail();
     //console.log(this.getEmail())
 
     return this._director.getUserDirectorData(this.getEmail());
   }
+
+
 }

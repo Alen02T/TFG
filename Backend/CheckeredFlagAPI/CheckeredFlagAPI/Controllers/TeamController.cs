@@ -32,6 +32,8 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(await _context.Teams.OrderByDescending(Teams => Teams.points).ToListAsync());
         }
 
+
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> Get(int id)
         {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Driver } from 'src/app/models/driver.model';
 import { DriverService } from 'src/app/services/driver.service';
 
@@ -8,46 +8,47 @@ import { DriverService } from 'src/app/services/driver.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+ @ViewChild('flexContainer', { static: true }) flexContainerRef!: ElementRef;
+  flexContainers!: HTMLCollectionOf<Element>;
 
-  // click(){
-  //   document.getElementById('.slide-nav')?.addEventListener('click', (e: Event) => {
-  //     e.preventDefault();
-  //     // Obtener la diapositiva actual
-  //     const current: number | undefined = document.getElementById('.flex--active')?.dataset.slide
-  //       ? parseInt(document.getElementById('.flex--active')!.dataset.slide!, 10)
-  //       : undefined;
-  //     // Obtener el número de diapositiva del botón
-  //     const next: number | undefined = this.dataset.slide
-  //       ? parseInt(this.dataset.slide, 10)
-  //       : undefined;
+  ngOnInit() {
+    this.flexContainers = document.getElementsByClassName('flex__container') as HTMLCollectionOf<Element>;
+  }
 
-  //     document.getElementById('.slide-nav')?.classList.remove('active');
-  //     this.classList.add('active');
+  click(event: Event) {
+    event.preventDefault();
 
-  //     if (current === next) {
-  //       return false;
-  //     } else {
-  //       document
-  //         .getElementById('.slider__warpper')
-  //         ?.querySelector(`.flex__container[data-slide="${next}"]`)
-  //         ?.classList.add('flex--preStart');
-  //       document.getElementById('.flex--active')?.classList.add('animate--end');
+    const clickedElement = event.target as HTMLElement;
+    const currentActive = document.querySelector('.flex--active');
+    const currentActiveSlide = currentActive?.getAttribute('data-slide');
+    const nextSlide = clickedElement.getAttribute('data-slide');
 
-  //       setTimeout(() => {
-  //         document
-  //           .getElementById('.flex--preStart')
-  //           ?.classList.remove('animate--start', 'flex--preStart')
-  //           ?.classList.add('flex--active');
-  //         document
-  //           .getElementById('.animate--end')
-  //           ?.classList.add('animate--start')
-  //           ?.classList.remove('animate--end', 'flex--active');
-  //       }, 800);
-  //     }
-  //   });
+    if (currentActiveSlide !== nextSlide) {
+      const sliderWrapper = document.querySelector('.slider__warpper');
+      const nextSlideElement = sliderWrapper?.querySelector(`.flex__container[data-slide="${nextSlide}"]`);
 
-  // }
+      if (nextSlideElement && currentActive) {
+        const allSlides = sliderWrapper?.querySelectorAll('.flex__container');
 
+        allSlides?.forEach(slide => {
+          slide.classList.remove('flex--preStart');
+        });
+
+        nextSlideElement.classList.add('flex--preStart');
+        nextSlideElement.classList.add('animate--start');
+
+        currentActive.classList.add('animate--end');
+        currentActive.classList.remove('flex--active');
+
+        setTimeout(() => {
+          nextSlideElement.classList.remove('animate--start', 'flex--preStart');
+          nextSlideElement.classList.add('flex--active');
+          currentActive.classList.add('animate--start');
+          currentActive.classList.remove('animate--end', 'flex--active');
+        }, 300);
+      }
+    }
+  }
 
 
 }

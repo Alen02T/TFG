@@ -190,29 +190,29 @@ export class SelectedDriverComponent implements OnInit {
     // const myLineChart = new Chart(graph, config);
 
 
-    this._Driverservice.getDriverById(this.driverId).subscribe(
-      apiPilotos => {
-        this.driver=apiPilotos;
-        this.teamId=this.driver?.team;
+    // this._Driverservice.getDriverById(this.driverId).subscribe(
+    //   apiPilotos => {
+    //     this.driver=apiPilotos;
+    //     this.teamId=this.driver?.team;
 
-        this._abilityService.getDriverAbility(this.driverId).subscribe((apiPilotos) =>
-        {
-          this.ability = apiPilotos,
-          this.restoConsistency=  this.ability.consistency-this.numeroInicial,
-          this.restoDefending=  this.ability.defending-this.numeroInicial,
-          this.restoPace=  this.ability.pace-this.numeroInicial,
-          this.restoTire=  this.ability.tireManagement-this.numeroInicial,
-          this.restoOvertaking=  this.ability.overtaking-this.numeroInicial
-        });
-        this._Teamservice.getTeamById(this.teamId).subscribe((
-          apiPilotos) => {
-            this.team = apiPilotos
-            // this.color!=this.team.color;
-            // console.log(this.color)
+    //     this._abilityService.getDriverAbility(this.driverId).subscribe((apiPilotos) =>
+    //     {
+    //       this.ability = apiPilotos,
+    //       this.restoConsistency=  this.ability.consistency-this.numeroInicial,
+    //       this.restoDefending=  this.ability.defending-this.numeroInicial,
+    //       this.restoPace=  this.ability.pace-this.numeroInicial,
+    //       this.restoTire=  this.ability.tireManagement-this.numeroInicial,
+    //       this.restoOvertaking=  this.ability.overtaking-this.numeroInicial
+    //     });
+    //     this._Teamservice.getTeamById(this.teamId).subscribe((
+    //       apiPilotos) => {
+    //         this.team = apiPilotos
+    //         // this.color!=this.team.color;
+    //         // console.log(this.color)
 
 
-      });
-});
+    //   });
+    // });
 
 }
 }

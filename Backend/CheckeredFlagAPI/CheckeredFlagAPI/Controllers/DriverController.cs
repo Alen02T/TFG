@@ -98,12 +98,29 @@ namespace CheckeredFlagAPI.Controllers
         }
 
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Driver>> Get(int id)
+        [HttpGet("{leagueId}/{id}")]
+        public async Task<ActionResult<Driver>> Get(int leagueId,int id)
         {
+            var league = await _context.Ligas.FindAsync(leagueId);
+
+            if (league == null)
+            {
+                return NotFound("Liga not found.");
+            }
+
             var Driver = await _context.Drivers.FindAsync(id);
-            if (Driver == null)
-                return BadRequest("Driver not found.");
+            
+
+            if (Driver == null) {
+                return NotFound("Driver not found.");
+            }
+             
+
+            if (Driver.leagueId != league.Id)
+            {
+                return Unauthorized("Access denied."); // Devuelve un error de autorización si el director no tiene permiso para acceder al piloto
+            }
+
             return Ok(Driver);
         }
 

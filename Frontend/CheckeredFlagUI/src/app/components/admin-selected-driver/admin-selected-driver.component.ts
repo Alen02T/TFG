@@ -175,20 +175,11 @@ export class AdminSelectedDriverComponent implements OnInit {
 
   // Saving field values for checking if there are changes
   if (this.director != null) {
-    this._teamService.getAvailableTeams(this.director.leagueId).subscribe(apiTeams=>this.availableTeams=apiTeams)
-
-  }
-
-}
-
-
-  ngOnInit(): void {
-    this.getDirector()
     this.activatedRoute.paramMap.subscribe((parameters: any) => {
       this.driverId = parameters.get('id');
 
       this._statService.getDriverStats(this.driverId).subscribe(apiDatos=>this.stat=apiDatos)
-
+      this._teamService.getAvailableTeams(this.director.leagueId).subscribe(apiTeams=>this.availableTeams=apiTeams)
       this._raceResultService.getRaceResultByDriver(this.driverId).subscribe(apiTeams=>{
         this.raceResults=apiTeams
         let length=this.raceResults.length
@@ -206,7 +197,7 @@ export class AdminSelectedDriverComponent implements OnInit {
         this.podiumAverage=(this.podiumAverage/length)*100
       })
 
-      this._driverService.getDriverById(this.driverId).subscribe(apiDriver => {
+      this._driverService.getDriverById(this.director.leagueId,this.driverId).subscribe(apiDriver => {
         this.driver = apiDriver;
         this._teamService.getTeamById(this.driver.team).subscribe(apiDriver => this.team=apiDriver);
 
@@ -227,5 +218,15 @@ export class AdminSelectedDriverComponent implements OnInit {
         }
       );
     }
-  )}
+  )
+
+
+  }
+
+}
+
+
+  ngOnInit(): void {
+    this.getDirector()
+  }
 }

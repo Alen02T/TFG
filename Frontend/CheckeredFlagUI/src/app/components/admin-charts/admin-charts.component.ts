@@ -261,7 +261,7 @@ export class AdminChartsComponent implements OnInit {
   buclePilotos(myLineChart:Chart,id:number){
     this._driverService.getDriversByLeagueId(id).subscribe((x) => {
       x.forEach((element) => {
-        this._driverService.getDriverById(element.driverId).subscribe(apiDriver => this.driver=apiDriver);
+        this._driverService.getDriverById(this.director.leagueId,element.driverId).subscribe(apiDriver => this.driver=apiDriver);
         let combinado = element.name //+ ' | ' + element.number
         this.addDataSet(myLineChart,combinado!,element.driverId)
       });

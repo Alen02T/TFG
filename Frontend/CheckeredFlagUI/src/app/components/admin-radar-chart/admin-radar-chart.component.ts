@@ -1,10 +1,12 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { Ability } from 'src/app/models/ability.model';
+import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
 import { driverInfo } from 'src/app/models/driverinfo.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { Stat } from 'src/app/models/stat.model';
+import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
@@ -28,16 +30,28 @@ export class AdminRadarChartComponent implements OnInit {
   stat:Stat | null
   ability:Ability | null
   driver:driverInfo | null
-
+  director:Director = new Director()
 
   constructor(private _statService:StatService,private _abilityService:AbilityService,
     private _driverService:DriverService,private _driverInfoService:driverInfoService,
-    private _raceService:RaceService ){
+    private _raceService:RaceService,private _token:TokenHandlerService ){
     this.stat=null;
     this.ability=null;
     this.abilityParameter=null
     this.driver=null;
   }
+
+  getDirector(){
+    this._token
+     .getDirector()
+     .subscribe((x) => (this.director = x) && this.loadData());
+ }
+
+ loadData(){
+  if(this.director!=null){
+    this.cargarRadar(this.abilityParameter!)
+  }
+ }
 
    hexToRgba(hex: string, alpha: number): string {
     const hexValue = hex.replace('#', '');
@@ -49,7 +63,7 @@ export class AdminRadarChartComponent implements OnInit {
 
   addDataSet(myLineChart: Chart, driverName: string, driverId: number) {
     this._abilityService.getDriverAbility(driverId).subscribe(data => {
-      this._driverInfoService.getdriverInfoDataByDriverId(driverId).subscribe(apiDriverInfo=>this.driver=apiDriverInfo)
+      this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId,driverId).subscribe(apiDriverInfo=>this.driver=apiDriverInfo)
       this.ability = data;
 
       let overtaking = this.ability.overtaking;
@@ -113,7 +127,7 @@ export class AdminRadarChartComponent implements OnInit {
   }
 
   cargarRadar(id:number){
-    this._driverInfoService.getdriverInfoDataByDriverId(id).subscribe(apiDriver=>{
+    this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId,id).subscribe(apiDriver=>{
       this.driver=apiDriver
 
 
@@ -247,7 +261,7 @@ export class AdminRadarChartComponent implements OnInit {
 buclePilotos(myLineChart:Chart){
     this._driverService.getDriversByLeagueId(2).subscribe((x) => {
       x.forEach((element) => {
-        this._driverService.getDriverById(element.driverId).subscribe(apiDriver => this.driver2=apiDriver);
+        this._driverService.getDriverById(this.director.leagueId,element.driverId).subscribe(apiDriver => this.driver2=apiDriver);
         let combinado = element.name //+ ' | ' + element.number
         this.addDataSet(myLineChart,combinado!,element.driverId)
       });
@@ -293,7 +307,8 @@ buclePilotos(myLineChart:Chart){
 }
 
   ngOnInit(): void {
-   this.cargarRadar(this.abilityParameter!)
+   this.getDirector()
+
   //  this.crearGraficaDeTodos()
   // this.cargarLineChart()
   // this.cargarPosicionDeGridPosicionFinal()
