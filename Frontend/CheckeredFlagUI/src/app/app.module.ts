@@ -68,6 +68,7 @@ import { AddLigaComponent } from './components/add-liga/add-liga.component';
 import { TableClosestRivalsComponent } from './components/table-closest-rivals/table-closest-rivals.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AuthInterceptor } from './services/AuthServices/auth.interceptor';
+import { ErroresModule } from './components/errores/errores.module';
 
 @NgModule({
   declarations: [
@@ -123,16 +124,17 @@ import { AuthInterceptor } from './services/AuthServices/auth.interceptor';
     MatTabsModule,
     MatSelectModule,
     MatSliderModule,
+    ErroresModule
   ],
   providers: [TeamService,CookieHandlerService,DirectorService,TokenHandlerService,
     DriverService,AbilityService,driverInfoService,StatService,CircuitService
   ,SponsorService,GrandPrixService,QualyService,RaceResultService,QualyResultService
 ,LigaService,RaceService,ResultService,
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }
+{
+  provide: HTTP_INTERCEPTORS,
+  useClass: AuthInterceptor,
+  multi: true
+}
 
 ],
   bootstrap: [AppComponent]

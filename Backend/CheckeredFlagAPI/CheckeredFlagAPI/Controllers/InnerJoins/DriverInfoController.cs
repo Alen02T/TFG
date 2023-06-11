@@ -328,29 +328,25 @@ namespace CheckeredFlagAPI.Controllers.InnerJoins
               }
 
         [HttpGet("{leagueId}/{driverId}")]
-        public ActionResult<DriverInfo> GetAllDriverInfoByDriverId(int leagueId,int driverId)
+        public ActionResult<Driver> GetAllDriverInfoByDriverId(int leagueId,int driverId)
         {
             var league = _context.Ligas.Find(leagueId);
+            var driver = _context.Drivers.FirstOrDefault(d => d.driverId == driverId);
 
-            
             if (league == null)
             {
                 return NotFound("Liga not found.");
             }
-
-
-            /*
-            if (Driver?.leagueId == null || Driver.leagueId != league.Id)
-            {
-                return Unauthorized("Access denied."); // Devuelve un error de autorización si el director no tiene permiso para acceder a la liga
-            }*/
-            var driver = _context.Drivers.FirstOrDefault(d => d.driverId == driverId);
 
             if (driver == null)
             {
                 return NotFound("Driver not found."); // Devuelve un error 404 si el conductor no se encuentra
             }
 
+            if (driver.leagueId != league.Id)
+            {
+                return Unauthorized("Access denied.");
+            }
 
             var driverInfo = (from d in _context.Drivers
                                   join t in _context.Teams on d.team equals t.teamId

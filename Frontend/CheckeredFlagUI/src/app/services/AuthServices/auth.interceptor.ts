@@ -49,16 +49,20 @@ export class AuthInterceptor implements HttpInterceptor {
     const unauthorized = 401
     const not_found=404
     const server_error=500
+    const client_error=400
 
     if(err instanceof HttpErrorResponse){
       if(err.status===unauthorized){
-        this._router.navigate([("errors")])
+        this._router.navigate([("errores/401")])
+      }
+      if(err.status===client_error){
+        this._router.navigate([("errores/404")])
       }
       if(err.status===server_error){
-        this._router.navigateByUrl("errors/500")
+        this._router.navigateByUrl("errores/500")
       }
       if(err.status===not_found){
-        this._router.navigateByUrl("errors/404")
+        this._router.navigateByUrl("errores/404")
       }
     }
       return throwError(err)
