@@ -34,12 +34,29 @@ namespace CheckeredFlagAPI.Controllers
 
 
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Team>> Get(int id)
+        [HttpGet("{leagueId}/{id}")]
+        public async Task<ActionResult<Team>> Get(int leagueId,int id)
         {
+            var league = await _context.Ligas.FindAsync(leagueId);
+
+            if (league == null)
+            {
+                return NotFound("Liga not found.");
+            }
+
             var team = await _context.Teams.FindAsync(id);
-            if (team == null)
+
+            if (team == null) {
                 return BadRequest("Team not found.");
+            }
+
+            if (team.leagueId != league.Id)
+            {
+                return Unauthorized("Access denied."); // Devuelve un error de autorización si el director no tiene permiso para acceder al piloto
+            }
+
+         
+               
             return Ok(team);
         }
 

@@ -213,7 +213,7 @@
 
   </div> -->
 
-  <ng-select (change)="getTeam(selectedTeam)" style="border: 2px solid black;" [items]="availableTeams" [(ngModel)]="selectedTeam" bindLabel="team" bindValue="teamId" formControlName="team">
+  <ng-select (change)="getTeam(director.leagueId,selectedTeam)" style="border: 2px solid black;" [items]="availableTeams" [(ngModel)]="selectedTeam" bindLabel="team" bindValue="teamId" formControlName="team">
     <ng-template  ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
         <div style="margin: 10px 0;border: 2px solid #{{item.color}};" class="card mb-3">
           <div class="row g-0">

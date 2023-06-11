@@ -87,8 +87,8 @@ export class AdminAddTeamComponent implements OnInit {
     // this._teamService.getTeamsByLeagueOrdererByPoints(1).subscribe(apiTeam=>this.teams=apiTeam);
   }
 
-  getTeam(idDriver:number){
-    this._teamService.getTeamById(idDriver).subscribe(apiEscuderia => {
+  getTeam(idLeague:number,idDriver:number){
+    this._teamService.getTeamById(idLeague,idDriver).subscribe(apiEscuderia => {
       this.team=apiEscuderia
     });
   }

@@ -46,7 +46,7 @@ export class AdminSelectedTeamComponent implements OnInit {
 
  loadData(){
   if(this.director!=null){
-    this._teamService.getTeamById(this.teamId).subscribe(apiTeam=>this.team=apiTeam);
+    this._teamService.getTeamById(this.director.leagueId,this.teamId).subscribe(apiTeam=>this.team=apiTeam);
     this._driverService.getDriversByEscuderia(this.teamId).subscribe(apiTeam=>{
       this.drivers=apiTeam
 

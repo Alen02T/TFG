@@ -199,7 +199,7 @@ export class AdminSelectedDriverComponent implements OnInit {
 
       this._driverService.getDriverById(this.director.leagueId,this.driverId).subscribe(apiDriver => {
         this.driver = apiDriver;
-        this._teamService.getTeamById(this.driver.team).subscribe(apiDriver => this.team=apiDriver);
+        this._teamService.getTeamById(this.director.leagueId,this.driver.team).subscribe(apiDriver => this.team=apiDriver);
 
       });
 

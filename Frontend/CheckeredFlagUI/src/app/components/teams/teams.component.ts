@@ -25,7 +25,7 @@ export class TeamsComponent implements OnInit {
       //alert(string)
       let number = string;
 
-      this.teamService.getTeamById(number).subscribe(apiEscuderia => this.team=apiEscuderia);
+      // this.teamService.getTeamById(number).subscribe(apiEscuderia => this.team=apiEscuderia);
       //this.driverService.getDriversByEscuderia(number).subscribe(apiEscuderia => this.drivers=apiEscuderia);
       //let shield = this.team?.shieldImage
       //console.log(this.team?.shieldImage)
