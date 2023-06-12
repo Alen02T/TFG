@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>{{team.name}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title style="background-color: {{team.color}};" size="large">  <img height="70px" src="{{team.shieldImage}}" alt=""></ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item color="dark">
+          <ion-label>Informacion general</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Director: <strong style="color: {{team.color}};">{{team.director}}</strong></ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Country: <strong style="color: {{team.color}};">{{team.country}}</strong> </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Cuartel: <strong style="color: {{team.color}};">{{team.homefactory}}</strong></ion-label>
+        </ion-item>
+
+      </ion-col>
+      <ion-col>
+        <ion-card color="dark">
+          <img alt="Silhouette of mountains" src="{{team.vehicleImage}}" />
+          <ion-card-header>
+            <ion-card-title>{{team.chassis}}</ion-card-title>
+            <ion-card-subtitle>{{team.engine}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            Coche con el que compite {{team.name}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-header>
+    <ion-toolbar color="dark" >
+      <ion-title size="large"> Pilotos de {{team.name}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-item color="light">
+    <ion-label>Esta es la pareja de pilotos que compiten en este equipo</ion-label>
+  </ion-item>
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let item of drivers">
+        <ion-card>
+          <img style="background-color: {{team.color}};" alt="Silhouette of mountains" src="{{item.imageDriver}}" />
+          <ion-card-header>
+            <ion-card-title>{{item.name}}</ion-card-title>
+            <ion-card-subtitle>{{item.lastname}} | <strong><i>{{item.number}}</i></strong></ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>Current Price: {{item.currentPrice | currency:'USD'}}</p>
+            <p>Country: {{item.country}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer  collapse="fade">
+  <ion-toolbar color="dark">
+    <ion-title style="float: left;">Checkered Flag</ion-title>
+    <img style="float: right;" height="40px" src="/assets/img/checkeredFlag.png" alt="">
+  </ion-toolbar>
+</ion-footer>
+

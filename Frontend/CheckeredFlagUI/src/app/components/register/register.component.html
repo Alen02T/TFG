@@ -23,6 +23,9 @@
         </div> -->
 
         <button (click)="register(this.formulario.value)"  style="color: black;">Log In</button>
+        <div *ngIf="loginError" class="error-message">
+          <div class="alert alert-danger" role="alert">La contraseña debe llevar un caracter especial,un numero y una mayuscula</div>
+        </div>
     </form>
 
 </body>

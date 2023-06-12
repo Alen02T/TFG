@@ -1,0 +1,63 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Equipos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Equipos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-list [inset]="true">
+    <ion-item color="dark">
+      <div style="font-family: FormulaRegular;" class="driver-cards" >
+        <div [routerLink]="'/teams/'+team.teamId" class="flip-card" *ngFor="let team of teams" style="--team-color: {{team.color}};" >
+           <div class="flip-card-inner" >
+
+             <div class="driver-card card-background" >
+
+              <div class="driver-image-layer" >
+
+              </div>
+               <div class="overlay">
+                 <img src="{{team.shieldImage}}" height="70" width="70" style="float: left;" alt=""><br>
+                 <img [src]="team.vehicleImage" alt="">
+                 <!-- <img src="/assets/img/renault.png" class="img-fluid" height="100" width="220" alt=""> -->
+
+                 <!-- <div class="number" style="font-weight: bold;"><i>{{tean.overall}}</i></div><br> -->
+                 <!--<div class="abbr" style="font-weight: bold;">VER</div>-->
+                 <!-- <img  class="flag rounded-c flag-icon flag-icon-{{team?.flag}}" alt=""> -->
+                 <!--<img class="team" src="\assets\img\redbull_logo.png" alt="">-->
+                 <!-- <span style="float: right;border-radius: 50px;" class="flag-icon flag-icon-{{team?.flag}}"></span> -->
+                  <!-- <div class="text-center  last-name">{{  team.engine }}</div> -->
+
+                  <hr>
+               </div>
+               <div class="overlay-name">
+                 <div class="last-name"> {{ team.director }}</div>
+                 <div class="first-name">{{ team.name }}</div>
+
+                 <hr>
+                <!-- <img src="{{team.shieldImage}}" height="30" width="30" style="float: left;" alt=""> -->
+                <span style="float: left;border-radius: 50px;width: 30px;height: 30px;" class="flag-icon flag-icon-{{team?.flag}}"></span>
+                 <!-- <p> <small> {{ team.engine }}</small></p> -->
+
+                <!-- <a target="_blank" [routerLink]="'/Drivers/'+driver.driverId"><button style="background-color: rgb(230, 230, 230);" type="button" class="btn btn-info">See More</button></a> -->
+               </div>
+               <!--style="width: 250px;"-->
+
+             </div>
+           </div>
+         </div>
+       </div>
+    </ion-item>
+  </ion-list>
+
+  <!--<app-footer></app-footer>-->
+
+</ion-content>

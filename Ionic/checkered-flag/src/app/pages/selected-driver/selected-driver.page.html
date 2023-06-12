@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>{{driverInfo.driverName}} {{driverInfo.driverLastName}} </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{driverInfo.driverName}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-img style="background-image: url({{driverInfo.teamShieldImage}});background-position: center;background-repeat: no-repeat;background-size: contain;background-color: {{driverInfo.teamColor}};"
+  src="{{driverInfo.driverImageDriver}}"
+></ion-img>
+<ion-item color="dark">
+  <ion-label>
+    <h1>{{driverInfo.driverName}}</h1>
+    <p>{{driverInfo.driverLastName}}</p>
+  </ion-label>
+</ion-item>
+
+<ion-list>
+  <ion-list-header  color="warning">
+    <ion-label>Latest Results</ion-label>
+  </ion-list-header>
+  <ion-item *ngFor="let item of raceResults">
+    <ion-label>{{item.raceName}}
+    </ion-label>
+    <ion-grid>
+      <ion-row >
+        <ion-col style="background-color: rgb(231, 210, 251);">{{item.resultGrid}}º</ion-col>
+        <ion-col style="background-color: lightblue;">{{item.resultPoints}} Pts</ion-col>
+        <ion-col *ngIf="item.resultFastestLap"><img style="height: 20px;" src="/assets/stuff/fastest.png" alt=""></ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+</ion-list>
+</ion-content>
+<ion-footer  collapse="fade">
+  <ion-toolbar color="dark">
+    <ion-title style="float: left;">Checkered Flag</ion-title>
+    <img style="float: right;" height="40px" src="/assets/img/checkeredFlag.png" alt="">
+  </ion-toolbar>
+</ion-footer>

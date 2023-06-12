@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ion-toolbar-dark" >
+    <ion-title >Pilotos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Pilotos</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-list [inset]="true">
+    <ion-item color="dark">
+      <div style="font-family: FormulaRegular;" class="driver-cards" >
+        <div [routerLink]="'/drivers/'+driver.driverId" class="flip-card" *ngFor="let driver of driversInfo" style="--team-color: {{driver.teamColor}};" >
+           <div class="flip-card-inner" >
+             <div class="driver-card card-background" >
+              <div class="driver-image-layer" >
+               <img [src]="driver.driverImageDriver" alt="">
+              </div>
+               <div class="overlay">
+                 <p>Rating</p>
+                 <div class="number" style="font-weight: bold;"><i>{{driver.overall}}</i></div><br>
+                 <!--<div class="abbr" style="font-weight: bold;">VER</div>-->
+                 <!--<img class="flag" src="\assets\img\nl.png" alt="">-->
+                 <!--<img class="team" src="\assets\img\redbull_logo.png" alt="">-->
+                 <span style="float: right;border-radius: 50px;" class="fi fi-{{ driver?.driverFlag }}"></span>
+                  <!-- <div class="text">{{ driver.driverCountry }}</div> -->
+
+               </div>
+               <div class="overlay-name">
+
+                 <div class="first-name">{{ driver.driverName }}</div>
+                 <div class="last-name"> {{ driver.driverLastName }}</div>
+                 <!-- <p> <small> {{ driver.teamName }}</small></p> -->
+                 <img style="height: 60px; width: 60px;" [src]="driver.teamShieldImage" alt="">
+                <!-- <a target="_blank" [routerLink]="'/Drivers/'+driver.driverId"><button style="background-color: rgb(230, 230, 230);" type="button" class="btn btn-info">See More</button></a> -->
+               </div>
+               <!--style="width: 250px;"-->
+
+             </div>
+           </div>
+         </div>
+       </div>
+    </ion-item>
+  </ion-list>
+
+
+</ion-content>
+<ion-footer  collapse="fade">
+  <ion-toolbar color="dark">
+    <ion-title style="float: left;">Checkered Flag</ion-title>
+    <img style="float: right;" height="40px" src="/assets/img/checkeredFlag.png" alt="">
+  </ion-toolbar>
+</ion-footer>

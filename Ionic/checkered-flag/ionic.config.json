@@ -1,0 +1,9 @@
+{
+  "name": "ionic-app-base",
+  "integrations": {},
+  "type": "angular",
+  "proxies": [{
+    "path": "/api",
+    "proxyUrl": "http://localhost"
+  }]
+}

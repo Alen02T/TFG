@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-toolbar  color="light">
+    <ion-title size="large">Resultados de {{grandPrix.raceName}} <span class="flag flag-{{grandPrix.circuitFlag}}"></span></ion-title>
+  </ion-toolbar>
+  <swiper-container [slidesPerView]="3">
+    <swiper-slide *ngFor="let item of raceResults">
+      <ion-card style="background-color: {{item.teamColor}};">
+        <ion-thumbnail style="background-color: black;">
+          <img alt="Silhouette of mountains" src="{{item.driverImageDriver}}" />
+        </ion-thumbnail>
+        <ion-card-header>
+          <ion-card-title>{{item.driverName}} | {{item.driverNumber}}</ion-card-title>
+          <ion-card-subtitle style="color: black;font-weight: bold;">{{item.resultPosition}}º | {{item.resultPoints}}pts</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+         <ion-img src="{{item.teamVehicleImage}}"></ion-img>
+        </ion-card-content>
+
+      </ion-card>
+    </swiper-slide>
+
+  </swiper-container>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card color="dark">
+          <img alt="Silhouette of mountains" src="{{grandPrix.circuitImage}}" />
+          <ion-card-header>
+            <ion-card-title>{{grandPrix.circuitName}} </ion-card-title>
+            <ion-card-subtitle>{{grandPrix.raceName}} | <span style="color: gold;font-weight: bold;">{{grandPrix.sponsorName}}</span></ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <h5>Round : {{grandPrix.raceRound}}</h5>
+            Circuit Lap Record <strong style="color: crimson;"> {{grandPrix.circuitlapRecord}}</strong>
+            Driver Lap Holder <strong style="color: crimson;"> {{grandPrix.circuitdriverRecord}}</strong>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-toolbar  color="light">
+    <ion-title size="large">Driver Standings</ion-title>
+  </ion-toolbar>
+
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>Tabla del mundial</ion-label>
+      </ion-item-divider>
+      <ion-item color="light" *ngFor="let item of driversInfo;index as i">
+        <ion-avatar slot="start">
+          <img src="{{item.driverImageDriver}}" />
+        </ion-avatar>
+        <ion-label>
+          <h1>{{i+1}}º|  Points:{{item.driverPoints}}</h1>
+          <p>{{item.driverName}} {{item.driverLastName}} | <strong> {{item.teamName}}</strong> </p>
+
+        </ion-label>
+      </ion-item>
+    </ion-item-group>
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer  collapse="fade">
+  <ion-toolbar color="dark">
+    <ion-title style="float: left;">Checkered Flag</ion-title>
+    <img style="float: right;" height="40px" src="/assets/img/checkeredFlag.png" alt="">
+  </ion-toolbar>
+</ion-footer>

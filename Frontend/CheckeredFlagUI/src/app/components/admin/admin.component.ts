@@ -233,6 +233,8 @@ onSelectChange(event:Event) {
     this.nombre = this.director.name;
     this.email = this.director.email;
     this.teamId = this.director.leagueId;
+
+
     this._ligaService.getLigaWithCircuits(this.director.leagueId).subscribe(apiLiga=>{
       this.ligaGetNumberCircuitos=apiLiga
       this.circuits=[...apiLiga.circuits]
@@ -240,7 +242,7 @@ onSelectChange(event:Event) {
       console.log(this.ligaGetNumberCircuitos.currentRound)
     })
 
-    this._ligaService.getLiga(this.director?.leagueId).subscribe(apiDirector=>{
+    this._ligaService.getLiga(this.director.leagueId).subscribe(apiDirector=>{
       this.ligaObj=apiDirector
 
       this.getGrandPrix(this.ligaObj.id, this.ligaObj.currentRound)
@@ -256,9 +258,6 @@ onSelectChange(event:Event) {
     this.getAllDrivers(this.director.leagueId);
     this.getTeams(this.director.leagueId);
     this.getMejorPilotoValorado(this.director.leagueId)
-
-
-
   }
 
 }

@@ -2,6 +2,7 @@ using CheckeredFlagAPI.Configurations;
 using CheckeredFlagAPI.Data;
 using CheckeredFlagAPI.Services.DirectorService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -24,11 +25,24 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 
 
-builder.Services.AddCors(options => options.AddPolicy(name: "FormulaOrigins",
-    policy =>
-    {
-        policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
-    }));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FormulaOrigins",
+        builder =>
+        {
+            builder.WithOrigins("http://localhost:4200")
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+
+    options.AddPolicy("FormulaOriginsIonic",
+      builder =>
+      {
+          builder.WithOrigins("http://localhost:8100")
+                 .AllowAnyHeader()
+                 .AllowAnyMethod();
+      });
+});
 
 
 
@@ -72,7 +86,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors("FormulaOrigins");
+app.UseCors("FormulaOrigins"); 
+app.UseCors("FormulaOriginsIonic");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

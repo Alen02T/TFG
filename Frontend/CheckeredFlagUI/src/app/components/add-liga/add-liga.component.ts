@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Director } from 'src/app/models/director.model';
 import { Liga } from 'src/app/models/liga.model';
 import { User } from 'src/app/models/user.model';
@@ -25,7 +26,7 @@ export class AddLigaComponent implements OnInit {
   formulario:FormGroup
   liga:Liga = new Liga()
   constructor(private _authService:AuthService,private formBuilder:FormBuilder,
-    private _directorService:DirectorService,private _token:TokenHandlerService,
+    private _directorService:DirectorService,private _token:TokenHandlerService,private _router:Router,
     private _ligaService:LigaService) {
 
     this.formulario = this.formBuilder.group({
@@ -79,6 +80,7 @@ submitForm() {
       this._directorService.updateDirector(this.directorId, this.director).subscribe(
         (response) => {
           console.log('Director actualizado correctamente', response);
+          this._router.navigateByUrl('/admin')
         },
         (error) => {
           console.error('Error al actualizar el director', error);
