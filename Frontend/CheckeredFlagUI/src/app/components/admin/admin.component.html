@@ -386,12 +386,13 @@
               <div *ngFor="let driverWinner of driversOrderedByPoints?.slice(0,1)" class="jumbotron">
                 <div *ngIf="circuits?.length==ligaGetNumberCircuitos?.currentRound && raceResults?.length!==0" class="container">
                   <h6>Felicidades</h6>
-                  <div class="jumbotron">
+                  <div   class="jumbotron">
                     <small>Ganador del mundial</small>
                     <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
-                      <div style="float: right;width: 50%;height: 100%;">
+                      <div style="background-image: url({{driverWinner.teamShieldImage}});background-position: right;background-size:contain;background-repeat: no-repeat; background-color: {{driverWinner.teamColor}}; float: right; width: 50%; height: 100%;">
                         <img src="{{driverWinner.driverImageDriver}}" alt="">
                       </div>
+
                       <div class="col-md-6 px-0">
                         <h1 class=" fst-italic">Ganador de la {{ligaObj?.nombre}}</h1>
                         <p style="color:{{driverWinner.teamColor}}">{{driverWinner.driverName}} {{driverWinner.driverLastName}}</p>
@@ -414,8 +415,9 @@
                 </div> -->
                 <div class="dropdown-field">
                   <select (change)="onSelectChange($event)">
-                    <option value="rating">Rating</option>
+                    <option value="valued">Most Valued</option>
                     <option value="points">Points</option>
+                    <option value="rating">Rating</option>
                   </select>
                 </div>
                 <!-- <button class="flat-button">

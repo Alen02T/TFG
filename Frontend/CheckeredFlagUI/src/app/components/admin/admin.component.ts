@@ -168,6 +168,14 @@ getDriversOrderedByPoints(leagueId:number){
   })
 }
 
+getDriversOrderedByRating(leagueId:number){
+  this._driverInfoService.getdriverInfoDataByLeagueOrderedByRating(leagueId).subscribe(apiDrivers=>{
+    this.driversInfoNormal=apiDrivers
+    this.textoExplicativo="Los 3 pilotos lideres con mas habilidad"
+
+  })
+}
+
  getAllDrivers(id:number){
     this._driverService.getDriversByLeagueId(id).subscribe(apiDrivers=>this.driversCount=apiDrivers)
     // this._driverService.getDriverData().subscribe(apiEscuderia=>this.drivers=apiEscuderia);
@@ -206,9 +214,12 @@ onSelectChange(event:Event) {
 
   if (selectedOption === 'points') {
     this.getDriversOrderedByPoints(this.director!.leagueId)
-  } else if (selectedOption === 'rating') {
+  } else if (selectedOption === 'valued') {
     this.getDriversOrderedByPrice(this.director!.leagueId)
+  } else if (selectedOption === 'rating') {
+    this.getDriversOrderedByRating(this.director!.leagueId)
   }
+
 }
 
 

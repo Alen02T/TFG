@@ -58,27 +58,27 @@
 
 
 
+<app-admin-header></app-admin-header>
+<marquee   scrollamount="15" style="background-color:rgb(0, 0, 0);color: white;padding: 10px;">
+  <div style="font-family: FormulaRegular;" *ngFor="let raceResult of raceResults;"  style="margin-right: 10px; border-left: 5px solid {{raceResult.teamColor}};display: inline-block;background-color:rgb(44, 44, 44);border: 2px solid rgb(0, 0, 0);justify-content: center;min-width: 25%;padding: 10px;" class="box" >
+    <span style="font-size: 35px;margin-left: 10px;text-align: center;">{{raceResult.resultPosition}}º</span>
+    <span style="font-size: 25px;"> {{raceResult.driverName}} {{raceResult.driverLastName}} |  Pts:<span style="font-weight: bold;">+{{raceResult.resultPoints}}</span> </span>
+    <img style="float: left;" [src]="raceResult.teamShieldImage" height="50" width="50" alt="">
+    <img  style="float: right;margin-left: 5px;border-left: 2px solid black;" [src]="raceResult.teamVehicleImage" alt="">
+  </div>
+</marquee>
 
 
 
 
 <mat-tab-group>
   <mat-tab label="Race">
-    <marquee   scrollamount="15" style="background-color:rgb(0, 0, 0);color: white;padding: 10px;">
-      <div style="font-family: FormulaRegular;" *ngFor="let raceResult of raceResults;"  style="margin-right: 10px; border-left: 5px solid {{raceResult.teamColor}};display: inline-block;background-color:rgb(44, 44, 44);border: 2px solid rgb(0, 0, 0);justify-content: center;min-width: 25%;padding: 10px;" class="box" >
-        <span style="font-size: 35px;margin-left: 10px;text-align: center;font-family: FormulaRegularBold;">{{raceResult.resultPosition}}º</span>
-        <span style="font-size: 25px;"> {{raceResult.driverName}} {{raceResult.driverLastName}} |  Pts:<span style="font-weight: bold;">+{{raceResult.resultPoints}}</span> </span>
-        <img style="float: left;" [src]="raceResult.teamShieldImage" height="50" width="50" alt="">
-        <img  style="float: right;margin-left: 5px;border-left: 2px solid black;" [src]="raceResult.teamVehicleImage" alt="">
-      </div>
-    </marquee>
-
-
-    <div style="font-family: FormulaRegular;">
+    <div>
       <div>
-        <div class="container">
+        <main style="background-color:#131720;padding: 20px;color: lightgray;min-height: 100vh;">
+        <div  class="container">
           <br><br>
-            <h1>Formula 1 {{grandPrix?.sponsorName}} {{grandPrix?.raceName}} - Race Result</h1> <span style="float: right;" class="flag-icon flag-icon-{{grandPrix?.circuitFlag}}"></span>
+            <h1>Formula 1 {{grandPrix?.sponsorName}} {{grandPrix?.raceName}} - Race Result</h1> <span style="float: right;" class="fi fi-{{grandPrix?.circuitFlag}}"></span>
 
             <b>{{grandPrix?.raceDate}}</b> | <small>{{grandPrix?.circuitName}},{{grandPrix?.circuitCountry}}</small>
 
@@ -86,7 +86,7 @@
 
             <h3>Results</h3>
             <br>
-            <table class="table" >
+            <table style="color: lightgray;" class="table" >
               <thead>
                 <tr>
                   <th scope="col">Pos</th>
@@ -98,39 +98,42 @@
               <tbody>
                 <tr *ngFor="let raceResult of raceResults;let first = first; let last = last" >
                   <th  scope="row">{{raceResult?.resultPosition}}</th>
-                  <td>{{raceResult?.driverName}} {{raceResult?.driverLastName}} <b>| <i style="font-family: FormulaRegularBlack;">{{raceResult?.driverNumber}}</i></b></td>
-                  <td>{{raceResult?.teamName}} <img src="{{raceResult?.teamShieldImage}}" width="30" height="30" alt="">   </td>
-                  <td> + {{raceResult?.resultPoints}}</td>
+                  <td>{{raceResult?.driverName}} {{raceResult?.driverLastName}} <b>| <i>{{raceResult?.driverNumber}}</i></b></td>
+                  <td><img src="{{raceResult?.teamVehicleImage}}" alt="">   </td>
+                  <td colspan="2"> + {{raceResult?.resultPoints}}</td>
+                  <td>{{raceResult?.resultFastestLap}}</td>
                 </tr>
               </tbody>
             </table>
-      </div>
+        </div>
+      </main>
     </div>
     </div>
 
   </mat-tab>
   <mat-tab label="Qualifying">
-    <table class="table" >
-      <thead>
-        <tr>
-          <th scope="col">Pos</th>
-          <th scope="col">Piloto</th>
-          <th scope="col">Equipo</th>
-          <th scope="col">Pts</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let qualyResult of qualysResults;let first = first; let last = last" >
-          <th  scope="row">{{qualyResult?.qualyGrid}}</th>
-          <td>{{qualyResult?.driverName}} {{qualyResult?.driverLastName}} <b>| <i style="font-family: FormulaRegularBlack;">{{qualyResult?.driverNumber}}</i></b></td>
-          <td>{{qualyResult?.teamName}} <img src="{{qualyResult?.teamShieldImage}}" width="30" height="30" alt="">   </td>
-          <td> + {{qualyResult?.qualyFastestLap}}</td>
-        </tr>
-      </tbody>
-    </table>
-  </mat-tab>
-  <mat-tab label="Circuit">
-    <app-selected-circuit></app-selected-circuit>
+    <main style="background-color:#131720;padding: 20px;color: lightgray;min-height: 100vh;">
+      <div class="container">
+      <table style="color: lightgray;" class="table" >
+        <thead>
+          <tr>
+            <th scope="col">Pos</th>
+            <th scope="col">Piloto</th>
+            <th scope="col">Equipo</th>
+            <th scope="col">Pts</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let qualyResult of qualysResults;let first = first; let last = last" >
+            <th  scope="row">{{qualyResult?.qualyGrid}}</th>
+            <td>{{qualyResult?.driverName}} {{qualyResult?.driverLastName}} <b>| <i >{{qualyResult?.driverNumber}}</i></b></td>
+            <td>{{qualyResult?.teamName}} <img src="{{qualyResult?.teamShieldImage}}" width="30" height="30" alt="">   </td>
+            <td *ngIf="qualyResult?.qualyFastestLap">POLEMAN</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </main>
   </mat-tab>
 </mat-tab-group>
 
