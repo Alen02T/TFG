@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/AuthServices/auth.service';
@@ -26,15 +27,42 @@ export class LoginComponent implements OnInit {
   @ViewChild('sectionElement') sectionElement!: ElementRef;
   backgroundImages: string[] = [
     '/assets/img/F1-cars.jpg',
-    '/assets/img/alonso.png',
-    '/assets/img/checkeredFlag.png'
+    '/assets/img/f1-indian-gp-2013-sebastian-ve.jpg',
+    '/assets/img/kimi.jpg',
+    '/assets/img/16802477725347.jpg',
+    '/assets/img/i.jpg'
   ];
   currentImageIndex = 0;
+submitted = false;
+loginError = false;
 
   user = new User();
+  formGroup: FormGroup;
+  constructor(private authService: AuthService,private fb:FormBuilder,
+    private router:Router,private _cookieService:CookieHandlerService) {
+      this.formGroup = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        // ...
+      });
+    }
 
-  constructor(private authService: AuthService,private router:Router,private _cookieService:CookieHandlerService) {}
 
+
+  // Crea el formulario y añade las validaciones
+  myForm: FormGroup = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
+  });
+
+  // Obtiene una referencia a los controles para mostrar los mensajes de error
+  get email() {
+    return this.myForm.get('email');
+  }
+
+  get password() {
+    return this.myForm.get('password');
+  }
 
   register(user: User) {
     this.authService.register(user).subscribe(() => {
@@ -45,12 +73,20 @@ export class LoginComponent implements OnInit {
 
 
   login(user: User) {
-    this.authService.login(user).subscribe((token: string) => {
-      //localStorage.setItem('authToken', token);
-      this._cookieService.setCookie(token);
-      this.router.navigateByUrl('/admin');
-    });
+    this.submitted = true;
+    this.authService.login(user).subscribe(
+      (token: string) => {
+        // El inicio de sesión fue exitoso
+        this._cookieService.setCookie(token);
+        this.router.navigateByUrl('/admin');
+      },
+      (error) => {
+        // El inicio de sesión falló, se produjo un error
+        this.loginError = true;
+      }
+    );
   }
+
   preloadImages(): Promise<any> {
     const promises: Promise<any>[] = [];
     this.backgroundImages.forEach((imageUrl: string) => {

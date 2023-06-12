@@ -34,9 +34,6 @@ export class AuthService {
 
   logout() {
     // remove user from local storage and set current user to null
-    //localStorage.removeItem('authToken');
-
-    //this.cookie.delete('authToken');
     this._cookieHandler.closeToken();
     this.router.navigate(['/'], {queryParams: {loggedOut: 'success'}});
     window.location.reload()

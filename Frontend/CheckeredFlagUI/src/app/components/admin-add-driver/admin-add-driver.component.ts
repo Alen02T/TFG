@@ -154,7 +154,6 @@ export class AdminAddDriverComponent implements OnInit {
         // Asignar la ID al formulario
         this.abilityForm.get("driverId")?.setValue(pilotoId);
         this.statForm.get("driverId")?.setValue(pilotoId);
-
         // Continuar con las operaciones necesarias
         this._abilityService.postAbilityData(this.abilityForm.value).subscribe(
           (response) => {
@@ -177,6 +176,7 @@ export class AdminAddDriverComponent implements OnInit {
             // Manejar el error del servicio como sea necesario
           }
         );
+        this.router.navigateByUrl("/admin")
       },
       (error) => {
         console.error("Error al agregar el piloto:", error);

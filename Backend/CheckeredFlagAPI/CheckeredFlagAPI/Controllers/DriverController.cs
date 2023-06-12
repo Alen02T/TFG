@@ -124,6 +124,20 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(Driver);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Driver>> GetById(int id)
+        {
+           
+            var Driver = await _context.Drivers.FindAsync(id);
+
+
+            if (Driver == null)
+            {
+                return NotFound("Driver not found.");
+            }
+            return Ok(Driver);
+        }
+
 
 
         /*
@@ -142,7 +156,7 @@ namespace CheckeredFlagAPI.Controllers
             _context.Drivers.Add(driver);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Get", new { id = driver.driverId }, driver);
+            return CreatedAtAction("GetById", new { id = driver.driverId }, driver);
         }
 
 

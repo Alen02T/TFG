@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Circuit } from 'src/app/models/circuit.model';
 import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
 import { driverInfo } from 'src/app/models/driverinfo.model';
@@ -51,12 +52,12 @@ export class AdminComponent implements OnInit {
   fechaFinal:Date | null;
 
   bestDriversOrderedByPrice:driverInfo[] = [];
-
+  ligaGetNumberCircuitos:Liga = new Liga();
   driversOrderedByPoints:driverInfo[] | null;
   driversInfoNormal:driverInfo[] | null;
   driversCount:Driver[] | null = [];
   teams:Team[] | null;
-
+  circuits:Circuit[] = []
   raceResults:raceResult[] =[];
   textoExplicativo:string="";
 
@@ -141,13 +142,23 @@ getWinnerRace(raceId:number){
 getGrandPrix(leagueId:number,currentRound:number){
   this._grandPrixService.getGrandPrixByRound(leagueId,currentRound).subscribe(apiDatos=>{
     this.grandPrix=apiDatos
-    this.getWinnerRace(this.grandPrix.raceId)
+    console.log(this.grandPrix)
+
+    // this.getWinnerRace(this.grandPrix.raceId)
   })
 }
 
  getDirectores(){
    this._directorService.getDirectorData().subscribe(apiEscuderia => this.directores=apiEscuderia);
  }
+
+getDriversOrderedByPrice(leagueId:number){
+  this._driverInfoService.getdriverInfoDataByLeagueOrderedByPrice(leagueId).subscribe(apiDrivers=>{
+    this.driversInfoNormal=apiDrivers
+    this.textoExplicativo="Los 3 pilotos mas valorados del mundial"
+
+  })
+}
 
 getDriversOrderedByPoints(leagueId:number){
   this._driverInfoService.getdriverInfoDataByLeagueOrderedByPoints(leagueId).subscribe(apiDrivers=>{
@@ -192,25 +203,14 @@ onSubmit() {
 
 onSelectChange(event:Event) {
   const selectedOption = (event.target as HTMLSelectElement).value;
-  console.log(selectedOption)
+
   if (selectedOption === 'points') {
     this.getDriversOrderedByPoints(this.director!.leagueId)
   } else if (selectedOption === 'rating') {
-    // Realizar acción correspondiente a la opción "Work"
-    // Por ejemplo, llamar a un endpoint relacionado con "Work"
-    this.loadWorkEndpoint();
+    this.getDriversOrderedByPrice(this.director!.leagueId)
   }
 }
 
-loadHomeEndpoint() {
-  // Lógica para cargar el endpoint relacionado con "Home"
-  // Por ejemplo, realizar una solicitud HTTP al endpoint correspondiente
-}
-
-loadWorkEndpoint() {
-  // Lógica para cargar el endpoint relacionado con "Work"
-  // Por ejemplo, realizar una solicitud HTTP al endpoint correspondiente
-}
 
 
 
@@ -222,7 +222,12 @@ loadWorkEndpoint() {
     this.nombre = this.director.name;
     this.email = this.director.email;
     this.teamId = this.director.leagueId;
-
+    this._ligaService.getLigaWithCircuits(this.director.leagueId).subscribe(apiLiga=>{
+      this.ligaGetNumberCircuitos=apiLiga
+      this.circuits=[...apiLiga.circuits]
+      console.log(this.circuits.length)
+      console.log(this.ligaGetNumberCircuitos.currentRound)
+    })
 
     this._ligaService.getLiga(this.director?.leagueId).subscribe(apiDirector=>{
       this.ligaObj=apiDirector

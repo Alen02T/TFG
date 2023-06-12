@@ -21,7 +21,7 @@ export class TokenHandlerService {
   // 1. Get token content
   getDecodedAccessToken(): any {
     try {
-      return jwt_decode(this._cookieHandler.getCookie());
+      return jwt_decode(this._cookieHandler.getCookie()!);
     } catch (Error) {
       return null;
     }

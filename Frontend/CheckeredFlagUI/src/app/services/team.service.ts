@@ -48,6 +48,16 @@ export class TeamService {
     return this.http.put<any>(environment.API_URL + '/Team/'+teamId, bodyData);
   }
 
+  updateTeamObject(teamData: Team,teamId:number): Observable<any> {
+    return this.http.put<any>(environment.API_URL + '/Team/'+teamId, teamData);
+  }
+
+  updateTeamPoints(teamId: number, points: number): Observable<any> {
+    const bodyData = points ;
+    return this.http.put<any>(`${environment.API_URL}/Team/${teamId}`, bodyData);
+  }
+
+
 
 
 }

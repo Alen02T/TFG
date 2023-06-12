@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Circuit } from 'src/app/models/circuit.model';
 import { Director } from 'src/app/models/director.model';
 import { Driver } from 'src/app/models/driver.model';
+import { driverInfo } from 'src/app/models/driverinfo.model';
 import { GrandPrix } from 'src/app/models/grandprix.model';
 import { Liga } from 'src/app/models/liga.model';
 import { Qualy } from 'src/app/models/qualy.model';
@@ -10,6 +11,7 @@ import { raceResult } from 'src/app/models/raceresult.model';
 import { Result } from 'src/app/models/result.model';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { DriverService } from 'src/app/services/driver.service';
+import { driverInfoService } from 'src/app/services/driverInfo.service';
 import { GrandPrixService } from 'src/app/services/grandPrix.service';
 import { LigaService } from 'src/app/services/liga.service';
 import { QualyService } from 'src/app/services/qualy.service';
@@ -30,7 +32,7 @@ export class AdminRacesManagementComponent implements OnInit {
   qualys:Qualy[] | null;
   qualysResults:qualyresult[] = [];
   raceResults:raceResult[] | null;
-
+  driversOrderedByPoints:driverInfo[] = []
   ligaGetNumberCircuitos:Liga | null;
   circuitos:Circuit[] = [];
 
@@ -38,7 +40,7 @@ export class AdminRacesManagementComponent implements OnInit {
   driver:Driver | null;
 
   constructor(private _grandPrixService:GrandPrixService,
-    private _qualyService:QualyService,private _ligaService:LigaService,
+    private _qualyService:QualyService,private _ligaService:LigaService,private _driverInfoService:driverInfoService,
     private _qualyResultService:QualyResultService,private _raceResultService:RaceResultService,
     private _resultService:ResultService,private _driverService:DriverService,private _token:TokenHandlerService) {
     this.grandPrixes=null
@@ -87,12 +89,19 @@ export class AdminRacesManagementComponent implements OnInit {
         // this._qualyService.getQualysByRace(15).subscribe(apiDatos=>this.qualys=apiDatos)
         this._qualyResultService.getQualyResultByRoundId(this.director.leagueId,this.liga.currentRound).subscribe(apiDatos=>this.qualysResults=apiDatos)
         this._raceResultService.getRaceResultByRound(this.director.leagueId,this.liga.currentRound).subscribe(apiDatos=>this.raceResults=apiDatos)
-
+        this._driverInfoService.getdriverInfoDataByLeagueOrderedByPrice(this.director.leagueId).subscribe(apiDatos=>this.driversOrderedByPoints=apiDatos)
 
 
         this._grandPrixService.getGrandPrixByRound(this.director.leagueId,this.liga?.currentRound).subscribe(apiGrandPrix=>{
           this.currentGrandPrix=apiGrandPrix
-          this._driverService.getWinnerDriverByRaceId(this.currentGrandPrix.raceId).subscribe(apiWinner=>this.driver=apiWinner)
+          // this._driverService.getWinnerDriverByRaceId(this.currentGrandPrix.raceId).subscribe(apiWinner => {
+          //   if (apiWinner) {
+          //     this.driver = apiWinner;
+          //   } else {
+          //     // El objeto apiWinner es nulo, realizar acciones alternativas o asignar un valor predeterminado
+          //   }
+          // });
+
         })
       })
 

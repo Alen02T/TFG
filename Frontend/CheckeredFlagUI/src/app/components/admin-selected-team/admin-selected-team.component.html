@@ -10,8 +10,8 @@
     </div>
   </section>
   <div style="position: absolute;top: 10px;left: 10px;display: inline-flex;">
-    <div *ngFor="let driver of drivers" style="width: 100px;margin: 10px;border: 4px solid #{{team?.color}};" class="avatar">
-      <img style="background-color: #{{team?.color}}" src="{{driver?.imageDriver}}" alt="">
+    <div *ngFor="let driver of drivers" style="width: 100px;margin: 10px;border: 4px solid {{team?.color}};" class="avatar">
+      <img style="background-color: {{team?.color}}" src="{{driver?.imageDriver}}" alt="">
     </div>
   </div>
 

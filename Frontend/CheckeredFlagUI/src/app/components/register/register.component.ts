@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Director } from 'src/app/models/director.model';
 import { User } from 'src/app/models/user.model';
@@ -17,7 +17,7 @@ export class RegisterComponent {
   // firstFormGroup: FormGroup;
 
   user = new User();
-
+  userLogin:User = new User()
   formulario:FormGroup
 
   constructor(private _authService:AuthService,private formBuilder:FormBuilder,
@@ -38,23 +38,36 @@ crearFormulario(){
 
 }
 
+
+
+
+
 register(user: User) {
 
-  this._authService.register(user).subscribe(() => {
-  });
+  this._authService.register(user).subscribe(
+    () => {
+      let director = new Director();
+      director.email = user.email;
+      director.name = user.name;
+      director.leagueId = 0;
+      this._directorService.postDirectorData(director).subscribe(() => {
+        this._router.navigateByUrl('/addLiga');
+      });
+    },
+    (error) => {
+      // Error durante el registro
+      console.error(error);
+      // Mostrar mensaje de error al usuario
+      // ...
+    }
+  );
 
-  let director = new Director();
-
-  director.email = user.email;
-  director.name = user.name;
-  director.leagueId = 0;
-
-
-  this._directorService.postDirectorData(director).subscribe(() => {
-    this._router.navigateByUrl('/addLiga');
-  });
 
 }
+
+
+
+
 
 
 

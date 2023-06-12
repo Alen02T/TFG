@@ -74,8 +74,7 @@ header h1 {
 main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
+
   padding: 20px;
 }
 
@@ -146,9 +145,7 @@ main {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-button {
-  margin-top: 20px;
-}
+
 
 .close-button {
   position: absolute;

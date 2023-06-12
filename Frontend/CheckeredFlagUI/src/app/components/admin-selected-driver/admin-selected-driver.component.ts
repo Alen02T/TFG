@@ -98,11 +98,10 @@ export class AdminSelectedDriverComponent implements OnInit {
     // console.log(team.teamId)
     // console.log(this.driver)
     this.teamSelectedNumber=team.teamId
-    console.log(this.teamSelectedNumber)
   }
 
   updateDriver(){
-
+    console.log(this.teamSelectedNumber)
     if (this.teamSelectedNumber === 0) {
       // mostrar mensaje de error
       return;
@@ -117,7 +116,7 @@ export class AdminSelectedDriverComponent implements OnInit {
         console.error("Error al actualizar el Driver:", error);
       }
     );
-    this._router.navigate(['/drivers']);
+    this._router.navigate(['/admin/teams/'+this.teamSelectedNumber]);
     }
 
 

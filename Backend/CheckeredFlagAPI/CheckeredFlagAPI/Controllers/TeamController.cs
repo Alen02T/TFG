@@ -124,8 +124,9 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(await _context.Teams.ToListAsync());
         }
-        
+
         //Version Optimizada de Put
+       
         [HttpPut]
         [Route("{id}")]
         public async Task<IActionResult> UpdateTeam([FromRoute] int id, Team request)
@@ -154,7 +155,22 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(dbTeam);
 
+        } /*
+        [HttpPut]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateTeam([FromRoute] int id, [FromBody] int points)
+        {
+            var dbTeam = await _context.Teams.FindAsync(id);
+            if (dbTeam == null)
+                return BadRequest("Team not found.");
+
+            dbTeam.points += points;
+
+            await _context.SaveChangesAsync();
+
+            return Ok(dbTeam);
         }
+        */
 
 
         [HttpDelete("{id}")]

@@ -13,6 +13,8 @@ import { driverInfo } from 'src/app/models/driverinfo.model';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { Director } from 'src/app/models/director.model';
+import { StatService } from 'src/app/services/stat.service';
+import { Stat } from 'src/app/models/stat.model';
 
 @Component({
   selector: 'app-create-qualy',
@@ -52,7 +54,7 @@ export class CreateQualyComponent implements OnInit {
   allMoved:boolean
   http: any;
   showCard: boolean = false;
-
+  stat:Stat = new Stat()
 
   polePiloto:number=0;
 
@@ -63,7 +65,7 @@ export class CreateQualyComponent implements OnInit {
   constructor(private _qualyService:QualyService,private _driverService:DriverService,
     private _activatedRoute:ActivatedRoute,private _grandPrix:GrandPrixService,
     private _driverInfo:driverInfoService,private router:Router,
-    private _token:TokenHandlerService) {
+    private _token:TokenHandlerService,private _statService:StatService) {
 
     this.driverPoleMan=null
     this.qualies2=null;
@@ -188,15 +190,16 @@ export class CreateQualyComponent implements OnInit {
   }
 
   public redirectToPage(): void {
+    this.toggleCard()
     setTimeout(() => {
       this.router.navigate(['/admin/races-management']); // Cambia '/otra-pagina' con la ruta de la página a la que quieres redirigir
-    }, 3000); // Espera 3000 milisegundos (3 segundos) antes de redirigir
+    }, 2000); // Espera 3000 milisegundos (3 segundos) antes de redirigir
   }
 
   //El array 3 funciona
   onAddQualys3(array:any){
 
-
+    this.toggleCard()
   let contador=1
     array.forEach((item: any) => {
       //console.log(item)
@@ -215,6 +218,15 @@ export class CreateQualyComponent implements OnInit {
           teamId:item.team,
           fastestLap:true,
         };
+        this._statService.getDriverStats(item.driverId).subscribe(driverStats => {
+          this.stat = driverStats;
+          this.stat.poles++
+          this._statService.updateStat(this.stat, qualy.driverId).subscribe(updatedStat => {
+            this.stat = updatedStat;
+            // Aquí puedes realizar otras acciones con el stat actualizado si es necesario
+          });
+        });
+
 
         this._driverInfo.getdriverInfoDataByDriverId(this.director.leagueId,this.polePiloto).subscribe(apiDatos=>this.driverPoleMan=apiDatos)
         this.qualyArray2.push(qualy)
@@ -242,18 +254,17 @@ export class CreateQualyComponent implements OnInit {
         // Aquí se reciben los datos de la API y se almacenan en una variable
         this.qualies2 = apiQualy;
         console.log(this.qualies2)
+
       },
       error => {
         // Aquí se maneja cualquier error que pueda ocurrir en la petición
         console.error(error);
       }
     );
-    this.redirectToPage()
-    this.qualyArray2.forEach(item => {
-      console.log(item)
-    });
 
-    this.toggleCard()
+    this.redirectToPage()
+
+
 
   }
 

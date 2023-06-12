@@ -14,6 +14,7 @@ import { Sponsor } from 'src/app/models/sponsor.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { Director } from 'src/app/models/director.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-add-races',
@@ -63,7 +64,7 @@ export class AdminAddRacesComponent implements OnInit {
   raceForm: FormGroup;
   showMessage = false;
    constructor(private _raceService:RaceService,
-    private _circuitService:CircuitService,
+    private _circuitService:CircuitService,private _router:Router,
     private _ligaService:LigaService,private _grandPrixService:GrandPrixService,
     private _sponsorService:SponsorService,private formBuilder:FormBuilder,private _token:TokenHandlerService
 ) {
@@ -221,6 +222,7 @@ export class AdminAddRacesComponent implements OnInit {
             console.log("Circuitos añadidos correctamente");
             this.selectedCircuits = [];
             this.crearCarreras(circuitos,arraySponsors,leagueId)
+            window.location.reload()
           },
           error => {
             console.error("Error al añadir circuitos:", error);

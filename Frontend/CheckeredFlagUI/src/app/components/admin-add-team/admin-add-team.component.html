@@ -1,198 +1,218 @@
+
 <div class="container">
   <div class="row gutters">
-    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-      <div class="card h-100">
-        <div class="card-body">
-          <div class="account-settings">
-            <div class="user-profile">
-              <div class="user-avatar">
-                <!-- <img class="common" style="background-color: yellow;" width="60" height="70" [src]="imagenElegida ? imagenElegida : 'ruta/default.png'" [hidden]="!imagenElegida"> -->
-              </div>
-              <h5 class="user-name">New Team</h5>
+  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+  <div class="card h-100">
+    <div class="card-body">
+      <div class="account-settings">
+        <div class="user-profile">
+          <div class="user-avatar">
+            <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"> -->
+          </div>
+          <h5 class="user-name">Crear Equipo</h5>
+          <h6 class="user-email">Menu de creacion de equ</h6>
+        </div>
+        <div class="about">
+          <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
+            Elige Foto de Vehiculo
+          </button>
+            <br><br>
+          <button class="btn btn-warning"  onclick="document.getElementById('owrap2').className='show'">
+            Elige Foto de Escuderia
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+  <div class="card h-100">
+    <div class="card-body">
+    <form autocomplete="off" [formGroup]="teamForm" (ngSubmit)="submitForm()">
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <h6 class="mb-2 text-primary">Detalles del Equipo</h6>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="name">Nombre:</label>
+            <input class="form-control" type="text" id="name" formControlName="name"></div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="country">Jefe Tecnico:</label>
+            <input class="form-control" type="text" id="director" formControlName="director">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="homefactory">Ubicacion de la Fabrica:</label>
+            <input class="form-control" type="text" id="homefactory" formControlName="homefactory">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="colorInput">Color:</label>
+            <input class="form-control" type="color" id="colorInput" formControlName="color">
+          </div>
+        </div>
+      </div>
+      <div class="row gutters">
 
-              <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
-                Elige Foto de Vehiculo
-              </button>
-                <br><br>
-              <button class="btn btn-warning"  onclick="document.getElementById('owrap2').className='show'">
-                Elige Foto de Escuderia
-              </button>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <h6 class="mt-3 mb-2 text-primary">Detalles del coche</h6>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="chassis">Chasis:</label>
+            <input class="form-control" type="text" id="chassis" formControlName="chassis" placeholder="W13 / RB-19">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="vehicleImage">Imagen de vehiculo:</label>
+            <input class="form-control" [attr.disabled]="disabled ? true : null" type="text" id="vehicleImage" formControlName="vehicleImage">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="shieldImage">Imagen de Escudo:</label>
+            <input class="form-control" [attr.disabled]="disabled ? true : null"  type="text" id="shieldImage" formControlName="shieldImage">
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+          <div class="form-group">
+            <label for="engine">Motor:</label>
+            <input class="form-control" type="text" id="engine" formControlName="engine">
+          </div>
+        </div>
 
-              <!-- <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
-                Elige Foto
-              </button> -->
-              <!-- <h6 class="user-email">yuki@Maxwell.com</h6> -->
-            </div>
 
-            <div class="about">
-              <h5>About</h5>
-              <p>Menu de Creacion de Equipos</p>
-              <p>Introduce los datos de tu piloto y elige un aspecto para el</p>
-            </div>
+      </div>
+      <br>
+      <button name="submit" type="reset" class="btn btn-secondary">Cancel</button>
+      <button [disabled]="teamForm.invalid" (click)="submitForm()" type="button" id="submit" name="submit" class="btn btn-primary">Create</button>
+    </form>
+
+      <br>
+      <div class="row gutters">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+          <div class="text-right">
+
           </div>
         </div>
       </div>
     </div>
-  <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-  <div class="card h-100">
-    <div class="card-body">
-      <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <h6 class="mb-2 text-primary">Personal Details</h6>
-        </div>
+  </div>
+  </div>
+  </div>
+  </div>
 
-</div></div>
-<form autocomplete="off" [formGroup]="teamForm" (ngSubmit)="submitForm()">
-  <div>
-    <label for="colorInput">Color:</label>
-    <input type="color" id="colorInput" formControlName="color">
-  </div>
-  <div>
-    <label for="name">Nombre:</label>
-    <input type="text" id="name" formControlName="name">
-  </div>
-  <div>
-    <label for="country">director:</label>
-    <input type="text" id="director" formControlName="director">
-  </div>
-  <div>
-    <label for="homefactory">homefactory:</label>
-    <input type="text" id="homefactory" formControlName="homefactory">
-  </div>
-  <div>
-    <label for="engine">engine:</label>
-    <input type="text" id="engine" formControlName="engine">
-  </div>
-  <div>
-    <label for="chassis">chassis:</label>
-    <input type="text" id="chassis" formControlName="chassis">
-  </div>
-  <div>
-    <label for="vehicleImage">vehicleImage:</label>
-    <input [attr.disabled]="disabled ? true : null" type="text" id="vehicleImage" formControlName="vehicleImage">
-  </div>
-  <div>
-    <label for="shieldImage">shieldImage:</label>
-    <input  [attr.disabled]="disabled ? true : null"  type="text" id="shieldImage" formControlName="shieldImage">
-  </div>
-  <!-- Agrega los campos restantes de acuerdo a la estructura de la clase -->
+  <div id="owrap">
+    <div style="background-color: black;overflow-y: scroll;" id="obox">
 
-  <button type="submit" [disabled]="!teamForm.valid">Guardar</button>
-</form>
-
-
-  </div>
-</div>
-</div>
+      <button class="btn btn-danger" onclick="document.getElementById('owrap').className=''">
+       X
+      </button>
+      <!-- <div class="logo"></div> -->
+      <div style="width: 100%;" class="wrapper">
+        <h1 style="color: white;margin: auto;">F1 Cars</h1>
+        <!-- <h5 style="color: white;margin: auto;">Elige la foto de tu piloto</h5> -->
+        <small style="color:lightgoldenrodyellow">Elige la foto de tu coche</small>
+        <div style="border: 2px solid black;" class="profile-wrap">
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/alfaRomeoCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/alfaRomeoCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/alphaTauriCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/alphaTauriCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/haasCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/haasCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/ferrariCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/ferrariCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/alpineCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/alpineCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/mcLarenCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/mcLarenCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/mercedesCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/mercedesCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/redbullCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/redbullCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/williamsCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/williamsCar.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/astonMartinCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/astonMartinCar.png" alt="">
+          </div>
 
 
-<div id="owrap">
-  <div style="background-color: black;overflow-y: scroll;" id="obox">
-
-    <button class="btn btn-danger" onclick="document.getElementById('owrap').className=''">
-     X
-    </button>
-    <!-- <div class="logo"></div> -->
-    <div style="width: 100%;" class="wrapper">
-      <h1 style="color: white;margin: auto;">F1 Cars</h1>
-      <!-- <h5 style="color: white;margin: auto;">Elige la foto de tu piloto</h5> -->
-      <small style="color:lightgoldenrodyellow">Elige la foto de tu coche</small>
-      <div style="border: 2px solid black;" class="profile-wrap">
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/alfaRomeoCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/alfaRomeoCar.png" alt="">
         </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/alphaTauriCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/alphaTauriCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/haasCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/haasCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/ferrariCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/ferrariCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/alpineCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/alpineCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/mcLarenCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/mcLarenCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/mercedesCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/mercedesCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/redbullCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/redbullCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/williamsCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/williamsCar.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap').className=''" (click)="obtenerSrcImagen('/assets/vehicleImgs/astonMartinCar.png')"  style="border-bottom: 2px solid black;" width="auto"  src="/assets/vehicleImgs/astonMartinCar.png" alt="">
-        </div>
-
-
       </div>
+
+
+
     </div>
 
 
-
   </div>
 
 
-</div>
+  <div id="owrap2">
+    <div style="background-color: black;overflow-y: scroll;" id="obox">
+
+      <button class="btn btn-danger" onclick="document.getElementById('owrap2').className=''">
+       X
+      </button>
+      <!-- <div class="logo"></div> -->
+      <div style="width: 100%;" class="wrapper">
+        <h1 style="color: white;margin: auto;">F1 Teams</h1>
+        <!-- <h5 style="color: white;margin: auto;">Elige la foto de tu piloto</h5> -->
+        <small style="color:lightgoldenrodyellow">Elige la foto de tu equipo</small>
+        <div style="border: 2px solid black;" class="profile-wrap">
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/alfaromeoLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"  src="/assets/teamImgs/logo/alfaromeoLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/haasLogo.png')" style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/haasLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/ferrariLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/ferrariLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/mercedesLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/mercedesLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/williamsLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;" src="/assets/teamImgs/logo/williamsLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/alpineLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;max-height: 150px;"   src="/assets/teamImgs/logo/alpineLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/redbullLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"  src="/assets/teamImgs/logo/redbullLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/mclarenLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/mclarenLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/astonMartinLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/astonMartinLogo.png" alt="">
+          </div>
+          <div style="width: auto;margin: 5px"  class="profile common">
+            <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/alphatauriLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/alphatauriLogo.png" alt="">
+          </div>
 
 
-<div id="owrap2">
-  <div style="background-color: black;overflow-y: scroll;" id="obox">
-
-    <button class="btn btn-danger" onclick="document.getElementById('owrap2').className=''">
-     X
-    </button>
-    <!-- <div class="logo"></div> -->
-    <div style="width: 100%;" class="wrapper">
-      <h1 style="color: white;margin: auto;">F1 Teams</h1>
-      <!-- <h5 style="color: white;margin: auto;">Elige la foto de tu piloto</h5> -->
-      <small style="color:lightgoldenrodyellow">Elige la foto de tu equipo</small>
-      <div style="border: 2px solid black;" class="profile-wrap">
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/alfaromeoLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"  src="/assets/teamImgs/logo/alfaromeoLogo.png" alt="">
         </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/haasLogo.png')" style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/haasLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/ferrariLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/ferrariLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/mercedesLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/mercedesLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/williamsLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;" src="/assets/teamImgs/logo/williamsLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/alpineLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;max-height: 150px;"   src="/assets/teamImgs/logo/alpineLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/redbullLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"  src="/assets/teamImgs/logo/redbullLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/mclarenLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/mclarenLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/astonMartinLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/astonMartinLogo.png" alt="">
-        </div>
-        <div style="width: auto;margin: 5px"  class="profile common">
-          <img onclick="document.getElementById('owrap2').className=''" (click)="obtenerSrcImagenEscuderia('/assets/teamImgs/logo/alphatauriLogo.png')"  style="border-bottom: 2px solid black;max-width: 200px;"   src="/assets/teamImgs/logo/alphatauriLogo.png" alt="">
-        </div>
-
-
       </div>
+
+
+
     </div>
 
 
-
   </div>
-
-
-</div>
-
-</div>

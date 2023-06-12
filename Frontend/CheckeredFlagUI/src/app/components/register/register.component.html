@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Design by foolishdeveloper.com -->
-    <title>Glassmorphism login Form Tutorial in html css</title>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
-    <!--Stylesheet-->
-
-</head>
 <body>
     <div class="background">
         <div class="shape"></div>
@@ -26,6 +17,10 @@
 
         <label for="password">Password</label>
         <input formControlName="password" type="password" placeholder="Password"  >
+
+        <!-- <div *ngIf="isInvalid">
+          <p>La contraseña debe llevar un numero y un caracter especial</p>
+        </div> -->
 
         <button (click)="register(this.formulario.value)"  style="color: black;">Log In</button>
     </form>

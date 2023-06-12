@@ -29,9 +29,14 @@ export class AdminAddTeamComponent implements OnInit {
     ,private formBuilder: FormBuilder,private router:Router,private _token:TokenHandlerService) {
     this.miElemento=ElementRef;
     this.miElemento2=ElementRef
+    this.teamForm = this.formBuilder.group({
+    });
 
 
 
+  }
+
+  crearFormulario(){
     this.teamForm = this.formBuilder.group({
 
       country: ["España"],
@@ -73,7 +78,6 @@ export class AdminAddTeamComponent implements OnInit {
     this.teamForm.get("leagueId")?.setValue(this.director.leagueId)
     console.log(this.teamForm.value);
     this._teamService.addTeam(this.teamForm.value).subscribe((response: any) => {
-      console.log(response);
       this.router.navigate(['/admin/']);
     });
   }
@@ -81,6 +85,7 @@ export class AdminAddTeamComponent implements OnInit {
 
 
   ngOnInit() {
+    this.crearFormulario()
     this.getDirector()
     // this.calcularOverall()
     // this._teamService.getAvailableTeams(1).subscribe(apiTeams=>this.availableTeams=apiTeams)

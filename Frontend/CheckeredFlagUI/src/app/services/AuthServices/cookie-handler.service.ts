@@ -13,18 +13,22 @@ export class CookieHandlerService {
   // HANDLE COOKIES
   // 1. Create cookie
   public setCookie(token: string) {
-    this.cookie.set('authToken', token);
+    localStorage.setItem('authToken', token);
+    // this.cookie.set('authToken', token);
   }
 
   // 2. Get cookie
   public getCookie() {
-    return this.cookie.get('authToken');
+    return localStorage.getItem('authToken')
+    // return this.cookie.get('authToken');
   }
 
   // 3. Delete cookie
-  public closeToken() {
+  closeToken() {
     // Cerramos sesión
-    this.cookie.delete('authToken');
+    localStorage.removeItem('authToken');
+
+    // this.cookie.delete('authToken');
   }
 }
 

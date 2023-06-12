@@ -1,38 +1,41 @@
-<!-- <input [(ngModel)]="user.email"  type="email" placeholder="Email" />
-<input [(ngModel)]="user.password" type="password" placeholder="Password"  />
-<a href="#">Forgot your password?</a>
-<button (click)="login(user)">Sign In</button> -->
-<!-- <button (click)="register(user)">register</button> -->
 
-<!-- <button mat-button [routerLink]="['/register']" routerLinkActive="router-link-active" >Ir a register</button> -->
-<section  [@fadeInOut]="currentImageIndex" #sectionElement class="pt-5 pb-5 mt-0 align-items-center d-flex bg-dark" style="min-height: 100vh; background-size: cover; ">
+<section  [@fadeInOut]="currentImageIndex" #sectionElement class="pt-5 pb-5 mt-0 align-items-center d-flex" style="min-height: 100vh; background-size: cover; background-position: center;  background-color: rgb(208, 182, 255);">
   <div class="container-fluid">
     <div class="row  justify-content-center align-items-center d-flex-row text-center h-100">
       <div class="col-12 col-md-4 col-lg-3   h-50 ">
         <div class="card shadow">
           <div class="card-body mx-auto">
+            <img height="60" src="/assets/img/checkeredFlag.png" alt="">
             <h4 class="card-title mt-3 text-center">Login</h4>
-            <p class="text-center">Sign In</p>
-            <p class="text-muted font-weight-bold ">
-              <span>CHECKERED FLAG</span>
-            </p>
+          <form [formGroup]="formGroup">
 
-              <div class="form-group input-group">
-                <div class="input-group-prepend">
-                  <!-- <span class="input-group-text"> <i class="fa fa-user"></i> </span> -->
-                  <input [(ngModel)]="user.email"  type="email" placeholder="Email" />
-                </div>
 
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <input formControlName="email" type="email" placeholder="Email" />
               </div>
-              <div class="form-group input-group">
-                <div class="input-group-prepend">
-                  <!-- <span class="input-group-text"> <i class="fa fa-envelope"></i> </span> -->
-                  <input [(ngModel)]="user.password" type="password" placeholder="Password"  />
-                </div>
-
+            </div>
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched || submitted)" class="error-message">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('email')?.errors?.['required']">El email debe ser obligatorio.</div>
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('email')?.errors?.['minlength']">El email no es válido.</div>
+            </div>
+            <div class="form-group input-group">
+              <div class="input-group-prepend">
+                <input formControlName="password" type="password" placeholder="Password" />
               </div>
+            </div>
+            <div *ngIf="formGroup.get('password')?.invalid && (formGroup.get('password')?.dirty || formGroup.get('password')?.touched || submitted)" class="error-message">
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('password')?.errors?.['required']">La contraseña es obligatoria.</div>
+              <div class="alert alert-danger" role="alert" *ngIf="formGroup.get('password')?.errors?.['minlength']">La contraseña debe tener al menos 6 caracteres.</div>
+            </div>
+          </form>
+          <div *ngIf="loginError" class="error-message">
+            <div class="alert alert-danger" role="alert">Credenciales incorrectas. Por favor, inténtalo de nuevo.</div>
+          </div>
+
+
               <div class="form-group">
-                <button (click)="login(user)">Sign In</button>
+                <button (click)="login(this.formGroup.value)">Sign In</button>
               </div>
               <p class="text-center">Don't have an account?
                 <a [routerLink]="'/register'">Sign Up</a>
@@ -44,3 +47,12 @@
     </div>
   </div>
 </section>
+
+
+
+<footer>
+	<p>
+		Created by
+		<a target="_blank" href="https://florin-pop.com">Alen Tokalic</a>
+	</p>
+</footer>

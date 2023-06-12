@@ -11,6 +11,7 @@ import { qualyresult } from 'src/app/models/qualyresult.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { Result } from 'src/app/models/result.model';
 import { Stat } from 'src/app/models/stat.model';
+import { Team } from 'src/app/models/team.model';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
 import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
@@ -21,6 +22,7 @@ import { QualyResultService } from 'src/app/services/qualyresult.service';
 import { RaceService } from 'src/app/services/race.service';
 import { ResultService } from 'src/app/services/result.service';
 import { StatService } from 'src/app/services/stat.service';
+import { TeamService } from 'src/app/services/team.service';
 
 @Component({
   selector: 'app-admin-add-result',
@@ -36,7 +38,7 @@ export class AdminAddResultComponent implements OnInit {
   qualyResults:qualyresult [] | null
   selectedDriverIndex: number = -1;
   raceResults:raceResult[] | null;
-
+  team:Team = new Team()
   qualys:Qualy[] | null;
   driver:Driver | null;
   stat:Stat | null;
@@ -76,7 +78,7 @@ export class AdminAddResultComponent implements OnInit {
   constructor(private _raceResults:RaceService,
     private _ligaService:LigaService
     ,private _grandPrixService:GrandPrixService,
-    private _activatedRoute:ActivatedRoute,
+    private _activatedRoute:ActivatedRoute,private _teamService:TeamService,
     private _qualyResultService:QualyResultService,
     private _qualyService:QualyService,private _router:Router,
     private _resultService:ResultService,
@@ -153,10 +155,13 @@ export class AdminAddResultComponent implements OnInit {
 
     //Dos arrays hay que hacer
       this.qualyResults?.forEach((dato,index)=>{
-
+        // console.log(dato)
         //Accedo a la clase para poder updatearla despues
+
+
         this._statService.getDriverStats(dato.driverId).subscribe(apiDatos=>{
           this.stat=apiDatos
+
 
         let posicionActual = index + 1 ;
         // console.log(dato.driverName , " esta en el puesto " , posicionActual , " actualmente ")
@@ -183,7 +188,8 @@ export class AdminAddResultComponent implements OnInit {
         if (index >= 0 && index < this.puntosPorPosicion.length) {
           newResult.points = this.puntosPorPosicion[index];
           this.stat.points = this.stat.points + this.puntosPorPosicion[index]
-          console.log(newResult.points + ' ' + newResult.driverId)
+
+
           //Si resulta Ganador
           if(index==0){
             this.stat.wins++
@@ -206,6 +212,21 @@ export class AdminAddResultComponent implements OnInit {
 
 
 
+        this.team.points +=this.team.points + newResult.points;
+        // console.log(newResult.points , dato.teamId)
+
+        this._teamService.getTeamById(this.director.leagueId, dato.teamId).subscribe(apiTeam => {
+          this.team = apiTeam;
+          this.team.points =this.team.points + newResult.points;
+          console.log(this.team.points)
+          this._teamService.updateTeamObject(this.team,dato.teamId).subscribe(updatedTeam => {
+            this.team = updatedTeam;
+            // console.log(this.team);
+            // Aquí puedes realizar otras acciones con el equipo actualizado si es necesario
+          });
+
+
+        });
 
 
         this._statService.updateStat(this.stat,dato.driverId).subscribe(
@@ -220,6 +241,7 @@ export class AdminAddResultComponent implements OnInit {
          )
 
 
+
          this._resultService.postResultData2(newResult).subscribe(
           (response:any) => {
             console.log('response received', response);
@@ -230,6 +252,8 @@ export class AdminAddResultComponent implements OnInit {
             // Maneja el error aquí si es necesario
           }
         );
+
+
       })
     })
 
@@ -345,6 +369,17 @@ export class AdminAddResultComponent implements OnInit {
 
 
       // console.log(this.ability,dato.driverId)
+      // Obtén el objeto this.ability con las propiedades individuales
+      const ability = this.ability;
+      // Suma todas las propiedades individuales
+      const suma = ability.consistency + ability.defending + ability.experience + ability.overtaking + ability.pace + ability.tireManagement;
+
+      // Calcula la media dividiendo la suma total por el número de propiedades
+      const average = suma / 6; // En este caso, se asume que tienes 6 propiedades individuales
+
+      // Asigna el valor promedio a la propiedad overall del objeto ability
+      ability.overall = Math.round(average);
+
 
       this._abilityService.updateAbility(this.ability,dato.driverId).subscribe(
         (response:any) => {
@@ -400,7 +435,7 @@ export class AdminAddResultComponent implements OnInit {
 
         this._driverService.getDriverById(this.director.leagueId,this.qualyResults![i].driverId).subscribe(apiAbility=>{
           this.driver=apiAbility
-
+          this.driver.seasonChange=0
           this.driver.seasonChange=this.driver.seasonChange+seasonChangeFloored
           this.driver.currentPrice=this.driver.currentPrice+ this.driver.seasonChange
           this._driverService.updateDriverBody(this.driver.driverId, this.driver).subscribe(
@@ -424,7 +459,7 @@ export class AdminAddResultComponent implements OnInit {
 
         this._driverService.getDriverById(this.director.leagueId,this.qualyResults![i].driverId).subscribe(apiAbility=>{
           this.driver=apiAbility
-
+          this.driver.seasonChange=0
           this.driver.seasonChange=this.driver.seasonChange-seasonChangeFloored
           this.driver.currentPrice=this.driver.currentPrice+ this.driver.seasonChange
 
@@ -456,6 +491,7 @@ export class AdminAddResultComponent implements OnInit {
     // })
     // })
   }
+
 
 
   onCheckboxChange(index: number) {

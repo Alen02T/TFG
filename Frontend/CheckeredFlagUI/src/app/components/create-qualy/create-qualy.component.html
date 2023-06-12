@@ -1,19 +1,82 @@
 
 <app-admin-header></app-admin-header>
+<main style="background-color: #192031;color: white;min-height:110vh;">
+<div>
+  <div class="row">
+    <div class="col">
+      <header>
+        <h1>{{ grandPrix?.raceName }} {{grandPrix?.sponsorName}} | Clasificacion <span style="text-align: right;" class="fi fi-{{grandPrix?.circuitFlag}}"></span> </h1>
+        <!-- <small>{{ liga?.descripcion }}</small> -->
+
+      </header>
+      <section style="background-color: red;">
+        <div class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+          <div class="col-md-6 px-0">
+            <h3>{{grandPrix?.circuitCountry}} | Ronda {{grandPrix?.raceRound}}</h3>
+            <p class="lead my-3">Longitud <strong>{{grandPrix?.circuitlength}}km</strong> </p>
+            <p class="lead my-3">Laps <strong> {{grandPrix?.circuitLaps}}</strong></p>
+            <p class="lead my-3">Driver <strong>{{grandPrix?.circuitdriverRecord}}</strong></p>
+            <p class="lead my-3">Lap Record <strong>{{grandPrix?.circuitlapRecord}}</strong></p>
+            <button class="btn btn-success" style="background-color: green;" [hidden]="isButtonDisabled" [disabled]="isButtonDisabled"  (click)="onAddQualys3(driversFinishedQualy)">Añadir los resultados</button>
+          </div>
+        </div>
+
+      </section>
+    </div>
+    <div class="col">
+      <div cdkDropListGroup>
+        <div class="row justify-content-md-center">
+         <div class="col col-lg-2">
+           <div style="width: 100%;" class="example-container">
+             <h2>Drivers</h2>
+
+             <div
+               cdkDropList
+               [cdkDropListData]="drivers"
+               class="example-list"
+               (cdkDropListDropped)="drop2($event)">
+               <div class="example-box" *ngFor="let driver of drivers" cdkDrag>
+                 <img *cdkDragPreview [src]="driver.imageDriver" [alt]="driver.name">
+                <img style="width: 60px;" src="{{driver.imageDriver}}" alt="">  {{driver.name}}
+               </div>
+
+             </div>
+           </div>
+
+         </div>
+         <div class="col-md-8">
+           <div class="example-container">
+             <h2>Qualifying Result <span style="float: right;"><input type="checkbox" [(ngModel)]="allMoved" />
+             </span></h2>
+             <div
+               cdkDropList
+               [cdkDropListData]="driversFinishedQualy"
+               class="example-list"
+               (cdkDropListDropped)="drop2($event)">
+               <div class="example-box" *ngFor="let driver of driversFinishedQualy; let i = index" cdkDrag> <span style="font-weight: bold;color: crimson;font-size: 35px;"> {{i+1}}</span> {{driver.name}} <img style="width: 60px;" src="{{driver.imageDriver}}" alt=""> <div *ngIf="allMoved && i==0">
+                 <!-- <label for="texto">Tiempo </label>
+                 <input type="text" name="time" id="texto" (focus)="driver" [defaultValue]="'1:20:000'"> -->
+               </div></div>
+             </div>
+           </div>
+         </div>
 
 
-<header>
-  <h1>{{ grandPrix?.raceName }} | Clasificacion <span style="text-align: right;" class="fi fi-{{grandPrix?.circuitFlag}}"></span></h1>
-  <!-- <small>{{ liga?.descripcion }}</small> -->
-</header>
-
-<hr>
-<main style="background-color: #192031;color: white;">
-
+       </div>
+       </div>
+    </div>
+  </div>
+</div>
+</main>
+<!-- <main style="background-color: #192031;color: white;height: 100vh;">
+  <header>
+    <h1>{{ grandPrix?.raceName }} | Clasificacion <span style="text-align: right;" class="fi fi-{{grandPrix?.circuitFlag}}"></span> </h1>
+    <button style="float: right;" class="btn btn-success" [disabled]="isButtonDisabled"  (click)="onAddQualys3(driversFinishedQualy)">Haz click aquí</button>
+  </header>
 <div cdkDropListGroup>
  <div class="row justify-content-md-center">
   <div class="col col-lg-2">
-    <div class="example-container">
+    <div style="width: 100%;" class="example-container">
       <h2>Drivers</h2>
 
       <div
@@ -40,8 +103,6 @@
         class="example-list"
         (cdkDropListDropped)="drop2($event)">
         <div class="example-box" *ngFor="let driver of driversFinishedQualy; let i = index" cdkDrag> <span style="font-weight: bold;color: crimson;font-size: 35px;"> {{i+1}}</span> {{driver.name}} <img style="width: 60px;" src="{{driver.imageDriver}}" alt=""> <div *ngIf="allMoved && i==0">
-          <label for="texto">Tiempo </label>
-          <input type="text" name="time" id="texto" (focus)="driver" [defaultValue]="'1:20:000'">
         </div></div>
       </div>
     </div>
@@ -51,7 +112,6 @@
 </div>
 </div>
 
-<button [disabled]="isButtonDisabled"  (click)="onAddQualys3(driversFinishedQualy)">Haz click aquí</button>
 </main>
 <div class="container2" [@fadeInOut] [@cardAnimation]="showCard ? 'visible' : 'hidden'" *ngIf="showCard">
 
@@ -82,11 +142,5 @@
     <button style="background-color: red;" class="btn btn-danger">X</button>
   </div>
 
-</div>
-
-
-<button (click)="toggleCard()">Mostrar tarjeta</button>
-
-
-
+</div> -->
 

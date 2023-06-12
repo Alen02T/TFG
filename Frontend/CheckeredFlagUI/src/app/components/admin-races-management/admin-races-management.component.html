@@ -1,26 +1,27 @@
 
 <app-admin-header></app-admin-header>
-<main style="background-color: #192031;color: black;min-height: 100vh;">
-
+<main *ngIf="circuitos?.length!=0" style="background-color: #192031;color: black;min-height: 100vh;">
+<br>
   <div *ngIf="circuitos?.length==liga?.currentRound && qualysResults.length!==0 && raceResults?.length!==0" class="container">
-    <h6>Se acabo</h6>
-    <div class="winner-section">
-      <h2 class="winner-title">¡Felicidades, eres el ganador!</h2>
-      <div class="winner-info">
-        <img src="ruta-a-la-imagen-del-ganador.jpg" alt="Imagen del ganador" class="winner-image">
-        <div class="winner-details">
-          <h3 class="winner-name">Nombre del ganador</h3>
-          <p class="winner-description">Breve descripción o mensaje de felicitación</p>
-          <button class="winner-button">Ver premio</button>
+    <div *ngFor="let driverWinner of driversOrderedByPoints?.slice(0,1)" class="card mb-3" style="max-width: 540px;border-color: {{driverWinner.teamColor}};">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+          <img src="{{driverWinner.driverImageDriver}}" class="card-img" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h5 class="card-title">{{driverWinner.driverName}} {{driverWinner.driverLastName}}</h5>
+            <p class="card-text">Es el ganador del mundial</p>
+            <p class="card-text"><small class="text-muted">Con una suma de {{driverWinner.driverPoints}} puntos</small></p>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
 
   <div  class="container">
     <div class="row">
-      <div style="margin-top: 80px;" class="col-4">
+      <div style="margin-top: 40px;" class="col-4">
 
         <div class="container">
           <div class="row">
@@ -46,9 +47,6 @@
 
 
       </div>
-
-
-
 
       <div style="margin-top: 80px;color: gray;" class="col-sm-8">
         <mat-tab-group  style="color: gray;background-color: #22293b">
@@ -94,7 +92,13 @@
               <div style="padding: 20px;" >
                 <button [disabled]="qualysResults.length!=0" [ngClass]="{'btn btn-warning': qualysResults.length==0, 'btn btn-success': qualysResults}"  [routerLink]="'/Qualy/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Clasificacion</button>
                 <button [disabled]="raceResults?.length!=0 || qualysResults.length==0" [ngClass]="{'btn btn-warning': raceResults?.length==0, 'btn btn-success': raceResults}" [routerLink]="'addResults/'+currentGrandPrix?.raceId" class="btn btn-warning">Añadir Carrera</button>
-                <button *ngIf="raceResults?.length!=0 && qualysResults.length!=0" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float: right;background-color: rgb(147, 44, 147);">Avanzar al siguiente Gran Premio</button>
+
+
+                  <button *ngIf="circuitos?.length!=liga?.currentRound && raceResults?.length!=0 && qualysResults.length!=0" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" style="float: right;background-color: rgb(147, 44, 147);">Avanzar al siguiente Gran Premio</button>
+
+
+
+                  <button routerLink="/admin" *ngIf="circuitos?.length==liga?.currentRound && qualysResults.length!==0 && raceResults?.length!==0" class="btn" style="float: right;background-color: rgb(147, 44, 147);">Volver al admin</button>
 
 
               </div>
@@ -241,3 +245,15 @@
   </div>
 </main>
 
+<main  *ngIf="circuitos?.length==0" style="background-color: #192031;color: black;min-height: 100vh;">
+  <div style="padding: 20px;" class="container">
+    <div style="background-color: rgb(196, 211, 215);padding: 15px;" class="jumbotron">
+      <h1 class="display-4">Necesitas seleccionar circuitos!</h1>
+      <p class="lead">Para ello haz click en el boton de añadir circuitos</p>
+      <hr class="my-4">
+      <p class="lead">
+        <a class="btn btn-warning btn-lg" [routerLink]="'/admin/addRaces'" role="button">Añadir Circuitos</a>
+      </p>
+    </div>
+  </div>
+</main>

@@ -38,7 +38,6 @@ getDirector(){
   this._token
    .getDirector()
    .subscribe((x) => (this.director = x) && this.loadData());
-
 }
 
 loadData() {
@@ -47,7 +46,6 @@ loadData() {
   if (this.director != null) {
     console.log(this.director)
     this.directorId=this.director.id
-
     this.crearFormulario()
   }
 
@@ -58,14 +56,13 @@ loadData() {
 
 crearFormulario() {
   this.formulario = this.formBuilder.group({
-
-    nombre: ['', Validators.required],
-    descripcion: ['', Validators.required],
+    nombre: ['', [Validators.required, Validators.minLength(4)]],
+    descripcion: ['', [Validators.required, Validators.minLength(10)]],
     fechaInicio: [new Date()],
     fechaFin: [new Date()],
-    ubicacion: ['', Validators.required],
+    ubicacion: ['', [Validators.required, Validators.minLength(4)]],
     directorId: [this.directorId],
-    currentRound: [0],
+    currentRound: [1],
     circuits: this.formBuilder.array([])
   });
 }
@@ -96,25 +93,25 @@ submitForm() {
 
 }
 
-getLigaByDirectorToUpdate(){
-  this._ligaService.getLigaByDirector(this.director.id).subscribe(apiLiga=>{
-    this.liga=apiLiga
-    this.director.leagueId=this.liga.id
-    this._directorService.updateDirector(this.directorId,this.director).subscribe(
-      response => {
-        // Manejar la respuesta exitosa aquí
-        console.log('Director actualizado correctamente', response);
-      },
-      error => {
-        // Manejar el error aquí
-        console.error('Error al actualizar el director', error);
-      }
-    )
-    }
-  )
+// getLigaByDirectorToUpdate(){
+//   this._ligaService.getLigaByDirector(this.director.id).subscribe(apiLiga=>{
+//     this.liga=apiLiga
+//     this.director.leagueId=this.liga.id
+//     this._directorService.updateDirector(this.directorId,this.director).subscribe(
+//       response => {
+//         // Manejar la respuesta exitosa aquí
+//         console.log('Director actualizado correctamente', response);
+//       },
+//       error => {
+//         // Manejar el error aquí
+//         console.error('Error al actualizar el director', error);
+//       }
+//     )
+//     }
+//   )
 
 
-}
+// }
 
 ngOnInit(): void {
   this.crearFormulario()

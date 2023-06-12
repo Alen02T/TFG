@@ -1,30 +1,38 @@
 
 
 <main style="background-color: #192031;min-height: 100vh;color: white;">
-
-
   <div class="container">
-
-      <form style="padding: 20px;width: 200px;" [formGroup]="formulario" (ngSubmit)="submitForm()">
+    <h2>Crea tu Mundial</h2>
+      <div class="row">
+        <div class="col">
+      <form style="padding: 20px" [formGroup]="formulario">
         <div class="form-group">
           <label for="nombre">Nombre</label>
-          <input type="text" class="form-control" formControlName="nombre" required>
+          <input class="feedback-input" type="text" formControlName="nombre" required>
         </div>
 
         <div class="form-group">
           <label for="descripcion">Descripción</label>
-          <textarea class="form-control" formControlName="descripcion" rows="4" required></textarea>
+          <textarea class="feedback-input" formControlName="descripcion" rows="4" required></textarea>
         </div>
 
         <div class="form-group">
           <label for="ubicacion">Ubicación</label>
-          <input type="text" class="form-control" formControlName="ubicacion" required>
+          <input  class="feedback-input" type="text"  formControlName="ubicacion" required>
         </div>
-
-
-        <button type="submit" class="btn btn-primary">Guardar</button>
       </form>
+      <div class="form-group">
+        <button [disabled]="formulario.invalid" (click)="submitForm()" class="btn btn-info">Guardar</button>
+      </div>
+        </div>
+        <div class="col">
+          <img style="width: 90%;height: 80%;" src="/assets/img/trofeoBueno.png" alt="">
+        </div>
+      </div>
+
+
 
 
   </div>
 </main>
+
