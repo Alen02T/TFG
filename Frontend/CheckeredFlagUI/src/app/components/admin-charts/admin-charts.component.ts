@@ -184,7 +184,7 @@ export class AdminChartsComponent implements OnInit {
         const data = {
           labels: nombreArray,
           datasets: [{
-            label: "Puntos",
+            label: "Victorias",
             data: arrayPuntos,
             backgroundColor: colorAleatorios
           }]

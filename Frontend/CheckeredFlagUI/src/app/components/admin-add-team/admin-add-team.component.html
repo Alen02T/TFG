@@ -1,112 +1,116 @@
-
-<div class="container">
-  <div class="row gutters">
-  <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
-  <div class="card h-100">
-    <div class="card-body">
-      <div class="account-settings">
-        <div class="user-profile">
-          <div class="user-avatar">
-            <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"> -->
+<app-admin-header></app-admin-header>
+<main style="background-color:#192031;padding: 20px;color: gray;min-height: 100vh;">
+  <div class="container">
+    <h1>Creacion de tu equipo</h1>
+    <div class="row gutters">
+    <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="account-settings">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin"> -->
+            </div>
+            <h5 class="user-name">Crear Equipo</h5>
+            <h6 class="user-email">Menu de creacion de equipos</h6>
           </div>
-          <h5 class="user-name">Crear Equipo</h5>
-          <h6 class="user-email">Menu de creacion de equ</h6>
-        </div>
-        <div class="about">
-          <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
-            Elige Foto de Vehiculo
-          </button>
-            <br><br>
-          <button class="btn btn-warning"  onclick="document.getElementById('owrap2').className='show'">
-            Elige Foto de Escuderia
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
-  <div class="card h-100">
-    <div class="card-body">
-    <form autocomplete="off" [formGroup]="teamForm" (ngSubmit)="submitForm()">
-      <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <h6 class="mb-2 text-primary">Detalles del Equipo</h6>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="name">Nombre:</label>
-            <input class="form-control" type="text" id="name" formControlName="name"></div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="country">Jefe Tecnico:</label>
-            <input class="form-control" type="text" id="director" formControlName="director">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="homefactory">Ubicacion de la Fabrica:</label>
-            <input class="form-control" type="text" id="homefactory" formControlName="homefactory">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="colorInput">Color:</label>
-            <input class="form-control" type="color" id="colorInput" formControlName="color">
-          </div>
-        </div>
-      </div>
-      <div class="row gutters">
-
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <h6 class="mt-3 mb-2 text-primary">Detalles del coche</h6>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="chassis">Chasis:</label>
-            <input class="form-control" type="text" id="chassis" formControlName="chassis" placeholder="W13 / RB-19">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="vehicleImage">Imagen de vehiculo:</label>
-            <input class="form-control" [attr.disabled]="disabled ? true : null" type="text" id="vehicleImage" formControlName="vehicleImage">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="shieldImage">Imagen de Escudo:</label>
-            <input class="form-control" [attr.disabled]="disabled ? true : null"  type="text" id="shieldImage" formControlName="shieldImage">
-          </div>
-        </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-          <div class="form-group">
-            <label for="engine">Motor:</label>
-            <input class="form-control" type="text" id="engine" formControlName="engine">
-          </div>
-        </div>
-
-
-      </div>
-      <br>
-      <button name="submit" type="reset" class="btn btn-secondary">Cancel</button>
-      <button [disabled]="teamForm.invalid" (click)="submitForm()" type="button" id="submit" name="submit" class="btn btn-primary">Create</button>
-    </form>
-
-      <br>
-      <div class="row gutters">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-          <div class="text-right">
-
+          <div class="about">
+            <button class="btn btn-warning"  onclick="document.getElementById('owrap').className='show'">
+              Elige Foto de Vehiculo
+            </button>
+              <br><br>
+            <button class="btn btn-warning"  onclick="document.getElementById('owrap2').className='show'">
+              Elige Foto de Escuderia
+            </button>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  </div>
-  </div>
-  </div>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+    <div class="card h-100">
+      <div class="card-body">
+      <form autocomplete="off" [formGroup]="teamForm" (ngSubmit)="submitForm()">
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mb-2 text-primary">Detalles del Equipo</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="name">Nombre:</label>
+              <input class="form-control" type="text" id="name" formControlName="name"></div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="country">Jefe Tecnico:</label>
+              <input class="form-control" type="text" id="director" formControlName="director">
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="homefactory">Ubicacion de la Fabrica:</label>
+              <input class="form-control" type="text" id="homefactory" formControlName="homefactory">
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="colorInput">Color:</label>
+              <input class="form-control" type="color" id="colorInput" formControlName="color">
+            </div>
+          </div>
+        </div>
+        <div class="row gutters">
+
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <h6 class="mt-3 mb-2 text-primary">Detalles del coche</h6>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="chassis">Chasis:</label>
+              <input class="form-control" type="text" id="chassis" formControlName="chassis" placeholder="W13 / RB-19">
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="vehicleImage">Imagen de vehiculo:</label>
+              <input class="form-control" [attr.disabled]="disabled ? true : null" type="text" id="vehicleImage" formControlName="vehicleImage">
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="shieldImage">Imagen de Escudo:</label>
+              <input class="form-control" [attr.disabled]="disabled ? true : null"  type="text" id="shieldImage" formControlName="shieldImage">
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="form-group">
+              <label for="engine">Motor:</label>
+              <input class="form-control" type="text" id="engine" formControlName="engine">
+            </div>
+          </div>
+
+
+        </div>
+        <br>
+        <button name="submit" type="reset" class="btn btn-secondary">Cancel</button>
+        <button [disabled]="teamForm.invalid" (click)="submitForm()" type="button" id="submit" name="submit" class="btn btn-primary">Create</button>
+      </form>
+
+        <br>
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="text-right">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</main>
+
 
   <div id="owrap">
     <div style="background-color: black;overflow-y: scroll;" id="obox">

@@ -122,5 +122,22 @@ namespace CheckeredFlagAPI.Controllers
             return Ok(await _context.Races.ToListAsync());
         }
 
+        [HttpDelete("league/{leagueId}")]
+        public async Task<ActionResult> DeleteByLeague(int leagueId)
+        {
+            var racesToDelete = await _context.Races.Where(r => r.leagueId == leagueId).ToListAsync();
+
+            if (racesToDelete.Count == 0)
+            {
+                return BadRequest("No races found in the league.");
+            }
+
+            _context.Races.RemoveRange(racesToDelete);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
+
     }
 }

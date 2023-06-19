@@ -52,4 +52,8 @@ export class LigaService {
     // return this.http.put<Liga>(environment.API_URL + '/Liga/'+ligaId+'/currentRound/', newCurrentRound);
   }
 
+  deleteLiga(id: number): Observable<Liga> {
+    return this.http.delete<Liga>(environment.API_URL + '/Liga/'+id);
+
+  }
 }

@@ -75,7 +75,7 @@
   <mat-tab label="Race">
     <div>
       <div>
-        <main style="background-color:#131720;padding: 20px;color: lightgray;min-height: 100vh;">
+        <main style="background-color:#d0daf0;padding: 20px;min-height: 100vh;">
         <div  class="container">
           <br><br>
             <h1>Formula 1 {{grandPrix?.sponsorName}} {{grandPrix?.raceName}} - Race Result</h1> <span style="float: right;" class="fi fi-{{grandPrix?.circuitFlag}}"></span>
@@ -86,7 +86,7 @@
 
             <h3>Results</h3>
             <br>
-            <table style="color: lightgray;" class="table" >
+            <table  class="table" >
               <thead>
                 <tr>
                   <th scope="col">Pos</th>
@@ -101,7 +101,7 @@
                   <td>{{raceResult?.driverName}} {{raceResult?.driverLastName}} <b>| <i>{{raceResult?.driverNumber}}</i></b></td>
                   <td><img src="{{raceResult?.teamVehicleImage}}" alt="">   </td>
                   <td colspan="2"> + {{raceResult?.resultPoints}}</td>
-                  <td>{{raceResult?.resultFastestLap}}</td>
+                  <td *ngIf="raceResult?.resultFastestLap==true"><img style="height: 50px;" src="/assets/stuff/fastest.png" alt=""></td>
                 </tr>
               </tbody>
             </table>
@@ -112,22 +112,22 @@
 
   </mat-tab>
   <mat-tab label="Qualifying">
-    <main style="background-color:#131720;padding: 20px;color: lightgray;min-height: 100vh;">
+    <main style="background-color:#d0daf0;padding: 20px;min-height: 100vh;">
       <div class="container">
-      <table style="color: lightgray;" class="table" >
+      <table  class="table" >
         <thead>
           <tr>
             <th scope="col">Pos</th>
             <th scope="col">Piloto</th>
             <th scope="col">Equipo</th>
-            <th scope="col">Pts</th>
+            <th scope="col">Fastest Lap</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let qualyResult of qualysResults;let first = first; let last = last" >
             <th  scope="row">{{qualyResult?.qualyGrid}}</th>
             <td>{{qualyResult?.driverName}} {{qualyResult?.driverLastName}} <b>| <i >{{qualyResult?.driverNumber}}</i></b></td>
-            <td>{{qualyResult?.teamName}} <img src="{{qualyResult?.teamShieldImage}}" width="30" height="30" alt="">   </td>
+            <td>{{qualyResult?.teamName}} <img src="{{qualyResult?.teamVehicleImage}}" alt="">   </td>
             <td *ngIf="qualyResult?.qualyFastestLap">POLEMAN</td>
           </tr>
         </tbody>

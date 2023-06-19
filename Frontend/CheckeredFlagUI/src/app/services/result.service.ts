@@ -79,5 +79,9 @@ export class ResultService {
 
     return this.http.post<Result>(environment.API_URL + '/Result', bodyData);
   }
+
+  deleteResultsByRaceId(raceId: number): Observable<any> {
+    return this.http.delete<any>(`${environment.API_URL}/Result/race/${raceId}`);
+  }
 }
 

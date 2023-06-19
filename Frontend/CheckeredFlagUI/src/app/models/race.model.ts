@@ -1,5 +1,5 @@
 export class Race {
-  raceId: number;
+  id: number;
   year: number;
   round: number;
   circuit: number;
@@ -9,7 +9,7 @@ export class Race {
   leagueId:number;
 
   constructor() {
-    this.raceId = 0;
+    this.id = 0;
     this.name = null;
     this.date = null;
     this.year = 0;

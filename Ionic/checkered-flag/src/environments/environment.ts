@@ -4,14 +4,14 @@
 const number=7
 export const environment = {
   production: false,
-  LEAGUEID:2,
+  LEAGUEID:21,
   API_URL: "https://localhost:7085/api",
   API_URL_SPECIAL: "https://localhost:7085/",
   LINK_GITHUB:"https://github.com/Alen02T",
   LINK_LINKEDIN:"https://www.linkedin.com/in/alen-tokalic-cerkezovic-8a50b7249/",
   LINK_TWITTER:"",
   LINK_INSTAGRAM:"https://www.instagram.com/alen_rincon/",
-  RONDA:5,
+  RONDA:1,
 //Cambiar cada vez que quiera cambiar una carrera
 
   BEFORERACEID:number-1,

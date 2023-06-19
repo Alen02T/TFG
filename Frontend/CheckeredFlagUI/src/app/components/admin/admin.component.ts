@@ -8,6 +8,7 @@ import { driverInfo } from 'src/app/models/driverinfo.model';
 import { GrandPrix } from 'src/app/models/grandprix.model';
 import { Liga } from 'src/app/models/liga.model';
 import { qualyresult } from 'src/app/models/qualyresult.model';
+import { Race } from 'src/app/models/race.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { Team } from 'src/app/models/team.model';
 import { User } from 'src/app/models/user.model';
@@ -15,12 +16,15 @@ import { AuthService } from 'src/app/services/AuthServices/auth.service';
 import { CookieHandlerService } from 'src/app/services/AuthServices/cookie-handler.service';
 import { DirectorService } from 'src/app/services/AuthServices/director.service';
 import { TokenHandlerService } from 'src/app/services/AuthServices/token-handler.service';
+import { AbilityService } from 'src/app/services/ability.service';
 import { DriverService } from 'src/app/services/driver.service';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
 import { GrandPrixService } from 'src/app/services/grandPrix.service';
 import { LigaService } from 'src/app/services/liga.service';
 import { QualyResultService } from 'src/app/services/qualyresult.service';
+import { RaceService } from 'src/app/services/race.service';
 import { RaceResultService } from 'src/app/services/raceresult.service';
+import { StatService } from 'src/app/services/stat.service';
 import { TeamService } from 'src/app/services/team.service';
 
 @Component({
@@ -50,7 +54,7 @@ export class AdminComponent implements OnInit {
 
   fechaInicial:Date | null;
   fechaFinal:Date | null;
-
+  races:Race[] = []
   bestDriversOrderedByPrice:driverInfo[] = [];
   ligaGetNumberCircuitos:Liga = new Liga();
   driversOrderedByPoints:driverInfo[] | null;
@@ -68,9 +72,9 @@ export class AdminComponent implements OnInit {
   qualyResults:qualyresult[] =[]
 
   constructor(private authService:AuthService,private _directorService:DirectorService,private router : Router,
-    private _token:TokenHandlerService, private route: ActivatedRoute,private _cookie:CookieHandlerService,
+    private _token:TokenHandlerService, private route: ActivatedRoute,private _cookie:CookieHandlerService,private _raceService:RaceService,
     private _teamService:TeamService,private _driverService:DriverService,private _ligaService:LigaService,
-    private formBuilder: FormBuilder,private _driverInfoService:driverInfoService,
+    private formBuilder: FormBuilder,private _driverInfoService:driverInfoService,private _statService:StatService,private _abilityService:AbilityService,
     private _raceResultService:RaceResultService,private _grandPrixService:GrandPrixService,private _qualyResultsService:QualyResultService
     ) {
       this.fechaInicial=null;
@@ -224,7 +228,6 @@ onSelectChange(event:Event) {
 
 
 
-
  loadData() {
 
   // Saving field values for checking if there are changes
@@ -276,5 +279,10 @@ getRestaTiempo(dateInicial:any, dateFinal:any){
   const diferenciaDias = Math.round(diferenciaMs / (1000 * 60 * 60 * 24));
   console.log(diferenciaDias)
 }
+
+
+
+
+
 
 }

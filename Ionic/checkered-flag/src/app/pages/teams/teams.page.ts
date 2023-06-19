@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Team } from 'src/app/models/team.model';
 import { TeamService } from 'src/app/services/team.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-teams',
@@ -37,7 +38,7 @@ export class TeamsPage implements OnInit {
 
 
   ngOnInit(): void {
-     this.teamService.getTeamsByLeagueOrdererByPoints(2).subscribe(apiEscuderia => this.teams=apiEscuderia);
+     this.teamService.getTeamsByLeagueOrdererByPoints(environment.LEAGUEID).subscribe(apiEscuderia => this.teams=apiEscuderia);
     }
 
 }

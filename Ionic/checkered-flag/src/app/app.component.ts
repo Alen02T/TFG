@@ -14,7 +14,7 @@ export class AppComponent {
   public appPages = [
     { title: 'Home', url: '/home', icon: 'mail' },
     { title: 'Driver', url: '/drivers', icon: 'people' },
-    { title: 'Teams', url: '/teams', icon: 'heart' },
+    { title: 'Teams', url: '/teams', icon: 'people' },
   ];
 
   drivers:driverInfo[] =[]

@@ -4,6 +4,7 @@ import { driverInfo } from 'src/app/models/driverinfo.model';
 import { raceResult } from 'src/app/models/raceresult.model';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
 import { RaceResultService } from 'src/app/services/raceresult.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-selected-driver',
@@ -24,7 +25,7 @@ export class SelectedDriverPage implements OnInit {
     })
 
     this._raceResultsService.getRaceResultByDriver(this.driverId).subscribe(apiDatos=>this.raceResults=apiDatos)
-    this.driverInfoService.getdriverInfoDataByDriverId(2,this.driverId).subscribe(apiDatos=>this.driverInfo=apiDatos)
+    this.driverInfoService.getdriverInfoDataByDriverId(environment.LEAGUEID,this.driverId).subscribe(apiDatos=>this.driverInfo=apiDatos)
   }
 
 }

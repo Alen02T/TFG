@@ -369,14 +369,13 @@
           </div>
 
           <div  *ngIf="director!=null && ligaObj!=null"  class="app-body-main-content">
-
             <section>
               <div class="jumbotron">
-                <div *ngIf="circuits?.length!=ligaGetNumberCircuitos?.currentRound && raceResults?.length===0">
+                <div *ngIf="circuits?.length!=ligaGetNumberCircuitos?.currentRound">
                   <small>Informacion De Liga</small>
                   <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
                     <div class="col-md-6 px-0">
-                      <h1 class=" fst-italic">League {{ligaObj?.nombre}}</h1>
+                      <h1 class=" fst-italic">{{ligaObj?.nombre}}</h1>
                       <p>{{ligaObj?.descripcion}}</p>
                       <p class="lead mb-0"><a  [routerLink]="'/MyLeague'"  class="text-white fw-bold">Acceder...</a></p>
                     </div>
@@ -394,12 +393,12 @@
                       </div>
 
                       <div class="col-md-6 px-0">
-                        <h1 class=" fst-italic">Ganador de la {{ligaObj?.nombre}}</h1>
+                        <h1 class=" fst-italic">Ganador de {{ligaObj?.nombre}}</h1>
                         <p style="color:{{driverWinner.teamColor}}">{{driverWinner.driverName}} {{driverWinner.driverLastName}}</p>
                         <p class="lead mb-0"><a  [routerLink]="'/MyLeague'"  class="text-white fw-bold">Acceder...</a></p>
                       </div>
                     </div>
-                    <button class="btn btn-warning">Empezar otra Liga de 0</button>
+                    <button routerLink="/profile" class="btn btn-warning">Dirigete a perfil!</button>
                   </div>
                 </div>
               </div>
@@ -538,8 +537,9 @@
 
                 </div>
               </div>
-
-              <div class="transfer">
+              <hr>
+              <h3 *ngIf="driversCount?.length!=0">Seleccion Rapida de Pilotos</h3>
+              <div  class="transfer">
                   <div class="card-body">
                     <ul class="list-group list-group-flush">
 
@@ -569,13 +569,12 @@
 
 
 
-
               </div>
             </section>
           </div>
           <div  *ngIf="director!=null && ligaObj!=null"  class="app-body-sidebar">
             <section class="payment-section">
-              <h2>Equipos</h2>
+              <h2 *ngIf="teams?.length!=0">Equipos</h2>
               <div class="payment-section-header">
                 <p>Mejores equipos del momento</p>
                 <div>
@@ -634,7 +633,7 @@
               </div>
               <div class="transfers">
                 <div  class="transfer" *ngIf="this.driversOrderedByPoints?.length==0">
-                  <h5>No hay pilotos por el momento</h5>
+                  <h5 style="color: rgb(232, 181, 28);font-weight: bold;">No hay pilotos por el momento</h5>
                 </div>
               </div>
               <div class="transfers">

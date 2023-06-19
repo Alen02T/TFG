@@ -214,5 +214,22 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(await _context.Drivers.ToListAsync());
         }
+
+        [HttpDelete("league/{leagueId}")]
+        public async Task<ActionResult> DeleteByLeague(int leagueId)
+        {
+            var driversToDelete = await _context.Drivers.Where(d => d.leagueId == leagueId).ToListAsync();
+
+            if (driversToDelete.Count == 0)
+            {
+                return BadRequest("No drivers found in the league.");
+            }
+
+            _context.Drivers.RemoveRange(driversToDelete);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
     }
 }

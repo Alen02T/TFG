@@ -56,7 +56,11 @@ export class TeamService {
     const bodyData = points ;
     return this.http.put<any>(`${environment.API_URL}/Team/${teamId}`, bodyData);
   }
+  deleteTeamsByLeague(leagueId: number): Observable<any> {
 
+    return this.http.delete<any>(`${environment.API_URL}/Team/league/${leagueId}`);
+
+  }
 
 
 

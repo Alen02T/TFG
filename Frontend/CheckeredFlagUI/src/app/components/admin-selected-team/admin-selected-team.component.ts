@@ -22,7 +22,7 @@ export class AdminSelectedTeamComponent implements OnInit {
   orderedTeams:Team[] | null;
 
   director:Director = new Director()
-
+  noPilotos:boolean=false
   firstDriverInfo:driverInfo | null;
   secondDriverInfo:driverInfo | null;
 
@@ -44,21 +44,41 @@ export class AdminSelectedTeamComponent implements OnInit {
      .subscribe((x) => (this.director = x) && this.loadData());
  }
 
- loadData(){
-  if(this.director!=null){
-    this._teamService.getTeamById(this.director.leagueId,this.teamId).subscribe(apiTeam=>this.team=apiTeam);
-    this._driverService.getDriversByEscuderia(this.teamId).subscribe(apiTeam=>{
-      this.drivers=apiTeam
+ loadData() {
+  if (this.director != null) {
+    this._teamService.getTeamById(this.director.leagueId, this.teamId).subscribe(apiTeam => {
+      this.team = apiTeam;
 
-      this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId,this.drivers[0].driverId).subscribe(apiDriverInfo=>this.firstDriverInfo=apiDriverInfo)
-      this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId,this.drivers[1].driverId).subscribe(apiDriverInfo=>this.secondDriverInfo=apiDriverInfo)
+      this._driverService.getDriversByEscuderia(this.teamId).subscribe(apiTeam => {
+        this.drivers = apiTeam;
 
+        if (this.drivers.length == 2) {
+          this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId, this.drivers[0].driverId).subscribe(apiDriverInfo => {
+            this.firstDriverInfo = apiDriverInfo;
+            // Aquí puedes realizar acciones adicionales con la información del primer conductor
+          });
 
-      this._teamService.getTeamsOrdererByPoints().subscribe(apiTeam=>this.orderedTeams=apiTeam);
+          this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId, this.drivers[1].driverId).subscribe(apiDriverInfo => {
+            this.secondDriverInfo = apiDriverInfo;
+            // Aquí puedes realizar acciones adicionales con la información del segundo conductor
+          });
+        }else if(this.drivers.length==1){
+          this._driverInfoService.getdriverInfoDataByDriverId(this.director.leagueId, this.drivers[0].driverId).subscribe(apiDriverInfo => {
+            this.firstDriverInfo = apiDriverInfo;
+            // Aquí puedes realizar acciones adicionales con la información del primer conductor
+          });
+        }else{
+          this.noPilotos=true
+        }
 
-    })
+        this._teamService.getTeamsOrdererByPoints().subscribe(apiTeam => {
+          this.orderedTeams = apiTeam;
+          // Aquí puedes realizar acciones adicionales con los equipos ordenados por puntos
+        });
+      });
+    });
   }
- }
+}
 
   ngOnInit(): void {
     this.getDirector()

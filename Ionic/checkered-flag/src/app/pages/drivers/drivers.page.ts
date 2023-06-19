@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { driverInfo } from 'src/app/models/driverinfo.model';
 import { driverInfoService } from 'src/app/services/driverInfo.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-drivers',
@@ -33,7 +34,7 @@ export class DriversPage implements OnInit {
 //  }
 
   ngOnInit(): void {
-    this._driverService.getdriverInfoDataByLeagueOrderedByPoints(2).subscribe(apiDrivers => this.driversInfo=apiDrivers);
+    this._driverService.getdriverInfoDataByLeagueOrderedByPoints(environment.LEAGUEID).subscribe(apiDrivers => this.driversInfo=apiDrivers);
     // this.getDirector()
    }
 }

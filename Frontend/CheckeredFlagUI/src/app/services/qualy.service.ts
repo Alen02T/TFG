@@ -57,4 +57,8 @@ export class QualyService {
   //   return result;
   // }
 
+  deleteQualysByRaceId(raceId: number): Observable<any> {
+    return this.http.delete<any>(`${environment.API_URL}/Qualy/race/${raceId}`);
+  }
+
 }

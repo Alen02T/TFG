@@ -67,7 +67,39 @@
     </div>
   </div>
 </div>
+<div class="container2" [@fadeInOut] [@cardAnimation]="showCard ? 'visible' : 'hidden'" *ngIf="showCard">
+
+  <div style="color: wheat;background-color: #192031;" class="game">
+    <div class="rank"><img width="35" src="{{driverPoleMan?.teamShieldImage}}" alt=""></div>
+  <div class="front">
+    <img src="{{driverPoleMan?.driverImageDriver}}" alt="game">
+    <h6 class="text-center">POLEMAN</h6>
+    <h5 class="name text-center"><strong>{{driverPoleMan?.driverName}}</strong></h5>
+    <div class="status">
+      <img src="{{driverPoleMan?.teamVehicleImage}}" alt="game">
+
+    </div>
+  </div>
+  <div class="back">
+    <div  class="streaming-info">
+      <p class="game-stat">{{driverPoleMan?.driverPoles}} <span>Poles</span></p>
+      <p class="game-stat">{{driverPoleMan?.driverPoints}}<span>Points</span></p>
+    </div>
+    <h6>{{driverPoleMan?.driverLastName}} | <span style="font-style: italic;color: crimson;"><strong>{{driverPoleMan?.driverNumber}}</strong></span> </h6>
+    <h5><span class="fi fi-{{driverPoleMan?.driverFlag}}"></span></h5>
+    </div>
+    <div style="background-color:#{{driverPoleMan?.teamColor}};" class="backgroundWrapper"></div>
+    </div>
+
+
+  <div class="close-button" (click)="toggleCard()">
+    <button style="background-color: red;" class="btn btn-danger">X</button>
+  </div>
+
+</div>
 </main>
+
+
 <!-- <main style="background-color: #192031;color: white;height: 100vh;">
   <header>
     <h1>{{ grandPrix?.raceName }} | Clasificacion <span style="text-align: right;" class="fi fi-{{grandPrix?.circuitFlag}}"></span> </h1>

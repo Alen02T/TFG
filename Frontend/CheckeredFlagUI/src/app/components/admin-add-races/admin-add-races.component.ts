@@ -140,7 +140,7 @@ export class AdminAddRacesComponent implements OnInit {
 
 
         const nuevaCarrera: Race = {
-          raceId:0,
+          id:0,
           name:"Gran Premio de " + circuitoId.country,
           date:formattedDate,
           year:new Date().getFullYear(),

@@ -190,10 +190,10 @@ export class CreateQualyComponent implements OnInit {
   }
 
   public redirectToPage(): void {
-    this.toggleCard()
+
     setTimeout(() => {
       this.router.navigate(['/admin/races-management']); // Cambia '/otra-pagina' con la ruta de la página a la que quieres redirigir
-    }, 2000); // Espera 3000 milisegundos (3 segundos) antes de redirigir
+    }, 3000); // Espera 3000 milisegundos (3 segundos) antes de redirigir
   }
 
   //El array 3 funciona

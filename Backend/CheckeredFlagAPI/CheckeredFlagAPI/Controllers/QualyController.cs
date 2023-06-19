@@ -106,5 +106,22 @@ namespace CheckeredFlagAPI.Controllers
 
             return Ok(await _context.Qualys.ToListAsync());
         }
+
+        [HttpDelete("race/{raceId}")]
+        public async Task<ActionResult> DeleteByRace(int raceId)
+        {
+            var qualysToDelete = await _context.Qualys.Where(q => q.RaceId == raceId).ToListAsync();
+
+            if (qualysToDelete.Count == 0)
+            {
+                return BadRequest("No qualys found for the race.");
+            }
+
+            _context.Qualys.RemoveRange(qualysToDelete);
+            await _context.SaveChangesAsync();
+
+            return Ok();
+        }
+
     }
 }

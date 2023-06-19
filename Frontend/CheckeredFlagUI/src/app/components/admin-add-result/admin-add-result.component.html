@@ -89,7 +89,7 @@
 
 
     <div class="col-md-8">
-      <form (ngSubmit)="guardarResultados()">
+      <form>
 
 
       <h1 style="color: white;">Tabla Final</h1>
@@ -128,8 +128,11 @@
         </table>
       </div>
       <div class="alert alert-warning" *ngIf="!isCheckboxSelected()">Selecciona al menos un checkbox.</div>
-      <input value="Guardar" class="btn btn-success" type="submit">
+      <!-- <input value="Guardar" class="btn btn-success" type="submit"> -->
       </form>
+      <button class="btn btn-success" (click)="guardarResultados()">
+        Guardar
+      </button>
     </div>
 
 

@@ -23,4 +23,8 @@ export class RaceService {
   addRace(race: Race): Observable<Race> {
     return this.http.post<Race>(environment.API_URL + '/Race/', race);
   }
+
+  deleteRacesByLeague(leagueId: number): Observable<any> {
+    return this.http.delete<any>(`${environment.API_URL}/Race/league/${leagueId}`);
+  }
 }
